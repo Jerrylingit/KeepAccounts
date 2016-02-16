@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		84E411171C72A47700C4260E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E411161C72A47700C4260E /* AppDelegate.swift */; };
 		84E411191C72A47700C4260E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E411181C72A47700C4260E /* ViewController.swift */; };
-		84E4111C1C72A47700C4260E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E4111A1C72A47700C4260E /* Main.storyboard */; };
 		84E4111E1C72A47700C4260E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E4111D1C72A47700C4260E /* Assets.xcassets */; };
 		84E411211C72A47700C4260E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E4111F1C72A47700C4260E /* LaunchScreen.storyboard */; };
 		84E4112C1C72A47700C4260E /* KeepAccountsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4112B1C72A47700C4260E /* KeepAccountsTests.swift */; };
@@ -37,7 +36,6 @@
 		84E411131C72A47700C4260E /* KeepAccounts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepAccounts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E411161C72A47700C4260E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84E411181C72A47700C4260E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		84E4111B1C72A47700C4260E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84E4111D1C72A47700C4260E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84E411201C72A47700C4260E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84E411221C72A47700C4260E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 			children = (
 				84E411161C72A47700C4260E /* AppDelegate.swift */,
 				84E411181C72A47700C4260E /* ViewController.swift */,
-				84E4111A1C72A47700C4260E /* Main.storyboard */,
 				84E4111D1C72A47700C4260E /* Assets.xcassets */,
 				84E4111F1C72A47700C4260E /* LaunchScreen.storyboard */,
 				84E411221C72A47700C4260E /* Info.plist */,
@@ -233,7 +230,6 @@
 			files = (
 				84E411211C72A47700C4260E /* LaunchScreen.storyboard in Resources */,
 				84E4111E1C72A47700C4260E /* Assets.xcassets in Resources */,
-				84E4111C1C72A47700C4260E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,14 +291,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		84E4111A1C72A47700C4260E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				84E4111B1C72A47700C4260E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		84E4111F1C72A47700C4260E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -400,6 +388,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = KeepAccounts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jerry.com.KeepAccounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -411,6 +400,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = KeepAccounts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jerry.com.KeepAccounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -15,7 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let chooseItem = ViewController()
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.rootViewController = chooseItem
+        window?.makeKeyAndVisible()
+        
         return true
     }
 
