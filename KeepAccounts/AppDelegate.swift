@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let chooseItem = ChooseItemViewController()
+        let chooseItem = ChooseItemVC()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = chooseItem
         window?.makeKeyAndVisible()

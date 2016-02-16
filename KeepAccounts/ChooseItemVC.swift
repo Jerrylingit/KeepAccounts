@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ChooseItemVC.swift
 //  KeepAccounts
 //
 //  Created by admin on 16/2/16.
@@ -8,14 +8,16 @@
 
 import UIKit
 
-class ChooseItemViewController: UIViewController {
+class ChooseItemVC: UIViewController {
 
+    let TopBarHeight: CGFloat = 44.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
-        
+        setupTopBar()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -23,8 +25,18 @@ class ChooseItemViewController: UIViewController {
     //创建顶部栏
     func setupTopBar(){
         
+        //底部栏
+        
+        //返回
+        let topBar = 
+        //改时间
+        
+        //写备注
+        
+        //加照片
     }
-
+    
+    
     //创建图标项
     func setupItem(){
         
@@ -38,6 +50,6 @@ class ChooseItemViewController: UIViewController {
     func setupComputeBoard(){
         
     }
-    
+
 }
 
