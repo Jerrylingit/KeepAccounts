@@ -17,7 +17,8 @@ class ChooseItemVC: UIViewController {
     
     let TopBarHeight: CGFloat = 44.0
     let CostBarHeight: CGFloat = 72.0
-    let CostBarTimeHeight: CGFloat = 20.0
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,18 +38,16 @@ class ChooseItemVC: UIViewController {
         
         //底部栏
         let topBar = TopBarView(frame: CGRectMake(0, 20, ScreenWidth, TopBarHeight))
-
         //添加到主view上
         self.view.addSubview(topBar)
-        
     }
-    
-    
-    
     
     //创建图标项
     func setupItem(){
+        let ItemBarHeight = ScreenHeight - 20 - TopBarHeight - CostBarHeight - ComputeBoardHeight
         
+        let itemBar = ItemBarView(frame: CGRectMake(0, 20 + TopBarHeight , ScreenWidth, ItemBarHeight))
+        self.view.addSubview(itemBar)
     }
     
     //创建消费金额栏
@@ -56,10 +55,8 @@ class ChooseItemVC: UIViewController {
         
         //消费金额栏
         let costBar = CostBarView(frame: CGRectMake(0, ScreenHeight - CostBarHeight - ComputeBoardHeight , ScreenWidth, CostBarHeight))
-
         //添加到self.view
         self.view.addSubview(costBar)
-        
     }
     //创建计算面板
     func setupComputeBoard(){

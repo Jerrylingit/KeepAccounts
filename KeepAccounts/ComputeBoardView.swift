@@ -29,7 +29,7 @@ class ComputeBoardView: UIView {
         let btnWidth = boardWidth/4
         let btnHeight = boardHeight/4
         
-        let sepLineWidth: CGFloat = 0.5
+        let sepLineWidth: CGFloat = 1
         
         let btnTitle = [["1", "4", "7", "清零"], ["2", "5", "8", "0"], ["3", "6", "9", "."]]
         let lastBtnTitle = ["收/支", "+", "OK"]
@@ -38,7 +38,10 @@ class ComputeBoardView: UIView {
             for var row = 0; row < btnTitle[col].count; ++row{
                 let btn = UIButton(frame: CGRectMake(CGFloat(col) * btnWidth, CGFloat(row) * btnHeight, btnWidth, btnHeight))
                 btn.setTitle(btnTitle[col][row], forState: .Normal)
-                btn.backgroundColor = UIColor.grayColor()
+                btn.titleLabel?.font = UIFont(name: "Courier New", size: 20)
+                btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
+                btn.setBackgroundImage(UIImage(named: "btn_num_pressed"), forState: .Normal)
+                btn.setBackgroundImage(UIImage(named: "btn_num"), forState: .Highlighted)
                 self.addSubview(btn)
             }
         }
@@ -46,7 +49,10 @@ class ComputeBoardView: UIView {
         for var row = 0; row < lastBtnTitle.count; ++row{
             let btn = UIButton(frame: CGRectMake(CGFloat(3) * btnWidth, CGFloat(row) * btnHeight, btnWidth, row == 2 ? btnHeight * 2: btnHeight))
             btn.setTitle(lastBtnTitle[row], forState: .Normal)
-            btn.backgroundColor = UIColor.grayColor()
+            btn.titleLabel?.font = UIFont(name: "Courier New", size: 20)
+            btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
+            btn.setBackgroundImage(UIImage(named: "btn_num_pressed"), forState: .Normal)
+            btn.setBackgroundImage(UIImage(named: "btn_num"), forState: .Highlighted)
             self.addSubview(btn)
         }
         

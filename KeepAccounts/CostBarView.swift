@@ -34,7 +34,6 @@ class CostBarView: UIView {
     
     override func layoutSubviews() {
         
-        
         let CoseBarWidth = self.frame.width
         let CostBarHeight = self.frame.height
         
@@ -45,9 +44,8 @@ class CostBarView: UIView {
         //分割线时间
         let cal = NSCalendar.currentCalendar()
         let calCom = cal.components([.Year, .Month, .Day], fromDate: NSDate())
-        var currentDate = String(calCom.year) + "年"
-        currentDate += String(calCom.month) + "月"
-        currentDate += String(calCom.day) + "日"
+        let currentDate = "\(calCom.year)年\(calCom.month)月\(calCom.day)日"
+
         
         //时间标签
         let costBarTime = UILabel(frame: CGRectMake(CoseBarWidth/3, -CostBarTimeHeight/2, CoseBarWidth/3, CostBarTimeHeight))
