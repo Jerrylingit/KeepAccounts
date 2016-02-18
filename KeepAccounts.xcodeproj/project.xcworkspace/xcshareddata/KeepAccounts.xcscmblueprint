@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "78A38FAA9A95CD4525111CFB370ACA110B98F314",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "78A38FAA9A95CD4525111CFB370ACA110B98F314" : 0,
+    "04101981B66E318109934C9516F88D824BB96459" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E027FC34-F8FA-44BE-B58B-D5F0BFC06BAA",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "78A38FAA9A95CD4525111CFB370ACA110B98F314" : "KeepAccounts\/",
+    "04101981B66E318109934C9516F88D824BB96459" : "KeepAccounts\/KeepAccounts\/Libraries\/ThirdLib\/fmdb\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "KeepAccounts",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "KeepAccounts.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ccgus\/fmdb",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "04101981B66E318109934C9516F88D824BB96459"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Jerrylingit\/KeepAccounts.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "78A38FAA9A95CD4525111CFB370ACA110B98F314"
+    }
+  ]
+}
