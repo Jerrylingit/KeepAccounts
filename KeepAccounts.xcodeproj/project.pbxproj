@@ -13,6 +13,12 @@
 		84DDF9DE1C754D83003F077F /* ItemBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D91C754D83003F077F /* ItemBarView.swift */; settings = {ASSET_TAGS = (); }; };
 		84DDF9DF1C754D83003F077F /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9DA1C754D83003F077F /* TopBarView.swift */; settings = {ASSET_TAGS = (); }; };
 		84DDFCF41C755283003F077F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDFCF31C755283003F077F /* libsqlite3.0.tbd */; };
+		84DDFDAF1C75C039003F077F /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA41C75C039003F077F /* FMDatabase.m */; settings = {ASSET_TAGS = (); }; };
+		84DDFDB01C75C039003F077F /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA61C75C039003F077F /* FMDatabaseAdditions.m */; settings = {ASSET_TAGS = (); }; };
+		84DDFDB11C75C039003F077F /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA81C75C039003F077F /* FMDatabasePool.m */; settings = {ASSET_TAGS = (); }; };
+		84DDFDB21C75C039003F077F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDAA1C75C039003F077F /* FMDatabaseQueue.m */; settings = {ASSET_TAGS = (); }; };
+		84DDFDB31C75C039003F077F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDAD1C75C039003F077F /* FMResultSet.m */; settings = {ASSET_TAGS = (); }; };
+		84DDFDB41C75C039003F077F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84DDFDAE1C75C039003F077F /* Info.plist */; settings = {ASSET_TAGS = (); }; };
 		84E411171C72A47700C4260E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E411161C72A47700C4260E /* AppDelegate.swift */; };
 		84E4111E1C72A47700C4260E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E4111D1C72A47700C4260E /* Assets.xcassets */; };
 		84E411211C72A47700C4260E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E4111F1C72A47700C4260E /* LaunchScreen.storyboard */; };
@@ -44,6 +50,19 @@
 		84DDF9D91C754D83003F077F /* ItemBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemBarView.swift; sourceTree = "<group>"; };
 		84DDF9DA1C754D83003F077F /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		84DDFCF31C755283003F077F /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		84DDFDA31C75C039003F077F /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		84DDFDA41C75C039003F077F /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		84DDFDA51C75C039003F077F /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		84DDFDA61C75C039003F077F /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		84DDFDA71C75C039003F077F /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		84DDFDA81C75C039003F077F /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		84DDFDA91C75C039003F077F /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		84DDFDAA1C75C039003F077F /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		84DDFDAB1C75C039003F077F /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		84DDFDAC1C75C039003F077F /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		84DDFDAD1C75C039003F077F /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		84DDFDAE1C75C039003F077F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84DDFDB61C75C0B1003F077F /* KeepAccounts-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KeepAccounts-Bridging-Header.h"; sourceTree = "<group>"; };
 		84E411131C72A47700C4260E /* KeepAccounts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepAccounts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E411161C72A47700C4260E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84E4111D1C72A47700C4260E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -109,12 +128,50 @@
 				84DDFCF31C755283003F077F /* libsqlite3.0.tbd */,
 			);
 			name = staticLib;
+			path = ../../..;
+			sourceTree = "<group>";
+		};
+		84DDFDA01C75C039003F077F /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				84DDFDA11C75C039003F077F /* ThirdLib */,
+			);
+			name = Libraries;
+			path = KeepAccounts/Libraries;
+			sourceTree = "<group>";
+		};
+		84DDFDA11C75C039003F077F /* ThirdLib */ = {
+			isa = PBXGroup;
+			children = (
+				84DDFCF51C7553F7003F077F /* staticLib */,
+				84DDFDA21C75C039003F077F /* fmdb */,
+			);
+			path = ThirdLib;
+			sourceTree = "<group>";
+		};
+		84DDFDA21C75C039003F077F /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				84DDFDA31C75C039003F077F /* FMDatabase.h */,
+				84DDFDA41C75C039003F077F /* FMDatabase.m */,
+				84DDFDA51C75C039003F077F /* FMDatabaseAdditions.h */,
+				84DDFDA61C75C039003F077F /* FMDatabaseAdditions.m */,
+				84DDFDA71C75C039003F077F /* FMDatabasePool.h */,
+				84DDFDA81C75C039003F077F /* FMDatabasePool.m */,
+				84DDFDA91C75C039003F077F /* FMDatabaseQueue.h */,
+				84DDFDAA1C75C039003F077F /* FMDatabaseQueue.m */,
+				84DDFDAB1C75C039003F077F /* FMDB.h */,
+				84DDFDAC1C75C039003F077F /* FMResultSet.h */,
+				84DDFDAD1C75C039003F077F /* FMResultSet.m */,
+				84DDFDAE1C75C039003F077F /* Info.plist */,
+			);
+			path = fmdb;
 			sourceTree = "<group>";
 		};
 		84E4110A1C72A47700C4260E = {
 			isa = PBXGroup;
 			children = (
-				84DDFCF51C7553F7003F077F /* staticLib */,
+				84DDFDA01C75C039003F077F /* Libraries */,
 				84E411151C72A47700C4260E /* KeepAccounts */,
 				84E4112A1C72A47700C4260E /* KeepAccountsTests */,
 				84E411351C72A47700C4260E /* KeepAccountsUITests */,
@@ -140,6 +197,7 @@
 				84E4111D1C72A47700C4260E /* Assets.xcassets */,
 				84E4111F1C72A47700C4260E /* LaunchScreen.storyboard */,
 				84E411221C72A47700C4260E /* Info.plist */,
+				84DDFDB61C75C0B1003F077F /* KeepAccounts-Bridging-Header.h */,
 			);
 			path = KeepAccounts;
 			sourceTree = "<group>";
@@ -270,6 +328,7 @@
 			files = (
 				84E411211C72A47700C4260E /* LaunchScreen.storyboard in Resources */,
 				84E4111E1C72A47700C4260E /* Assets.xcassets in Resources */,
+				84DDFDB41C75C039003F077F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,9 +356,14 @@
 				84DDF9DE1C754D83003F077F /* ItemBarView.swift in Sources */,
 				84DDF9DB1C754D83003F077F /* ChooseItemVC.swift in Sources */,
 				84DDF9DD1C754D83003F077F /* CostBarView.swift in Sources */,
+				84DDFDAF1C75C039003F077F /* FMDatabase.m in Sources */,
+				84DDFDB11C75C039003F077F /* FMDatabasePool.m in Sources */,
+				84DDFDB21C75C039003F077F /* FMDatabaseQueue.m in Sources */,
 				84E411171C72A47700C4260E /* AppDelegate.swift in Sources */,
 				84DDF9DF1C754D83003F077F /* TopBarView.swift in Sources */,
+				84DDFDB31C75C039003F077F /* FMResultSet.m in Sources */,
 				84DDF9DC1C754D83003F077F /* ComputeBoardView.swift in Sources */,
+				84DDFDB01C75C039003F077F /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +501,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jerry.com.KeepAccounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KeepAccounts/KeepAccounts-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -450,6 +515,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jerry.com.KeepAccounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KeepAccounts/KeepAccounts-Bridging-Header.h";
 			};
 			name = Release;
 		};
