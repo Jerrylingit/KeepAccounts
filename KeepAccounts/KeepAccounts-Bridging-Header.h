@@ -8,6 +8,7 @@
 
 #ifndef KeepAccounts_Bridging_Header_h
 #define KeepAccounts_Bridging_Header_h
+
 #import "FMDB.h"
 
 #endif /* KeepAccounts_Bridging_Header_h */

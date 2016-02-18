@@ -19,7 +19,6 @@ class ChooseItemVC: UIViewController {
     let CostBarHeight: CGFloat = 72.0
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
