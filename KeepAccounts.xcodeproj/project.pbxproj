@@ -431,13 +431,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/KeepAccounts/Libraries/ThirdLib/realm-swift-0.98.1/ios/swift-2.1.1",
-					"$(PROJECT_DIR)/KeepAccounts/Libraries/ThirdLib/realm-swift-0.98.1/osx/swift-2.1.1",
-					"$(PROJECT_DIR)/KeepAccounts/Libraries/ThirdLib/realm-swift-0.98.1/tvos",
-					"$(PROJECT_DIR)/KeepAccounts/Libraries/ThirdLib/realm-swift-0.98.1/watchos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = KeepAccounts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -450,13 +444,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/KeepAccounts/Libraries/ThirdLib/realm-swift-0.98.1/ios/swift-2.1.1",
-					"$(PROJECT_DIR)/KeepAccounts/Libraries/ThirdLib/realm-swift-0.98.1/osx/swift-2.1.1",
-					"$(PROJECT_DIR)/KeepAccounts/Libraries/ThirdLib/realm-swift-0.98.1/tvos",
-					"$(PROJECT_DIR)/KeepAccounts/Libraries/ThirdLib/realm-swift-0.98.1/watchos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = KeepAccounts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
