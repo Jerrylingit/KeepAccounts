@@ -102,6 +102,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84DC44371C75C2B00054E632 /* Support File */ = {
+			isa = PBXGroup;
+			children = (
+				84E411161C72A47700C4260E /* AppDelegate.swift */,
+				84E4111F1C72A47700C4260E /* LaunchScreen.storyboard */,
+				84E411221C72A47700C4260E /* Info.plist */,
+				84DDFDB61C75C0B1003F077F /* KeepAccounts-Bridging-Header.h */,
+			);
+			name = "Support File";
+			sourceTree = "<group>";
+		};
 		84DDF9D41C754D83003F077F /* KAMainController */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,12 +203,9 @@
 		84E411151C72A47700C4260E /* KeepAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				84DC44371C75C2B00054E632 /* Support File */,
 				84DDF9D41C754D83003F077F /* KAMainController */,
-				84E411161C72A47700C4260E /* AppDelegate.swift */,
 				84E4111D1C72A47700C4260E /* Assets.xcassets */,
-				84E4111F1C72A47700C4260E /* LaunchScreen.storyboard */,
-				84E411221C72A47700C4260E /* Info.plist */,
-				84DDFDB61C75C0B1003F077F /* KeepAccounts-Bridging-Header.h */,
 			);
 			path = KeepAccounts;
 			sourceTree = "<group>";

@@ -10,8 +10,6 @@ import UIKit
 
 class ComputeBoardView: UIView {
     
-    
-    
     //自定义初始化方法
     override init(frame: CGRect) {
         super.init(frame: frame)

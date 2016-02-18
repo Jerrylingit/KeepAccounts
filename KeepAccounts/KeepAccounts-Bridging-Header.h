@@ -1,7 +1,4 @@
 //
-//  KeepAccounts-Bridging-Header.h
-//  KeepAccounts
-//
 //  Created by admin on 16/2/18.
 //  Copyright © 2016年 jerry. All rights reserved.
 //
@@ -11,4 +8,4 @@
 
 #import "FMDB.h"
 
-#endif /* KeepAccounts_Bridging_Header_h */
+#endif
