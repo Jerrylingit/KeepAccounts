@@ -32,6 +32,9 @@ class ChooseItemVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
+
+    
     //创建顶部栏
     func setupTopBar(){
         
