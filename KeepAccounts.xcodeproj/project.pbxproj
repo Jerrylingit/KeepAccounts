@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84DD0AE61C76BF5A00661F52 /* TypeBtnDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AE51C76BF5A00661F52 /* TypeBtnDB.swift */; settings = {ASSET_TAGS = (); }; };
+		84DD0AEB1C76C7DF00661F52 /* btnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEA1C76C7DF00661F52 /* btnModel.swift */; settings = {ASSET_TAGS = (); }; };
+		84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */; settings = {ASSET_TAGS = (); }; };
 		84DDF9DB1C754D83003F077F /* ChooseItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D61C754D83003F077F /* ChooseItemVC.swift */; settings = {ASSET_TAGS = (); }; };
 		84DDF9DC1C754D83003F077F /* ComputeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D71C754D83003F077F /* ComputeBoardView.swift */; settings = {ASSET_TAGS = (); }; };
 		84DDF9DD1C754D83003F077F /* CostBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D81C754D83003F077F /* CostBarView.swift */; settings = {ASSET_TAGS = (); }; };
@@ -44,6 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84DD0AE51C76BF5A00661F52 /* TypeBtnDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeBtnDB.swift; sourceTree = "<group>"; };
+		84DD0AEA1C76C7DF00661F52 /* btnModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = btnModel.swift; sourceTree = "<group>"; };
+		84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDatabaseAdditionsVariadic.swift; sourceTree = "<group>"; };
 		84DDF9D61C754D83003F077F /* ChooseItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseItemVC.swift; sourceTree = "<group>"; };
 		84DDF9D71C754D83003F077F /* ComputeBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeBoardView.swift; sourceTree = "<group>"; };
 		84DDF9D81C754D83003F077F /* CostBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostBarView.swift; sourceTree = "<group>"; };
@@ -113,9 +119,27 @@
 			name = "Support File";
 			sourceTree = "<group>";
 		};
+		84DD0AE41C76BF5A00661F52 /* TypeBtnDB */ = {
+			isa = PBXGroup;
+			children = (
+				84DD0AE51C76BF5A00661F52 /* TypeBtnDB.swift */,
+			);
+			path = TypeBtnDB;
+			sourceTree = "<group>";
+		};
+		84DD0AE91C76C7DF00661F52 /* BtnModel */ = {
+			isa = PBXGroup;
+			children = (
+				84DD0AEA1C76C7DF00661F52 /* btnModel.swift */,
+			);
+			path = BtnModel;
+			sourceTree = "<group>";
+		};
 		84DDF9D41C754D83003F077F /* KAMainController */ = {
 			isa = PBXGroup;
 			children = (
+				84DD0AE91C76C7DF00661F52 /* BtnModel */,
+				84DD0AE41C76BF5A00661F52 /* TypeBtnDB */,
 				84DDF9D51C754D83003F077F /* CostList */,
 			);
 			path = KAMainController;
@@ -163,6 +187,7 @@
 		84DDFDA21C75C039003F077F /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
+				84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */,
 				84DDFDA31C75C039003F077F /* FMDatabase.h */,
 				84DDFDA41C75C039003F077F /* FMDatabase.m */,
 				84DDFDA51C75C039003F077F /* FMDatabaseAdditions.h */,
@@ -369,9 +394,12 @@
 				84DDFDB21C75C039003F077F /* FMDatabaseQueue.m in Sources */,
 				84E411171C72A47700C4260E /* AppDelegate.swift in Sources */,
 				84DDF9DF1C754D83003F077F /* TopBarView.swift in Sources */,
+				84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				84DDFDB31C75C039003F077F /* FMResultSet.m in Sources */,
 				84DDF9DC1C754D83003F077F /* ComputeBoardView.swift in Sources */,
+				84DD0AE61C76BF5A00661F52 /* TypeBtnDB.swift in Sources */,
 				84DDFDB01C75C039003F077F /* FMDatabaseAdditions.m in Sources */,
+				84DD0AEB1C76C7DF00661F52 /* btnModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
