@@ -20,6 +20,7 @@ class ComputeBoardView: UIView {
     var title = UILabel()
     var icon :UIImage? = UIImage()
     var money = UILabel()
+    var okBtn = UIButton()
     
     //自定义初始化方法
     override init(frame: CGRect) {
@@ -74,6 +75,9 @@ class ComputeBoardView: UIView {
         for var row = 0; row < lastBtnTitle.count; ++row{
             let btnFrame = CGRectMake(CGFloat(3) * btnWidth, CGFloat(row) * btnHeight + btnY , btnWidth, row == 2 ? btnHeight * 2: btnHeight)
             let btn = createBtn(btnFrame,title: lastBtnTitle[row],normalImage: "btn_num_pressed",highlightedImage: "btn_num")
+            if row == 2 {
+                okBtn = btn
+            }
             self.addSubview(btn)
         }
     }
@@ -107,8 +111,36 @@ class ComputeBoardView: UIView {
         btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
         btn.setBackgroundImage(UIImage(named: normalImage), forState: .Normal)
         btn.setBackgroundImage(UIImage(named: highlightedImage), forState: .Highlighted)
+        btn.addTarget(self, action: "clickComputedBtn:", forControlEvents: .TouchUpInside)
         return btn
     }
+    
+    func clickComputedBtn(btn:UIButton){
+        
+        let value = btn.titleLabel!.text!
+        switch value {
+        case "1","2", "3", "4", "5", "6", "7", "8", "9", "0" :
+            print(value)
+        case "收/支":
+            print(value)
+        case "清零" :
+            print(value)
+        case "OK" :
+            print(value)
+        case ".":
+            print(value)
+        case "+":
+            print(value)
+            okBtn.titleLabel?.text = "="
+        case "=":
+            print(value)
+            okBtn.titleLabel?.text = "OK"
+        default:
+            print("Error")
+        }
+        
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
