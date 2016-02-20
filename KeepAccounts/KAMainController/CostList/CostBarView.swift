@@ -18,6 +18,20 @@ class CostBarView: UIView {
     let costBarTitleMarginLeft: CGFloat = 12+48+12
     let costBarTitleWidth:CGFloat = 60
     
+    let sepLineWidth: CGFloat = 1
+    
+    var title = UILabel()
+    var money = UILabel()
+    var iconView = UIImageView()
+    var icon:UIImage? {
+        get{
+            return self.iconView.image
+        }
+        set(newValue){
+            self.iconView.image = newValue
+        }
+    }
+    
     //自定义初始化方法
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,52 +48,68 @@ class CostBarView: UIView {
     
     override func layoutSubviews() {
         
-        let CoseBarWidth = self.frame.width
-        let CostBarHeight = self.frame.height
-        
-        //分割线
-        let costBarSepLine = UIView(frame: CGRectMake(0, 0, CoseBarWidth, 0.5))
+        //CostBar分割线
+        setupCostBarSepLine(self.frame)
+        //分割线时间标签
+        setupCostBarTime(self.frame)
+        //最左边图标
+        setupCostBarLeftIcon(self.frame)
+        //标题
+        setupCostBarTitle(self.frame)
+        //右边金额显示
+        setupCostBarMoney(self.frame)
+    }
+    //CostBar分割线
+    private func setupCostBarSepLine(frame:CGRect){
+        let costBarSepLine = UIView(frame: CGRectMake(0, 0, frame.width, sepLineWidth))
         costBarSepLine.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.7)
-        
+        self.addSubview(costBarSepLine)
+    }
+    //分割线时间标签
+    private func setupCostBarTime(frame: CGRect){
         //分割线时间
         let cal = NSCalendar.currentCalendar()
         let calCom = cal.components([.Year, .Month, .Day], fromDate: NSDate())
         let currentDate = "\(calCom.year)年\(calCom.month)月\(calCom.day)日"
-
+        
         
         //时间标签
-        let costBarTime = UILabel(frame: CGRectMake(CoseBarWidth/3, -CostBarTimeHeight/2, CoseBarWidth/3, CostBarTimeHeight))
+        let costBarTime = UILabel(frame: CGRectMake(frame.width/3, -CostBarTimeHeight/2, frame.width/3, CostBarTimeHeight))
         costBarTime.textAlignment = .Center
         costBarTime.backgroundColor = UIColor.whiteColor()
         costBarTime.layer.cornerRadius = 10
-        costBarTime.layer.borderWidth = 0.5
+        costBarTime.layer.borderWidth = sepLineWidth
         costBarTime.layer.borderColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.7).CGColor
         costBarTime.font = UIFont(name: costBarTime.font.fontName, size: 14)
         costBarTime.textColor = UIColor.blackColor()
         costBarTime.text = currentDate
         
-        
-        //最左边图标
+        self.addSubview(costBarTime)
+    }
+    //最左边图标
+    private func setupCostBarLeftIcon(frame:CGRect){
         let costBarLeftIcon = UIImageView(frame: CGRectMake(costBarLeftIconMargin, costBarLeftIconMargin, costBarLeftIconWidth, costBarLeftIconWidth))
         costBarLeftIcon.image = UIImage(named: "type_big_1")
-        
-        //标题
-        let costBarTitle = UILabel(frame: CGRectMake(costBarTitleMarginLeft, 0, costBarTitleWidth, CostBarHeight))
+        iconView = costBarLeftIcon
+        self.addSubview(costBarLeftIcon)
+    }
+    //标题
+    private func setupCostBarTitle(frame: CGRect){
+        let costBarTitle = UILabel(frame: CGRectMake(costBarTitleMarginLeft, 0, costBarTitleWidth, frame.height))
         costBarTitle.text = "一般"
         costBarTitle.font = UIFont(name: costBarTitle.font.fontName, size: 16)
-        //右边金额显示
+        title = costBarTitle
+        self.addSubview(costBarTitle)
+    }
+    //右边金额显示
+    private func setupCostBarMoney(frame: CGRect){
         let costBarMoney = UILabel(frame: CGRectMake(costBarTitleMarginLeft + costBarTitleWidth + 10, 0,
-            CoseBarWidth - costBarTitleMarginLeft - costBarTitleWidth - 20 , CostBarHeight))
+            frame.width - costBarTitleMarginLeft - costBarTitleWidth - 20 , frame.height))
         costBarMoney.textAlignment = .Right
         costBarMoney.font = UIFont(name: costBarMoney.font.fontName, size: 20)
         costBarMoney.text = "￥100000"
-        
-        //添加到底部栏
-        self.addSubview(costBarSepLine)
-        self.addSubview(costBarTime)
-        self.addSubview(costBarLeftIcon)
-        self.addSubview(costBarTitle)
+        money = costBarMoney
         self.addSubview(costBarMoney)
     }
-
+    
 }

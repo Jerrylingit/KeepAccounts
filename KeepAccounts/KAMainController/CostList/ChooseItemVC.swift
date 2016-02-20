@@ -13,18 +13,19 @@ class ChooseItemVC: UIViewController {
     let ScreenWidth = UIScreen.mainScreen().bounds.width
     let ScreenHeight = UIScreen.mainScreen().bounds.height
     
-    let ComputeBoardHeight =  UIScreen.mainScreen().bounds.height/2 - 20
+    let ComputeBoardHeight =  UIScreen.mainScreen().bounds.height/2 - 20 + 72
     
     let TopBarHeight: CGFloat = 44.0
-    let CostBarHeight: CGFloat = 72.0
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
+        //创建顶部栏
         setupTopBar()
-        setupCostBar()
+        //创建图标项
         setupItem()
+        //消费金额和计算面板栏
         setupComputeBoard()
     }
     
@@ -46,20 +47,12 @@ class ChooseItemVC: UIViewController {
     
     //创建图标项
     func setupItem(){
-        let ItemBarHeight = ScreenHeight - 20 - TopBarHeight - CostBarHeight - ComputeBoardHeight
+        let ItemBarHeight = ScreenHeight - 20 - TopBarHeight - ComputeBoardHeight
         
         let itemBar = ItemBarView(frame: CGRectMake(0, 20 + TopBarHeight , ScreenWidth, ItemBarHeight))
         self.view.addSubview(itemBar)
     }
     
-    //创建消费金额栏
-    func setupCostBar(){
-        
-        //消费金额栏
-        let costBar = CostBarView(frame: CGRectMake(0, ScreenHeight - CostBarHeight - ComputeBoardHeight , ScreenWidth, CostBarHeight))
-        //添加到self.view
-        self.view.addSubview(costBar)
-    }
     //创建计算面板
     func setupComputeBoard(){
         //创建计算面板
