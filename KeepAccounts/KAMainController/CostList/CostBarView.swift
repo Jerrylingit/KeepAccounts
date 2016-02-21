@@ -97,7 +97,7 @@ class CostBarView: UIView {
     private func setupCostBarTitle(frame: CGRect){
         let costBarTitle = UILabel(frame: CGRectMake(costBarTitleMarginLeft, 0, costBarTitleWidth, frame.height))
         costBarTitle.text = "一般"
-        costBarTitle.font = UIFont(name: costBarTitle.font.fontName, size: 16)
+        costBarTitle.font = UIFont(name: "Arial", size: 20)
         title = costBarTitle
         self.addSubview(costBarTitle)
     }
@@ -106,8 +106,8 @@ class CostBarView: UIView {
         let costBarMoney = UILabel(frame: CGRectMake(costBarTitleMarginLeft + costBarTitleWidth + 10, 0,
             frame.width - costBarTitleMarginLeft - costBarTitleWidth - 20 , frame.height))
         costBarMoney.textAlignment = .Right
-        costBarMoney.font = UIFont(name: costBarMoney.font.fontName, size: 20)
-        costBarMoney.text = "100"
+        costBarMoney.font = UIFont(name: "Arial", size: 40)
+        costBarMoney.text = "0.0"
         money = costBarMoney
         self.addSubview(costBarMoney)
     }

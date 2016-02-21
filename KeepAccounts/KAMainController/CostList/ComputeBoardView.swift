@@ -19,6 +19,7 @@ class ComputeBoardView: UIView {
     //存放上一次的累加值
     var lastValue: Float32 = 0
     var pressAdd = false
+    var pressEqual = false
     
     var title = UILabel()
     var icon :UIImage? = UIImage()
@@ -130,17 +131,20 @@ class ComputeBoardView: UIView {
                 pressAdd = false
                 money.text = "0"
             }
-            //没点击+号
-            else{
-                
+            //计算完一次
+            if pressEqual {
+                pressEqual = false
+                money.text = "0"
             }
-            money.text = String(Float32(money.text!)! * 10.0 + Float32(value)!)
+            
+            money.text = NSString(format: "%.2f", (Float32(money.text!)! * 10.0 + Float32(value)!)) as String
         case "收/支":
             print(value)
         case "C" :
             print(value)
             lastValue = 0
-            money.text = "0.0"
+            money.text = "0.00"
+            okBtn.setTitle("OK", forState: .Normal)
         case "OK" :
             print(value)
         case ".":
@@ -160,6 +164,7 @@ class ComputeBoardView: UIView {
             
         case "=":
             print(value)
+            pressEqual = true
             okBtn.setTitle("OK", forState: .Normal)
             lastValue += Float32(money.text!)!
             money.text = String(lastValue)
