@@ -43,11 +43,6 @@ class CostBarView: UIView {
     }
     
     func setup(){
-        
-    }
-    
-    override func layoutSubviews() {
-        
         //CostBar分割线
         setupCostBarSepLine(self.frame)
         //分割线时间标签
@@ -58,6 +53,11 @@ class CostBarView: UIView {
         setupCostBarTitle(self.frame)
         //右边金额显示
         setupCostBarMoney(self.frame)
+    }
+    
+    override func layoutSubviews() {
+        
+
     }
     //CostBar分割线
     private func setupCostBarSepLine(frame:CGRect){
@@ -107,7 +107,7 @@ class CostBarView: UIView {
             frame.width - costBarTitleMarginLeft - costBarTitleWidth - 20 , frame.height))
         costBarMoney.textAlignment = .Right
         costBarMoney.font = UIFont(name: costBarMoney.font.fontName, size: 20)
-        costBarMoney.text = "￥100000"
+        costBarMoney.text = "100"
         money = costBarMoney
         self.addSubview(costBarMoney)
     }

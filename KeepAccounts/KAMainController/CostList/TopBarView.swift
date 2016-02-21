@@ -22,11 +22,6 @@ class TopBarView: UIView {
     }
     
     func setup(){
-        
-    }
-    
-    override func layoutSubviews() {
-        
         let TopBarWidth = self.frame.width
         let TopBarHeight = self.frame.height
         
@@ -52,6 +47,11 @@ class TopBarView: UIView {
         self.addSubview(topBarAddRemark)
         self.addSubview(topBarTakePhoto)
         self.addSubview(topBarSepLine)
+    }
+    
+    override func layoutSubviews() {
+        
+
     }
     
     private func createTopBarBtn(num number:CGFloat, title:String, target:AnyObject, action:Selector) -> UIButton{

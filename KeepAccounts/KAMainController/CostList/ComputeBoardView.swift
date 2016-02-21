@@ -12,10 +12,13 @@ class ComputeBoardView: UIView {
     
     let sepLineWidth: CGFloat = 1
     let lastBtnTitle = ["收/支", "+", "OK"]
-    let btnTitle = [["1", "4", "7", "清零"], ["2", "5", "8", "0"], ["3", "6", "9", "."]]
+    let btnTitle = [["1", "4", "7", "C"], ["2", "5", "8", "0"], ["3", "6", "9", "."]]
     
     let CostBarHeight: CGFloat = 72.0
     
+    //存放上一次的累加值
+    var lastValue: Float32 = 0
+    var pressAdd = false
     
     var title = UILabel()
     var icon :UIImage? = UIImage()
@@ -29,10 +32,6 @@ class ComputeBoardView: UIView {
     }
     
     func setup(){
-
-    }
-    
-    override func layoutSubviews() {
         let width = self.frame.width
         let ComputedBoardHeight = self.frame.height - CostBarHeight
         
@@ -44,6 +43,10 @@ class ComputeBoardView: UIView {
         setUpLastColunmBtn(CGRectMake(0, CostBarHeight, width, ComputedBoardHeight))
         //生成横竖分割线
         setUpSepLine(CGRectMake(0, CostBarHeight, width, ComputedBoardHeight))
+    }
+    
+    override func layoutSubviews() {
+
     }
     
     private func setupCostBar(frame:CGRect){
@@ -107,7 +110,8 @@ class ComputeBoardView: UIView {
     private func createBtn(frame: CGRect, title:String, normalImage:String, highlightedImage: String) -> UIButton{
         let btn = UIButton(frame: frame)
         btn.setTitle(title, forState: .Normal)
-        btn.titleLabel?.font = UIFont(name: "Courier New", size: 25)
+        btn.titleLabel?.textAlignment = .Center
+        btn.titleLabel?.font = UIFont(name: "Arial", size: 25)
         btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
         btn.setBackgroundImage(UIImage(named: normalImage), forState: .Normal)
         btn.setBackgroundImage(UIImage(named: highlightedImage), forState: .Highlighted)
@@ -117,24 +121,48 @@ class ComputeBoardView: UIView {
     
     func clickComputedBtn(btn:UIButton){
         
-        let value = btn.titleLabel!.text!
+        let value = btn.currentTitle!
         switch value {
         case "1","2", "3", "4", "5", "6", "7", "8", "9", "0" :
             print(value)
+            //点击了+号
+            if pressAdd {
+                pressAdd = false
+                money.text = "0"
+            }
+            //没点击+号
+            else{
+                
+            }
+            money.text = String(Float32(money.text!)! * 10.0 + Float32(value)!)
         case "收/支":
             print(value)
-        case "清零" :
+        case "C" :
             print(value)
+            lastValue = 0
+            money.text = "0.0"
         case "OK" :
             print(value)
         case ".":
             print(value)
         case "+":
             print(value)
-            okBtn.titleLabel?.text = "="
+            pressAdd = true
+            if okBtn.currentTitle! != "="{
+                lastValue = Float32(money.text!)!
+            }
+            else{
+                lastValue += Float32(money.text!)!
+            }
+            money.text = String(lastValue)
+            okBtn.setTitle("=", forState: .Normal)
+            
+            
         case "=":
             print(value)
-            okBtn.titleLabel?.text = "OK"
+            okBtn.setTitle("OK", forState: .Normal)
+            lastValue += Float32(money.text!)!
+            money.text = String(lastValue)
         default:
             print("Error")
         }
