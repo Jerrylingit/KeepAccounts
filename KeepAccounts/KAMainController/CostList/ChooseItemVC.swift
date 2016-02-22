@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol chooseItem{
+    
+}
+
+
 class ChooseItemVC: UIViewController {
 
     let ScreenWidth = UIScreen.mainScreen().bounds.width

@@ -106,7 +106,7 @@ class CostBarView: UIView {
         let costBarMoney = UILabel(frame: CGRectMake(costBarTitleMarginLeft + costBarTitleWidth + 10, 0,
             frame.width - costBarTitleMarginLeft - costBarTitleWidth - 20 , frame.height))
         costBarMoney.textAlignment = .Right
-        costBarMoney.font = UIFont(name: "Arial", size: 40)
+        costBarMoney.font = UIFont(name: "Arial", size: 35)
         costBarMoney.text = "0.0"
         money = costBarMoney
         self.addSubview(costBarMoney)

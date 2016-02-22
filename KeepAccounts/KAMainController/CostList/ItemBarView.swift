@@ -155,8 +155,9 @@ class ItemBarView: UIView {
         
         //添加icon
         let iconWidth = frame.width - CGFloat(2) * IconMarginLeft
-        let icon = UIImageView(frame: CGRectMake(IconMarginLeft, IconMarginTop, iconWidth, iconWidth))
-        icon.image = UIImage(named: item.imageName as String)
+        let icon = UIButton(frame: CGRectMake(IconMarginLeft, IconMarginTop, iconWidth, iconWidth))
+        icon.setImage(UIImage(named: item.imageName as String), forState: .Normal)
+        icon.addTarget(self, action: "itemPress:", forControlEvents: .TouchUpInside)
         //添加title
         let titleHeight = frame.height - iconWidth - CGFloat(2) * IconMarginTop - TitleMarginTop
         let titleY = frame.height - TitleMarginTop - titleHeight
@@ -167,6 +168,9 @@ class ItemBarView: UIView {
         itemView.addSubview(icon)
         itemView.addSubview(title)
         return itemView
+    }
+    func itemPress(sender:UIButton){
+        
     }
     
 }

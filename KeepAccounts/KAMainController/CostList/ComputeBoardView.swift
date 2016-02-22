@@ -10,16 +10,21 @@ import UIKit
 
 class ComputeBoardView: UIView {
     
-    let sepLineWidth: CGFloat = 1
-    let lastBtnTitle = ["收/支", "+", "OK"]
-    let btnTitle = [["1", "4", "7", "C"], ["2", "5", "8", "0"], ["3", "6", "9", "."]]
+    private let sepLineWidth: CGFloat = 1
+    private let lastBtnTitle = ["收/支", "+", "OK"]
+    private let btnTitle = [["1", "4", "7", "C"], ["2", "5", "8", "0"], ["3", "6", "9", "."]]
     
-    let CostBarHeight: CGFloat = 72.0
+    private let CostBarHeight: CGFloat = 72.0
     
     //存放上一次的累加值
-    var lastValue: Float32 = 0
-    var pressAdd = false
-    var pressEqual = false
+    private var summand: Float = 0
+    private var addend: Float = 0
+    private var decimal:Float = 0
+    private var numOfDecimal:Int = 0
+    private var numOfInt = 0
+    private var pressAdd = false
+    private var pressEqual = false
+    private var pressDot = false
     
     var title = UILabel()
     var icon :UIImage? = UIImage()
@@ -120,54 +125,87 @@ class ComputeBoardView: UIView {
         return btn
     }
     
+    
+
+    private func outOfDocMode(){
+        pressDot = false
+        numOfDecimal = 0
+    }
+    
     func clickComputedBtn(btn:UIButton){
         
         let value = btn.currentTitle!
         switch value {
         case "1","2", "3", "4", "5", "6", "7", "8", "9", "0" :
-            print(value)
             //点击了+号
             if pressAdd {
                 pressAdd = false
-                money.text = "0"
+                addend = 0
             }
             //计算完一次
             if pressEqual {
                 pressEqual = false
-                money.text = "0"
+                addend = 0
             }
             
-            money.text = NSString(format: "%.2f", (Float32(money.text!)! * 10.0 + Float32(value)!)) as String
+            if pressDot {
+                numOfDecimal++
+                
+                if numOfDecimal <= 2 {
+                    decimal = Float(value)! / Float(pow(10.0, Double(numOfDecimal)))
+                    money.text = NSString(format: "%.2f", (addend + decimal) ) as String
+                }
+                else{
+                    //超过两位小数
+                }
+            }
+            else{
+                numOfInt++
+                if numOfInt <= 7 {
+                    money.text = NSString(format: "%.2f", (addend * 10.0 + Float(value)!) ) as String
+                }
+                else{
+                    //超过7位
+                }
+                
+            }
+            
+            addend = Float(money.text!)!
+            
         case "收/支":
             print(value)
         case "C" :
-            print(value)
-            lastValue = 0
+            summand = 0
+            addend = 0
+            numOfInt = 0
+            outOfDocMode()
             money.text = "0.00"
             okBtn.setTitle("OK", forState: .Normal)
         case "OK" :
             print(value)
         case ".":
-            print(value)
+            pressDot = true
         case "+":
-            print(value)
             pressAdd = true
-            if okBtn.currentTitle! != "="{
-                lastValue = Float32(money.text!)!
+            numOfInt = 0
+            outOfDocMode()
+            if addend != 0 {
+                summand += addend
+                addend = 0
             }
-            else{
-                lastValue += Float32(money.text!)!
-            }
-            money.text = String(lastValue)
+            money.text = NSString(format: "%.2f", summand) as String
             okBtn.setTitle("=", forState: .Normal)
             
-            
         case "=":
-            print(value)
+            numOfInt = 0
+            outOfDocMode()
             pressEqual = true
             okBtn.setTitle("OK", forState: .Normal)
-            lastValue += Float32(money.text!)!
-            money.text = String(lastValue)
+            if addend != 0 {
+                summand += addend
+                addend = 0
+            }
+            money.text = NSString(format: "%.2f", summand) as String
         default:
             print("Error")
         }
