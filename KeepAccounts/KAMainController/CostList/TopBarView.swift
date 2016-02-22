@@ -15,7 +15,6 @@ class TopBarView: UIView {
         super.init(frame: frame)
         setup()
     }
-    
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -51,7 +50,6 @@ class TopBarView: UIView {
     
     override func layoutSubviews() {
         
-
     }
     
     private func createTopBarBtn(num number:CGFloat, title:String, target:AnyObject, action:Selector) -> UIButton{
