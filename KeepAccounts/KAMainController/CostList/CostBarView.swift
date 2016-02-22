@@ -4,7 +4,7 @@
 //
 //  Created by admin on 16/2/17.
 //  Copyright © 2016年 jerry. All rights reserved.
-//
+
 
 import UIKit
 
@@ -23,14 +23,6 @@ class CostBarView: UIView {
     var title = UILabel()
     var money = UILabel()
     var iconView = UIImageView()
-    var icon:UIImage? {
-        get{
-            return self.iconView.image
-        }
-        set(newValue){
-            self.iconView.image = newValue
-        }
-    }
     
     //自定义初始化方法
     override init(frame: CGRect) {
@@ -71,7 +63,6 @@ class CostBarView: UIView {
         let cal = NSCalendar.currentCalendar()
         let calCom = cal.components([.Year, .Month, .Day], fromDate: NSDate())
         let currentDate = "\(calCom.year)年\(calCom.month)月\(calCom.day)日"
-        
         
         //时间标签
         let costBarTime = UILabel(frame: CGRectMake(frame.width/3, -CostBarTimeHeight/2, frame.width/3, CostBarTimeHeight))

@@ -18,6 +18,8 @@ class ItemBarView: UIView {
     let TitleMarginLeft:CGFloat = 16
     let TitleMarginTop:CGFloat = 10
     
+    var delegate:ChooseItemVC?
+    
     //自定义初始化方法
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,50 +33,50 @@ class ItemBarView: UIView {
     }
     
     func setup(){
-        let incomeItem : NSDictionary = [
-            "type_add":"自定义",
-            "type_big_1":"一般",
-            "type_big_2":"用餐",
-            "type_big_3":"零食",
-            "type_big_4":"交通",
-            "type_big_5":"充值",
-            "type_big_6":"购物",
-            "type_big_7":"娱乐",
-            "type_big_8":"住房",
-            "type_big_9":"约会",
-            "type_big_10":"网购",
-            "type_big_11":"鞋帽",
-            "type_big_12":"护肤",
-            "type_big_13":"丽人",
-            "type_big_14":"剧场",
-            "type_big_15":"转账",
-            "type_big_16":"腐败",
-            "type_big_17":"运动",
-            "type_big_18":"医疗",
-            "type_big_19":"旅游",
-            "type_big_20":"学习",
-            "type_big_21":"香烟",
-            "type_big_22":"酒水",
-            "type_big_23":"数码",
-            "type_big_24":"爱人",
-            "type_big_25":"家庭",
-            "type_big_26":"宠物",
-            "type_big_27":"服装",
-            "type_big_28":"日用品",
-            "type_big_29":"果蔬",
-            "type_big_30":"宝宝",
-            "type_big_31":"信用卡",
-            "type_big_32":"理财",
-            "type_big_33":"工作", ]
-        
-        let btnKeys = incomeItem.allKeys
-        
-        for(var i = 0; i < incomeItem.count; ++i){
-            let imageName = btnKeys[i] as! NSString
-            let iconTitle = incomeItem[imageName] as! NSString
-            let item = btnModel(ID: i, imageName: imageName, iconTitle: iconTitle)
-            TypeBtnDB.insertData(item)
-        }
+//        let incomeItem : NSDictionary = [
+//            "type_add":"自定义",
+//            "type_big_1":"一般",
+//            "type_big_2":"用餐",
+//            "type_big_3":"零食",
+//            "type_big_4":"交通",
+//            "type_big_5":"充值",
+//            "type_big_6":"购物",
+//            "type_big_7":"娱乐",
+//            "type_big_8":"住房",
+//            "type_big_9":"约会",
+//            "type_big_10":"网购",
+//            "type_big_11":"鞋帽",
+//            "type_big_12":"护肤",
+//            "type_big_13":"丽人",
+//            "type_big_14":"剧场",
+//            "type_big_15":"转账",
+//            "type_big_16":"腐败",
+//            "type_big_17":"运动",
+//            "type_big_18":"医疗",
+//            "type_big_19":"旅游",
+//            "type_big_20":"学习",
+//            "type_big_21":"香烟",
+//            "type_big_22":"酒水",
+//            "type_big_23":"数码",
+//            "type_big_24":"爱人",
+//            "type_big_25":"家庭",
+//            "type_big_26":"宠物",
+//            "type_big_27":"服装",
+//            "type_big_28":"日用品",
+//            "type_big_29":"果蔬",
+//            "type_big_30":"宝宝",
+//            "type_big_31":"信用卡",
+//            "type_big_32":"理财",
+//            "type_big_33":"工作", ]
+//        
+//        let btnKeys = incomeItem.allKeys
+//        
+//        for(var i = 0; i < incomeItem.count; ++i){
+//            let imageName = btnKeys[i] as! NSString
+//            let iconTitle = incomeItem[imageName] as! NSString
+//            let item = btnModel(ID: i, imageName: imageName, iconTitle: iconTitle)
+//            TypeBtnDB.insertData(item)
+//        }
         
     }
     
@@ -114,7 +116,7 @@ class ItemBarView: UIView {
                 for(var column = 0; column < (page > 1 ? 5 : tmpRowCount); ++column){
                     //修改X偏移量
                     itemX = CGFloat(column) * ItemWidth + CGFloat(pageX) * ItemBarWidth
-                    let itemView = createItemView(self.items[index], frame: CGRectMake(itemX, itemY, ItemWidth, ItemHeight))
+                    let itemView = createItemView(index, item: self.items[index], frame: CGRectMake(itemX, itemY, ItemWidth, ItemHeight))
                     itemBar.addSubview(itemView)
                     index++
                 }
@@ -149,7 +151,7 @@ class ItemBarView: UIView {
         }
     }
     
-    private func createItemView(item:btnModel,frame:CGRect)->UIView{
+    private func createItemView(index:Int ,item:btnModel,frame:CGRect)->UIView{
         
         let itemView = UIView(frame: frame)
         
@@ -157,6 +159,7 @@ class ItemBarView: UIView {
         let iconWidth = frame.width - CGFloat(2) * IconMarginLeft
         let icon = UIButton(frame: CGRectMake(IconMarginLeft, IconMarginTop, iconWidth, iconWidth))
         icon.setImage(UIImage(named: item.imageName as String), forState: .Normal)
+        icon.tag = index
         icon.addTarget(self, action: "itemPress:", forControlEvents: .TouchUpInside)
         //添加title
         let titleHeight = frame.height - iconWidth - CGFloat(2) * IconMarginTop - TitleMarginTop
@@ -170,55 +173,8 @@ class ItemBarView: UIView {
         return itemView
     }
     func itemPress(sender:UIButton){
-        
+        let item = self.items[sender.tag]
+        delegate?.setCostBarIconAndTitle(item.imageName as String, title: item.iconTitle as String)
     }
     
 }
-
-
-//let expendItem : NSDictionary = [
-//    "type_big_n0":"收入",
-//    "type_big_n1":"报销",
-//    "type_big_n2":"工资",
-//    "type_big_n3":"红包",
-//    "type_big_n4":"兼职",
-//    "type_big_n5":"奖金",
-//    "type_big_n6":"零花钱",
-//    "type_big_n7":"生活费",
-//    "type_big_n8":"投资", ]
-
-//let incomeItem : NSDictionary = [
-//    "type_add":"自定义",
-//    "type_big_1":"一般",
-//    "type_big_2":"用餐",
-//    "type_big_3":"零食",
-//    "type_big_4":"交通",
-//    "type_big_5":"充值",
-//    "type_big_6":"购物",
-//    "type_big_7":"娱乐",
-//    "type_big_8":"住房",
-//    "type_big_9":"约会",
-//    "type_big_10":"网购",
-//    "type_big_11":"鞋帽",
-//    "type_big_12":"护肤",
-//    "type_big_13":"丽人",
-//    "type_big_14":"剧场",
-//    "type_big_15":"转账",
-//    "type_big_16":"腐败",
-//    "type_big_17":"运动",
-//    "type_big_18":"医疗",
-//    "type_big_19":"旅游",
-//    "type_big_20":"学习",
-//    "type_big_21":"香烟",
-//    "type_big_22":"酒水",
-//    "type_big_23":"数码",
-//    "type_big_24":"爱人",
-//    "type_big_25":"家庭",
-//    "type_big_26":"宠物",
-//    "type_big_27":"服装",
-//    "type_big_28":"日用品",
-//    "type_big_29":"果蔬",
-//    "type_big_30":"宝宝",
-//    "type_big_31":"信用卡",
-//    "type_big_32":"理财",
-//    "type_big_33":"工作", ]

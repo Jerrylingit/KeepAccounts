@@ -27,9 +27,18 @@ class ComputeBoardView: UIView {
     private var pressDot = false
     
     var title = UILabel()
-    var icon :UIImage? = UIImage()
+    var iconView :UIImageView?
     var money = UILabel()
     var okBtn = UIButton()
+    var icon : UIImage?{
+        get{
+            return iconView?.image
+        }
+        set(newIcon){
+            iconView?.image = newIcon
+        }
+    }
+    
     
     //自定义初始化方法
     override init(frame: CGRect) {
@@ -58,7 +67,7 @@ class ComputeBoardView: UIView {
     private func setupCostBar(frame:CGRect){
         let costBar = CostBarView(frame: frame)
         title = costBar.title
-        icon = costBar.icon
+        iconView = costBar.iconView
         money = costBar.money
         self.addSubview(costBar)
     }
