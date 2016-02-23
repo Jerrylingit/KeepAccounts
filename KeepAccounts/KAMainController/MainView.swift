@@ -120,6 +120,7 @@ class MainView: UIView {
         
         let Accounts = UIButton(frame: CGRectMake(AccountsMarginLeft, 20, AccountsWidth, AccountsHeight))
         Accounts.setImage(UIImage(named: "book_cover_0"), forState: .Normal)
+        Accounts.setImage(<#T##image: UIImage?##UIImage?#>, forState: <#T##UIControlState#>)
         
         AccountsScrollView.addSubview(Accounts)
         self.addSubview(AccountsScrollView)
@@ -132,9 +133,8 @@ class MainView: UIView {
         sepLine.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.8)
         
         let explore = UIButton(frame: CGRectMake(0, 0, 40, 40))
-        explore.backgroundColor = UIColor.blueColor()
-        explore.center = bottomBar.center
-        explore.imageView?.image = UIImage(named: "button_add")
+        explore.center = CGPointMake(frame.width/2, frame.height/2)
+        explore.setImage(UIImage(named: "button_add"), forState: .Normal)
         
         bottomBar.addSubview(sepLine)
         bottomBar.addSubview(explore)
