@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		841636F41C7B3C3E00BBE6E8 /* SingleAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841636F31C7B3C3E00BBE6E8 /* SingleAccountView.swift */; settings = {ASSET_TAGS = (); }; };
+		8477D21B1C7BE124000B94DF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8477D21A1C7BE124000B94DF /* MainView.swift */; settings = {ASSET_TAGS = (); }; };
 		848785191C7B3B9F007327B1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848785181C7B3B9F007327B1 /* MainViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		84DD0AE61C76BF5A00661F52 /* TypeBtnDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AE51C76BF5A00661F52 /* TypeBtnDB.swift */; settings = {ASSET_TAGS = (); }; };
 		84DD0AEB1C76C7DF00661F52 /* btnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEA1C76C7DF00661F52 /* btnModel.swift */; settings = {ASSET_TAGS = (); }; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		841636F31C7B3C3E00BBE6E8 /* SingleAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountView.swift; sourceTree = "<group>"; };
+		8477D21A1C7BE124000B94DF /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		848785181C7B3B9F007327B1 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		84DD0AE51C76BF5A00661F52 /* TypeBtnDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeBtnDB.swift; sourceTree = "<group>"; };
 		84DD0AEA1C76C7DF00661F52 /* btnModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = btnModel.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				84DD0AE41C76BF5A00661F52 /* TypeBtnDB */,
 				84DDF9D51C754D83003F077F /* CostList */,
 				848785181C7B3B9F007327B1 /* MainViewController.swift */,
+				8477D21A1C7BE124000B94DF /* MainView.swift */,
 			);
 			path = KAMainController;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				84DDF9DF1C754D83003F077F /* TopBarView.swift in Sources */,
 				84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				84DDFDB31C75C039003F077F /* FMResultSet.m in Sources */,
+				8477D21B1C7BE124000B94DF /* MainView.swift in Sources */,
 				84DDF9DC1C754D83003F077F /* ComputeBoardView.swift in Sources */,
 				841636F41C7B3C3E00BBE6E8 /* SingleAccountView.swift in Sources */,
 				84DD0AE61C76BF5A00661F52 /* TypeBtnDB.swift in Sources */,
