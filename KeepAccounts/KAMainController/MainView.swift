@@ -16,7 +16,7 @@ let BottomBarHeight:CGFloat = 60
 
 class MainView: UIView {
     //供修改总收入和总支出的接口, 1: 总收入， 2: 总支出， 3: 总结余
-    var incomeAndExpendLabels = [UILabel]()
+    var incomeAndExpendLabels: NSArray = NSArray()
     
     override init(frame: CGRect) {
         
@@ -26,7 +26,7 @@ class MainView: UIView {
         let BottomBarY = AccountsViewY + AccountsViewHeight
         
         super.init(frame: frame)
-        
+        self.backgroundColor = UIColor.whiteColor()
         //顶部栏
         setupTopBar(CGRectMake(0, StatusBarHeight, frame.width, TopBarHeight))
         //收入和支出
@@ -46,7 +46,7 @@ class MainView: UIView {
         let IconWidth:CGFloat = 40
         
         let TitleX = IconWidth + IconMarginLeft + IconMarginRight
-        let TitleWidth:CGFloat = 50
+        let TitleWidth:CGFloat = 60
         
         let SettingWidth:CGFloat = 26
         let SettingX = frame.width - SettingWidth - 40
@@ -59,6 +59,7 @@ class MainView: UIView {
         
         let title = UILabel(frame: CGRectMake(TitleX, 0, TitleWidth, frame.height))
         title.textAlignment = .Center
+        title.text = "未登录"
         
         let setting = UIButton(frame: CGRectMake(SettingX, SettingY, SettingWidth, SettingWidth))
         setting.setImage(UIImage(named: "menu_setting"), forState: .Normal)
@@ -79,9 +80,9 @@ class MainView: UIView {
     private func setupIncomeAndExpendBar(frame:CGRect){
         let TriWidth = frame.width / 3
         let LabelMarginLeft:CGFloat = 25
-        let LabelMarginTop:CGFloat = 15
+        let LabelMarginTop:CGFloat = 20
         
-        let LabelWidth:CGFloat = 50
+        let LabelWidth:CGFloat = 60
         let LabelHeight:CGFloat = 15
         
         let staticLabelText = ["总收入", "总支出", "总结余"]
@@ -92,6 +93,7 @@ class MainView: UIView {
             let LabelX = LabelMarginLeft + CGFloat(i) * TriWidth
             let label = UILabel(frame: CGRectMake(LabelX, LabelMarginTop, LabelWidth, LabelHeight))
             label.text = staticLabelText[i]
+            label.textColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
             incomeAndExpend.addSubview(label)
         }
         
@@ -99,8 +101,9 @@ class MainView: UIView {
         for(var i = 0; i < 3; ++i){
             let LabelX = LabelMarginLeft + CGFloat(i) * TriWidth
             let label = UILabel(frame: CGRectMake(LabelX, LabelMarginTop + LabelHeight , LabelWidth, LabelHeight))
+            label.textColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
             label.text = "0.00"
-            incomeAndExpendLabels[i] = label
+            incomeAndExpendLabels.arrayByAddingObject(label)
             incomeAndExpend.addSubview(label)
         }
         
@@ -115,7 +118,7 @@ class MainView: UIView {
         
         let AccountsScrollView = UIScrollView(frame: frame)
         
-        let Accounts = UIButton(frame: CGRectMake(AccountsMarginLeft, 10, AccountsWidth, AccountsHeight))
+        let Accounts = UIButton(frame: CGRectMake(AccountsMarginLeft, 20, AccountsWidth, AccountsHeight))
         Accounts.setImage(UIImage(named: "book_cover_0"), forState: .Normal)
         
         AccountsScrollView.addSubview(Accounts)
@@ -125,8 +128,15 @@ class MainView: UIView {
     //底部
     private func setupBottomBar(frame:CGRect){
         let bottomBar = UIView(frame: frame)
+        let sepLine = UIView(frame: CGRectMake(0, 0 , frame.width, 1))
+        sepLine.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.8)
+        
         let explore = UIButton(frame: CGRectMake(0, 0, 40, 40))
+        explore.backgroundColor = UIColor.blueColor()
         explore.center = bottomBar.center
+        explore.imageView?.image = UIImage(named: "button_add")
+        
+        bottomBar.addSubview(sepLine)
         bottomBar.addSubview(explore)
         self.addSubview(bottomBar)
     }

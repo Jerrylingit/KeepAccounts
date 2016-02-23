@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
     }
     //建立主页面
     private func setupMainView(){
-        let mainView = MainView(frame: CGRectMake(0, 0, self.view.frame.width - 36, self.view.frame.height))
+        let mainView = MainView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
         self.view.addSubview(mainView)
     }
     
