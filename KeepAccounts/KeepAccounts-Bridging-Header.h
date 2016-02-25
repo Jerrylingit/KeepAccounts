@@ -7,5 +7,6 @@
 #define KeepAccounts_Bridging_Header_h
 
 #import "FMDB.h"
+#include "RESideMenu.h"
 
 #endif

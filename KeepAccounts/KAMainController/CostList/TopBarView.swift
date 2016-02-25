@@ -10,6 +10,8 @@ import UIKit
 
 class TopBarView: UIView {
     
+    var delegate:TopBarProtocol?
+    
     //自定义初始化方法
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,6 +29,7 @@ class TopBarView: UIView {
         //返回
         let topBarBack = UIButton(frame: CGRectMake(20, 10, 22, 22))
         topBarBack.setImage(UIImage(named: "back_light"), forState: UIControlState.Normal)
+        topBarBack.addTarget(self, action: "back:", forControlEvents: .TouchUpInside)
         //改时间
         let topBarChangeTime = createTopBarBtn(num: 1, title: "改时间", target: self, action: "ChangeTimePress:")
         
@@ -61,6 +64,10 @@ class TopBarView: UIView {
         btn.setTitleColor(UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0), forState: UIControlState.Highlighted)
         btn.addTarget(self, action: action, forControlEvents: .TouchUpInside)
         return btn
+    }
+    
+    func back(sender:AnyObject!){
+        delegate?.clickBack(sender)
     }
     
     func ChangeTimePress(btn: UIButton?){

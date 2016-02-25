@@ -12,8 +12,11 @@ protocol ChooseItemProtocol{
     func setCostBarIconAndTitle(icon:String, title:String)
 }
 
+protocol TopBarProtocol{
+    func clickBack(sender:AnyObject!)
+}
 
-class ChooseItemVC: UIViewController,ChooseItemProtocol {
+class ChooseItemVC: UIViewController, ChooseItemProtocol, TopBarProtocol {
 
     let ScreenWidth = UIScreen.mainScreen().bounds.width
     let ScreenHeight = UIScreen.mainScreen().bounds.height
@@ -43,6 +46,7 @@ class ChooseItemVC: UIViewController,ChooseItemProtocol {
         
         //底部栏
         let topBar = TopBarView(frame: CGRectMake(0, 20, ScreenWidth, TopBarHeight))
+        topBar.delegate = self
         //添加到主view上
         self.view.addSubview(topBar)
     }
@@ -70,4 +74,11 @@ class ChooseItemVC: UIViewController,ChooseItemProtocol {
     }
     
 }
+
+extension ChooseItemVC{
+    func clickBack(sender:AnyObject!){
+        self.presentLeftMenuViewController(sender)
+    }
+}
+
 

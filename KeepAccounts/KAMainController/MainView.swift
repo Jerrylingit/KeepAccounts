@@ -120,7 +120,6 @@ class MainView: UIView {
         
         let Accounts = UIButton(frame: CGRectMake(AccountsMarginLeft, 20, AccountsWidth, AccountsHeight))
         Accounts.setImage(UIImage(named: "book_cover_0"), forState: .Normal)
-        Accounts.setImage(<#T##image: UIImage?##UIImage?#>, forState: <#T##UIControlState#>)
         
         AccountsScrollView.addSubview(Accounts)
         self.addSubview(AccountsScrollView)

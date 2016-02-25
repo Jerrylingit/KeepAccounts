@@ -1,30 +1,28 @@
 //
-//  MainViewController.swift
+//  SingleAccountVC.swift
 //  KeepAccounts
 //
-//  Created by admin on 16/2/22.
+//  Created by admin on 16/2/25.
 //  Copyright © 2016年 jerry. All rights reserved.
 //
 
 import UIKit
 
-
-
-class MainViewController: UIViewController {
+class SingleAccountVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //建立主页面
         setupMainView()
+        
     }
-    //建立主页面
     private func setupMainView(){
-        let mainView = MainView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        self.view.addSubview(mainView)
+        let singleAccountView = SingleAccountView(frame: self.view.frame)
+        self.view.addSubview(singleAccountView)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
 }

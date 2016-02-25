@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		841636F41C7B3C3E00BBE6E8 /* SingleAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841636F31C7B3C3E00BBE6E8 /* SingleAccountView.swift */; settings = {ASSET_TAGS = (); }; };
 		8477D21B1C7BE124000B94DF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8477D21A1C7BE124000B94DF /* MainView.swift */; settings = {ASSET_TAGS = (); }; };
 		848785191C7B3B9F007327B1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848785181C7B3B9F007327B1 /* MainViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		84B722921C7E94B4009F436B /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228D1C7E94B4009F436B /* RECommonFunctions.m */; settings = {ASSET_TAGS = (); }; };
+		84B722931C7E94B4009F436B /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228F1C7E94B4009F436B /* RESideMenu.m */; settings = {ASSET_TAGS = (); }; };
+		84B722941C7E94B4009F436B /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B722911C7E94B4009F436B /* UIViewController+RESideMenu.m */; settings = {ASSET_TAGS = (); }; };
+		84B722B91C7EF016009F436B /* SingleAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B722B81C7EF016009F436B /* SingleAccountVC.swift */; settings = {ASSET_TAGS = (); }; };
+		84B722BB1C7EF8CD009F436B /* SingleAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B722BA1C7EF8CD009F436B /* SingleAccountView.swift */; settings = {ASSET_TAGS = (); }; };
 		84DD0AE61C76BF5A00661F52 /* TypeBtnDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AE51C76BF5A00661F52 /* TypeBtnDB.swift */; settings = {ASSET_TAGS = (); }; };
 		84DD0AEB1C76C7DF00661F52 /* btnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEA1C76C7DF00661F52 /* btnModel.swift */; settings = {ASSET_TAGS = (); }; };
 		84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */; settings = {ASSET_TAGS = (); }; };
@@ -50,9 +54,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		841636F31C7B3C3E00BBE6E8 /* SingleAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountView.swift; sourceTree = "<group>"; };
 		8477D21A1C7BE124000B94DF /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		848785181C7B3B9F007327B1 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		84B7228C1C7E94B4009F436B /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
+		84B7228D1C7E94B4009F436B /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
+		84B7228E1C7E94B4009F436B /* RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenu.h; sourceTree = "<group>"; };
+		84B7228F1C7E94B4009F436B /* RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenu.m; sourceTree = "<group>"; };
+		84B722901C7E94B4009F436B /* UIViewController+RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RESideMenu.h"; sourceTree = "<group>"; };
+		84B722911C7E94B4009F436B /* UIViewController+RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RESideMenu.m"; sourceTree = "<group>"; };
+		84B722B81C7EF016009F436B /* SingleAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountVC.swift; sourceTree = "<group>"; };
+		84B722BA1C7EF8CD009F436B /* SingleAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountView.swift; sourceTree = "<group>"; };
 		84DD0AE51C76BF5A00661F52 /* TypeBtnDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeBtnDB.swift; sourceTree = "<group>"; };
 		84DD0AEA1C76C7DF00661F52 /* btnModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = btnModel.swift; sourceTree = "<group>"; };
 		84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDatabaseAdditionsVariadic.swift; sourceTree = "<group>"; };
@@ -114,12 +125,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		841636F21C7B3C3E00BBE6E8 /* SingleAccountView */ = {
+		84B7228B1C7E94B4009F436B /* RESideMenu */ = {
 			isa = PBXGroup;
 			children = (
-				841636F31C7B3C3E00BBE6E8 /* SingleAccountView.swift */,
+				84B7228C1C7E94B4009F436B /* RECommonFunctions.h */,
+				84B7228D1C7E94B4009F436B /* RECommonFunctions.m */,
+				84B7228E1C7E94B4009F436B /* RESideMenu.h */,
+				84B7228F1C7E94B4009F436B /* RESideMenu.m */,
+				84B722901C7E94B4009F436B /* UIViewController+RESideMenu.h */,
+				84B722911C7E94B4009F436B /* UIViewController+RESideMenu.m */,
 			);
-			path = SingleAccountView;
+			path = RESideMenu;
+			sourceTree = "<group>";
+		};
+		84B722B71C7EF016009F436B /* SingleViewVC */ = {
+			isa = PBXGroup;
+			children = (
+				84B722B81C7EF016009F436B /* SingleAccountVC.swift */,
+				84B722BA1C7EF8CD009F436B /* SingleAccountView.swift */,
+			);
+			path = SingleViewVC;
 			sourceTree = "<group>";
 		};
 		84DC44371C75C2B00054E632 /* Support File */ = {
@@ -152,7 +177,7 @@
 		84DDF9D41C754D83003F077F /* KAMainController */ = {
 			isa = PBXGroup;
 			children = (
-				841636F21C7B3C3E00BBE6E8 /* SingleAccountView */,
+				84B722B71C7EF016009F436B /* SingleViewVC */,
 				84DD0AE91C76C7DF00661F52 /* BtnModel */,
 				84DD0AE41C76BF5A00661F52 /* TypeBtnDB */,
 				84DDF9D51C754D83003F077F /* CostList */,
@@ -195,6 +220,7 @@
 		84DDFDA11C75C039003F077F /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
+				84B7228B1C7E94B4009F436B /* RESideMenu */,
 				84DDFCF51C7553F7003F077F /* staticLib */,
 				84DDFDA21C75C039003F077F /* fmdb */,
 			);
@@ -404,20 +430,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				84DDF9DE1C754D83003F077F /* ItemBarView.swift in Sources */,
+				84B722921C7E94B4009F436B /* RECommonFunctions.m in Sources */,
 				84DDF9DB1C754D83003F077F /* ChooseItemVC.swift in Sources */,
 				84DDF9DD1C754D83003F077F /* CostBarView.swift in Sources */,
 				84DDFDAF1C75C039003F077F /* FMDatabase.m in Sources */,
 				84DDFDB11C75C039003F077F /* FMDatabasePool.m in Sources */,
 				84DDFDB21C75C039003F077F /* FMDatabaseQueue.m in Sources */,
 				84E411171C72A47700C4260E /* AppDelegate.swift in Sources */,
+				84B722B91C7EF016009F436B /* SingleAccountVC.swift in Sources */,
 				848785191C7B3B9F007327B1 /* MainViewController.swift in Sources */,
 				84DDF9DF1C754D83003F077F /* TopBarView.swift in Sources */,
 				84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				84DDFDB31C75C039003F077F /* FMResultSet.m in Sources */,
+				84B722931C7E94B4009F436B /* RESideMenu.m in Sources */,
 				8477D21B1C7BE124000B94DF /* MainView.swift in Sources */,
 				84DDF9DC1C754D83003F077F /* ComputeBoardView.swift in Sources */,
-				841636F41C7B3C3E00BBE6E8 /* SingleAccountView.swift in Sources */,
 				84DD0AE61C76BF5A00661F52 /* TypeBtnDB.swift in Sources */,
+				84B722BB1C7EF8CD009F436B /* SingleAccountView.swift in Sources */,
+				84B722941C7E94B4009F436B /* UIViewController+RESideMenu.m in Sources */,
 				84DDFDB01C75C039003F077F /* FMDatabaseAdditions.m in Sources */,
 				84DD0AEB1C76C7DF00661F52 /* btnModel.swift in Sources */,
 			);

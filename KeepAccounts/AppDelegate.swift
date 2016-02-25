@@ -10,16 +10,27 @@ import UIKit
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, RESideMenuDelegate {
 
     var window: UIWindow?
     
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let chooseItem = MainViewController()
+        //let chooseItem = MainViewController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.rootViewController = chooseItem
+        let leftMenuVC = MainViewController()
+        let homeVC = SingleAccountVC()
+        let sideMenu = RESideMenu.init(contentViewController: homeVC, leftMenuViewController: leftMenuVC, rightMenuViewController: nil)
+        sideMenu.delegate = self
+        sideMenu.scaleContentView = false
+        sideMenu.contentViewInPortraitOffsetCenterX = 150
+        sideMenu.contentViewShadowEnabled = true
+        sideMenu.contentViewShadowOffset = CGSize(width: 20, height: 20)
+        sideMenu.contentViewShadowColor = UIColor.blackColor()
+        sideMenu.scaleMenuView = false
+        sideMenu.fadeMenuView = false
+        window?.rootViewController = sideMenu
         window?.makeKeyAndVisible()
         
         return true
