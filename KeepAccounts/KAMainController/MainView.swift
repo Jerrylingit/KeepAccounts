@@ -9,12 +9,14 @@
 import UIKit
 
 //组件高度
-let StatusBarHeight:CGFloat = 20
-let TopBarHeight:CGFloat = 72
-let IncomeAndExpendBarHeight:CGFloat = 50
-let BottomBarHeight:CGFloat = 60
+
 
 class MainView: UIView {
+    let StatusBarHeight:CGFloat = 20
+    let TopBarHeight:CGFloat = 72
+    let IncomeAndExpendBarHeight:CGFloat = 50
+    let BottomBarHeight:CGFloat = 60
+    
     //供修改总收入和总支出的接口, 1: 总收入， 2: 总支出， 3: 总结余
     var incomeAndExpendLabels: NSArray = NSArray()
     

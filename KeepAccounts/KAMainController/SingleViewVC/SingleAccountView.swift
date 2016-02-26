@@ -9,16 +9,24 @@
 import UIKit
 
 
-let HeadBarHeight:CGFloat = 135
 
-let BtnWidth:CGFloat = 35
-let BtnMargin:CGFloat = 10
-
-let MidBtnWidth:CGFloat = 60
-let MidBtnHeight:CGFloat = 20
-let MidBtnMarginTop:CGFloat = 30
 
 class SingleAccountView: UIView {
+    
+    let HeadBarHeight:CGFloat = 155
+    
+    let BtnWidth:CGFloat = 35
+    let BtnMargin:CGFloat = 10
+    let StatusBarHeight:CGFloat = 20
+    
+    let MidBtnWidth:CGFloat = 60
+    let MidBtnHeight:CGFloat = 20
+    let MidBtnMarginTop:CGFloat = 20
+    
+    
+    let LabelMargin:CGFloat = 10
+    let LabelWidth:CGFloat = 50
+    let LabelHeight:CGFloat = 30
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +35,7 @@ class SingleAccountView: UIView {
     
     private func setup(frame:CGRect){
         
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated:true)
+        
         //头部view
         setupHeadBar(CGRectMake(0, 0, frame.width, HeadBarHeight))
         //中间add按钮
@@ -35,7 +43,8 @@ class SingleAccountView: UIView {
         //收入支出栏
         setupIncomeCostBar(frame)
         //流水账
-        setupDayAccounts(frame)
+        let DayAccountsY = HeadBarHeight + LabelMargin * 2  + LabelHeight * 2
+        setupDayAccounts(CGRectMake(0, DayAccountsY, frame.width, frame.height - DayAccountsY))
     }
     
     //头部view
@@ -45,39 +54,69 @@ class SingleAccountView: UIView {
         
         let headBar = UIImageView(frame: frame)
         headBar.image = UIImage(named: "background1")
+        headBar.userInteractionEnabled = true
         
-        let manageBtn = UIButton(frame: CGRectMake(BtnMargin, BtnMargin, BtnWidth, BtnWidth))
+        let manageBtn = UIButton(frame: CGRectMake(BtnMargin, BtnMargin + StatusBarHeight, BtnWidth, BtnWidth))
         manageBtn.setImage(UIImage(named: "btn_menu"), forState: .Normal)
         
         let midBtn = UIButton(frame: CGRectMake(0, 0, MidBtnWidth, MidBtnHeight))
-        midBtn.center = CGPointMake(HeadBarWidth/2, MidBtnMarginTop)
+        midBtn.center = CGPointMake(HeadBarWidth/2, MidBtnMarginTop + StatusBarHeight)
         midBtn.setTitle("日常账本", forState: .Normal)
         midBtn.titleLabel?.font = UIFont(name: "Courier", size: 12)
         midBtn.layer.cornerRadius = 10
         midBtn.layer.borderColor = UIColor.whiteColor().CGColor
         midBtn.layer.borderWidth = 1
         
-        let takePhotoBtn = UIButton(frame: CGRectMake(HeadBarWidth - BtnMargin - BtnWidth, BtnMargin, BtnWidth, BtnWidth))
+        let takePhotoBtn = UIButton(frame: CGRectMake(HeadBarWidth - BtnMargin - BtnWidth, BtnMargin + StatusBarHeight, BtnWidth, BtnWidth))
         takePhotoBtn.setImage(UIImage(named: "btn_camera"), forState: .Normal)
         
         headBar.addSubview(manageBtn)
         headBar.addSubview(midBtn)
         headBar.addSubview(takePhotoBtn)
         
-        
         self.addSubview(headBar)
     }
     //中间add按钮
     private func setupMidAddBtn(frame:CGRect){
-        
+        let MidAddBtnWidth:CGFloat = 90
+        let midAddBtn = UIButton(frame: CGRectMake(0, 0, MidAddBtnWidth, MidAddBtnWidth))
+        midAddBtn.center = CGPointMake(frame.width/2, HeadBarHeight)
+        midAddBtn.setImage(UIImage(named: "circle_btn"), forState: .Normal)
+        midAddBtn.backgroundColor = UIColor.whiteColor()
+        midAddBtn.layer.cornerRadius = 45
+        self.addSubview(midAddBtn)
     }
     //收入支出栏
     private func setupIncomeCostBar(frame:CGRect){
+
         
+        
+        let Income = UILabel(frame: CGRectMake(LabelMargin, HeadBarHeight + LabelMargin, LabelWidth, LabelHeight))
+        Income.text = "收入"
+        
+        let CostX = frame.width - LabelWidth - LabelMargin
+        let Cost = UILabel(frame: CGRectMake(CostX, HeadBarHeight + LabelMargin, LabelWidth, LabelHeight))
+        Cost.textAlignment = .Right
+        Cost.text = "支出"
+        
+        let IncomeNumY = HeadBarHeight + LabelMargin + LabelHeight
+        let IncomeNum = UILabel(frame: CGRectMake(LabelMargin, IncomeNumY, LabelWidth, LabelHeight))
+        IncomeNum.text = "0.00"
+        
+        let CostNum = UILabel(frame: CGRectMake(CostX, IncomeNumY, LabelWidth, LabelHeight))
+        CostNum.textAlignment = .Right
+        CostNum.text = "0.00"
+        
+        self.addSubview(Income)
+        self.addSubview(Cost)
+        self.addSubview(IncomeNum)
+        self.addSubview(CostNum)
     }
     //流水账
     private func setupDayAccounts(frame:CGRect){
-        
+        let DayAccountsView = UIScrollView(frame: frame)
+        DayAccountsView.contentSize = CGSizeMake(frame.width, frame.height + 30)
+        self.addSubview(DayAccountsView)
     }
     
     required init?(coder aDecoder: NSCoder) {

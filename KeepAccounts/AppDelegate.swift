@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RESideMenuDelegate {
         sideMenu.scaleContentView = false
         sideMenu.contentViewInPortraitOffsetCenterX = 150
         sideMenu.contentViewShadowEnabled = true
-        sideMenu.contentViewShadowOffset = CGSize(width: 20, height: 20)
+        sideMenu.contentViewShadowOffset = CGSize(width: -3, height: -3)
         sideMenu.contentViewShadowColor = UIColor.blackColor()
         sideMenu.scaleMenuView = false
         sideMenu.fadeMenuView = false
