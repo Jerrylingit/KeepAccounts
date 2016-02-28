@@ -28,6 +28,8 @@ class SingleAccountView: UIView {
     let LabelWidth:CGFloat = 50
     let LabelHeight:CGFloat = 30
     
+    var delegate:SingleAccountVC?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup(frame)
@@ -58,6 +60,7 @@ class SingleAccountView: UIView {
         
         let manageBtn = UIButton(frame: CGRectMake(BtnMargin, BtnMargin + StatusBarHeight, BtnWidth, BtnWidth))
         manageBtn.setImage(UIImage(named: "btn_menu"), forState: .Normal)
+        manageBtn.addTarget(self, action: "clickManageBtn:", forControlEvents: .TouchUpInside)
         
         let midBtn = UIButton(frame: CGRectMake(0, 0, MidBtnWidth, MidBtnHeight))
         midBtn.center = CGPointMake(HeadBarWidth/2, MidBtnMarginTop + StatusBarHeight)
@@ -84,6 +87,8 @@ class SingleAccountView: UIView {
         midAddBtn.setImage(UIImage(named: "circle_btn"), forState: .Normal)
         midAddBtn.backgroundColor = UIColor.whiteColor()
         midAddBtn.layer.cornerRadius = 45
+        midAddBtn.addTarget(self, action: "clickMidAddBtn:", forControlEvents: .TouchUpInside)
+        
         self.addSubview(midAddBtn)
     }
     //收入支出栏
@@ -117,6 +122,13 @@ class SingleAccountView: UIView {
         let DayAccountsView = UIScrollView(frame: frame)
         DayAccountsView.contentSize = CGSizeMake(frame.width, frame.height + 30)
         self.addSubview(DayAccountsView)
+    }
+    
+    func clickManageBtn(sender:AnyObject!){
+        delegate?.clickManageBtn(sender)
+    }
+    func clickMidAddBtn(sender:AnyObject!){
+        delegate?.clickMidAddBtn(sender)
     }
     
     required init?(coder aDecoder: NSCoder) {

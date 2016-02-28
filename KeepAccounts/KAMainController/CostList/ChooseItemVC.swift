@@ -77,7 +77,7 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol, TopBarProtocol {
 
 extension ChooseItemVC{
     func clickBack(sender:AnyObject!){
-        self.presentLeftMenuViewController(sender)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

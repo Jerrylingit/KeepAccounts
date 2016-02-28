@@ -8,7 +8,12 @@
 
 import UIKit
 
-class SingleAccountVC: UIViewController {
+protocol SubViewProtocol{
+    func clickManageBtn(sender:AnyObject!)
+    func clickMidAddBtn(sender:AnyObject!)
+}
+
+class SingleAccountVC: UIViewController, SubViewProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +23,7 @@ class SingleAccountVC: UIViewController {
     }
     private func setupMainView(){
         let singleAccountView = SingleAccountView(frame: self.view.frame)
+        singleAccountView.delegate = self
         self.view.addSubview(singleAccountView)
     }
 
@@ -30,4 +36,13 @@ class SingleAccountVC: UIViewController {
         return .LightContent
     }
 
+}
+
+extension SingleAccountVC{
+    func clickManageBtn(sender:AnyObject!){
+        self.presentLeftMenuViewController(sender)
+    }
+    func clickMidAddBtn(sender:AnyObject!){
+        self.presentViewController(ChooseItemVC(), animated: true, completion: nil)
+    }
 }
