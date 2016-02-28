@@ -7,28 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8477D21B1C7BE124000B94DF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8477D21A1C7BE124000B94DF /* MainView.swift */; settings = {ASSET_TAGS = (); }; };
-		848785191C7B3B9F007327B1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848785181C7B3B9F007327B1 /* MainViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		84B722921C7E94B4009F436B /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228D1C7E94B4009F436B /* RECommonFunctions.m */; settings = {ASSET_TAGS = (); }; };
-		84B722931C7E94B4009F436B /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228F1C7E94B4009F436B /* RESideMenu.m */; settings = {ASSET_TAGS = (); }; };
-		84B722941C7E94B4009F436B /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B722911C7E94B4009F436B /* UIViewController+RESideMenu.m */; settings = {ASSET_TAGS = (); }; };
-		84B722B91C7EF016009F436B /* SingleAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B722B81C7EF016009F436B /* SingleAccountVC.swift */; settings = {ASSET_TAGS = (); }; };
-		84B722BB1C7EF8CD009F436B /* SingleAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B722BA1C7EF8CD009F436B /* SingleAccountView.swift */; settings = {ASSET_TAGS = (); }; };
-		84DD0AE61C76BF5A00661F52 /* TypeBtnDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AE51C76BF5A00661F52 /* TypeBtnDB.swift */; settings = {ASSET_TAGS = (); }; };
-		84DD0AEB1C76C7DF00661F52 /* btnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEA1C76C7DF00661F52 /* btnModel.swift */; settings = {ASSET_TAGS = (); }; };
-		84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */; settings = {ASSET_TAGS = (); }; };
-		84DDF9DB1C754D83003F077F /* ChooseItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D61C754D83003F077F /* ChooseItemVC.swift */; settings = {ASSET_TAGS = (); }; };
-		84DDF9DC1C754D83003F077F /* ComputeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D71C754D83003F077F /* ComputeBoardView.swift */; settings = {ASSET_TAGS = (); }; };
-		84DDF9DD1C754D83003F077F /* CostBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D81C754D83003F077F /* CostBarView.swift */; settings = {ASSET_TAGS = (); }; };
-		84DDF9DE1C754D83003F077F /* ItemBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D91C754D83003F077F /* ItemBarView.swift */; settings = {ASSET_TAGS = (); }; };
-		84DDF9DF1C754D83003F077F /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9DA1C754D83003F077F /* TopBarView.swift */; settings = {ASSET_TAGS = (); }; };
+		8477D21B1C7BE124000B94DF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8477D21A1C7BE124000B94DF /* MainView.swift */; };
+		848785191C7B3B9F007327B1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848785181C7B3B9F007327B1 /* MainViewController.swift */; };
+		84B722921C7E94B4009F436B /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228D1C7E94B4009F436B /* RECommonFunctions.m */; };
+		84B722931C7E94B4009F436B /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228F1C7E94B4009F436B /* RESideMenu.m */; };
+		84B722941C7E94B4009F436B /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B722911C7E94B4009F436B /* UIViewController+RESideMenu.m */; };
+		84B722B91C7EF016009F436B /* SingleAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B722B81C7EF016009F436B /* SingleAccountVC.swift */; };
+		84B722BB1C7EF8CD009F436B /* SingleAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B722BA1C7EF8CD009F436B /* SingleAccountView.swift */; };
+		84DD0AE61C76BF5A00661F52 /* TypeBtnDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AE51C76BF5A00661F52 /* TypeBtnDB.swift */; };
+		84DD0AEB1C76C7DF00661F52 /* btnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEA1C76C7DF00661F52 /* btnModel.swift */; };
+		84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */; };
+		84DDF9DB1C754D83003F077F /* ChooseItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D61C754D83003F077F /* ChooseItemVC.swift */; };
+		84DDF9DC1C754D83003F077F /* ComputeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D71C754D83003F077F /* ComputeBoardView.swift */; };
+		84DDF9DD1C754D83003F077F /* CostBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D81C754D83003F077F /* CostBarView.swift */; };
+		84DDF9DE1C754D83003F077F /* ItemBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9D91C754D83003F077F /* ItemBarView.swift */; };
+		84DDF9DF1C754D83003F077F /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDF9DA1C754D83003F077F /* TopBarView.swift */; };
 		84DDFCF41C755283003F077F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDFCF31C755283003F077F /* libsqlite3.0.tbd */; };
-		84DDFDAF1C75C039003F077F /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA41C75C039003F077F /* FMDatabase.m */; settings = {ASSET_TAGS = (); }; };
-		84DDFDB01C75C039003F077F /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA61C75C039003F077F /* FMDatabaseAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		84DDFDB11C75C039003F077F /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA81C75C039003F077F /* FMDatabasePool.m */; settings = {ASSET_TAGS = (); }; };
-		84DDFDB21C75C039003F077F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDAA1C75C039003F077F /* FMDatabaseQueue.m */; settings = {ASSET_TAGS = (); }; };
-		84DDFDB31C75C039003F077F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDAD1C75C039003F077F /* FMResultSet.m */; settings = {ASSET_TAGS = (); }; };
-		84DDFDB41C75C039003F077F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84DDFDAE1C75C039003F077F /* Info.plist */; settings = {ASSET_TAGS = (); }; };
+		84DDFDAF1C75C039003F077F /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA41C75C039003F077F /* FMDatabase.m */; };
+		84DDFDB01C75C039003F077F /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA61C75C039003F077F /* FMDatabaseAdditions.m */; };
+		84DDFDB11C75C039003F077F /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA81C75C039003F077F /* FMDatabasePool.m */; };
+		84DDFDB21C75C039003F077F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDAA1C75C039003F077F /* FMDatabaseQueue.m */; };
+		84DDFDB31C75C039003F077F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDAD1C75C039003F077F /* FMResultSet.m */; };
+		84DDFDB41C75C039003F077F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84DDFDAE1C75C039003F077F /* Info.plist */; };
 		84E411171C72A47700C4260E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E411161C72A47700C4260E /* AppDelegate.swift */; };
 		84E4111E1C72A47700C4260E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E4111D1C72A47700C4260E /* Assets.xcassets */; };
 		84E411211C72A47700C4260E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E4111F1C72A47700C4260E /* LaunchScreen.storyboard */; };
@@ -177,9 +177,9 @@
 		84DDF9D41C754D83003F077F /* KAMainController */ = {
 			isa = PBXGroup;
 			children = (
-				84B722B71C7EF016009F436B /* SingleViewVC */,
 				84DD0AE91C76C7DF00661F52 /* BtnModel */,
 				84DD0AE41C76BF5A00661F52 /* TypeBtnDB */,
+				84B722B71C7EF016009F436B /* SingleViewVC */,
 				84DDF9D51C754D83003F077F /* CostList */,
 				848785181C7B3B9F007327B1 /* MainViewController.swift */,
 				8477D21A1C7BE124000B94DF /* MainView.swift */,
