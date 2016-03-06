@@ -8,6 +8,7 @@
 
 import UIKit
 
+let DatabaseDoc = String.createFilePathInDocumentWith("DatabaseDoc") ?? ""
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, RESideMenuDelegate {
@@ -16,7 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RESideMenuDelegate {
     
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+        //在沙盒中创建目录
+        if(NSFileManager.defaultManager().fileExistsAtPath(DatabaseDoc) == false){
+            do{
+                try NSFileManager.defaultManager().createDirectoryAtPath(DatabaseDoc, withIntermediateDirectories: true, attributes: nil)
+            }catch {
+                print("Could not create the DatabaseDoc directory")
+            }
+        }
         //let chooseItem = MainViewController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let leftMenuVC = MainViewController()

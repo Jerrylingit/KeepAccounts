@@ -23,7 +23,7 @@ class ItemBarView: UIView {
     //自定义初始化方法
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+//        setup()
         getItemsFromDB()
     }
     
@@ -33,51 +33,50 @@ class ItemBarView: UIView {
     }
     
     func setup(){
-//        let incomeItem : NSDictionary = [
-//            "type_add":"自定义",
-//            "type_big_1":"一般",
-//            "type_big_2":"用餐",
-//            "type_big_3":"零食",
-//            "type_big_4":"交通",
-//            "type_big_5":"充值",
-//            "type_big_6":"购物",
-//            "type_big_7":"娱乐",
-//            "type_big_8":"住房",
-//            "type_big_9":"约会",
-//            "type_big_10":"网购",
-//            "type_big_11":"鞋帽",
-//            "type_big_12":"护肤",
-//            "type_big_13":"丽人",
-//            "type_big_14":"剧场",
-//            "type_big_15":"转账",
-//            "type_big_16":"腐败",
-//            "type_big_17":"运动",
-//            "type_big_18":"医疗",
-//            "type_big_19":"旅游",
-//            "type_big_20":"学习",
-//            "type_big_21":"香烟",
-//            "type_big_22":"酒水",
-//            "type_big_23":"数码",
-//            "type_big_24":"爱人",
-//            "type_big_25":"家庭",
-//            "type_big_26":"宠物",
-//            "type_big_27":"服装",
-//            "type_big_28":"日用品",
-//            "type_big_29":"果蔬",
-//            "type_big_30":"宝宝",
-//            "type_big_31":"信用卡",
-//            "type_big_32":"理财",
-//            "type_big_33":"工作", ]
-//        
-//        let btnKeys = incomeItem.allKeys
-//        
-//        for(var i = 0; i < incomeItem.count; ++i){
-//            let imageName = btnKeys[i] as! NSString
-//            let iconTitle = incomeItem[imageName] as! NSString
-//            let item = btnModel(ID: i, imageName: imageName, iconTitle: iconTitle)
-//            TypeBtnDB.insertData(item)
-//        }
+        let incomeItem : NSDictionary = [
+            "type_add":"自定义",
+            "type_big_1":"一般",
+            "type_big_2":"用餐",
+            "type_big_3":"零食",
+            "type_big_4":"交通",
+            "type_big_5":"充值",
+            "type_big_6":"购物",
+            "type_big_7":"娱乐",
+            "type_big_8":"住房",
+            "type_big_9":"约会",
+            "type_big_10":"网购",
+            "type_big_11":"鞋帽",
+            "type_big_12":"护肤",
+            "type_big_13":"丽人",
+            "type_big_14":"剧场",
+            "type_big_15":"转账",
+            "type_big_16":"腐败",
+            "type_big_17":"运动",
+            "type_big_18":"医疗",
+            "type_big_19":"旅游",
+            "type_big_20":"学习",
+            "type_big_21":"香烟",
+            "type_big_22":"酒水",
+            "type_big_23":"数码",
+            "type_big_24":"爱人",
+            "type_big_25":"家庭",
+            "type_big_26":"宠物",
+            "type_big_27":"服装",
+            "type_big_28":"日用品",
+            "type_big_29":"果蔬",
+            "type_big_30":"宝宝",
+            "type_big_31":"信用卡",
+            "type_big_32":"理财",
+            "type_big_33":"工作", ]
         
+        let btnKeys = incomeItem.allKeys
+        
+        for(var i = 0; i < incomeItem.count; ++i){
+            let imageName = btnKeys[i] as! NSString
+            let iconTitle = incomeItem[imageName] as! NSString
+            let item = btnModel(ID: i, imageName: imageName, iconTitle: iconTitle)
+            TypeBtnDB.insertData(item)
+        }
     }
     
     override func layoutSubviews() {

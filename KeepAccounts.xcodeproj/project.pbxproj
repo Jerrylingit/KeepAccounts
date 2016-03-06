@@ -15,7 +15,6 @@
 		84B722B91C7EF016009F436B /* SingleAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B722B81C7EF016009F436B /* SingleAccountVC.swift */; };
 		84B722BB1C7EF8CD009F436B /* SingleAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B722BA1C7EF8CD009F436B /* SingleAccountView.swift */; };
 		84DD0AE61C76BF5A00661F52 /* TypeBtnDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AE51C76BF5A00661F52 /* TypeBtnDB.swift */; };
-		84DD0AEB1C76C7DF00661F52 /* btnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEA1C76C7DF00661F52 /* btnModel.swift */; };
 		84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */; };
 		84DDFCF41C755283003F077F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDFCF31C755283003F077F /* libsqlite3.0.tbd */; };
 		84DDFDAF1C75C039003F077F /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA41C75C039003F077F /* FMDatabase.m */; };
@@ -34,6 +33,9 @@
 		C417E5851C8B276F007875EF /* CostBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E5801C8B276F007875EF /* CostBarView.swift */; };
 		C417E5861C8B276F007875EF /* ItemBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E5811C8B276F007875EF /* ItemBarView.swift */; };
 		C417E5871C8B276F007875EF /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E5821C8B276F007875EF /* TopBarView.swift */; };
+		C4F8E49C1C8BBD30003C6A89 /* btnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F8E49B1C8BBD30003C6A89 /* btnModel.swift */; };
+		C4F8E4A11C8BC166003C6A89 /* NSString+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F8E4A01C8BC166003C6A89 /* NSString+Path.swift */; };
+		C4F8E4B61C8C1345003C6A89 /* AccountDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F8E4B51C8C1345003C6A89 /* AccountDB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +67,6 @@
 		84B722B81C7EF016009F436B /* SingleAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountVC.swift; sourceTree = "<group>"; };
 		84B722BA1C7EF8CD009F436B /* SingleAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountView.swift; sourceTree = "<group>"; };
 		84DD0AE51C76BF5A00661F52 /* TypeBtnDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeBtnDB.swift; sourceTree = "<group>"; };
-		84DD0AEA1C76C7DF00661F52 /* btnModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = btnModel.swift; sourceTree = "<group>"; };
 		84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDatabaseAdditionsVariadic.swift; sourceTree = "<group>"; };
 		84DDFCF31C755283003F077F /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		84DDFDA31C75C039003F077F /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -97,6 +98,9 @@
 		C417E5801C8B276F007875EF /* CostBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostBarView.swift; sourceTree = "<group>"; };
 		C417E5811C8B276F007875EF /* ItemBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemBarView.swift; sourceTree = "<group>"; };
 		C417E5821C8B276F007875EF /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
+		C4F8E49B1C8BBD30003C6A89 /* btnModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = btnModel.swift; sourceTree = "<group>"; };
+		C4F8E4A01C8BC166003C6A89 /* NSString+Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Path.swift"; sourceTree = "<group>"; };
+		C4F8E4B51C8C1345003C6A89 /* AccountDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,19 +170,11 @@
 			path = TypeBtnDB;
 			sourceTree = "<group>";
 		};
-		84DD0AE91C76C7DF00661F52 /* BtnModel */ = {
-			isa = PBXGroup;
-			children = (
-				84DD0AEA1C76C7DF00661F52 /* btnModel.swift */,
-			);
-			path = BtnModel;
-			sourceTree = "<group>";
-		};
 		84DDF9D41C754D83003F077F /* KAMainController */ = {
 			isa = PBXGroup;
 			children = (
+				C4F8E4B41C8C12F9003C6A89 /* AccountModel */,
 				C417E5781C8B276F007875EF /* CostList */,
-				84DD0AE91C76C7DF00661F52 /* BtnModel */,
 				84DD0AE41C76BF5A00661F52 /* TypeBtnDB */,
 				84B722B71C7EF016009F436B /* SingleViewVC */,
 				848785181C7B3B9F007327B1 /* MainViewController.swift */,
@@ -259,6 +255,7 @@
 		84E411151C72A47700C4260E /* KeepAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				C4F8E49E1C8BBFFA003C6A89 /* Utility */,
 				84DC44371C75C2B00054E632 /* Support File */,
 				84DDF9D41C754D83003F077F /* KAMainController */,
 				84E4111D1C72A47700C4260E /* Assets.xcassets */,
@@ -307,6 +304,7 @@
 		C417E57B1C8B276F007875EF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C4F8E49B1C8BBD30003C6A89 /* btnModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -334,6 +332,30 @@
 				C417E5821C8B276F007875EF /* TopBarView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C4F8E49E1C8BBFFA003C6A89 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				C4F8E49F1C8BBFFA003C6A89 /* FileManager */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		C4F8E49F1C8BBFFA003C6A89 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				C4F8E4A01C8BC166003C6A89 /* NSString+Path.swift */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
+		C4F8E4B41C8C12F9003C6A89 /* AccountModel */ = {
+			isa = PBXGroup;
+			children = (
+				C4F8E4B51C8C1345003C6A89 /* AccountDB.swift */,
+			);
+			path = AccountModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -470,12 +492,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				84B722921C7E94B4009F436B /* RECommonFunctions.m in Sources */,
+				C4F8E4B61C8C1345003C6A89 /* AccountDB.swift in Sources */,
 				84DDFDAF1C75C039003F077F /* FMDatabase.m in Sources */,
 				84DDFDB11C75C039003F077F /* FMDatabasePool.m in Sources */,
 				84DDFDB21C75C039003F077F /* FMDatabaseQueue.m in Sources */,
 				C417E5871C8B276F007875EF /* TopBarView.swift in Sources */,
 				84E411171C72A47700C4260E /* AppDelegate.swift in Sources */,
 				C417E5841C8B276F007875EF /* ComputeBoardView.swift in Sources */,
+				C4F8E49C1C8BBD30003C6A89 /* btnModel.swift in Sources */,
 				C417E5831C8B276F007875EF /* ChooseItemVC.swift in Sources */,
 				84B722B91C7EF016009F436B /* SingleAccountVC.swift in Sources */,
 				848785191C7B3B9F007327B1 /* MainViewController.swift in Sources */,
@@ -486,10 +510,10 @@
 				84DD0AE61C76BF5A00661F52 /* TypeBtnDB.swift in Sources */,
 				84B722BB1C7EF8CD009F436B /* SingleAccountView.swift in Sources */,
 				C417E5861C8B276F007875EF /* ItemBarView.swift in Sources */,
+				C4F8E4A11C8BC166003C6A89 /* NSString+Path.swift in Sources */,
 				84B722941C7E94B4009F436B /* UIViewController+RESideMenu.m in Sources */,
 				84DDFDB01C75C039003F077F /* FMDatabaseAdditions.m in Sources */,
 				C417E5851C8B276F007875EF /* CostBarView.swift in Sources */,
-				84DD0AEB1C76C7DF00661F52 /* btnModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

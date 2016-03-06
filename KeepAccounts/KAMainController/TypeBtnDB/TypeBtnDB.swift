@@ -14,12 +14,8 @@ class TypeBtnDB: NSObject {
     //取得数据库文件
     class func getDB()->FMDatabase{
         
-        //取document目录
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as Array
-        let docPath = paths[0] as NSString
-        //创建文件路径“DataBase/TypeBtn.db”
-        let btnPath = docPath.stringByAppendingPathComponent("TypeBtn.db")
-        
+        //创建文件路径“TypeBtn.db”
+        let btnPath = String.createFilePathInDocumentWith("DatabaseDoc/TypeBtn.db") ?? ""
         
         //创建filemanager
         let fileManager = NSFileManager.defaultManager()
