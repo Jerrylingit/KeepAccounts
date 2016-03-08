@@ -30,6 +30,7 @@ class ComputeBoardView: UIView {
     var iconView :UIImageView?
     var money = UILabel()
     var okBtn = UIButton()
+    var iconName = String()
     var icon : UIImage?{
         get{
             return iconView?.image
@@ -140,10 +141,31 @@ class ComputeBoardView: UIView {
         pressDot = false
         numOfDecimal = 0
     }
+    private func pressOK(){
+        let item = AccountItem()
+        item.money = money.text ?? ""
+        item.iconTitle = title.text ?? ""
+        item.iconName = iconName
+        AccoutDB.insertData(item);
+        
+    }
+    private func pressIncomeAndCost(){
+        let db = AccoutDB.getDB()
+        db.open()
+        let count =  Int(db.intForQuery("SELECT COUNT(ID) FROM ACCOUNTMODEL"))
+        db.close()
+        if count != 0{
+            for i in 1...count{
+                let item = AccoutDB.selectData(i)
+                print(item.money)
+            }
+        }
+
+    }
     
     func clickComputedBtn(btn:UIButton){
         
-        let value = btn.currentTitle!
+        let value = btn.currentTitle ?? ""
         switch value {
         case "1","2", "3", "4", "5", "6", "7", "8", "9", "0" :
             //点击了+号
@@ -182,7 +204,7 @@ class ComputeBoardView: UIView {
             addend = Float(money.text!)!
             
         case "收/支":
-            print(value)
+            pressIncomeAndCost()
         case "C" :
             summand = 0
             addend = 0
@@ -191,7 +213,7 @@ class ComputeBoardView: UIView {
             money.text = "0.00"
             okBtn.setTitle("OK", forState: .Normal)
         case "OK" :
-            print(value)
+            pressOK()
         case ".":
             pressDot = true
         case "+":

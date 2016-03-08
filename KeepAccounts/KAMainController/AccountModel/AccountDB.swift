@@ -9,8 +9,8 @@
 import Foundation
 
 private let accountModelPath = "DatabaseDoc/AccountModel.db"
-private let createTableSQL = "CREATE TABLE IF NOT EXISTS AccountModel(ID INTEGER PRIMARY KEY, ICONNAME TEXT, ICONTITLE TEXT, MONEY TEXT, DATE INTEGER, PHOTO TEXT, REMARK TEXT)"
-private let insertSQL = "INSERT INTO AccountModel(ID, ICONNAME, ICONTITLE, MONEY, DATE, PHOTO, REMARK) VALUES(?,?,?,?,?,?,?,?,?)"
+private let createTableSQL = "CREATE TABLE IF NOT EXISTS AccountModel(ID INTEGER PRIMARY KEY AUTOINCREMENT, ICONNAME TEXT, ICONTITLE TEXT, MONEY TEXT, DATE INTEGER, PHOTO TEXT, REMARK TEXT)"
+private let insertSQL = "INSERT INTO AccountModel(ICONNAME, ICONTITLE, MONEY, DATE, PHOTO, REMARK) VALUES(?,?,?,?,?,?)"
 private let updateSQL = "UPDATE AccountModel SET ICONNAME=?, ICONTITLE=? MONEY=? DATE=? PHOTO=? REMARK=? WHERE ID=?"
 private let deleteSQL = "DELETE FROM AccountModel WHERE ID=?"
 private let selectSQL = "SELECT * FROM AccountModel WHERE ID=?"
@@ -30,9 +30,8 @@ class AccoutDB: NSObject {
     //取得数据库文件
     class func getDB()->FMDatabase{
         
-        //创建文件路径“TypeBtn.db”
+        //创建文件路径
         let btnPath = String.createFilePathInDocumentWith(accountModelPath) ?? ""
-        
         //创建filemanager
         let fileManager = NSFileManager.defaultManager()
         //不存在要创建的文件则进入创建操作
@@ -65,7 +64,7 @@ class AccoutDB: NSObject {
     class func insertData(item:AccountItem){
         let db = self.getDB()
         db.open()
-        db.executeUpdate(insertSQL, withArgumentsInArray: [item.ID, item.iconName, item.iconTitle, item.money, item.date, item.photo, item.remark])
+        db.executeUpdate(insertSQL, withArgumentsInArray: [item.iconName, item.iconTitle, item.money, item.date, item.photo, item.remark])
         db.close()
     }
     //更新数据

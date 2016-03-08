@@ -70,6 +70,7 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol, TopBarProtocol {
     
     func setCostBarIconAndTitle(icon: String, title: String) {
         ComputedBar?.title.text = title
+        ComputedBar?.iconName = icon
         ComputedBar?.icon = UIImage(named: icon)
     }
     
