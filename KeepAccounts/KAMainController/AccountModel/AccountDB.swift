@@ -9,22 +9,20 @@
 import Foundation
 
 private let accountModelPath = "DatabaseDoc/AccountModel.db"
-private let createTableSQL = "CREATE TABLE IF NOT EXISTS AccountModel(ID INTEGER PRIMARY KEY, ICONNAME TEXT, ICONTITLE TEXT, MONEY TEXT, DAY TEXT, MONTH TEXT, YEAR TEXT, PHOTO OLE OBJECT, REMARK TEXT)"
-private let insertSQL = "INSERT INTO AccountModel(ID, ICONNAME, ICONTITLE, MONEY, DAY, MONTH, YEAR, PHOTO, REMARK) VALUES(?,?,?,?,?,?,?,?,?)"
-private let updateSQL = "UPDATE AccountModel SET ICONNAME=?, ICONTITLE=? MONEY=? DAY=? MONTH=? YEAR=? PHOTO=? REMARK=? WHERE ID=?"
+private let createTableSQL = "CREATE TABLE IF NOT EXISTS AccountModel(ID INTEGER PRIMARY KEY, ICONNAME TEXT, ICONTITLE TEXT, MONEY TEXT, DATE INTEGER, PHOTO TEXT, REMARK TEXT)"
+private let insertSQL = "INSERT INTO AccountModel(ID, ICONNAME, ICONTITLE, MONEY, DATE, PHOTO, REMARK) VALUES(?,?,?,?,?,?,?,?,?)"
+private let updateSQL = "UPDATE AccountModel SET ICONNAME=?, ICONTITLE=? MONEY=? DATE=? PHOTO=? REMARK=? WHERE ID=?"
 private let deleteSQL = "DELETE FROM AccountModel WHERE ID=?"
 private let selectSQL = "SELECT * FROM AccountModel WHERE ID=?"
 
 class AccountItem: NSObject {
-    var ID:Int = 0
+    var ID = 0
     var iconName = ""
     var iconTitle = ""
     var money = ""
-    var day = ""
-    var month = ""
-    var year = ""
+    var date = 0
     var remark = ""
-    var photo:NSData = NSData()
+    var photo = ""
 }
 
 class AccoutDB: NSObject {
@@ -67,14 +65,14 @@ class AccoutDB: NSObject {
     class func insertData(item:AccountItem){
         let db = self.getDB()
         db.open()
-        db.executeUpdate(insertSQL, withArgumentsInArray: [item.ID, item.iconName, item.iconTitle, item.money, item.day, item.month, item.year, item.photo, item.remark])
+        db.executeUpdate(insertSQL, withArgumentsInArray: [item.ID, item.iconName, item.iconTitle, item.money, item.date, item.photo, item.remark])
         db.close()
     }
     //更新数据
     class func updateData(item:AccountItem){
         let db = self.getDB()
         db.open()
-        db.executeUpdate(updateSQL, withArgumentsInArray: [item.ID, item.iconName, item.iconTitle, item.money, item.day, item.month, item.year, item.photo, item.remark])
+        db.executeUpdate(updateSQL, withArgumentsInArray: [item.ID, item.iconName, item.iconTitle, item.money, item.date, item.photo, item.remark])
         db.close()
     }
     //删除数据
@@ -95,11 +93,9 @@ class AccoutDB: NSObject {
             item.iconName = rs.stringForColumn("ICONNAME")
             item.iconTitle = rs.stringForColumn("ICONTITLE")
             item.money = rs.stringForColumn("MONEY")
-            item.day = rs.stringForColumn("DAY")
-            item.month = rs.stringForColumn("MONTH")
-            item.year = rs.stringForColumn("YEAR")
+            item.date = Int(rs.intForColumn("DATE"))
             item.remark = rs.stringForColumn("REMARK")
-            item.photo = rs.dataForColumn("PHOTO")
+            item.photo = rs.stringForColumn("PHOTO")
         }
         return item
     }
