@@ -10,21 +10,24 @@ import Foundation
 
 private let accountModelPath = "DatabaseDoc/AccountModel.db"
 private let createTableSQL = "CREATE TABLE IF NOT EXISTS AccountModel(ID INTEGER PRIMARY KEY, ICONNAME TEXT, ICONTITLE TEXT, MONEY TEXT, DAY TEXT, MONTH TEXT, YEAR TEXT, PHOTO OLE OBJECT, REMARK TEXT)"
-private let insertSQL = "INSERT INTO AccountModel(ID, IMAGENAME, ICONTITLE, MONEY, DAY, MONTH, YEAR, PHOTO, REMARK) VALUES(?,?,?,?,?,?,?,?,?)"
+private let insertSQL = "INSERT INTO AccountModel(ID, ICONNAME, ICONTITLE, MONEY, DAY, MONTH, YEAR, PHOTO, REMARK) VALUES(?,?,?,?,?,?,?,?,?)"
+private let updateSQL = "UPDATE AccountModel SET ICONNAME=?, ICONTITLE=? MONEY=? DAY=? MONTH=? YEAR=? PHOTO=? REMARK=? WHERE ID=?"
+private let deleteSQL = "DELETE FROM AccountModel WHERE ID=?"
+private let selectSQL = "SELECT * FROM AccountModel WHERE ID=?"
 
 class AccountItem: NSObject {
-    var ID:Int?
-    var iconName:String?
-    var iconTitle:String?
-    var money:String?
-    var day:String?
-    var month:String?
-    var year:String?
-    var remark:String?
-    var photo:UIImage?
+    var ID:Int = 0
+    var iconName = ""
+    var iconTitle = ""
+    var money = ""
+    var day = ""
+    var month = ""
+    var year = ""
+    var remark = ""
+    var photo:NSData = NSData()
 }
 
-class AccoutModel: NSObject {
+class AccoutDB: NSObject {
 
     //取得数据库文件
     class func getDB()->FMDatabase{
@@ -64,10 +67,42 @@ class AccoutModel: NSObject {
     class func insertData(item:AccountItem){
         let db = self.getDB()
         db.open()
-        db.executeUpdate(insertSQL, withArgumentsInArray: [item.ID!,item.iconName!, item.iconTitle!])
+        db.executeUpdate(insertSQL, withArgumentsInArray: [item.ID, item.iconName, item.iconTitle, item.money, item.day, item.month, item.year, item.photo, item.remark])
         db.close()
     }
-    
+    //更新数据
+    class func updateData(item:AccountItem){
+        let db = self.getDB()
+        db.open()
+        db.executeUpdate(updateSQL, withArgumentsInArray: [item.ID, item.iconName, item.iconTitle, item.money, item.day, item.month, item.year, item.photo, item.remark])
+        db.close()
+    }
+    //删除数据
+    class func deleteData(item:AccountItem){
+        let db = self.getDB()
+        db.open()
+        db.executeUpdate(deleteSQL, withArgumentsInArray: [item.ID])
+        db.close()
+    }
+    //查询数据
+    class func selectData(id:Int)->AccountItem{
+        let db = self.getDB()
+        db.open()
+        let rs = db.executeQuery(selectSQL, withArgumentsInArray: [id])
+        let item = AccountItem()
+        while rs.next(){
+            item.ID = Int(rs.intForColumn("ID"))
+            item.iconName = rs.stringForColumn("ICONNAME")
+            item.iconTitle = rs.stringForColumn("ICONTITLE")
+            item.money = rs.stringForColumn("MONEY")
+            item.day = rs.stringForColumn("DAY")
+            item.month = rs.stringForColumn("MONTH")
+            item.year = rs.stringForColumn("YEAR")
+            item.remark = rs.stringForColumn("REMARK")
+            item.photo = rs.dataForColumn("PHOTO")
+        }
+        return item
+    }
     
     
 }
