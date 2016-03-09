@@ -119,8 +119,11 @@ class SingleAccountView: UIView {
     }
     //流水账
     private func setupDayAccounts(frame:CGRect){
-        let DayAccountsView = UIScrollView(frame: frame)
-        DayAccountsView.contentSize = CGSizeMake(frame.width, frame.height + 30)
+        let DayAccountsView = UITableView(frame: frame)
+        DayAccountsView.separatorStyle = .SingleLine
+        DayAccountsView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AccountCell")
+        DayAccountsView.dataSource = delegate
+        DayAccountsView.delegate = delegate
         self.addSubview(DayAccountsView)
     }
     

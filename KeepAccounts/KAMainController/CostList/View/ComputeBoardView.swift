@@ -146,6 +146,7 @@ class ComputeBoardView: UIView {
         item.money = money.text ?? ""
         item.iconTitle = title.text ?? ""
         item.iconName = iconName
+        item.date = Int(NSDate().timeIntervalSince1970)
         AccoutDB.insertData(item);
         
     }
