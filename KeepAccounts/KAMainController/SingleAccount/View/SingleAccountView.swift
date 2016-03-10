@@ -127,7 +127,7 @@ class SingleAccountView: UIView {
     private func setupDayAccounts(frame:CGRect){
         let DayAccountsView = UITableView(frame: frame)
         DayAccountsView.separatorStyle = .SingleLine
-        DayAccountsView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AccountCell")
+        DayAccountsView.registerNib(UINib(nibName: "AccountCell", bundle: nil), forCellReuseIdentifier: "AccountCell")
         DayAccountsView.dataSource = delegate
         DayAccountsView.delegate = delegate
         self.addSubview(DayAccountsView)

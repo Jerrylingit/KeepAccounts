@@ -26,6 +26,8 @@
 		84E411371C72A47700C4260E /* KeepAccountsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E411361C72A47700C4260E /* KeepAccountsUITests.swift */; };
 		84E5798F1C917BE90007295B /* SingleAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5798B1C917BE90007295B /* SingleAccountVC.swift */; settings = {ASSET_TAGS = (); }; };
 		84E579901C917BE90007295B /* SingleAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5798E1C917BE90007295B /* SingleAccountView.swift */; settings = {ASSET_TAGS = (); }; };
+		84E579941C917D8C0007295B /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E579921C917D8C0007295B /* AccountCell.swift */; settings = {ASSET_TAGS = (); }; };
+		84E579951C917D8C0007295B /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E579931C917D8C0007295B /* AccountCell.xib */; settings = {ASSET_TAGS = (); }; };
 		C417E5831C8B276F007875EF /* ChooseItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E57A1C8B276F007875EF /* ChooseItemVC.swift */; };
 		C417E5841C8B276F007875EF /* ComputeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E57F1C8B276F007875EF /* ComputeBoardView.swift */; };
 		C417E5851C8B276F007875EF /* CostBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E5801C8B276F007875EF /* CostBarView.swift */; };
@@ -91,6 +93,8 @@
 		84E411381C72A47700C4260E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84E5798B1C917BE90007295B /* SingleAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountVC.swift; sourceTree = "<group>"; };
 		84E5798E1C917BE90007295B /* SingleAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountView.swift; sourceTree = "<group>"; };
+		84E579921C917D8C0007295B /* AccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
+		84E579931C917D8C0007295B /* AccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountCell.xib; sourceTree = "<group>"; };
 		C417E57A1C8B276F007875EF /* ChooseItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseItemVC.swift; sourceTree = "<group>"; };
 		C417E57F1C8B276F007875EF /* ComputeBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeBoardView.swift; sourceTree = "<group>"; };
 		C417E5801C8B276F007875EF /* CostBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostBarView.swift; sourceTree = "<group>"; };
@@ -290,9 +294,19 @@
 		84E5798D1C917BE90007295B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84E579911C917CAA0007295B /* Cell */,
 				84E5798E1C917BE90007295B /* SingleAccountView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		84E579911C917CAA0007295B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				84E579921C917D8C0007295B /* AccountCell.swift */,
+				84E579931C917D8C0007295B /* AccountCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		C417E5781C8B276F007875EF /* CostList */ = {
@@ -473,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84E411211C72A47700C4260E /* LaunchScreen.storyboard in Resources */,
+				84E579951C917D8C0007295B /* AccountCell.xib in Resources */,
 				84E4111E1C72A47700C4260E /* Assets.xcassets in Resources */,
 				84DDFDB41C75C039003F077F /* Info.plist in Resources */,
 			);
@@ -516,6 +531,7 @@
 				84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				84DDFDB31C75C039003F077F /* FMResultSet.m in Sources */,
 				84B722931C7E94B4009F436B /* RESideMenu.m in Sources */,
+				84E579941C917D8C0007295B /* AccountCell.swift in Sources */,
 				C417E5861C8B276F007875EF /* ItemBarView.swift in Sources */,
 				C4F8E4A11C8BC166003C6A89 /* NSString+Path.swift in Sources */,
 				84E579901C917BE90007295B /* SingleAccountView.swift in Sources */,

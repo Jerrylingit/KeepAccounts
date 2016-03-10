@@ -49,14 +49,16 @@ extension SingleAccountVC: SubViewProtocol{
 }
 //MARK: - tableview delegate
 extension SingleAccountVC:UITableViewDelegate{
-    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CGFloat(70)
+    }
 }
 //MARK: - tableview datasource
 extension SingleAccountVC:UITableViewDataSource{
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identify = "AccountCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(identify, forIndexPath: indexPath) 
-        cell.textLabel!.text = "什么玩意"
+        let cell = tableView.dequeueReusableCellWithIdentifier(identify, forIndexPath: indexPath) as! AccountCell
         return cell
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
