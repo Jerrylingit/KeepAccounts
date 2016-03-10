@@ -10,8 +10,6 @@
 		84B722921C7E94B4009F436B /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228D1C7E94B4009F436B /* RECommonFunctions.m */; };
 		84B722931C7E94B4009F436B /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228F1C7E94B4009F436B /* RESideMenu.m */; };
 		84B722941C7E94B4009F436B /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B722911C7E94B4009F436B /* UIViewController+RESideMenu.m */; };
-		84B722B91C7EF016009F436B /* SingleAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B722B81C7EF016009F436B /* SingleAccountVC.swift */; };
-		84B722BB1C7EF8CD009F436B /* SingleAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B722BA1C7EF8CD009F436B /* SingleAccountView.swift */; };
 		84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */; };
 		84DDFCF41C755283003F077F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDFCF31C755283003F077F /* libsqlite3.0.tbd */; };
 		84DDFDAF1C75C039003F077F /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA41C75C039003F077F /* FMDatabase.m */; };
@@ -26,6 +24,8 @@
 		84E411211C72A47700C4260E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E4111F1C72A47700C4260E /* LaunchScreen.storyboard */; };
 		84E4112C1C72A47700C4260E /* KeepAccountsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4112B1C72A47700C4260E /* KeepAccountsTests.swift */; };
 		84E411371C72A47700C4260E /* KeepAccountsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E411361C72A47700C4260E /* KeepAccountsUITests.swift */; };
+		84E5798F1C917BE90007295B /* SingleAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5798B1C917BE90007295B /* SingleAccountVC.swift */; settings = {ASSET_TAGS = (); }; };
+		84E579901C917BE90007295B /* SingleAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5798E1C917BE90007295B /* SingleAccountView.swift */; settings = {ASSET_TAGS = (); }; };
 		C417E5831C8B276F007875EF /* ChooseItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E57A1C8B276F007875EF /* ChooseItemVC.swift */; };
 		C417E5841C8B276F007875EF /* ComputeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E57F1C8B276F007875EF /* ComputeBoardView.swift */; };
 		C417E5851C8B276F007875EF /* CostBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E5801C8B276F007875EF /* CostBarView.swift */; };
@@ -62,8 +62,6 @@
 		84B7228F1C7E94B4009F436B /* RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenu.m; sourceTree = "<group>"; };
 		84B722901C7E94B4009F436B /* UIViewController+RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RESideMenu.h"; sourceTree = "<group>"; };
 		84B722911C7E94B4009F436B /* UIViewController+RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RESideMenu.m"; sourceTree = "<group>"; };
-		84B722B81C7EF016009F436B /* SingleAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountVC.swift; sourceTree = "<group>"; };
-		84B722BA1C7EF8CD009F436B /* SingleAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountView.swift; sourceTree = "<group>"; };
 		84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDatabaseAdditionsVariadic.swift; sourceTree = "<group>"; };
 		84DDFCF31C755283003F077F /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		84DDFDA31C75C039003F077F /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -91,6 +89,8 @@
 		84E411321C72A47700C4260E /* KeepAccountsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeepAccountsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E411361C72A47700C4260E /* KeepAccountsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepAccountsUITests.swift; sourceTree = "<group>"; };
 		84E411381C72A47700C4260E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84E5798B1C917BE90007295B /* SingleAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountVC.swift; sourceTree = "<group>"; };
+		84E5798E1C917BE90007295B /* SingleAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleAccountView.swift; sourceTree = "<group>"; };
 		C417E57A1C8B276F007875EF /* ChooseItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseItemVC.swift; sourceTree = "<group>"; };
 		C417E57F1C8B276F007875EF /* ComputeBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeBoardView.swift; sourceTree = "<group>"; };
 		C417E5801C8B276F007875EF /* CostBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostBarView.swift; sourceTree = "<group>"; };
@@ -142,15 +142,6 @@
 			path = RESideMenu;
 			sourceTree = "<group>";
 		};
-		84B722B71C7EF016009F436B /* SingleViewVC */ = {
-			isa = PBXGroup;
-			children = (
-				84B722B81C7EF016009F436B /* SingleAccountVC.swift */,
-				84B722BA1C7EF8CD009F436B /* SingleAccountView.swift */,
-			);
-			path = SingleViewVC;
-			sourceTree = "<group>";
-		};
 		84DC44371C75C2B00054E632 /* Support File */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,10 +156,10 @@
 		84DDF9D41C754D83003F077F /* KAMainController */ = {
 			isa = PBXGroup;
 			children = (
+				84E579891C917BE90007295B /* SingleAccount */,
 				C498AC061C8F1183007286EE /* MainViewController */,
 				C4F8E4B41C8C12F9003C6A89 /* AccountModel */,
 				C417E5781C8B276F007875EF /* CostList */,
-				84B722B71C7EF016009F436B /* SingleViewVC */,
 			);
 			path = KAMainController;
 			sourceTree = "<group>";
@@ -277,6 +268,31 @@
 				84E411381C72A47700C4260E /* Info.plist */,
 			);
 			path = KeepAccountsUITests;
+			sourceTree = "<group>";
+		};
+		84E579891C917BE90007295B /* SingleAccount */ = {
+			isa = PBXGroup;
+			children = (
+				84E5798A1C917BE90007295B /* Controller */,
+				84E5798D1C917BE90007295B /* View */,
+			);
+			path = SingleAccount;
+			sourceTree = "<group>";
+		};
+		84E5798A1C917BE90007295B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				84E5798B1C917BE90007295B /* SingleAccountVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		84E5798D1C917BE90007295B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84E5798E1C917BE90007295B /* SingleAccountView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C417E5781C8B276F007875EF /* CostList */ = {
@@ -487,6 +503,7 @@
 				C498AC0A1C8F1183007286EE /* MainViewController.swift in Sources */,
 				C4F8E4B61C8C1345003C6A89 /* AccountDB.swift in Sources */,
 				84DDFDAF1C75C039003F077F /* FMDatabase.m in Sources */,
+				84E5798F1C917BE90007295B /* SingleAccountVC.swift in Sources */,
 				84DDFDB11C75C039003F077F /* FMDatabasePool.m in Sources */,
 				84DDFDB21C75C039003F077F /* FMDatabaseQueue.m in Sources */,
 				C417E5871C8B276F007875EF /* TopBarView.swift in Sources */,
@@ -496,13 +513,12 @@
 				C4F8E49C1C8BBD30003C6A89 /* btnModel.swift in Sources */,
 				C417E5831C8B276F007875EF /* ChooseItemVC.swift in Sources */,
 				84DECF001C8EB9E500B80975 /* TypeBtnDB.swift in Sources */,
-				84B722B91C7EF016009F436B /* SingleAccountVC.swift in Sources */,
 				84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				84DDFDB31C75C039003F077F /* FMResultSet.m in Sources */,
 				84B722931C7E94B4009F436B /* RESideMenu.m in Sources */,
-				84B722BB1C7EF8CD009F436B /* SingleAccountView.swift in Sources */,
 				C417E5861C8B276F007875EF /* ItemBarView.swift in Sources */,
 				C4F8E4A11C8BC166003C6A89 /* NSString+Path.swift in Sources */,
+				84E579901C917BE90007295B /* SingleAccountView.swift in Sources */,
 				84B722941C7E94B4009F436B /* UIViewController+RESideMenu.m in Sources */,
 				84DDFDB01C75C039003F077F /* FMDatabaseAdditions.m in Sources */,
 				C417E5851C8B276F007875EF /* CostBarView.swift in Sources */,

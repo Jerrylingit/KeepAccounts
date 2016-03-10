@@ -24,8 +24,7 @@ class SingleAccountVC: UIViewController{
     }
     
     private func setupMainView(){
-        let singleAccountView = SingleAccountView(frame: self.view.frame)
-        singleAccountView.delegate = self
+        let singleAccountView = SingleAccountView(frame: self.view.frame, delegate:self)
         self.view.addSubview(singleAccountView)
     }
 
@@ -48,11 +47,11 @@ extension SingleAccountVC: SubViewProtocol{
         self.presentViewController(ChooseItemVC(), animated: true, completion: nil)
     }
 }
-
+//MARK: - tableview delegate
 extension SingleAccountVC:UITableViewDelegate{
     
 }
-
+//MARK: - tableview datasource
 extension SingleAccountVC:UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identify = "AccountCell"
@@ -64,7 +63,7 @@ extension SingleAccountVC:UITableViewDataSource{
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 6
     }
     
     

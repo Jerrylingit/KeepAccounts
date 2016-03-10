@@ -32,6 +32,12 @@ class SingleAccountView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+    }
+    
+    convenience init(frame:CGRect, delegate:AnyObject!){
+        self.init(frame: frame)
+        self.delegate = delegate as? SingleAccountVC
         setup(frame)
     }
     
@@ -48,6 +54,8 @@ class SingleAccountView: UIView {
         let DayAccountsY = HeadBarHeight + LabelMargin * 2  + LabelHeight * 2
         setupDayAccounts(CGRectMake(0, DayAccountsY, frame.width, frame.height - DayAccountsY))
     }
+    
+    
     
     //头部view
     private func setupHeadBar(frame:CGRect){
@@ -93,8 +101,6 @@ class SingleAccountView: UIView {
     }
     //收入支出栏
     private func setupIncomeCostBar(frame:CGRect){
-
-        
         
         let Income = UILabel(frame: CGRectMake(LabelMargin, HeadBarHeight + LabelMargin, LabelWidth, LabelHeight))
         Income.text = "收入"
@@ -128,10 +134,16 @@ class SingleAccountView: UIView {
     }
     
     func clickManageBtn(sender:AnyObject!){
-        delegate?.clickManageBtn(sender)
+        if (delegate?.respondsToSelector("clickManageBtn:") != nil){
+            delegate?.clickManageBtn(sender)
+        }
+        
     }
     func clickMidAddBtn(sender:AnyObject!){
-        delegate?.clickMidAddBtn(sender)
+        if (delegate?.respondsToSelector("clickMidAddBtn:") != nil){
+            delegate?.clickMidAddBtn(sender)
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
