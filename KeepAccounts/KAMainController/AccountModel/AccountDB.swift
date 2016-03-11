@@ -14,6 +14,7 @@ private let insertSQL = "INSERT INTO AccountModel(ICONNAME, ICONTITLE, MONEY, DA
 private let updateSQL = "UPDATE AccountModel SET ICONNAME=?, ICONTITLE=? MONEY=? DATE=? PHOTO=? REMARK=? WHERE ID=?"
 private let deleteSQL = "DELETE FROM AccountModel WHERE ID=?"
 private let selectSQL = "SELECT * FROM AccountModel WHERE ID=?"
+private let selectOrderByDateSQL = "SELECT * FROM AccountModel ORDER BY date DESC"
 
 class AccountItem: NSObject {
     var ID = 0
@@ -32,7 +33,7 @@ class AccoutDB: NSObject {
         
         //创建文件路径
         let btnPath = String.createFilePathInDocumentWith(accountModelPath) ?? ""
-        //print(btnPath)
+//        print(btnPath)
         //创建filemanager
         let fileManager = NSFileManager.defaultManager()
         //不存在要创建的文件则进入创建操作
@@ -97,7 +98,28 @@ class AccoutDB: NSObject {
             item.remark = rs.stringForColumn("REMARK")
             item.photo = rs.stringForColumn("PHOTO")
         }
+        db.close()
         return item
+    }
+    class func selectDataOrderByDate()->[AccountItem] {
+        let db = self.getDB()
+        db.open()
+        let rs = db.executeQuery(selectOrderByDateSQL, withArgumentsInArray: nil)
+        
+        var items:[AccountItem] = []
+        while rs.next(){
+            let item = AccountItem()
+            item.ID = Int(rs.intForColumn("ID"))
+            item.iconName = rs.stringForColumn("ICONNAME")
+            item.iconTitle = rs.stringForColumn("ICONTITLE")
+            item.money = rs.stringForColumn("MONEY")
+            item.date = Int(rs.intForColumn("DATE"))
+            item.remark = rs.stringForColumn("REMARK")
+            item.photo = rs.stringForColumn("PHOTO")
+            items.append(item)
+        }
+        db.close()
+        return items
     }
     
     
