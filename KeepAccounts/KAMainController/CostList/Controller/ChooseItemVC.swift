@@ -8,6 +8,9 @@
 
 import UIKit
 
+protocol ComputeBoardProtocol{
+    func onPressBack()
+}
 protocol ChooseItemProtocol{
     func setCostBarIconAndTitle(icon:String, title:String)
 }
@@ -16,7 +19,7 @@ protocol TopBarProtocol{
     func clickBack(sender:AnyObject!)
 }
 
-class ChooseItemVC: UIViewController, ChooseItemProtocol, TopBarProtocol {
+class ChooseItemVC: UIViewController, ChooseItemProtocol {
 
     let ScreenWidth = UIScreen.mainScreen().bounds.width
     let ScreenHeight = UIScreen.mainScreen().bounds.height
@@ -63,6 +66,7 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol, TopBarProtocol {
     func setupComputeBoard(){
         //创建计算面板
         let computeBoard = ComputeBoardView(frame: CGRectMake(0, ScreenHeight - ComputeBoardHeight, ScreenWidth, ComputeBoardHeight))
+        computeBoard.delegate = self
         ComputedBar = computeBoard
         //添加到self.view
         self.view.addSubview(computeBoard)
@@ -73,11 +77,15 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol, TopBarProtocol {
         ComputedBar?.iconName = icon
         ComputedBar?.icon = UIImage(named: icon)
     }
-    
 }
 
-extension ChooseItemVC{
+extension ChooseItemVC: TopBarProtocol{
     func clickBack(sender:AnyObject!){
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+extension ChooseItemVC: ComputeBoardProtocol{
+    func onPressBack() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 }

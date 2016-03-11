@@ -31,6 +31,7 @@ class ComputeBoardView: UIView {
     var money = UILabel()
     var okBtn = UIButton()
     var iconName = String()
+    var delegate:ChooseItemVC?
     var icon : UIImage?{
         get{
             return iconView?.image
@@ -70,6 +71,7 @@ class ComputeBoardView: UIView {
         title = costBar.title
         iconView = costBar.iconView
         money = costBar.money
+        iconName = "type_big_1"
         self.addSubview(costBar)
     }
     //生成前三列button
@@ -148,19 +150,12 @@ class ComputeBoardView: UIView {
         item.iconName = iconName
         item.date = Int(NSDate().timeIntervalSince1970)
         AccoutDB.insertData(item);
-        
+        NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
+        if delegate?.respondsToSelector("onPressBack") != nil{
+            delegate?.onPressBack()
+        }
     }
     private func pressIncomeAndCost(){
-        let db = AccoutDB.getDB()
-        db.open()
-        let count =  Int(db.intForQuery("SELECT COUNT(ID) FROM ACCOUNTMODEL"))
-        db.close()
-        if count != 0{
-            for i in 1...count{
-                let item = AccoutDB.selectData(i)
-                print(item.money)
-            }
-        }
 
     }
     

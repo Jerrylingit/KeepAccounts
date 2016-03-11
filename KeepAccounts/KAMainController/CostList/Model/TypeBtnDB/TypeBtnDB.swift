@@ -84,6 +84,7 @@ class TypeBtnDB: NSObject {
             item.imageName = rs.stringForColumn("IMAGENAME")
             item.iconTitle = rs.stringForColumn("ICONTITLE")
         }
+        db.close()
         return item
     }
     

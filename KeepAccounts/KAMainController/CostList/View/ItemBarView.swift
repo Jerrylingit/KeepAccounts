@@ -23,7 +23,7 @@ class ItemBarView: UIView {
     //自定义初始化方法
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        setup()
+        setup()
         getItemsFromDB()
     }
     
