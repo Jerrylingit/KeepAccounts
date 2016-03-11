@@ -29,7 +29,7 @@ class SingleAccountView: UIView {
     let LabelHeight:CGFloat = 30
     
     var delegate:SingleAccountVC?
-    
+    var tableView:UITableView?
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -126,10 +126,11 @@ class SingleAccountView: UIView {
     //流水账
     private func setupDayAccounts(frame:CGRect){
         let DayAccountsView = UITableView(frame: frame)
-        DayAccountsView.separatorStyle = .SingleLine
+        DayAccountsView.separatorStyle = .None
         DayAccountsView.registerNib(UINib(nibName: "AccountCell", bundle: nil), forCellReuseIdentifier: "AccountCell")
         DayAccountsView.dataSource = delegate
         DayAccountsView.delegate = delegate
+        tableView = DayAccountsView
         self.addSubview(DayAccountsView)
     }
     

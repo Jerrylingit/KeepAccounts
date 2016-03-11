@@ -15,16 +15,28 @@ protocol SubViewProtocol{
 }
 
 class SingleAccountVC: UIViewController{
-
+    
+    var mainView:SingleAccountView?
+    var itemAccounts:[AccountItem] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadDataSource", name: "ChangeDataSource", object: nil)
         self.view.backgroundColor = UIColor.whiteColor()
         setupMainView()
-        
+        initDataSource()
+    }
+    func reloadDataSource(){
+        initDataSource()
+        mainView?.tableView?.reloadData()
     }
     
+    //MARK: - datasource
+    private func initDataSource(){
+        itemAccounts = AccoutDB.selectDataOrderByDate()
+    }
     private func setupMainView(){
         let singleAccountView = SingleAccountView(frame: self.view.frame, delegate:self)
+        mainView = singleAccountView
         self.view.addSubview(singleAccountView)
     }
 
@@ -53,22 +65,32 @@ extension SingleAccountVC:UITableViewDelegate{
         return CGFloat(70)
     }
 }
+
 //MARK: - tableview datasource
 extension SingleAccountVC:UITableViewDataSource{
+    
+    func itemFromDataSourceWith(indexPath:NSIndexPath) -> AccountItem{
+        if indexPath.row < itemAccounts.count{
+           return itemAccounts[indexPath.row]
+        }
+        return AccountItem()
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identify = "AccountCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(identify, forIndexPath: indexPath) as! AccountCell
+        let item = itemFromDataSourceWith(indexPath)
+        cell.iconTitle.text = item.iconTitle
+        cell.icon.image = UIImage(named: item.iconName)
+        print(item.iconName)
+        cell.itemCost.text = item.money
         return cell
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return itemAccounts.count
     }
-    
-    
-    
     
 }
