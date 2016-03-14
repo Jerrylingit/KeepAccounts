@@ -64,8 +64,9 @@ class CostBarView: UIView {
     //分割线时间标签
     private func setupCostBarTime(frame: CGRect){
         //分割线时间
-        let timeInterval = NSDate().timeIntervalSince1970
-        let currentDate = NSDate.dateToChinaCalander(sepLineTime ?? timeInterval)
+        
+        self.sepLineTime = self.sepLineTime ?? NSDate().timeIntervalSince1970
+        let currentDate = NSDate.dateToChinaCalander(sepLineTime!)
         
         //时间标签
         let costBarTime = UILabel(frame: CGRectMake(frame.width/3, -CostBarTimeHeight/2, frame.width/3, CostBarTimeHeight))

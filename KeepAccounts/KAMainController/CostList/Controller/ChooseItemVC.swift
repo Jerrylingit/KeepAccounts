@@ -78,7 +78,17 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     //时间选择器
     func setupDatePicker(){
         let datePickerView = CustomDatePicker(frame: self.view.frame, date: NSDate(), cancel: nil, sure: nil)
-        datePickerView.cancelCallback = ()->() in 
+        datePickerView.hidden = true
+
+        
+        datePickerView.cancelCallback = {()->() in datePickerView.hidden = !datePickerView.hidden}
+        datePickerView.sureCallback = {(date)-> () in
+            let dateTmp = date as NSDate
+            let interval = dateTmp.timeIntervalSince1970
+            self.ComputedBar?.accountTime = interval
+        }
+        datePicker = datePickerView
+        self.view.addSubview(datePickerView)
     }
     
     func setCostBarIconAndTitle(icon: String, title: String) {

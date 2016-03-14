@@ -48,6 +48,7 @@ class ComputeBoardView: UIView {
             return costBar?.sepLineTime
         }
         set (newAccountTime){
+            costBar?.sepLineTime = newAccountTime
             costBar?.costBarTime?.text = NSDate.dateToChinaCalander(newAccountTime!)
         }
     }
@@ -160,7 +161,7 @@ class ComputeBoardView: UIView {
         item.money = money.text ?? ""
         item.iconTitle = title.text ?? ""
         item.iconName = iconName
-        item.date = Int(NSDate().timeIntervalSince1970)
+        item.date = Int(accountTime!)
         AccoutDB.insertData(item);
         NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
         if delegate?.respondsToSelector("onPressBack") != nil{
