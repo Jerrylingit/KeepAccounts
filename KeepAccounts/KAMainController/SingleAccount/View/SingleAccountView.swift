@@ -37,6 +37,7 @@ class SingleAccountView: UIView {
     
     convenience init(frame:CGRect, delegate:AnyObject!){
         self.init(frame: frame)
+        //tableView的数据源和代理应该在其初始化之前就建立好
         self.delegate = delegate as? SingleAccountVC
         setup(frame)
     }
@@ -128,7 +129,7 @@ class SingleAccountView: UIView {
         let DayAccountsView = UITableView(frame: frame)
         DayAccountsView.separatorStyle = .None
         DayAccountsView.registerNib(UINib(nibName: "AccountCell", bundle: nil), forCellReuseIdentifier: "AccountCell")
-        DayAccountsView.dataSource = AccountDataSource()
+        DayAccountsView.dataSource = delegate
         DayAccountsView.delegate = delegate
         tableView = DayAccountsView
         self.addSubview(DayAccountsView)

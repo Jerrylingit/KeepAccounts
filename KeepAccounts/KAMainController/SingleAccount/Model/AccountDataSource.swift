@@ -12,7 +12,7 @@ class AccountDataSource: NSObject, UITableViewDataSource {
     
     var itemAccounts:[AccountItem] = []
     
-    override func init() {
+    override init() {
         itemAccounts = AccoutDB.selectDataOrderByDate()
     }
     
