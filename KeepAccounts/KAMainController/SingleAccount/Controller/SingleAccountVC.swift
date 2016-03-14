@@ -16,8 +16,12 @@ protocol SubViewProtocol{
 
 class SingleAccountVC: UIViewController{
     
+    //改时间
+    
+    
     var mainView:SingleAccountView?
     var itemAccounts:[AccountItem] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadDataSource", name: "ChangeDataSource", object: nil)
@@ -82,7 +86,6 @@ extension SingleAccountVC:UITableViewDataSource{
         let item = itemFromDataSourceWith(indexPath)
         cell.iconTitle.text = item.iconTitle
         cell.icon.image = UIImage(named: item.iconName)
-        print(item.iconName)
         cell.itemCost.text = item.money
         return cell
     }

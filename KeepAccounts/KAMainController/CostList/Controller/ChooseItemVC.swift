@@ -10,6 +10,7 @@ import UIKit
 
 protocol ComputeBoardProtocol{
     func onPressBack()
+    func clickTime()
 }
 protocol ChooseItemProtocol{
     func setCostBarIconAndTitle(icon:String, title:String)
@@ -28,6 +29,7 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     
     let TopBarHeight: CGFloat = 44.0
     var ComputedBar:ComputeBoardView?
+    var datePicker:UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,8 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
         setupItem()
         //消费金额和计算面板栏
         setupComputeBoard()
+        //时间选择器
+        setupDatePicker()
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,6 +75,11 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
         //添加到self.view
         self.view.addSubview(computeBoard)
     }
+    //时间选择器
+    func setupDatePicker(){
+        let datePickerView = CustomDatePicker(frame: self.view.frame, date: NSDate(), cancel: nil, sure: nil)
+        datePickerView.cancelCallback = ()->() in 
+    }
     
     func setCostBarIconAndTitle(icon: String, title: String) {
         ComputedBar?.title.text = title
@@ -82,6 +91,9 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
 extension ChooseItemVC: TopBarProtocol{
     func clickBack(sender:AnyObject!){
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    func clickTime(){
+        self.datePicker?.hidden = !self.datePicker!.hidden
     }
 }
 extension ChooseItemVC: ComputeBoardProtocol{

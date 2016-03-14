@@ -10,7 +10,7 @@ import UIKit
 
 class TopBarView: UIView {
     
-    var delegate:TopBarProtocol?
+    var delegate:ChooseItemVC?
     
     //自定义初始化方法
     override init(frame: CGRect) {
@@ -67,11 +67,15 @@ class TopBarView: UIView {
     }
     
     func back(sender:AnyObject!){
-        delegate?.clickBack(sender)
+        if delegate?.respondsToSelector("clickBack:") != nil{
+            delegate?.clickBack(sender)
+        }
     }
     
     func ChangeTimePress(btn: UIButton?){
-        
+        if delegate?.respondsToSelector("clickTime") != nil{
+            delegate?.clickTime()
+        }
     }
     func AddRemarkPress(btn: UIButton?){
         

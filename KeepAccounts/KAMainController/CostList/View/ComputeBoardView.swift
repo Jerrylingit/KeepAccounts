@@ -31,6 +31,7 @@ class ComputeBoardView: UIView {
     var money = UILabel()
     var okBtn = UIButton()
     var iconName = String()
+    var date = 0
     var delegate:ChooseItemVC?
     var icon : UIImage?{
         get{
@@ -38,6 +39,16 @@ class ComputeBoardView: UIView {
         }
         set(newIcon){
             iconView?.image = newIcon
+        }
+    }
+    private var costBar:CostBarView?
+    //外部设置costbar的time用的接口
+    var accountTime:NSTimeInterval?{
+        get {
+            return costBar?.sepLineTime
+        }
+        set (newAccountTime){
+            costBar?.costBarTime?.text = NSDate.dateToChinaCalander(newAccountTime!)
         }
     }
     
@@ -68,6 +79,7 @@ class ComputeBoardView: UIView {
     
     private func setupCostBar(frame:CGRect){
         let costBar = CostBarView(frame: frame)
+        self.costBar = costBar
         title = costBar.title
         iconView = costBar.iconView
         money = costBar.money

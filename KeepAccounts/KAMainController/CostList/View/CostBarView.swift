@@ -23,6 +23,10 @@ class CostBarView: UIView {
     var title = UILabel()
     var money = UILabel()
     var iconView = UIImageView()
+    var costBarTime:UILabel?
+
+    //分割线时间
+    var sepLineTime:NSTimeInterval?
     
     //自定义初始化方法
     override init(frame: CGRect) {
@@ -60,9 +64,8 @@ class CostBarView: UIView {
     //分割线时间标签
     private func setupCostBarTime(frame: CGRect){
         //分割线时间
-        let cal = NSCalendar.currentCalendar()
-        let calCom = cal.components([.Year, .Month, .Day], fromDate: NSDate())
-        let currentDate = "\(calCom.year)年\(calCom.month)月\(calCom.day)日"
+        let timeInterval = NSDate().timeIntervalSince1970
+        let currentDate = NSDate.dateToChinaCalander(sepLineTime ?? timeInterval)
         
         //时间标签
         let costBarTime = UILabel(frame: CGRectMake(frame.width/3, -CostBarTimeHeight/2, frame.width/3, CostBarTimeHeight))
@@ -74,6 +77,7 @@ class CostBarView: UIView {
         costBarTime.font = UIFont(name: costBarTime.font.fontName, size: 14)
         costBarTime.textColor = UIColor.blackColor()
         costBarTime.text = currentDate
+        self.costBarTime = costBarTime
         
         self.addSubview(costBarTime)
     }
