@@ -11,6 +11,8 @@ import UIKit
 protocol ComputeBoardProtocol{
     func onPressBack()
     func clickTime()
+    func clickRemark()
+    func clickPhoto()
 }
 protocol ChooseItemProtocol{
     func setCostBarIconAndTitle(icon:String, title:String)
@@ -104,6 +106,14 @@ extension ChooseItemVC: TopBarProtocol{
     }
     func clickTime(){
         self.datePicker?.hidden = !self.datePicker!.hidden
+    }
+    func clickRemark() {
+        let limitInputVC = LimitInputVC()
+        limitInputVC.initDate = ComputedBar?.accountTime
+        self.presentViewController(limitInputVC, animated: true, completion: nil)
+    }
+    func clickPhoto() {
+        
     }
 }
 extension ChooseItemVC: ComputeBoardProtocol{

@@ -7,6 +7,6 @@
 #define KeepAccounts_Bridging_Header_h
 
 #import "FMDB.h"
-#include "RESideMenu.h"
-
+#import "RESideMenu.h"
+#import "MBProgressHUD.h"
 #endif

@@ -78,10 +78,14 @@ class TopBarView: UIView {
         }
     }
     func AddRemarkPress(btn: UIButton?){
-        
+        if delegate?.respondsToSelector("clickRemark") != nil{
+            delegate?.clickRemark()
+        }
     }
     func TakePhotoPress(btn: UIButton?){
-        
+        if delegate?.respondsToSelector("clickRemark") != nil{
+            delegate?.clickPhoto()
+        }
     }
 
 }
