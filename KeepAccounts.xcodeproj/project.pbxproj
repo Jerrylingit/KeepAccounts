@@ -36,7 +36,6 @@
 		84E612611C9249A500021495 /* IncomeAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E6125F1C9249A500021495 /* IncomeAccountCell.xib */; settings = {ASSET_TAGS = (); }; };
 		84E612641C926A1700021495 /* AccountDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E612631C926A1700021495 /* AccountDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		84FFE80A1C97E62C00A0CAAB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFE8091C97E62C00A0CAAB /* String+Extension.swift */; settings = {ASSET_TAGS = (); }; };
-		84FFE80E1C98144300A0CAAB /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FFE80D1C98144300A0CAAB /* MBProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
 		C417E5831C8B276F007875EF /* ChooseItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E57A1C8B276F007875EF /* ChooseItemVC.swift */; };
 		C417E5841C8B276F007875EF /* ComputeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E57F1C8B276F007875EF /* ComputeBoardView.swift */; };
 		C417E5851C8B276F007875EF /* CostBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E5801C8B276F007875EF /* CostBarView.swift */; };
@@ -112,8 +111,6 @@
 		84E6125F1C9249A500021495 /* IncomeAccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomeAccountCell.xib; sourceTree = "<group>"; };
 		84E612631C926A1700021495 /* AccountDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDataSource.swift; sourceTree = "<group>"; };
 		84FFE8091C97E62C00A0CAAB /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		84FFE80C1C98144300A0CAAB /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		84FFE80D1C98144300A0CAAB /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		C417E57A1C8B276F007875EF /* ChooseItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseItemVC.swift; sourceTree = "<group>"; };
 		C417E57F1C8B276F007875EF /* ComputeBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeBoardView.swift; sourceTree = "<group>"; };
 		C417E5801C8B276F007875EF /* CostBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostBarView.swift; sourceTree = "<group>"; };
@@ -217,7 +214,6 @@
 		84DDFDA11C75C039003F077F /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
-				84FFE80B1C98144300A0CAAB /* MBProgressHUD */,
 				84B7228B1C7E94B4009F436B /* RESideMenu */,
 				84DDFCF51C7553F7003F077F /* staticLib */,
 				84DDFDA21C75C039003F077F /* fmdb */,
@@ -380,15 +376,6 @@
 				84FFE8091C97E62C00A0CAAB /* String+Extension.swift */,
 			);
 			path = "String+Extension";
-			sourceTree = "<group>";
-		};
-		84FFE80B1C98144300A0CAAB /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				84FFE80C1C98144300A0CAAB /* MBProgressHUD.h */,
-				84FFE80D1C98144300A0CAAB /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		C417E5781C8B276F007875EF /* CostList */ = {
@@ -615,7 +602,6 @@
 				84E411171C72A47700C4260E /* AppDelegate.swift in Sources */,
 				C498AC091C8F1183007286EE /* MainView.swift in Sources */,
 				84CA4B511C969C7F009766B9 /* customDatePickerView.swift in Sources */,
-				84FFE80E1C98144300A0CAAB /* MBProgressHUD.m in Sources */,
 				C417E5841C8B276F007875EF /* ComputeBoardView.swift in Sources */,
 				84DC5B0E1C96554F00D80529 /* NSDate+Extension.swift in Sources */,
 				C4F8E49C1C8BBD30003C6A89 /* btnModel.swift in Sources */,
