@@ -52,6 +52,9 @@ class ComputeBoardView: UIView {
             costBar?.costBarTime?.text = NSDate.dateToChinaCalander(newAccountTime!)
         }
     }
+    var remark:String?
+    var photoName:String?
+    
     
     
     //自定义初始化方法
@@ -162,6 +165,8 @@ class ComputeBoardView: UIView {
         item.iconTitle = title.text ?? ""
         item.iconName = iconName
         item.date = Int(accountTime!)
+        item.remark = remark ?? ""
+        item.photo = photoName ?? ""
         AccoutDB.insertData(item);
         NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
         if delegate?.respondsToSelector("onPressBack") != nil{

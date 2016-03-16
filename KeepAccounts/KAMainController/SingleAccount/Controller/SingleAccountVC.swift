@@ -16,9 +16,18 @@ protocol SubViewProtocol{
 
 class SingleAccountVC: UIViewController{
     
+    
+    var aa = [1,2,3]
+    var bb:[Int]{
+        get {
+            return self.aa
+        }
+        set(newArray){
+            self.aa = newArray
+        }
+    }
+    
     //改时间
-    
-    
     var mainView:SingleAccountView?
     var itemAccounts:[AccountItem] = []
     
@@ -84,9 +93,14 @@ extension SingleAccountVC:UITableViewDataSource{
         let identify = "AccountCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(identify, forIndexPath: indexPath) as! AccountCell
         let item = itemFromDataSourceWith(indexPath)
+        let imagePath = String.createFilePathInDocumentWith(item.photo) ?? ""
         cell.iconTitle.text = item.iconTitle
         cell.icon.image = UIImage(named: item.iconName)
         cell.itemCost.text = item.money
+        cell.remark.text = item.remark
+        if let data = NSData(contentsOfFile: imagePath){
+            cell.photoView.image = UIImage(data: data)
+        }
         return cell
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

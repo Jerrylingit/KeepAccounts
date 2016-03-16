@@ -11,6 +11,9 @@ import UIKit
 class TopBarView: UIView {
     
     var delegate:ChooseItemVC?
+    var topBarChangeTime:UIButton?
+    var topBarAddRemark:UIButton?
+    var topBarTakePhoto:UIButton?
     
     //自定义初始化方法
     override init(frame: CGRect) {
@@ -32,12 +35,15 @@ class TopBarView: UIView {
         topBarBack.addTarget(self, action: "back:", forControlEvents: .TouchUpInside)
         //改时间
         let topBarChangeTime = createTopBarBtn(num: 1, title: "改时间", target: self, action: "ChangeTimePress:")
+        self.topBarChangeTime = topBarChangeTime
         
         //写备注
         let topBarAddRemark = createTopBarBtn(num: 2, title: "写备注", target: self, action: "AddRemarkPress:")
+        self.topBarAddRemark = topBarAddRemark
         
         //加照片
         let topBarTakePhoto = createTopBarBtn(num: 3, title: "加照片", target: self, action: "TakePhotoPress:")
+        self.topBarTakePhoto = topBarTakePhoto
         
         //分割线
         let topBarSepLine = UIView(frame: CGRectMake(0, TopBarHeight - 0.5, TopBarWidth, 0.5))

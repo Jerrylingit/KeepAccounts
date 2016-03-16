@@ -16,4 +16,17 @@ extension String{
         let docPath = paths.firstObject as? NSString
         return docPath?.stringByAppendingPathComponent(fileName)
     }
+    
+    public static func createDirectoryInDocumentWith(directoryName:String) -> String?{
+        let directoryPath = String.createFilePathInDocumentWith(directoryName) ?? ""
+        //在沙盒中创建目录
+        if(NSFileManager.defaultManager().fileExistsAtPath(directoryPath) == false){
+            do{
+                try NSFileManager.defaultManager().createDirectoryAtPath(directoryPath, withIntermediateDirectories: true, attributes: nil)
+            }catch {
+                print("Could not create the DatabaseDoc directory")
+            }
+        }
+        return directoryName
+    }
 }

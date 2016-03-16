@@ -145,7 +145,6 @@ class SingleAccountView: UIView {
         if (delegate?.respondsToSelector("clickMidAddBtn:") != nil){
             delegate?.clickMidAddBtn(sender)
         }
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

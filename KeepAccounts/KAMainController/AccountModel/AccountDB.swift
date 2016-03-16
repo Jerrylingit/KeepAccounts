@@ -27,13 +27,12 @@ class AccountItem: NSObject {
 }
 
 class AccoutDB: NSObject {
-
     //取得数据库文件
     class func getDB()->FMDatabase{
         
         //创建文件路径
         let btnPath = String.createFilePathInDocumentWith(accountModelPath) ?? ""
-//        print(btnPath)
+        print(btnPath)
         //创建filemanager
         let fileManager = NSFileManager.defaultManager()
         //不存在要创建的文件则进入创建操作

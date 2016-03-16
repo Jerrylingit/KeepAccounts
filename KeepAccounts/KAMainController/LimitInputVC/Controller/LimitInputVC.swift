@@ -16,6 +16,7 @@ class LimitInputVC: UIViewController {
     var limitInput:LimitInputView?
     var initDate:NSTimeInterval?
     var keyboardIsShow:Bool = false
+    var completeInput:completeRespond?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
@@ -50,6 +51,7 @@ class LimitInputVC: UIViewController {
         let limitInput = LimitInputView(frame: self.view.frame)
         limitInput.delegate = self
         limitInput.initDate = initDate
+        limitInput.completeInput = self.completeInput
         self.limitInput = limitInput
         self.view.addSubview(limitInput)
     }

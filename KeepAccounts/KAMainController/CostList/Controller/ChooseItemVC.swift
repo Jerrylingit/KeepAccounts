@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let AccountPhoto = "AccountPhoto"
+
 protocol ComputeBoardProtocol{
     func onPressBack()
     func clickTime()
@@ -110,15 +112,45 @@ extension ChooseItemVC: TopBarProtocol{
     func clickRemark() {
         let limitInputVC = LimitInputVC()
         limitInputVC.initDate = ComputedBar?.accountTime
+        limitInputVC.completeInput = {(text) in ComputedBar?.remark = text}
         self.presentViewController(limitInputVC, animated: true, completion: nil)
     }
     func clickPhoto() {
-        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .PhotoLibrary
+        imagePicker.allowsEditing = true
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
 }
 extension ChooseItemVC: ComputeBoardProtocol{
     func onPressBack() {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+extension ChooseItemVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        
+        //转为二进制，压缩
+        let imageData = UIImage.cropAndCompressImage(image, scale: 0.5, compressionQualiy: 0.7)
+        //生成文件名
+        let imageName = "AccountPhoto/image-" + String(NSDate().timeIntervalSince1970)
+        //生成路径
+        let imagePath = String.createFilePathInDocumentWith(imageName) ?? ""
+        //写入文件
+        if imageData?.writeToFile(imagePath, atomically: false) == true {
+            print("write AccountImage success!")
+            ComputedBar?.photoName = imageName
+        }
+        else{
+            print("write AccountImage failed!")
+        }
+        
+        //存储到computedBar中
+        
+        
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

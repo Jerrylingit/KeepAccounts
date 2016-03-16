@@ -14,6 +14,8 @@ private let DateBarHeight:CGFloat = 30
 private let TextFieldHeight:CGFloat = 180
 private let MaxLengthOfRemark = 40
 
+typealias completeRespond = (String)->()
+
 class LimitInputView: UIView {
     
     var delegate:LimitInputVC?
@@ -21,6 +23,7 @@ class LimitInputView: UIView {
     var dateLabel:UILabel?
     var characterNum:UILabel?
     var currentLengthOfRemark:Int?
+    var completeInput:completeRespond?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -121,6 +124,9 @@ extension LimitInputView:UITextViewDelegate{
             }
             else{
                 self.back(self)
+                if let complete = completeInput{
+                    complete(textView.text)
+                }
                 textView.resignFirstResponder()
             }
             return false
