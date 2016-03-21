@@ -24,6 +24,8 @@ class AccountItem: NSObject {
     var date = 0
     var remark = ""
     var photo = ""
+    var dateString = ""
+    var dayCost = ""
 }
 
 class AccoutDB: NSObject {
@@ -32,7 +34,7 @@ class AccoutDB: NSObject {
         
         //创建文件路径
         let btnPath = String.createFilePathInDocumentWith(accountModelPath) ?? ""
-        print(btnPath)
+//        print(btnPath)
         //创建filemanager
         let fileManager = NSFileManager.defaultManager()
         //不存在要创建的文件则进入创建操作
