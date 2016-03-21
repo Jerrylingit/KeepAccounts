@@ -16,4 +16,11 @@ extension NSDate{
         let currentDate = "\(calCom.year)年\(calCom.month)月\(calCom.day)日"
         return currentDate
     }
+    class func intervalToDateComponent(interval:NSTimeInterval) -> NSDateComponents{
+        let date = NSDate(timeIntervalSince1970: interval)
+        let cal = NSCalendar.currentCalendar()
+        let calCom = cal.components([.Year, .Month, .Day], fromDate: date)
+        return calCom
+    }
+    
 }
