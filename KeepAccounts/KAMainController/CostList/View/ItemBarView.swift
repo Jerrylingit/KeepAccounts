@@ -23,7 +23,7 @@ class ItemBarView: UIView {
     //自定义初始化方法
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        setup()
+        setup()
         getItemsFromDB()
     }
     
@@ -33,6 +33,11 @@ class ItemBarView: UIView {
     }
     
     func setup(){
+        if NSFileManager.defaultManager().fileExistsAtPath(String.createFilePathInDocumentWith("DatabaseDoc/TypeBtn.db") ?? "") {
+            return
+            
+        }
+        
         let incomeItem : NSDictionary = [
             "type_add":"自定义",
             "type_big_1":"一般",

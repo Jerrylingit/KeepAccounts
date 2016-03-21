@@ -131,6 +131,9 @@ class SingleAccountView: UIView {
         DayAccountsView.registerNib(UINib(nibName: "AccountCell", bundle: nil), forCellReuseIdentifier: "AccountCell")
         DayAccountsView.dataSource = delegate
         DayAccountsView.delegate = delegate
+        DayAccountsView.estimatedRowHeight = 70
+        DayAccountsView.rowHeight = UITableViewAutomaticDimension
+        
         tableView = DayAccountsView
         self.addSubview(DayAccountsView)
     }

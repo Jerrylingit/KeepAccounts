@@ -75,7 +75,7 @@ extension SingleAccountVC: SubViewProtocol{
 //MARK: - tableview delegate
 extension SingleAccountVC:UITableViewDelegate{
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return CGFloat(70)
+        return CGFloat(100)
     }
 }
 
@@ -92,6 +92,18 @@ extension SingleAccountVC:UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identify = "AccountCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(identify, forIndexPath: indexPath) as! AccountCell
+        cell.selectionStyle = .None
+        
+        let rowAmount = tableView.numberOfRowsInSection(indexPath.section)
+        //最后一个去掉尾巴
+        if (indexPath.row == rowAmount - 1){
+            
+        }
+        //第一个延长头部
+        else if (indexPath.row == 0){
+            
+        }
+        
         let item = itemFromDataSourceWith(indexPath)
         let imagePath = String.createFilePathInDocumentWith(item.photo) ?? ""
         cell.iconTitle.text = item.iconTitle
