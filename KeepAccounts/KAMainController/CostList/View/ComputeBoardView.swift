@@ -153,7 +153,10 @@ class ComputeBoardView: UIView {
         return btn
     }
     
-    
+    private func prepareForNextAssign(){
+        photoName = ""
+        remark = ""
+    }
 
     private func outOfDocMode(){
         pressDot = false
@@ -172,6 +175,7 @@ class ComputeBoardView: UIView {
         if delegate?.respondsToSelector("onPressBack") != nil{
             delegate?.onPressBack()
         }
+        prepareForNextAssign()
     }
     private func pressIncomeAndCost(){
 
