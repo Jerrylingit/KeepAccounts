@@ -56,7 +56,8 @@ class SingleAccountVC: UIViewController{
             sourceItem.dayCost = sourceItem.money
             //4、判断showDate是否为空字符串，为空则加上本次的金额，不为空则替换cell
             if showDate == "" {
-                let curMoney = Float(dayCostItem.dayCost)! + Float(sourceItem.money)!
+                let dayCostTmp = Float(dayCostItem.dayCost) ?? 0
+                let curMoney = Float(sourceItem.money) ?? 0 + dayCostTmp
                 dayCostItem.dayCost = NSString(format: "%.2f", curMoney) as String
                 sourceItem.dayCost = ""
             }
@@ -139,15 +140,14 @@ extension SingleAccountVC:UITableViewDataSource{
         let identify = "AccountCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(identify, forIndexPath: indexPath) as! AccountCell
         cell.selectionStyle = .None
-        //tableview的蛋疼之处，从cell池中拿出来的cell可能属性已经改变了，所以得有初始化这一步
-        //所以tableview只能用于内容高度一致
+        
         cell.botmLine.hidden = false
         cell.dayIndicator.hidden = true
         
         let item = itemFromDataSourceWith(indexPath)
         let imagePath = String.createFilePathInDocumentWith(item.photo) ?? ""
         cell.iconTitle.text = item.iconTitle
-        cell.icon.image = UIImage(named: item.iconName)
+        cell.icon.setImage(UIImage(named: item.iconName), forState: .Normal)
         cell.itemCost.text = item.money
         cell.remark.text = item.remark
         cell.dayCost.text = item.dayCost

@@ -15,7 +15,7 @@ class AccountCell: UITableViewCell {
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var itemCost: UILabel!
     @IBOutlet weak var iconTitle: UILabel!
-    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var icon: UIButton!
     @IBOutlet weak var remark: UILabel!
     @IBOutlet weak var botmLine: UIView!
     @IBOutlet weak var dayIndicator: UIImageView!
@@ -37,12 +37,11 @@ class AccountCell: UITableViewCell {
         photoView.image = nil
         itemCost.text = ""
         iconTitle.text = ""
-        icon.image = nil
         remark.text = ""
         botmLine.hidden = false
         topLine.hidden = false
         dayIndicator.hidden = true
-        
+        icon.setImage(nil, forState: .Normal)
     }
 }
 

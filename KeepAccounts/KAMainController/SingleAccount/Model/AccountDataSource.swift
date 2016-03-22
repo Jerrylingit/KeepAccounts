@@ -28,7 +28,7 @@ class AccountDataSource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier(identify, forIndexPath: indexPath) as! AccountCell
         let item = itemFromDataSourceWith(indexPath)
         cell.iconTitle.text = item.iconTitle
-        cell.icon.image = UIImage(named: item.iconName)
+        cell.icon.setImage(UIImage(named: item.iconName), forState: .Normal)
         cell.itemCost.text = item.money
         return cell
     }

@@ -146,10 +146,6 @@ extension ChooseItemVC: UIImagePickerControllerDelegate, UINavigationControllerD
         else{
             print("write AccountImage failed!")
         }
-        
-        //存储到computedBar中
-        
-        
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
 }
