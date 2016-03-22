@@ -20,14 +20,46 @@ class AccountCell: UITableViewCell {
     @IBOutlet weak var botmLine: UIView!
     @IBOutlet weak var dayIndicator: UIImageView!
     @IBOutlet weak var topLine: UIView!
+    @IBOutlet weak var deleteBtn: UIButton!
+    @IBOutlet weak var editBtn: UIButton!
+    
+    var isHiddenSubview = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
 
+        
+    }
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
+    }
+    
+    @IBAction func clickIcon(sender: AnyObject) {
+        isHiddenSubview = !isHiddenSubview
+        let commonViewAlpha:CGFloat = isHiddenSubview ? 0.0 : 1.0
+        let editAndDeleteAlpha:CGFloat = isHiddenSubview ? 1.0 : 0.0
+        dealWithSubView(commonViewAlpha)
+        dealWithBtns(editAndDeleteAlpha)
+    }
+    
+    @IBAction func clickEditBtn(sender: AnyObject) {
+        print("edit")
+    }
+    @IBAction func clickDeleteBtn(sender: AnyObject) {
+        print("delete")
+    }
+    private func dealWithSubView(alpha:CGFloat){
+        photoView.alpha = alpha
+        iconTitle.alpha = alpha
+        itemCost.alpha = alpha
+        remark.alpha = alpha
+    }
+    private func dealWithBtns(alpha:CGFloat){
+        deleteBtn.alpha = alpha
+        editBtn.alpha = alpha
     }
     
     override func prepareForReuse(){
