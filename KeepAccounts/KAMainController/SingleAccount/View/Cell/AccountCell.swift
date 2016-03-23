@@ -44,7 +44,13 @@ class AccountCell: UITableViewCell {
     }
     
     @IBAction func clickEditBtn(sender: AnyObject) {
-        
+        let model = ChooseItemModel()
+        model.dataBaseId = cellID ?? 0
+        model.mode = "edit"
+        let editChooseItemVC = ChooseItemVC(model: model)
+        if let block = presentVCBlock{
+            block(editChooseItemVC, true, nil)
+        }
         print("edit")
     }
     @IBAction func clickDeleteBtn(sender: AnyObject) {

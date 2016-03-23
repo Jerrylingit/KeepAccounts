@@ -15,17 +15,11 @@ protocol LimitInputViewProtocol{
 class LimitInputVC: UIViewController {
     var limitInput:LimitInputView?
     var initVCDate:String?
-    var text:String {
-        get{
-            return self.limitInput?.textInput?.text ?? ""
-        }
-        set(newValue){
-            self.limitInput?.textInput?.text = newValue
-        }
-    }
+    var text:String = ""
     var placehoder:String = "记录花销"
     var keyboardIsShow:Bool = false
     var completeInput:completeRespond?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
@@ -61,6 +55,9 @@ class LimitInputVC: UIViewController {
         limitInput.delegate = self
         limitInput.initViewDate = initVCDate
         limitInput.placehoder = placehoder
+        if text != ""{
+            limitInput.textInput?.text = text
+        }
         limitInput.completeInput = self.completeInput
         self.limitInput = limitInput
         self.view.addSubview(limitInput)

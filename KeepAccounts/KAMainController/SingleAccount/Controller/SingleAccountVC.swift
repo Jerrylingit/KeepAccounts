@@ -58,7 +58,8 @@ class SingleAccountVC: UIViewController{
             //4、判断showDate是否为空字符串，为空则加上本次的金额，不为空则替换cell
             if showDate == "" {
                 let dayCostTmp = Float(dayCostItem.dayCost) ?? 0
-                let curMoney = Float(sourceItem.money) ?? 0 + dayCostTmp
+                let moneyTmp = Float(sourceItem.money) ?? 0
+                let curMoney = dayCostTmp + moneyTmp
                 dayCostItem.dayCost = NSString(format: "%.2f", curMoney) as String
                 sourceItem.dayCost = ""
             }
