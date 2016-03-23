@@ -25,6 +25,9 @@ class LimitInputView: UIView {
     var currentLengthOfRemark:Int?
     var completeInput:completeRespond?
     
+    var placehoder:String = "记录花销"
+    var textInput:UITextView?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         let DateBarY = TopBarHeight + StatusBarHeight
@@ -74,10 +77,10 @@ class LimitInputView: UIView {
         textInput.font = UIFont(name: "Arial", size: 20)
         textInput.keyboardType = .Default
         textInput.returnKeyType = .Done
-        textInput.text = "记录花销"
+        textInput.text = placehoder
         textInput.textColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
         textInput.delegate = self;
-        
+        self.textInput = textInput
         let characterNum = UILabel(frame: CGRectMake(10, self.frame.height - 60, 80, 40))
         characterNum.text = "0/40"
         self.characterNum = characterNum
@@ -102,7 +105,7 @@ class LimitInputView: UIView {
 extension LimitInputView:UITextViewDelegate{
     
     func textViewDidBeginEditing(textView: UITextView) {
-        if textView.text == "记录花销" {
+        if textView.text == placehoder {
             textView.text = ""
             textView.textColor = UIColor.blackColor()
         }
@@ -110,7 +113,7 @@ extension LimitInputView:UITextViewDelegate{
     }
     func textViewDidEndEditing(textView: UITextView) {
         if textView.text == "" {
-            textView.text = "记录花销"
+            textView.text = placehoder
             textView.textColor = UIColor.grayColor()
         }
         textView.resignFirstResponder()

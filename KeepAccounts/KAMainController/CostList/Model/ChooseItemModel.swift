@@ -13,13 +13,12 @@ class ChooseItemModel:NSObject{
     var mode:String
     //数据库的存入Id，初始化为0
     var dataBaseId:Int
-    var costBarTime:NSTimeInterval
-    var costBarIconName:String
-    var costBarTitle:String
-    var costBarMoney:String
-    
-    var topBarRemark:String = ""
-    var topBarPhotoName:String = ""
+    dynamic var costBarTime:NSTimeInterval
+    dynamic var costBarIconName:String
+    dynamic var costBarTitle:String
+    dynamic var costBarMoney:String
+    dynamic var topBarRemark:String
+    dynamic var topBarPhotoName:String
     
     func floatToStringRemain2Decimal(float:Float)->String {
         return String(format: "%.2f", float)
@@ -32,9 +31,11 @@ class ChooseItemModel:NSObject{
     func setCostBarTimeWithDate(date:NSDate){
         costBarTime = date.timeIntervalSince1970
     }
+    
     func getCostBarTimeInString()->String{
         return NSDate.intervalToChinaCalander(costBarTime)
     }
+    
     func getCostBarTimeInDate()->NSDate{
         return NSDate(timeIntervalSince1970: costBarTime)
     }
@@ -48,6 +49,8 @@ class ChooseItemModel:NSObject{
         costBarIconName = "type_big_1"
         costBarTitle = "一般"
         costBarMoney = "0.00"
+        topBarRemark = ""
+        topBarPhotoName = ""
         super.init()
     }
 

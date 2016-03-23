@@ -75,19 +75,41 @@ class ComputeBoardView: UIView {
         }
     }
     
-    var computedResult:computedResultResponder?
+    var computedResult:computedResultResponder?{
+        get{
+            return computeLogic.computedMoney
+        }
+        set(newValue){
+            computeLogic.computedMoney = newValue
+        }
+    }
     
-    var okBtn = UIButton()
+    var pressOK:(()->Void)?{
+        get{
+            return computeLogic.pressOKClosure
+        }
+        set(newValue){
+            computeLogic.pressOKClosure = newValue
+        }
+    }
     
+    var pressIncomeAndCost:(()->Void)?{
+        get{
+            return computeLogic.pressIncomeAndCostClosure
+        }
+        set(newValue){
+            computeLogic.pressIncomeAndCostClosure = newValue
+        }
+    }
     
-
+//    var okBtn = UIButton()
     var delegate:ChooseItemVC?
-
-    
+    let computeLogic:ComputedBoardLogic
     
     
     //自定义初始化方法
     override init(frame: CGRect) {
+        computeLogic = ComputedBoardLogic()
         super.init(frame: frame)
         setup()
     }
@@ -194,7 +216,8 @@ class ComputeBoardView: UIView {
             let btnFrame = CGRectMake(CGFloat(3) * btnWidth, CGFloat(row) * btnHeight + btnY , btnWidth, row == 2 ? btnHeight * 2: btnHeight)
             let btn = createBtn(btnFrame,title: lastBtnTitle[row],normalImage: "btn_num_pressed",highlightedImage: "btn_num")
             if row == 2 {
-                okBtn = btn
+                computeLogic.okBtn = btn
+//                okBtn = btn
             }
             self.addSubview(btn)
         }
@@ -232,6 +255,10 @@ class ComputeBoardView: UIView {
         btn.setBackgroundImage(UIImage(named: highlightedImage), forState: .Highlighted)
         btn.addTarget(self, action: "clickComputedBtn:", forControlEvents: .TouchUpInside)
         return btn
+    }
+    func clickComputedBtn(btn:UIButton){
+        let value = btn.currentTitle ?? ""
+        computeLogic.Compute(value)
     }
     
     required init?(coder aDecoder: NSCoder) {

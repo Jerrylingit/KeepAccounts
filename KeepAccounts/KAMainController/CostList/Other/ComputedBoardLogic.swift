@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ComputedBoardLogic{
+class ComputedBoardLogic:NSObject{
     
     //存放上一次的累加值
     private var result:Float = 0
@@ -24,6 +24,8 @@ class ComputedBoardLogic{
     var okBtn = UIButton()
     
     var computedMoney:computedResultResponder?
+    var pressOKClosure:(()->Void)?
+    var pressIncomeAndCostClosure:(()->Void)?
     
     private func outOfDocMode(){
         pressDot = false
@@ -33,6 +35,10 @@ class ComputedBoardLogic{
     var remark:String?
     var photoName:String?
     private func pressOK(){
+        if let pressOKClosure = pressOKClosure{
+            pressOKClosure()
+        }
+        
 //        let item = AccountItem()
 //        item.money = money.text ?? ""
 //        item.iconTitle = title.text ?? ""
@@ -48,12 +54,12 @@ class ComputedBoardLogic{
 //        prepareForNextAssign()
     }
     private func pressIncomeAndCost(){
-        
+        if let pressIncomeAndCostClosure = pressIncomeAndCostClosure{
+            pressIncomeAndCostClosure()
+        }
     }
     
-    func clickComputedBtn(btn:UIButton){
-        
-        let value = btn.currentTitle ?? ""
+    func Compute(value:String){
         switch value {
         case "1","2", "3", "4", "5", "6", "7", "8", "9", "0" :
             //点击了+号

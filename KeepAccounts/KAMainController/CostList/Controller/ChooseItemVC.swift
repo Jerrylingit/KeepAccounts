@@ -24,6 +24,8 @@ protocol TopBarProtocol{
     func clickBack(sender:AnyObject!)
 }
 
+private let myContent = 0
+
 class ChooseItemVC: UIViewController, ChooseItemProtocol {
 
     let ScreenWidth = UIScreen.mainScreen().bounds.width
@@ -53,6 +55,12 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
+        chooseItemModel.addObserver(self, forKeyPath: "costBarTime", options: [.New, .Old], context: nil)
+        chooseItemModel.addObserver(self, forKeyPath: "costBarIconName", options: [.New, .Old], context: nil)
+        chooseItemModel.addObserver(self, forKeyPath: "costBarTitle", options: [.New, .Old], context: nil)
+        chooseItemModel.addObserver(self, forKeyPath: "costBarMoney", options: [.New, .Old], context: nil)
+        chooseItemModel.addObserver(self, forKeyPath: "topBarRemark", options: [.New, .Old], context: nil)
+        chooseItemModel.addObserver(self, forKeyPath: "topBarPhotoName", options: [.New, .Old], context: nil)
         //创建顶部栏
         setupTopBar()
         //创建图标项
@@ -93,6 +101,25 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
         computeBoard.icon = UIImage(named: chooseItemModel.costBarIconName)
         computeBoard.title = chooseItemModel.costBarTitle
         computeBoard.money = chooseItemModel.costBarMoney
+        //修改model中的金额
+        computeBoard.computedResult = {(float) in
+            self.chooseItemModel.setCostBarMoneyWithFloat(float)
+        }
+        //点击OK时要执行一系列操作
+        computeBoard.pressOK = {() in
+            let item = AccountItem()
+            item.money = self.chooseItemModel.costBarMoney
+            item.iconTitle = self.chooseItemModel.costBarTitle
+            item.iconName = self.chooseItemModel.costBarIconName
+            item.date = Int(self.chooseItemModel.costBarTime)
+            item.remark = self.chooseItemModel.topBarRemark
+            item.photo = self.chooseItemModel.topBarPhotoName
+            AccoutDB.insertData(item);
+            NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
+            self.onPressBack()
+        }
+        //点击收入或分支选项也要执行切换操作
+        computeBoard.pressIncomeAndCost = {() in }
         computedBar = computeBoard
         //添加到self.view
         self.view.addSubview(computeBoard)
@@ -116,7 +143,23 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        
+        switch keyPath ?? "" {
+        case "costBarTime":
+            computedBar?.time = chooseItemModel.getCostBarTimeInString()
+        case "costBarIconName":
+            computedBar?.icon = UIImage(named:chooseItemModel.costBarIconName)
+        case "costBarTitle":
+            computedBar?.title = chooseItemModel.costBarTitle
+        case "costBarMoney":
+            computedBar?.money = chooseItemModel.costBarMoney
+        case "topBarRemark":
+            print("I observe topBarRemark's value changed")
+        case "topBarPhotoName":
+            print("I observe topBarPhotoName value changed")
+        default:
+            print("error keypath")
+            
+        }
     }
     
 }
@@ -131,7 +174,8 @@ extension ChooseItemVC: TopBarProtocol{
     func clickRemark() {
         let limitInputVC = LimitInputVC()
         limitInputVC.initVCDate = chooseItemModel.getCostBarTimeInString()
-        limitInputVC.completeInput = {(text) in computedBar?.remark = text}
+        limitInputVC.text = chooseItemModel.topBarRemark
+        limitInputVC.completeInput = {(text) in self.chooseItemModel.topBarRemark = text}
         self.presentViewController(limitInputVC, animated: true, completion: nil)
     }
     func clickPhoto() {
@@ -159,8 +203,7 @@ extension ChooseItemVC: UIImagePickerControllerDelegate, UINavigationControllerD
         let imagePath = String.createFilePathInDocumentWith(imageName) ?? ""
         //写入文件
         if imageData?.writeToFile(imagePath, atomically: false) == true {
-            print("write AccountImage success!")
-            computedBar?.photoName = imageName
+            chooseItemModel.topBarPhotoName = imageName
         }
         else{
             print("write AccountImage failed!")
@@ -168,5 +211,3 @@ extension ChooseItemVC: UIImagePickerControllerDelegate, UINavigationControllerD
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
 }
-
-
