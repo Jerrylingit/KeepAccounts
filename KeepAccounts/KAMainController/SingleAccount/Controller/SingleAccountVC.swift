@@ -12,6 +12,7 @@ import UIKit
 protocol SubViewProtocol{
     func clickManageBtn(sender:AnyObject!)
     func clickMidAddBtn(sender:AnyObject!)
+    func presentVC(VC:UIViewController, animated:Bool, completion:(()->Void)?)
 }
 
 class SingleAccountVC: UIViewController{
@@ -106,7 +107,6 @@ class SingleAccountVC: UIViewController{
             return "\(currentCom.year)年\(currentCom.month)月\(currentCom.day)日"
         }
     }
-
 }
 
 extension SingleAccountVC: SubViewProtocol{
@@ -115,6 +115,9 @@ extension SingleAccountVC: SubViewProtocol{
     }
     func clickMidAddBtn(sender:AnyObject!){
         self.presentViewController(ChooseItemVC(), animated: true, completion: nil)
+    }
+    func presentVC(VC: UIViewController, animated: Bool, completion: (() -> Void)?) {
+        self.presentViewController(VC, animated: animated, completion: completion)
     }
 }
 //MARK: - tableview delegate
@@ -140,12 +143,13 @@ extension SingleAccountVC:UITableViewDataSource{
         let identify = "AccountCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(identify, forIndexPath: indexPath) as! AccountCell
         cell.selectionStyle = .None
-        
+        cell.presentVCBlock = {(VC, animated, completion) in self.presentViewController(VC, animated: animated, completion: completion)}
         cell.botmLine.hidden = false
         cell.dayIndicator.hidden = true
         
         let item = itemFromDataSourceWith(indexPath)
         let imagePath = String.createFilePathInDocumentWith(item.photo) ?? ""
+        cell.cellID = item.ID
         cell.iconTitle.text = item.iconTitle
         cell.icon.setImage(UIImage(named: item.iconName), forState: .Normal)
         cell.itemCost.text = item.money

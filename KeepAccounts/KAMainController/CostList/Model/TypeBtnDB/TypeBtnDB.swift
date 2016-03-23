@@ -8,6 +8,19 @@
 
 import UIKit
 
+
+class btnModel: NSObject {
+    var ID : Int
+    var imageName : NSString
+    var iconTitle : NSString
+    
+    init(ID:Int, imageName:NSString, iconTitle: NSString){
+        self.ID = ID
+        self.imageName = imageName
+        self.iconTitle = iconTitle
+    }
+}
+
 class TypeBtnDB: NSObject {
     
     

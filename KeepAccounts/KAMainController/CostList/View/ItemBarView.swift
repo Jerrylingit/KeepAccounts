@@ -7,17 +7,15 @@
 //
 
 import UIKit
+private let IconMarginLeft:CGFloat = 12
+private let IconMarginTop:CGFloat = 10
+
+private let TitleMarginLeft:CGFloat = 16
+private let TitleMarginTop:CGFloat = 10
 
 class ItemBarView: UIView {
     
     var items : [btnModel] = []
-    
-    let IconMarginLeft:CGFloat = 12
-    let IconMarginTop:CGFloat = 10
-    
-    let TitleMarginLeft:CGFloat = 16
-    let TitleMarginTop:CGFloat = 10
-    
     var delegate:ChooseItemVC?
     
     //自定义初始化方法

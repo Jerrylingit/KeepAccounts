@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+typealias presentVCResponder = (UIViewController, Bool, (()->Void)?)->Void
 class AccountCell: UITableViewCell {
 
     @IBOutlet weak var dayCost: UILabel!
@@ -22,14 +22,12 @@ class AccountCell: UITableViewCell {
     @IBOutlet weak var topLine: UIView!
     @IBOutlet weak var deleteBtn: UIButton!
     @IBOutlet weak var editBtn: UIButton!
-    
+    var cellID:Int?
     var isHiddenSubview = false
-    
+    var presentVCBlock:presentVCResponder?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-
-        
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -46,10 +44,21 @@ class AccountCell: UITableViewCell {
     }
     
     @IBAction func clickEditBtn(sender: AnyObject) {
+        
         print("edit")
     }
     @IBAction func clickDeleteBtn(sender: AnyObject) {
-        print("delete")
+        let alertView = UIAlertController(title: "删除账目", message: "您确定要删除吗？", preferredStyle: .Alert)
+        alertView.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
+        alertView.addAction(UIAlertAction(title: "确定", style: .Default){(action) in
+            if let ID = self.cellID{
+                AccoutDB.deleteDataWith(ID)
+            }
+            NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
+        })
+        if let block = presentVCBlock{
+            block(alertView, true, nil)
+        }
     }
     private func dealWithSubView(alpha:CGFloat){
         photoView.alpha = alpha
@@ -74,6 +83,8 @@ class AccountCell: UITableViewCell {
         topLine.hidden = false
         dayIndicator.hidden = true
         icon.setImage(nil, forState: .Normal)
+        dealWithSubView(1.0)
+        dealWithBtns(0.0)
     }
 }
 

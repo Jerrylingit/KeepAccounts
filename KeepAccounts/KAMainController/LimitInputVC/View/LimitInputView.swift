@@ -19,7 +19,7 @@ typealias completeRespond = (String)->()
 class LimitInputView: UIView {
     
     var delegate:LimitInputVC?
-    var initDate:NSTimeInterval?
+    var initViewDate:String?
     var dateLabel:UILabel?
     var characterNum:UILabel?
     var currentLengthOfRemark:Int?
@@ -38,7 +38,7 @@ class LimitInputView: UIView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.dateLabel?.text = NSDate.dateToChinaCalander(initDate ?? NSDate().timeIntervalSince1970)
+        self.dateLabel?.text = initViewDate
     }
     private func setupTopBar(frame:CGRect){
         //topbar

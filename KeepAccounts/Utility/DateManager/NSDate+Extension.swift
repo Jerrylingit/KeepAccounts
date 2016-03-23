@@ -9,7 +9,7 @@
 import Foundation
 
 extension NSDate{
-    class func dateToChinaCalander(interval:NSTimeInterval) ->String{
+    class func intervalToChinaCalander(interval:NSTimeInterval) ->String{
         let date = NSDate(timeIntervalSince1970: interval)
         let cal = NSCalendar.currentCalendar()
         let calCom = cal.components([.Year, .Month, .Day], fromDate: date)

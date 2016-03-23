@@ -8,15 +8,27 @@
 
 import UIKit
 
+private let CostBarTimeHeight: CGFloat = 20.0
+
+private let costBarLeftIconMargin: CGFloat = 12
+private let costBarLeftIconWidth:CGFloat = 48
+
+private let costBarTitleMarginLeft: CGFloat = 12+48+12
+private let costBarTitleWidth:CGFloat = 60
+
+private let sepLineWidth: CGFloat = 1
+
+typealias computedResultResponder = (Float)->Void
+
 class ComputeBoardView: UIView {
     
-    private let sepLineWidth: CGFloat = 1
     private let lastBtnTitle = ["收/支", "+", "OK"]
     private let btnTitle = [["1", "4", "7", "C"], ["2", "5", "8", "0"], ["3", "6", "9", "."]]
     
     private let CostBarHeight: CGFloat = 72.0
     
     //存放上一次的累加值
+    private var result:Float = 0
     private var summand: Float = 0
     private var addend: Float = 0
     private var decimal:Float = 0
@@ -26,34 +38,51 @@ class ComputeBoardView: UIView {
     private var pressEqual = false
     private var pressDot = false
     
-    var title = UILabel()
-    var iconView :UIImageView?
-    var money = UILabel()
-    var okBtn = UIButton()
-    var iconName = String()
-    var date = 0
-    var delegate:ChooseItemVC?
-    var icon : UIImage?{
+    var costBarTitle:UILabel?
+    var title:String{
         get{
-            return iconView?.image
+            return costBarTitle?.text ?? ""
         }
-        set(newIcon){
-            iconView?.image = newIcon
-        }
-    }
-    private var costBar:CostBarView?
-    //外部设置costbar的time用的接口
-    var accountTime:NSTimeInterval?{
-        get {
-            return costBar?.sepLineTime
-        }
-        set (newAccountTime){
-            costBar?.sepLineTime = newAccountTime
-            costBar?.costBarTime?.text = NSDate.dateToChinaCalander(newAccountTime!)
+        set(newValue){
+            costBarTitle?.text = newValue
         }
     }
-    var remark:String?
-    var photoName:String?
+    var costBarMoney:UILabel?
+    var money:String{
+        get{
+            return costBarMoney?.text ?? ""
+        }
+        set(newValue){
+            costBarMoney?.text = newValue
+        }
+    }
+    var costBarLeftIcon:UIImageView?
+    var icon:UIImage? {
+        get{
+            return costBarLeftIcon?.image
+        }
+        set(newValue){
+            costBarLeftIcon?.image = newValue
+        }
+    }
+    var costBarTime:UILabel?
+    var time:String{
+        get{
+            return costBarTime?.text ?? ""
+        }
+        set(newValue){
+            costBarTime?.text = newValue
+        }
+    }
+    
+    var computedResult:computedResultResponder?
+    
+    var okBtn = UIButton()
+    
+    
+
+    var delegate:ChooseItemVC?
+
     
     
     
@@ -80,15 +109,67 @@ class ComputeBoardView: UIView {
     override func layoutSubviews() {
 
     }
+
+    //分割线时间标签
+    private func setupCostBarTime(frame: CGRect)->UILabel{
+        
+        //时间标签
+        let costBarTime = UILabel(frame: CGRectMake(frame.width/3, -CostBarTimeHeight/2, frame.width/3, CostBarTimeHeight))
+        costBarTime.textAlignment = .Center
+        costBarTime.backgroundColor = UIColor.whiteColor()
+        costBarTime.layer.cornerRadius = 10
+        costBarTime.layer.borderWidth = sepLineWidth
+        costBarTime.layer.borderColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.7).CGColor
+        costBarTime.font = UIFont(name: costBarTime.font.fontName, size: 14)
+        costBarTime.textColor = UIColor.blackColor()
+        self.costBarTime = costBarTime
+        
+        return costBarTime
+    }
+    //最左边图标
+    private func setupCostBarLeftIcon(frame:CGRect)->UIImageView {
+        let costBarLeftIcon = UIImageView(frame: CGRectMake(costBarLeftIconMargin, costBarLeftIconMargin, costBarLeftIconWidth, costBarLeftIconWidth))
+        self.costBarLeftIcon = costBarLeftIcon
+        return costBarLeftIcon
+    }
+    //标题
+    private func setupCostBarTitle(frame: CGRect)->UILabel{
+        let costBarTitle = UILabel(frame: CGRectMake(costBarTitleMarginLeft, 0, costBarTitleWidth, frame.height))
+        costBarTitle.font = UIFont(name: "Arial", size: 20)
+        self.costBarTitle = costBarTitle
+        return costBarTitle
+    }
+    //右边金额显示
+    private func setupCostBarMoney(frame: CGRect)->UILabel{
+        let costBarMoney = UILabel(frame: CGRectMake(costBarTitleMarginLeft + costBarTitleWidth + 10, 0,
+            frame.width - costBarTitleMarginLeft - costBarTitleWidth - 20 , frame.height))
+        costBarMoney.textAlignment = .Right
+        costBarMoney.font = UIFont(name: "Arial", size: 35)
+        self.costBarMoney = costBarMoney
+        return costBarMoney
+    }
     
     private func setupCostBar(frame:CGRect){
-        let costBar = CostBarView(frame: frame)
-        self.costBar = costBar
-        title = costBar.title
-        iconView = costBar.iconView
-        money = costBar.money
-        iconName = "type_big_1"
-        self.addSubview(costBar)
+        
+        let costBarBackground = UIView(frame: frame)
+        //CostBar分割线
+        let costBarSepLine = UIView(frame: CGRectMake(0, 0, frame.width, sepLineWidth))
+        costBarSepLine.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.7)
+        //分割线时间标签
+        costBarTime = setupCostBarTime(frame)
+        //最左边图标
+        costBarLeftIcon = setupCostBarLeftIcon(frame)
+        //标题
+        costBarTitle = setupCostBarTitle(frame)
+        //右边金额显示
+        costBarMoney = setupCostBarMoney(frame)
+        
+        costBarBackground.addSubview(costBarSepLine)
+        costBarBackground.addSubview(costBarTime!)
+        costBarBackground.addSubview(costBarLeftIcon!)
+        costBarBackground.addSubview(costBarTitle!)
+        costBarBackground.addSubview(costBarMoney!)
+        self.addSubview(costBarBackground)
     }
     //生成前三列button
     private func setUpThreeColunmBtn(frame: CGRect){
@@ -151,114 +232,6 @@ class ComputeBoardView: UIView {
         btn.setBackgroundImage(UIImage(named: highlightedImage), forState: .Highlighted)
         btn.addTarget(self, action: "clickComputedBtn:", forControlEvents: .TouchUpInside)
         return btn
-    }
-    
-    private func prepareForNextAssign(){
-        photoName = ""
-        remark = ""
-    }
-
-    private func outOfDocMode(){
-        pressDot = false
-        numOfDecimal = 0
-    }
-    private func pressOK(){
-        let item = AccountItem()
-        item.money = money.text ?? ""
-        item.iconTitle = title.text ?? ""
-        item.iconName = iconName
-        item.date = Int(accountTime!)
-        item.remark = remark ?? ""
-        item.photo = photoName ?? ""
-        AccoutDB.insertData(item);
-        NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
-        if delegate?.respondsToSelector("onPressBack") != nil{
-            delegate?.onPressBack()
-        }
-        prepareForNextAssign()
-    }
-    private func pressIncomeAndCost(){
-
-    }
-    
-    func clickComputedBtn(btn:UIButton){
-        
-        let value = btn.currentTitle ?? ""
-        switch value {
-        case "1","2", "3", "4", "5", "6", "7", "8", "9", "0" :
-            //点击了+号
-            if pressAdd {
-                pressAdd = false
-                addend = 0
-            }
-            //计算完一次
-            if pressEqual {
-                pressEqual = false
-                addend = 0
-            }
-            
-            if pressDot {
-                numOfDecimal++
-                
-                if numOfDecimal <= 2 {
-                    decimal = Float(value)! / Float(pow(10.0, Double(numOfDecimal)))
-                    money.text = NSString(format: "%.2f", (addend + decimal) ) as String
-                }
-                else{
-                    //超过两位小数
-                }
-            }
-            else{
-                numOfInt++
-                if numOfInt <= 7 {
-                    money.text = NSString(format: "%.2f", (addend * 10.0 + Float(value)!) ) as String
-                }
-                else{
-                    //超过7位
-                }
-                
-            }
-            
-            addend = Float(money.text!)!
-            
-        case "收/支":
-            pressIncomeAndCost()
-        case "C" :
-            summand = 0
-            addend = 0
-            numOfInt = 0
-            outOfDocMode()
-            money.text = "0.00"
-            okBtn.setTitle("OK", forState: .Normal)
-        case "OK" :
-            pressOK()
-        case ".":
-            pressDot = true
-        case "+":
-            pressAdd = true
-            numOfInt = 0
-            outOfDocMode()
-            if addend != 0 {
-                summand += addend
-                addend = 0
-            }
-            money.text = NSString(format: "%.2f", summand) as String
-            okBtn.setTitle("=", forState: .Normal)
-            
-        case "=":
-            numOfInt = 0
-            outOfDocMode()
-            pressEqual = true
-            okBtn.setTitle("OK", forState: .Normal)
-            if addend != 0 {
-                summand += addend
-                addend = 0
-            }
-            money.text = NSString(format: "%.2f", summand) as String
-        default:
-            print("Error")
-        }
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

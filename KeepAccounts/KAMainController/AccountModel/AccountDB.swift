@@ -84,6 +84,12 @@ class AccoutDB: NSObject {
         db.executeUpdate(deleteSQL, withArgumentsInArray: [item.ID])
         db.close()
     }
+    class func deleteDataWith(ID:Int){
+        let db = self.getDB()
+        db.open()
+        db.executeUpdate(deleteSQL, withArgumentsInArray: [ID])
+        db.close()
+    }
     //查询数据
     class func selectData(id:Int)->AccountItem{
         let db = self.getDB()

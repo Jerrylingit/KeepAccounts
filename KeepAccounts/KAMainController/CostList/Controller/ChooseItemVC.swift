@@ -32,8 +32,23 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     let ComputeBoardHeight =  UIScreen.mainScreen().bounds.height/2 - 20 + 72
     
     let TopBarHeight: CGFloat = 44.0
-    var ComputedBar:ComputeBoardView?
+    var computedBar:ComputeBoardView?
     var datePicker:UIView?
+    //dataModel
+    var chooseItemModel:ChooseItemModel
+    
+    init(model:ChooseItemModel){
+        chooseItemModel = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    convenience init(){
+        self.init(model: ChooseItemModel())
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +69,6 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     
     //创建顶部栏
     func setupTopBar(){
-        
         //底部栏
         let topBar = TopBarView(frame: CGRectMake(0, 20, ScreenWidth, TopBarHeight))
         topBar.delegate = self
@@ -75,31 +89,36 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
         //创建计算面板
         let computeBoard = ComputeBoardView(frame: CGRectMake(0, ScreenHeight - ComputeBoardHeight, ScreenWidth, ComputeBoardHeight))
         computeBoard.delegate = self
-        ComputedBar = computeBoard
+        computeBoard.time = chooseItemModel.getCostBarTimeInString()
+        computeBoard.icon = UIImage(named: chooseItemModel.costBarIconName)
+        computeBoard.title = chooseItemModel.costBarTitle
+        computeBoard.money = chooseItemModel.costBarMoney
+        computedBar = computeBoard
         //添加到self.view
         self.view.addSubview(computeBoard)
     }
     //时间选择器
     func setupDatePicker(){
-        let datePickerView = CustomDatePicker(frame: self.view.frame, date: NSDate(), cancel: nil, sure: nil)
+        let datePickerView = CustomDatePicker(frame: self.view.frame, date: chooseItemModel.getCostBarTimeInDate(), cancel: nil, sure: nil)
         datePickerView.hidden = true
-
-        
         datePickerView.cancelCallback = {()->() in datePickerView.hidden = !datePickerView.hidden}
         datePickerView.sureCallback = {(date)-> () in
-            let dateTmp = date as NSDate
-            let interval = dateTmp.timeIntervalSince1970
-            self.ComputedBar?.accountTime = interval
+            //new change
+            self.chooseItemModel.setCostBarTimeWithDate(date)
         }
         datePicker = datePickerView
         self.view.addSubview(datePickerView)
     }
-    
+
     func setCostBarIconAndTitle(icon: String, title: String) {
-        ComputedBar?.title.text = title
-        ComputedBar?.iconName = icon
-        ComputedBar?.icon = UIImage(named: icon)
+        chooseItemModel.costBarIconName = icon
+        chooseItemModel.costBarTitle = title
     }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+    }
+    
 }
 
 extension ChooseItemVC: TopBarProtocol{
@@ -111,8 +130,8 @@ extension ChooseItemVC: TopBarProtocol{
     }
     func clickRemark() {
         let limitInputVC = LimitInputVC()
-        limitInputVC.initDate = ComputedBar?.accountTime
-        limitInputVC.completeInput = {(text) in ComputedBar?.remark = text}
+        limitInputVC.initVCDate = chooseItemModel.getCostBarTimeInString()
+        limitInputVC.completeInput = {(text) in computedBar?.remark = text}
         self.presentViewController(limitInputVC, animated: true, completion: nil)
     }
     func clickPhoto() {
@@ -141,7 +160,7 @@ extension ChooseItemVC: UIImagePickerControllerDelegate, UINavigationControllerD
         //写入文件
         if imageData?.writeToFile(imagePath, atomically: false) == true {
             print("write AccountImage success!")
-            ComputedBar?.photoName = imageName
+            computedBar?.photoName = imageName
         }
         else{
             print("write AccountImage failed!")

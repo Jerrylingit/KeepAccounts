@@ -14,7 +14,7 @@ protocol LimitInputViewProtocol{
 
 class LimitInputVC: UIViewController {
     var limitInput:LimitInputView?
-    var initDate:NSTimeInterval?
+    var initVCDate:String?
     var keyboardIsShow:Bool = false
     var completeInput:completeRespond?
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class LimitInputVC: UIViewController {
     private func setup(){
         let limitInput = LimitInputView(frame: self.view.frame)
         limitInput.delegate = self
-        limitInput.initDate = initDate
+        limitInput.initViewDate = initVCDate
         limitInput.completeInput = self.completeInput
         self.limitInput = limitInput
         self.view.addSubview(limitInput)
