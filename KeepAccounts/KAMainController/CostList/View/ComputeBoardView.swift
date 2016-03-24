@@ -102,7 +102,6 @@ class ComputeBoardView: UIView {
         }
     }
     
-//    var okBtn = UIButton()
     var delegate:ChooseItemVC?
     let computeLogic:ComputedBoardLogic
     

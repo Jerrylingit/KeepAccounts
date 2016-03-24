@@ -22,8 +22,9 @@ class AccountCell: UITableViewCell {
     @IBOutlet weak var topLine: UIView!
     @IBOutlet weak var deleteBtn: UIButton!
     @IBOutlet weak var editBtn: UIButton!
+    private var isHiddenSubview = false
+    
     var cellID:Int?
-    var isHiddenSubview = false
     var presentVCBlock:presentVCResponder?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -98,6 +99,7 @@ class AccountCell: UITableViewCell {
         icon.setImage(nil, forState: .Normal)
         dealWithSubView(1.0)
         dealWithBtns(0.0)
+        isHiddenSubview = false
     }
 }
 

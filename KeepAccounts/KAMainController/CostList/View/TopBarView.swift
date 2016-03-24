@@ -14,7 +14,17 @@ class TopBarView: UIView {
     var topBarChangeTime:UIButton?
     var topBarAddRemark:UIButton?
     var topBarTakePhoto:UIButton?
-    
+    var topBarTakePhotoImage:UIButton?
+    var topBarInitPhoto:UIImage?{
+        get{
+            return topBarTakePhotoImage?.imageView?.image
+        }
+        set(newValue){
+            topBarTakePhotoImage?.setImage(newValue, forState: .Normal)
+            topBarTakePhotoImage?.hidden = false
+            topBarTakePhoto?.hidden = true
+        }
+    }
     //自定义初始化方法
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,6 +55,13 @@ class TopBarView: UIView {
         let topBarTakePhoto = createTopBarBtn(num: 3, title: "加照片", target: self, action: "TakePhotoPress:")
         self.topBarTakePhoto = topBarTakePhoto
         
+        let topBarTakePhotoImage = UIButton(frame: CGRectMake(self.frame.width/4 * 3 + 25 , 5, self.frame.height - 10, self.frame.height - 10 ))
+        topBarTakePhotoImage.layer.cornerRadius = (self.frame.height - 10) / 2
+        topBarTakePhotoImage.clipsToBounds = true
+        topBarTakePhotoImage.hidden = true
+        topBarTakePhotoImage.addTarget(self, action: "TakePhotoPress:", forControlEvents: .TouchUpInside)
+        self.topBarTakePhotoImage = topBarTakePhotoImage
+        
         //分割线
         let topBarSepLine = UIView(frame: CGRectMake(0, TopBarHeight - 0.5, TopBarWidth, 0.5))
         topBarSepLine.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.7)
@@ -54,11 +71,8 @@ class TopBarView: UIView {
         self.addSubview(topBarChangeTime)
         self.addSubview(topBarAddRemark)
         self.addSubview(topBarTakePhoto)
+        self.addSubview(topBarTakePhotoImage)
         self.addSubview(topBarSepLine)
-    }
-    
-    override func layoutSubviews() {
-        
     }
     
     private func createTopBarBtn(num number:CGFloat, title:String, target:AnyObject, action:Selector) -> UIButton{
@@ -95,7 +109,3 @@ class TopBarView: UIView {
     }
 
 }
-
-
-
-

@@ -35,6 +35,7 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     
     let TopBarHeight: CGFloat = 44.0
     var computedBar:ComputeBoardView?
+    var topBar:TopBarView?
     var datePicker:UIView?
     //dataModel
     var chooseItemModel:ChooseItemModel
@@ -50,6 +51,14 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    deinit{
+        chooseItemModel.removeObserver(self, forKeyPath: "costBarTime")
+        chooseItemModel.removeObserver(self, forKeyPath: "costBarIconName")
+        chooseItemModel.removeObserver(self, forKeyPath: "costBarTitle")
+        chooseItemModel.removeObserver(self, forKeyPath: "costBarMoney")
+        chooseItemModel.removeObserver(self, forKeyPath: "topBarRemark")
+        chooseItemModel.removeObserver(self, forKeyPath: "topBarPhotoName")
     }
     
     override func viewDidLoad() {
@@ -79,7 +88,11 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     func setupTopBar(){
         //底部栏
         let topBar = TopBarView(frame: CGRectMake(0, 20, ScreenWidth, TopBarHeight))
+        if chooseItemModel.topBarPhotoName != ""{
+            topBar.topBarInitPhoto = UIImage.generateImageWithFileName(chooseItemModel.topBarPhotoName)
+        }
         topBar.delegate = self
+        self.topBar = topBar
         //添加到主view上
         self.view.addSubview(topBar)
     }
@@ -153,6 +166,7 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
         switch keyPath ?? "" {
         case "costBarTime":
             computedBar?.time = chooseItemModel.getCostBarTimeInString()
+            topBar?.topBarChangeTime?.setTitleColor(UIColor.orangeColor(), forState: .Normal)
         case "costBarIconName":
             computedBar?.icon = UIImage(named:chooseItemModel.costBarIconName)
         case "costBarTitle":
@@ -160,15 +174,34 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
         case "costBarMoney":
             computedBar?.money = chooseItemModel.costBarMoney
         case "topBarRemark":
-            print("I observe topBarRemark's value changed")
+            if let newValue = change?[NSKeyValueChangeNewKey]{
+                if newValue as! String == ""{
+                    topBar?.topBarAddRemark?.setTitleColor(UIColor.blackColor(), forState: .Normal)
+                }
+                else{
+                    topBar?.topBarAddRemark?.setTitleColor(UIColor.orangeColor(), forState: .Normal)
+                }
+            }
         case "topBarPhotoName":
-            print("I observe topBarPhotoName value changed")
+            if let newValue = change?[NSKeyValueChangeNewKey]{
+                let value = newValue as! String
+                if value == ""{
+                    topBar?.topBarTakePhoto?.hidden = false
+                    topBar?.topBarTakePhotoImage?.hidden = true
+                }
+                else{
+                    if let image = UIImage.generateImageWithFileName(value){
+                        topBar?.topBarTakePhotoImage?.setImage(image, forState: .Normal)
+                        topBar?.topBarTakePhoto?.hidden = true
+                        topBar?.topBarTakePhotoImage?.hidden = false
+                    }
+                }
+            }
         default:
             print("error keypath")
             
         }
     }
-    
 }
 
 extension ChooseItemVC: TopBarProtocol{

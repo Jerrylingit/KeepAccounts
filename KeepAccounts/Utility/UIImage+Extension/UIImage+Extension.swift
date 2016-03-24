@@ -29,4 +29,13 @@ extension UIImage{
         let imageData = compressImage(cropImage, compressionQuality: compressionQualiy)
         return imageData
     }
+    public class func generateImageWithFileName(fileName:String)->UIImage?{
+        let imagePath = String.createFilePathInDocumentWith(fileName) ?? ""
+        if let data = NSData(contentsOfFile: imagePath){
+            return UIImage(data: data)
+        }
+        else{
+            return nil
+        }
+    }
 }

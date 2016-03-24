@@ -8,28 +8,48 @@
 
 import UIKit
 
+private let HeadBarHeight:CGFloat = 155
 
+private let BtnWidth:CGFloat = 35
+private let BtnMargin:CGFloat = 10
+private let StatusBarHeight:CGFloat = 20
+
+private let MidBtnWidth:CGFloat = 60
+private let MidBtnHeight:CGFloat = 20
+private let MidBtnMarginTop:CGFloat = 20
+
+
+private let LabelMargin:CGFloat = 15
+private let LabelWidth:CGFloat = 145
+private let LabelHeight:CGFloat = 30
 
 
 class SingleAccountView: UIView {
     
-    let HeadBarHeight:CGFloat = 155
-    
-    let BtnWidth:CGFloat = 35
-    let BtnMargin:CGFloat = 10
-    let StatusBarHeight:CGFloat = 20
-    
-    let MidBtnWidth:CGFloat = 60
-    let MidBtnHeight:CGFloat = 20
-    let MidBtnMarginTop:CGFloat = 20
-    
-    
-    let LabelMargin:CGFloat = 10
-    let LabelWidth:CGFloat = 50
-    let LabelHeight:CGFloat = 30
+
     
     var delegate:SingleAccountVC?
     var tableView:UITableView?
+    var totalIncomeNum:UILabel?
+    var totalCostNum:UILabel?
+    var incomeText:String?{
+        get {
+            return totalIncomeNum?.text
+        }
+        set(newValue){
+            totalIncomeNum?.text = newValue
+        }
+    }
+    var costText:String?{
+        get {
+            return totalCostNum?.text
+        }
+        set(newValue){
+            totalCostNum?.text = newValue
+        }
+    }
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -103,26 +123,28 @@ class SingleAccountView: UIView {
     //收入支出栏
     private func setupIncomeCostBar(frame:CGRect){
         
-        let Income = UILabel(frame: CGRectMake(LabelMargin, HeadBarHeight + LabelMargin, LabelWidth, LabelHeight))
-        Income.text = "收入"
+        let income = UILabel(frame: CGRectMake(LabelMargin, HeadBarHeight + LabelMargin, LabelWidth, LabelHeight))
+        income.text = "收入"
         
         let CostX = frame.width - LabelWidth - LabelMargin
-        let Cost = UILabel(frame: CGRectMake(CostX, HeadBarHeight + LabelMargin, LabelWidth, LabelHeight))
-        Cost.textAlignment = .Right
-        Cost.text = "支出"
+        let cost = UILabel(frame: CGRectMake(CostX, HeadBarHeight + LabelMargin, LabelWidth, LabelHeight))
+        cost.textAlignment = .Right
+        cost.text = "支出"
         
         let IncomeNumY = HeadBarHeight + LabelMargin + LabelHeight
-        let IncomeNum = UILabel(frame: CGRectMake(LabelMargin, IncomeNumY, LabelWidth, LabelHeight))
-        IncomeNum.text = "0.00"
+        let incomeNum = UILabel(frame: CGRectMake(LabelMargin, IncomeNumY, LabelWidth, LabelHeight))
+        incomeNum.text = "0.00"
+        self.totalIncomeNum = incomeNum
         
-        let CostNum = UILabel(frame: CGRectMake(CostX, IncomeNumY, LabelWidth, LabelHeight))
-        CostNum.textAlignment = .Right
-        CostNum.text = "0.00"
+        let costNum = UILabel(frame: CGRectMake(CostX, IncomeNumY, LabelWidth, LabelHeight))
+        costNum.textAlignment = .Right
+        costNum.text = "0.00"
+        self.totalCostNum = costNum
         
-        self.addSubview(Income)
-        self.addSubview(Cost)
-        self.addSubview(IncomeNum)
-        self.addSubview(CostNum)
+        self.addSubview(income)
+        self.addSubview(cost)
+        self.addSubview(incomeNum)
+        self.addSubview(costNum)
     }
     //流水账
     private func setupDayAccounts(frame:CGRect){

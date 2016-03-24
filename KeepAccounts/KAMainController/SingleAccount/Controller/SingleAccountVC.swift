@@ -26,6 +26,9 @@ class SingleAccountVC: UIViewController{
     //改时间
     var mainView:SingleAccountView?
     var itemAccounts:[AccountItem] = []
+    //总支出和总收入
+    var totalIncome:Float = 0
+    var totalCost:Float = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +58,10 @@ class SingleAccountVC: UIViewController{
             //3、修改原数据
             sourceItem.dateString = showDate
             sourceItem.dayCost = sourceItem.money
+            //累加
+            if let money = Float(sourceItem.money){
+                totalCost += money
+            }
             //4、判断showDate是否为空字符串，为空则加上本次的金额，不为空则替换cell
             if showDate == "" {
                 let dayCostTmp = Float(dayCostItem.dayCost) ?? 0
@@ -66,8 +73,10 @@ class SingleAccountVC: UIViewController{
             else{
                 dayCostItem = sourceItem
             }
+            
             tmpItemAccounts.append(sourceItem)
         }
+        mainView?.costText = String(format: "%.2f", totalCost)
         lastCellInterval = lastDay
         itemAccounts = tmpItemAccounts
     }
