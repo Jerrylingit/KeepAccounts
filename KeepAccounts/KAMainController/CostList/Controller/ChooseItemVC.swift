@@ -108,13 +108,20 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
         //点击OK时要执行一系列操作
         computeBoard.pressOK = {() in
             let item = AccountItem()
+            item.ID = self.chooseItemModel.dataBaseId
             item.money = self.chooseItemModel.costBarMoney
             item.iconTitle = self.chooseItemModel.costBarTitle
             item.iconName = self.chooseItemModel.costBarIconName
             item.date = Int(self.chooseItemModel.costBarTime)
             item.remark = self.chooseItemModel.topBarRemark
             item.photo = self.chooseItemModel.topBarPhotoName
-            AccoutDB.insertData(item);
+            if self.chooseItemModel.mode == "edit"{
+                AccoutDB.updateData(item)
+            }
+            else if self.chooseItemModel.mode == "init" {
+                AccoutDB.insertData(item)
+            }
+            
             NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
             self.onPressBack()
         }

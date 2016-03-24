@@ -11,7 +11,7 @@ import Foundation
 private let accountModelPath = "DatabaseDoc/AccountModel.db"
 private let createTableSQL = "CREATE TABLE IF NOT EXISTS AccountModel(ID INTEGER PRIMARY KEY AUTOINCREMENT, ICONNAME TEXT, ICONTITLE TEXT, MONEY TEXT, DATE INTEGER, PHOTO TEXT, REMARK TEXT)"
 private let insertSQL = "INSERT INTO AccountModel(ICONNAME, ICONTITLE, MONEY, DATE, PHOTO, REMARK) VALUES(?,?,?,?,?,?)"
-private let updateSQL = "UPDATE AccountModel SET ICONNAME=?, ICONTITLE=? MONEY=? DATE=? PHOTO=? REMARK=? WHERE ID=?"
+private let updateSQL = "UPDATE AccountModel SET ICONNAME=?, ICONTITLE=?, MONEY=?, DATE=?, PHOTO=?, REMARK=? WHERE ID=?"
 private let deleteSQL = "DELETE FROM AccountModel WHERE ID=?"
 private let selectSQL = "SELECT * FROM AccountModel WHERE ID=?"
 private let selectOrderByDateSQL = "SELECT * FROM AccountModel ORDER BY date DESC"
@@ -74,7 +74,7 @@ class AccoutDB: NSObject {
     class func updateData(item:AccountItem){
         let db = self.getDB()
         db.open()
-        db.executeUpdate(updateSQL, withArgumentsInArray: [item.ID, item.iconName, item.iconTitle, item.money, item.date, item.photo, item.remark])
+        db.executeUpdate(updateSQL, withArgumentsInArray: [item.iconName, item.iconTitle, item.money, item.date, item.photo, item.remark, item.ID])
         db.close()
     }
     //删除数据
@@ -91,7 +91,7 @@ class AccoutDB: NSObject {
         db.close()
     }
     //查询数据
-    class func selectData(id:Int)->AccountItem{
+    class func selectDataWithID(id:Int)->AccountItem{
         let db = self.getDB()
         db.open()
         let rs = db.executeQuery(selectSQL, withArgumentsInArray: [id])

@@ -45,13 +45,20 @@ class AccountCell: UITableViewCell {
     
     @IBAction func clickEditBtn(sender: AnyObject) {
         let model = ChooseItemModel()
-        model.dataBaseId = cellID ?? 0
+        let item = AccoutDB.selectDataWithID(cellID ?? 0)
         model.mode = "edit"
+        model.dataBaseId = item.ID
+        model.costBarMoney = item.money
+        model.costBarTitle = item.iconTitle
+        model.costBarIconName = item.iconName
+        model.costBarTime = NSTimeInterval(item.date)
+        model.topBarRemark = item.remark
+        model.topBarPhotoName = item.photo
+        
         let editChooseItemVC = ChooseItemVC(model: model)
         if let block = presentVCBlock{
             block(editChooseItemVC, true, nil)
         }
-        print("edit")
     }
     @IBAction func clickDeleteBtn(sender: AnyObject) {
         let alertView = UIAlertController(title: "删除账目", message: "您确定要删除吗？", preferredStyle: .Alert)
