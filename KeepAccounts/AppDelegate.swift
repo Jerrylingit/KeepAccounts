@@ -25,11 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RESideMenuDelegate {
         let homeVC = SingleAccountVC()
         let sideMenu = RESideMenu.init(contentViewController: homeVC, leftMenuViewController: leftMenuVC, rightMenuViewController: nil)
         sideMenu.delegate = self
-        sideMenu.scaleContentView = false
         sideMenu.contentViewInPortraitOffsetCenterX = 150
         sideMenu.contentViewShadowEnabled = true
         sideMenu.contentViewShadowOffset = CGSize(width: -3, height: -3)
         sideMenu.contentViewShadowColor = UIColor.blackColor()
+        sideMenu.scaleContentView = false
         sideMenu.scaleMenuView = false
         sideMenu.fadeMenuView = false
         window?.rootViewController = sideMenu

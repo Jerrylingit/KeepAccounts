@@ -231,7 +231,7 @@
                 <outlet property="remark" destination="bYU-7v-FU8" id="NZ8-RV-5se"/>
                 <outlet property="topLine" destination="qo1-vN-WI3" id="KFF-u1-mV8"/>
             </connections>
-            <point key="canvasLocation" x="712" y="588.5"/>
+            <point key="canvasLocation" x="900" y="765.5"/>
         </tableViewCell>
     </objects>
     <resources>
