@@ -8,12 +8,12 @@
 
 import UIKit
 
+private var ScreenWithRatio = UIScreen.mainScreen().bounds.width / 375
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, RESideMenuDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //在沙盒中创建目录
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RESideMenuDelegate {
         let homeVC = SingleAccountVC()
         let sideMenu = RESideMenu.init(contentViewController: homeVC, leftMenuViewController: leftMenuVC, rightMenuViewController: nil)
         sideMenu.delegate = self
-        sideMenu.contentViewInPortraitOffsetCenterX = 150
+        sideMenu.contentViewInPortraitOffsetCenterX = 150 * ScreenWithRatio
         sideMenu.contentViewShadowEnabled = true
         sideMenu.contentViewShadowOffset = CGSize(width: -3, height: -3)
         sideMenu.contentViewShadowColor = UIColor.blackColor()
@@ -65,5 +65,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RESideMenuDelegate {
     }
 
 
+}
+
+extension AppDelegate:RESideMenuDelegate{
+    func sideMenu(sideMenu: RESideMenu!, didShowMenuViewController menuViewController: UIViewController!) {
+        sideMenu.panGestureEnabled = false
+    }
+    func sideMenu(sideMenu: RESideMenu!, willHideMenuViewController menuViewController: UIViewController!) {
+        sideMenu.panGestureEnabled = true
+    }
 }
 

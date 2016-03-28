@@ -78,6 +78,7 @@ class SingleAccountVC: UIViewController{
             tmpItemAccounts.append(sourceItem)
         }
         mainView?.costText = String(format: "%.2f", totalCost)
+        totalCost = 0
         lastCellInterval = lastDay
         itemAccounts = tmpItemAccounts
     }

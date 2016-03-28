@@ -10,6 +10,7 @@ import UIKit
 
 //组件高度
 
+private var ScreenWidthRatio = UIScreen.mainScreen().bounds.width / 375
 
 class MainView: UIView {
     let StatusBarHeight:CGFloat = 20
@@ -19,26 +20,32 @@ class MainView: UIView {
     
     //供修改总收入和总支出的接口, 1: 总收入， 2: 总支出， 3: 总结余
     var incomeAndExpendLabels: NSArray = NSArray()
+    var accountBookBtnView:UICollectionView?
+    var delegate:MainViewController?
     
-    override init(frame: CGRect) {
-        
+    convenience init(frame:CGRect, delegate:MainViewController){
+        self.init(frame:frame)
         let IncomeAndExpendBarY = StatusBarHeight + TopBarHeight
         let AccountsViewHeight = frame.height - IncomeAndExpendBarY - IncomeAndExpendBarHeight - BottomBarHeight
         let AccountsViewY = IncomeAndExpendBarY + IncomeAndExpendBarHeight
         let BottomBarY = AccountsViewY + AccountsViewHeight
         
-        super.init(frame: frame)
         self.backgroundColor = UIColor.whiteColor()
+        self.delegate = delegate
+        let contentWidth = frame.width - 30 * ScreenWidthRatio
         //顶部栏
-        setupTopBar(CGRectMake(0, StatusBarHeight, frame.width, TopBarHeight))
+        setupTopBar(CGRectMake(0, StatusBarHeight, contentWidth, TopBarHeight))
         //收入和支出
-        setupIncomeAndExpendBar(CGRectMake(0, IncomeAndExpendBarY, frame.width, IncomeAndExpendBarHeight))
+        setupIncomeAndExpendBar(CGRectMake(0, IncomeAndExpendBarY, contentWidth, IncomeAndExpendBarHeight))
         //账本
-        setupAccountsView(CGRectMake(0, AccountsViewY, frame.width, AccountsViewHeight))
+        setupAccountsView(CGRectMake(0, AccountsViewY, contentWidth, AccountsViewHeight))
         //底部
-        setupBottomBar(CGRectMake(0, BottomBarY, frame.width, BottomBarHeight))
+        setupBottomBar(CGRectMake(0, BottomBarY, contentWidth, BottomBarHeight))
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
     
     //顶部栏
     private func setupTopBar(frame:CGRect){
@@ -65,7 +72,6 @@ class MainView: UIView {
         
         let setting = UIButton(frame: CGRectMake(SettingX, SettingY, SettingWidth, SettingWidth))
         setting.setImage(UIImage(named: "menu_setting"), forState: .Normal)
-        
         
         let sepLine = UIView(frame: CGRectMake(0, frame.height - 1 , frame.width, 1))
         sepLine.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.8)
@@ -116,15 +122,17 @@ class MainView: UIView {
         
         let AccountsWidth:CGFloat = 80
         let AccountsHeight:CGFloat = 108
-        let AccountsMarginLeft = (frame.width - 3 * AccountsWidth) / 4
+  
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSizeMake(AccountsWidth, AccountsHeight)
+        let collectionView = UICollectionView(frame: frame, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.delegate = delegate
+        collectionView.dataSource = delegate
+        collectionView.registerNib(UINib(nibName: "AccountBookCell", bundle: nil), forCellWithReuseIdentifier: "AccountBookBtnCell")
+        self.accountBookBtnView = collectionView
         
-        let AccountsScrollView = UIScrollView(frame: frame)
-        
-        let Accounts = UIButton(frame: CGRectMake(AccountsMarginLeft, 20, AccountsWidth, AccountsHeight))
-        Accounts.setImage(UIImage(named: "book_cover_0"), forState: .Normal)
-        
-        AccountsScrollView.addSubview(Accounts)
-        self.addSubview(AccountsScrollView)
+        self.addSubview(collectionView)
         
     }
     //底部
