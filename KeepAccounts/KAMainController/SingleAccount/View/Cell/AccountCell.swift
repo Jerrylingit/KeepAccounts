@@ -37,11 +37,13 @@ class AccountCell: UITableViewCell {
     }
     
     @IBAction func clickIcon(sender: AnyObject) {
+        showSubView(!isHiddenSubview)
+        showBtns(isHiddenSubview)
         isHiddenSubview = !isHiddenSubview
-        let commonViewAlpha:CGFloat = isHiddenSubview ? 0.0 : 1.0
-        let editAndDeleteAlpha:CGFloat = isHiddenSubview ? 1.0 : 0.0
-        dealWithSubView(commonViewAlpha)
-        dealWithBtns(editAndDeleteAlpha)
+        UIView.animateWithDuration(0.3, animations: {() in
+            self.showSubView(!self.isHiddenSubview)
+            self.showBtns(self.isHiddenSubview)
+        })
     }
     
     @IBAction func clickEditBtn(sender: AnyObject) {
@@ -74,15 +76,21 @@ class AccountCell: UITableViewCell {
             block(alertView, true, nil)
         }
     }
-    private func dealWithSubView(alpha:CGFloat){
+    private func showSubView(bool:Bool){
+        let alpha:CGFloat = bool ? 1 : 0
         photoView.alpha = alpha
         iconTitle.alpha = alpha
         itemCost.alpha = alpha
         remark.alpha = alpha
+        deleteBtn.center = bool ? self.icon.center : CGPointMake(60, self.icon.center.y)
+        editBtn.center = bool ? self.icon.center : CGPointMake(self.frame.width - 60, self.icon.center.y)
     }
-    private func dealWithBtns(alpha:CGFloat){
+    private func showBtns(bool:Bool){
+        let alpha:CGFloat = bool ? 1 : 0
         deleteBtn.alpha = alpha
         editBtn.alpha = alpha
+        deleteBtn.center = bool ? CGPointMake(60, self.icon.center.y) : self.icon.center
+        editBtn.center = bool ? CGPointMake(self.frame.width - 60, self.icon.center.y) :self.icon.center
     }
     
     override func prepareForReuse(){
@@ -97,8 +105,8 @@ class AccountCell: UITableViewCell {
         topLine.hidden = false
         dayIndicator.hidden = true
         icon.setImage(nil, forState: .Normal)
-        dealWithSubView(1.0)
-        dealWithBtns(0.0)
+        showSubView(true)
+        showBtns(false)
         isHiddenSubview = false
     }
 }

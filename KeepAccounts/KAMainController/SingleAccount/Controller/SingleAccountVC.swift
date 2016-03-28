@@ -36,6 +36,7 @@ class SingleAccountVC: UIViewController{
         self.view.backgroundColor = UIColor.whiteColor()
         setupMainView()
         initDataSource()
+        
     }
     func reloadDataSource(){
         initDataSource()
