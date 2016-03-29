@@ -10,6 +10,7 @@ import UIKit
 
 class AccountBookCell: UICollectionViewCell {
 
+    @IBOutlet weak var highlightedView: UIView!
     @IBOutlet weak var selectedFlag: UIImageView!
     @IBOutlet weak var accountCounts: UILabel!
     @IBOutlet weak var accountTitle: UILabel!
@@ -20,7 +21,17 @@ class AccountBookCell: UICollectionViewCell {
     }
     //重用前做一些必要的初始化
     override func prepareForReuse() {
-        
+        showHighlightedView(false)
+        selectedFlag.alpha = 0
+        accountCounts.text = ""
+        accountTitle.text = ""
+        accountBackImage.image = nil
+    }
+    func showDeepHighlightedView(bool:Bool){
+        highlightedView.alpha = bool ? 0.7 : 0
+    }
+    func showHighlightedView(bool:Bool){
+        highlightedView.alpha = bool ? 0.3 : 0
     }
 
 }

@@ -9,7 +9,6 @@
 import UIKit
 
 
-
 class MainViewController: UIViewController {
 
     var mainVCModel:MainVCModel = MainVCModel()
@@ -29,21 +28,19 @@ class MainViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-
 }
 extension MainViewController:UICollectionViewDelegate{
-    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
+    
     func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
-        
+        cell.showHighlightedView(true)
     }
     func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
+        cell.showHighlightedView(false)
     }
 }
 extension MainViewController:UICollectionViewDataSource{

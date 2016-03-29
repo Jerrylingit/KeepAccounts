@@ -42,6 +42,10 @@
                         <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rOa-0c-T7j">
+                        <rect key="frame" x="0.0" y="0.0" width="162" height="216"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -61,6 +65,11 @@
                 <constraint firstItem="G9Z-i8-0E3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="r0l-P4-150"/>
             </constraints>
             <size key="customSize" width="162" height="216"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="4"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="B9P-k9-p7I"/>
@@ -71,6 +80,7 @@
                 <outlet property="accountBackImage" destination="PK6-6G-KQC" id="b50-Oe-QI5"/>
                 <outlet property="accountCounts" destination="BRu-WB-DCt" id="sCy-WI-nMw"/>
                 <outlet property="accountTitle" destination="G9Z-i8-0E3" id="fWN-cX-PEh"/>
+                <outlet property="highlightedView" destination="rOa-0c-T7j" id="q4t-Fj-PXD"/>
                 <outlet property="selectedFlag" destination="2Za-EO-dzQ" id="PzK-Es-G40"/>
             </connections>
             <point key="canvasLocation" x="1272" y="513"/>
