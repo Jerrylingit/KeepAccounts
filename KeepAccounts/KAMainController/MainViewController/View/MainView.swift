@@ -11,7 +11,7 @@ import UIKit
 //组件高度
 
 private var ScreenWidthRatio = UIScreen.mainScreen().bounds.width / 375
-
+private var ScreenHeightRatio = UIScreen.mainScreen().bounds.height / 667
 class MainView: UIView {
     let StatusBarHeight:CGFloat = 20
     let TopBarHeight:CGFloat = 72
@@ -120,11 +120,13 @@ class MainView: UIView {
     //账本
     private func setupAccountsView(frame:CGRect){
         
-        let AccountsWidth:CGFloat = 80
-        let AccountsHeight:CGFloat = 108
+        let AccountsWidth:CGFloat = 80 * ScreenWidthRatio
+        let AccountsHeight:CGFloat = 110 * ScreenHeightRatio
   
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSizeMake(AccountsWidth, AccountsHeight)
+        flowLayout.scrollDirection = .Vertical
+        flowLayout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20)
         let collectionView = UICollectionView(frame: frame, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.delegate = delegate
@@ -133,7 +135,6 @@ class MainView: UIView {
         self.accountBookBtnView = collectionView
         
         self.addSubview(collectionView)
-        
     }
     //底部
     private func setupBottomBar(frame:CGRect){

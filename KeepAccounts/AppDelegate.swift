@@ -9,6 +9,7 @@
 import UIKit
 
 private var ScreenWithRatio = UIScreen.mainScreen().bounds.width / 375
+let firmAccountPath = "AccountBooks/firmAccount.archiver"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //在沙盒中创建目录
         initWithCreateDirectory()
+        initWithCreateAccountBooks()
 
         //let chooseItem = MainViewController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -40,6 +42,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func initWithCreateDirectory(){
         String.createDirectoryInDocumentWith("DatabaseDoc")
         String.createDirectoryInDocumentWith("AccountPhoto")
+        String.createDirectoryInDocumentWith("AccountBooks")
+    }
+    private func initWithCreateAccountBooks(){
+        let path = String.createFilePathInDocumentWith(firmAccountPath) ?? ""
+        if NSFileManager.defaultManager().fileExistsAtPath(path) == false {
+            //初始化账本页
+            var booksArray:[AccountBookBtn] = []
+            let booksitem = AccountBookBtn(title: "日常账本", count: "0笔", image: "book_cover_0", flag: true, dbName: "DatabaseDoc/AccountModel.db")
+            booksArray.append(booksitem)
+            NSKeyedArchiver.archiveRootObject(booksArray, toFile: path)
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

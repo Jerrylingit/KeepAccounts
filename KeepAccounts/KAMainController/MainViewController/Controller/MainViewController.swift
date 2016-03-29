@@ -12,10 +12,12 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    var mainVCModel:MainVCModel = MainVCModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         //建立主页面
         setupMainView()
+        
     }
     //建立主页面
     private func setupMainView(){
@@ -30,17 +32,35 @@ class MainViewController: UIViewController {
 
 }
 extension MainViewController:UICollectionViewDelegate{
-    
+    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
+        
+    }
+    func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
+    }
 }
 extension MainViewController:UICollectionViewDataSource{
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return mainVCModel.accountsBtns.count
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AccountBookBtnCell", forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AccountBookBtnCell", forIndexPath: indexPath) as! AccountBookCell
+        let cellData = mainVCModel.accountsBtns[indexPath.row]
+        cell.accountTitle.text = cellData.btnTitle
+        cell.accountCounts.text = cellData.accountCount
+        cell.accountBackImage.image = UIImage(named: cellData.backgrountImageName)
+        cell.selectedFlag.alpha = cellData.selectedFlag ? 1 : 0
+        
         return cell
     }
     
