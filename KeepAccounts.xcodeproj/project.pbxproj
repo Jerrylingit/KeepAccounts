@@ -7,15 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		847B67F81CAB9E18000A58AE /* CustomAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847B67F61CAB9E18000A58AE /* CustomAlertVC.swift */; settings = {ASSET_TAGS = (); }; };
-		847B67F91CAB9E18000A58AE /* CustomAlertVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847B67F71CAB9E18000A58AE /* CustomAlertVC.xib */; settings = {ASSET_TAGS = (); }; };
-		848187E11CAA193C005B0875 /* MainVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848187E01CAA193C005B0875 /* MainVCModel.swift */; settings = {ASSET_TAGS = (); }; };
-		849EC16C1C9955640046D53F /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EC16B1C9955640046D53F /* UIImage+Extension.swift */; settings = {ASSET_TAGS = (); }; };
+		848187E11CAA193C005B0875 /* MainVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848187E01CAA193C005B0875 /* MainVCModel.swift */; };
+		849EC16C1C9955640046D53F /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EC16B1C9955640046D53F /* UIImage+Extension.swift */; };
 		84B722921C7E94B4009F436B /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228D1C7E94B4009F436B /* RECommonFunctions.m */; };
 		84B722931C7E94B4009F436B /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228F1C7E94B4009F436B /* RESideMenu.m */; };
 		84B722941C7E94B4009F436B /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B722911C7E94B4009F436B /* UIViewController+RESideMenu.m */; };
-		84CA4B511C969C7F009766B9 /* customDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA4B501C969C7F009766B9 /* customDatePickerView.swift */; settings = {ASSET_TAGS = (); }; };
-		84DC5B0E1C96554F00D80529 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC5B0D1C96554F00D80529 /* NSDate+Extension.swift */; settings = {ASSET_TAGS = (); }; };
+		84CA4B511C969C7F009766B9 /* customDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA4B501C969C7F009766B9 /* customDatePickerView.swift */; };
+		84DC5B0E1C96554F00D80529 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC5B0D1C96554F00D80529 /* NSDate+Extension.swift */; };
 		84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0AEC1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift */; };
 		84DDFCF41C755283003F077F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDFCF31C755283003F077F /* libsqlite3.0.tbd */; };
 		84DDFDAF1C75C039003F077F /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDFDA41C75C039003F077F /* FMDatabase.m */; };
@@ -30,23 +28,23 @@
 		84E411211C72A47700C4260E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E4111F1C72A47700C4260E /* LaunchScreen.storyboard */; };
 		84E4112C1C72A47700C4260E /* KeepAccountsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4112B1C72A47700C4260E /* KeepAccountsTests.swift */; };
 		84E411371C72A47700C4260E /* KeepAccountsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E411361C72A47700C4260E /* KeepAccountsUITests.swift */; };
-		84E489861C9F99610024502E /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E489851C9F99610024502E /* UIView+Extension.swift */; settings = {ASSET_TAGS = (); }; };
-		84E4B28D1CA91D3D00400F56 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4B2891CA91D3D00400F56 /* MainViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		84E4B28E1CA91D3D00400F56 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4B28C1CA91D3D00400F56 /* MainView.swift */; settings = {ASSET_TAGS = (); }; };
-		84E4B2961CA9283100400F56 /* AccountBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4B2941CA9283100400F56 /* AccountBookCell.swift */; settings = {ASSET_TAGS = (); }; };
-		84E4B2971CA9283100400F56 /* AccountBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E4B2951CA9283100400F56 /* AccountBookCell.xib */; settings = {ASSET_TAGS = (); }; };
-		84E5798F1C917BE90007295B /* SingleAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5798B1C917BE90007295B /* SingleAccountVC.swift */; settings = {ASSET_TAGS = (); }; };
-		84E579901C917BE90007295B /* SingleAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5798E1C917BE90007295B /* SingleAccountView.swift */; settings = {ASSET_TAGS = (); }; };
-		84E579941C917D8C0007295B /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E579921C917D8C0007295B /* AccountCell.swift */; settings = {ASSET_TAGS = (); }; };
-		84E579951C917D8C0007295B /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E579931C917D8C0007295B /* AccountCell.xib */; settings = {ASSET_TAGS = (); }; };
-		84E5B1E91C979BE300BBE173 /* LimitInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5B1E81C979BE300BBE173 /* LimitInputVC.swift */; settings = {ASSET_TAGS = (); }; };
-		84E5B1EB1C979CC600BBE173 /* LimitInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5B1EA1C979CC600BBE173 /* LimitInputView.swift */; settings = {ASSET_TAGS = (); }; };
-		84E612601C9249A500021495 /* IncomeAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6125E1C9249A500021495 /* IncomeAccountCell.swift */; settings = {ASSET_TAGS = (); }; };
-		84E612611C9249A500021495 /* IncomeAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E6125F1C9249A500021495 /* IncomeAccountCell.xib */; settings = {ASSET_TAGS = (); }; };
-		84E612641C926A1700021495 /* AccountDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E612631C926A1700021495 /* AccountDataSource.swift */; settings = {ASSET_TAGS = (); }; };
-		84E6ABCC1CA2376100CBA148 /* ChooseItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6ABCB1CA2376100CBA148 /* ChooseItemModel.swift */; settings = {ASSET_TAGS = (); }; };
-		84E6ABCF1CA2948000CBA148 /* ComputedBoardLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6ABCE1CA2948000CBA148 /* ComputedBoardLogic.swift */; settings = {ASSET_TAGS = (); }; };
-		84FFE80A1C97E62C00A0CAAB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFE8091C97E62C00A0CAAB /* String+Extension.swift */; settings = {ASSET_TAGS = (); }; };
+		84E489861C9F99610024502E /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E489851C9F99610024502E /* UIView+Extension.swift */; };
+		84E4B28D1CA91D3D00400F56 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4B2891CA91D3D00400F56 /* MainViewController.swift */; };
+		84E4B28E1CA91D3D00400F56 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4B28C1CA91D3D00400F56 /* MainView.swift */; };
+		84E4B2961CA9283100400F56 /* AccountBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4B2941CA9283100400F56 /* AccountBookCell.swift */; };
+		84E4B2971CA9283100400F56 /* AccountBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E4B2951CA9283100400F56 /* AccountBookCell.xib */; };
+		84E5798F1C917BE90007295B /* SingleAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5798B1C917BE90007295B /* SingleAccountVC.swift */; };
+		84E579901C917BE90007295B /* SingleAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5798E1C917BE90007295B /* SingleAccountView.swift */; };
+		84E579941C917D8C0007295B /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E579921C917D8C0007295B /* AccountCell.swift */; };
+		84E579951C917D8C0007295B /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E579931C917D8C0007295B /* AccountCell.xib */; };
+		84E5B1E91C979BE300BBE173 /* LimitInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5B1E81C979BE300BBE173 /* LimitInputVC.swift */; };
+		84E5B1EB1C979CC600BBE173 /* LimitInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5B1EA1C979CC600BBE173 /* LimitInputView.swift */; };
+		84E612601C9249A500021495 /* IncomeAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6125E1C9249A500021495 /* IncomeAccountCell.swift */; };
+		84E612611C9249A500021495 /* IncomeAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E6125F1C9249A500021495 /* IncomeAccountCell.xib */; };
+		84E612641C926A1700021495 /* AccountDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E612631C926A1700021495 /* AccountDataSource.swift */; };
+		84E6ABCC1CA2376100CBA148 /* ChooseItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6ABCB1CA2376100CBA148 /* ChooseItemModel.swift */; };
+		84E6ABCF1CA2948000CBA148 /* ComputedBoardLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6ABCE1CA2948000CBA148 /* ComputedBoardLogic.swift */; };
+		84FFE80A1C97E62C00A0CAAB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFE8091C97E62C00A0CAAB /* String+Extension.swift */; };
 		C417E5831C8B276F007875EF /* ChooseItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E57A1C8B276F007875EF /* ChooseItemVC.swift */; };
 		C417E5841C8B276F007875EF /* ComputeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E57F1C8B276F007875EF /* ComputeBoardView.swift */; };
 		C417E5861C8B276F007875EF /* ItemBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E5811C8B276F007875EF /* ItemBarView.swift */; };
@@ -73,8 +71,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		847B67F61CAB9E18000A58AE /* CustomAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertVC.swift; sourceTree = "<group>"; };
-		847B67F71CAB9E18000A58AE /* CustomAlertVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlertVC.xib; sourceTree = "<group>"; };
 		848187E01CAA193C005B0875 /* MainVCModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVCModel.swift; sourceTree = "<group>"; };
 		849EC16B1C9955640046D53F /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		84B7228C1C7E94B4009F436B /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
@@ -163,15 +159,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		847B67F51CAB9DED000A58AE /* CustomAlertController */ = {
-			isa = PBXGroup;
-			children = (
-				847B67F61CAB9E18000A58AE /* CustomAlertVC.swift */,
-				847B67F71CAB9E18000A58AE /* CustomAlertVC.xib */,
-			);
-			path = CustomAlertController;
-			sourceTree = "<group>";
-		};
 		849EC16A1C99554F0046D53F /* UIImage+Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,7 +202,6 @@
 		84DDF9D41C754D83003F077F /* KAMainController */ = {
 			isa = PBXGroup;
 			children = (
-				847B67F51CAB9DED000A58AE /* CustomAlertController */,
 				84E5B1E51C979BD100BBE173 /* LimitInputVC */,
 				84E579891C917BE90007295B /* SingleAccount */,
 				C498AC061C8F1183007286EE /* MainViewController */,
@@ -646,7 +632,6 @@
 				84E411211C72A47700C4260E /* LaunchScreen.storyboard in Resources */,
 				84E579951C917D8C0007295B /* AccountCell.xib in Resources */,
 				84E612611C9249A500021495 /* IncomeAccountCell.xib in Resources */,
-				847B67F91CAB9E18000A58AE /* CustomAlertVC.xib in Resources */,
 				84E4111E1C72A47700C4260E /* Assets.xcassets in Resources */,
 				84E4B2971CA9283100400F56 /* AccountBookCell.xib in Resources */,
 				84DDFDB41C75C039003F077F /* Info.plist in Resources */,
@@ -704,7 +689,6 @@
 				C417E5861C8B276F007875EF /* ItemBarView.swift in Sources */,
 				C4F8E4A11C8BC166003C6A89 /* NSString+Path.swift in Sources */,
 				84E612601C9249A500021495 /* IncomeAccountCell.swift in Sources */,
-				847B67F81CAB9E18000A58AE /* CustomAlertVC.swift in Sources */,
 				849EC16C1C9955640046D53F /* UIImage+Extension.swift in Sources */,
 				84E579901C917BE90007295B /* SingleAccountView.swift in Sources */,
 				84B722941C7E94B4009F436B /* UIViewController+RESideMenu.m in Sources */,

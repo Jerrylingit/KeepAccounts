@@ -29,32 +29,6 @@ class MainViewController: UIViewController {
         self.view.addSubview(mainView)
     }
     
-//    private func setupInputDialog(){
-//        //背景视图，设置透明
-//        let bgView = UIView(frame: self.view.bounds)
-//        
-//        //中间自定义视图，背景白色
-//        let midBgView = UIView(frame: CGRectNull)
-//        
-//        //输入title框
-//        let titleTextField = UITextField(frame: CGRectNull)
-//        
-//        //chooseImage
-//        let chooseImage = generateImage(CGRectNull)
-//        
-//        //取消
-//        let cancelBtn = UIButton(frame: CGRectNull)
-//        
-//        //确定
-//        let sureBtn = UIButton(frame: CGRectNull)
-//        
-//        
-//        
-//    }
-//    func generateImage(frame:CGRect)->UIView{
-//        
-//    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -69,15 +43,7 @@ class MainViewController: UIViewController {
                 if sender.state == .Began{
                     cell.highlightedViewAlpha = AccountCellPressState.LongPress.rawValue
                     //弹出修改的按钮
-                    let alert = UIAlertController(title: "asdfasdf", message: "", preferredStyle: .Alert)
-                    let sureAction = UIAlertAction(title: "确定", style: .Default, handler: {(action) in print(action) })
-                    let cancelAction = UIAlertAction(title: "取消", style: .Default, handler: {(action) in print(action) })
-                    alert.addAction(sureAction)
-                    alert.addAction(cancelAction)
-                    let custom = UIViewController()
-                    custom.view.backgroundColor = UIColor.greenColor()
-                    alert.setValue(custom, forKey: "contentViewController")
-                    self.presentViewController(alert, animated: true, completion: nil)
+//                    self.presentViewController(alert, animated: true, completion: nil)
                 }
             }
             
