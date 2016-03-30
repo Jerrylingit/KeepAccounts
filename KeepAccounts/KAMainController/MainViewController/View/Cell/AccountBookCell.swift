@@ -18,6 +18,8 @@ class AccountBookCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+//        let longPress = UILongPressGestureRecognizer(target: self, action: "longPressAction:")
+//        self.addGestureRecognizer(longPress)
     }
     //重用前做一些必要的初始化
     override func prepareForReuse() {
@@ -26,6 +28,9 @@ class AccountBookCell: UICollectionViewCell {
         accountCounts.text = ""
         accountTitle.text = ""
         accountBackImage.image = nil
+    }
+    func longPressAction(sender:UILongPressGestureRecognizer){
+        
     }
     func showDeepHighlightedView(bool:Bool){
         highlightedView.alpha = bool ? 0.7 : 0

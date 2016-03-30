@@ -30,14 +30,36 @@ class MainViewController: UIViewController {
     
 }
 extension MainViewController:UICollectionViewDelegate{
+    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+
+        let cellCount = collectionView.numberOfItemsInSection(indexPath.section)
+        if indexPath.row == cellCount - 1{
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
+        cell.selectedFlag.alpha = 1.0
+    }
+    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
+        cell.selectedFlag.alpha = 0.0
+    }
     
     func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    
     func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
         cell.showHighlightedView(true)
     }
+    
     func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
         cell.showHighlightedView(false)
