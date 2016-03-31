@@ -14,12 +14,14 @@ class MainViewController: UIViewController {
     var mainVCModel:MainVCModel = MainVCModel()
     var mainView:MainView = MainView()
     var customAlertView:CustomAlertView?
+    var operateAccountBook:OperateAccountBookView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //建立主页面
         setupMainView()
         setupCustomAlertView()
+        setupOperateAccountBookView()
     }
 
     
@@ -36,7 +38,6 @@ class MainViewController: UIViewController {
             if indexPath.row < cellCount - 1{
                 if sender.state == .Began{
                     cell.highlightedViewAlpha = AccountCellPressState.LongPress.rawValue
-                    
                     //弹出修改的按钮
                     
                 }
@@ -58,6 +59,13 @@ class MainViewController: UIViewController {
         
         self.customAlertView = customAlertView
     }
+    private func setupOperateAccountBookView(){
+        let frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
+        let operateAccountBook = OperateAccountBookView(frame: frame)
+        operateAccountBook.hidden = true
+        self.operateAccountBook = operateAccountBook
+        self.view.addSubview(operateAccountBook)
+    }
     
     //MARK: - private method
     
@@ -67,13 +75,19 @@ class MainViewController: UIViewController {
 extension MainViewController:UICollectionViewDelegate{
     //MARK: - selected cell
     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
         let cellCount = collectionView.numberOfItemsInSection(indexPath.section)
         if indexPath.row == cellCount - 1{
             return false
         }
         else{
-            return true
+            if cell.highlightedViewAlpha < 0.59{
+                return true
+            }
+            else{
+                return false
+            }
+            
         }
     }
     

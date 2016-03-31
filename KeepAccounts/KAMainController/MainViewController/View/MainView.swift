@@ -10,8 +10,9 @@ import UIKit
 
 //组件高度
 
-private var ScreenWidthRatio = UIScreen.mainScreen().bounds.width / 375
-private var ScreenHeightRatio = UIScreen.mainScreen().bounds.height / 667
+private let ScreenWidthRatio = UIScreen.mainScreen().bounds.width / 375
+private let ScreenHeightRatio = UIScreen.mainScreen().bounds.height / 667
+
 class MainView: UIView {
     let StatusBarHeight:CGFloat = 20
     let TopBarHeight:CGFloat = 72
