@@ -8,7 +8,6 @@
 
 import Foundation
 
-private let accountModelPath = "DatabaseDoc/AccountModel.db"
 private let createTableSQL = "CREATE TABLE IF NOT EXISTS AccountModel(ID INTEGER PRIMARY KEY AUTOINCREMENT, ICONNAME TEXT, ICONTITLE TEXT, MONEY TEXT, DATE INTEGER, PHOTO TEXT, REMARK TEXT)"
 private let insertSQL = "INSERT INTO AccountModel(ICONNAME, ICONTITLE, MONEY, DATE, PHOTO, REMARK) VALUES(?,?,?,?,?,?)"
 private let updateSQL = "UPDATE AccountModel SET ICONNAME=?, ICONTITLE=?, MONEY=?, DATE=?, PHOTO=?, REMARK=? WHERE ID=?"
@@ -30,10 +29,10 @@ class AccountItem: NSObject {
 
 class AccoutDB: NSObject {
     //取得数据库文件
-    class func getDB()->FMDatabase{
+    class func getDB(path:String)->FMDatabase{
         
         //创建文件路径
-        let btnPath = String.createFilePathInDocumentWith(accountModelPath) ?? ""
+        let btnPath = String.createFilePathInDocumentWith(path) ?? ""
 //        print(btnPath)
         //创建filemanager
         let fileManager = NSFileManager.defaultManager()
@@ -64,35 +63,35 @@ class AccoutDB: NSObject {
         return FMDatabase(path: btnPath)
     }
     //插入数据
-    class func insertData(item:AccountItem){
-        let db = self.getDB()
+    class func insertData(path:String, item:AccountItem){
+        let db = self.getDB(path)
         db.open()
         db.executeUpdate(insertSQL, withArgumentsInArray: [item.iconName, item.iconTitle, item.money, item.date, item.photo, item.remark])
         db.close()
     }
     //更新数据
-    class func updateData(item:AccountItem){
-        let db = self.getDB()
+    class func updateData(path:String, item:AccountItem){
+        let db = self.getDB(path)
         db.open()
         db.executeUpdate(updateSQL, withArgumentsInArray: [item.iconName, item.iconTitle, item.money, item.date, item.photo, item.remark, item.ID])
         db.close()
     }
     //删除数据
-    class func deleteData(item:AccountItem){
-        let db = self.getDB()
+    class func deleteData(path:String, item:AccountItem){
+        let db = self.getDB(path)
         db.open()
         db.executeUpdate(deleteSQL, withArgumentsInArray: [item.ID])
         db.close()
     }
-    class func deleteDataWith(ID:Int){
-        let db = self.getDB()
+    class func deleteDataWith(path:String, ID:Int){
+        let db = self.getDB(path)
         db.open()
         db.executeUpdate(deleteSQL, withArgumentsInArray: [ID])
         db.close()
     }
     //查询数据
-    class func selectDataWithID(id:Int)->AccountItem{
-        let db = self.getDB()
+    class func selectDataWithID(path:String, id:Int)->AccountItem{
+        let db = self.getDB(path)
         db.open()
         let rs = db.executeQuery(selectSQL, withArgumentsInArray: [id])
         let item = AccountItem()
@@ -108,8 +107,8 @@ class AccoutDB: NSObject {
         db.close()
         return item
     }
-    class func selectDataOrderByDate()->[AccountItem] {
-        let db = self.getDB()
+    class func selectDataOrderByDate(path:String)->[AccountItem] {
+        let db = self.getDB(path)
         db.open()
         let rs = db.executeQuery(selectOrderByDateSQL, withArgumentsInArray: nil)
         

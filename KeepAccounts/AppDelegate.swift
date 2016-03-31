@@ -36,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sideMenu.fadeMenuView = false
         window?.rootViewController = sideMenu
         window?.makeKeyAndVisible()
-        
         return true
     }
     private func initWithCreateDirectory(){

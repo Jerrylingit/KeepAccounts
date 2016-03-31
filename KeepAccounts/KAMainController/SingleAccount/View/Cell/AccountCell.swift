@@ -48,7 +48,7 @@ class AccountCell: UITableViewCell {
     
     @IBAction func clickEditBtn(sender: AnyObject) {
         let model = ChooseItemModel()
-        let item = AccoutDB.selectDataWithID(cellID ?? 0)
+        let item = AccoutDB.selectDataWithID(accountModelPath, id: cellID ?? 0)
         model.mode = "edit"
         model.dataBaseId = item.ID
         model.costBarMoney = item.money
@@ -68,7 +68,7 @@ class AccountCell: UITableViewCell {
         alertView.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
         alertView.addAction(UIAlertAction(title: "确定", style: .Default){(action) in
             if let ID = self.cellID{
-                AccoutDB.deleteDataWith(ID)
+                AccoutDB.deleteDataWith(accountModelPath, ID: ID)
             }
             NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
         })

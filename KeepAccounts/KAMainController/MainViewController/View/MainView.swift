@@ -150,6 +150,9 @@ class MainView: UIView {
         bottomBar.addSubview(explore)
         self.addSubview(bottomBar)
     }
+    func reloadCollectionView(){
+        self.accountBookBtnView?.reloadData()
+    }
     
 
     required init?(coder aDecoder: NSCoder) {

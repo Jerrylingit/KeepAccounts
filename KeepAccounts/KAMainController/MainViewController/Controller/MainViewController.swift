@@ -13,21 +13,15 @@ class MainViewController: UIViewController {
     
     var mainVCModel:MainVCModel = MainVCModel()
     var mainView:MainView = MainView()
+    var customAlertView:CustomAlertView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //建立主页面
         setupMainView()
-//        setupInputDialog()
-        
+        setupCustomAlertView()
     }
-    //建立主页面
-    private func setupMainView(){
-        let mainViewFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-        let mainView = MainView(frame: mainViewFrame, delegate:self)
-        self.mainView = mainView
-        self.view.addSubview(mainView)
-    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -42,17 +36,36 @@ class MainViewController: UIViewController {
             if indexPath.row < cellCount - 1{
                 if sender.state == .Began{
                     cell.highlightedViewAlpha = AccountCellPressState.LongPress.rawValue
+                    
                     //弹出修改的按钮
-//                    self.presentViewController(alert, animated: true, completion: nil)
+                    
                 }
             }
-            
         }
     }
+    
+    //MARK: - generate views by coding(private)
+    //建立主页面
+    private func setupMainView(){
+        let mainViewFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+        let mainView = MainView(frame: mainViewFrame, delegate:self)
+        self.mainView = mainView
+        self.view.addSubview(mainView)
+    }
+    private func setupCustomAlertView(){
+        let frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+        let customAlertView = CustomAlertView(frame: frame)
+        
+        self.customAlertView = customAlertView
+    }
+    
+    //MARK: - private method
+    
     
 }
 //MARK: - UICollectionViewDelegate
 extension MainViewController:UICollectionViewDelegate{
+    //MARK: - selected cell
     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
 
         let cellCount = collectionView.numberOfItemsInSection(indexPath.section)
@@ -65,15 +78,10 @@ extension MainViewController:UICollectionViewDelegate{
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
-        cell.selectedFlag.alpha = 1.0
+        mainVCModel.showFlagWithIndex(indexPath.row)
+        mainView.reloadCollectionView()
     }
-    
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
-        cell.selectedFlag.alpha = 0.0
-    }
-    
+    //MARK: - highlighted cell
     func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -81,6 +89,36 @@ extension MainViewController:UICollectionViewDelegate{
     func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
         cell.highlightedViewAlpha = AccountCellPressState.Highlighted.rawValue
+        
+        let cellCount = collectionView.numberOfItemsInSection(indexPath.section)
+        if indexPath.row == cellCount - 1{
+            customAlertView?.title = ""
+            customAlertView?.initChooseImage = "book_cover_0"
+            customAlertView?.cancelBlock = {() in
+                self.customAlertView?.removeFromSuperview()
+            }
+            customAlertView?.sureBlock = {(title, imageName) in
+                //建一个数据库
+                let currentTime = Int(NSDate().timeIntervalSince1970)
+                if let dbPath = String.createFilePathInDocumentWith(accountModelPath+"\(currentTime)"){
+                    let item = AccountBookBtn(title: title, count: "0笔", image: imageName, flag: false, dbName: dbPath)
+                    //插入账本
+                    self.mainVCModel.addBookItemByAppend(item)
+                    self.mainView.accountBookBtnView?.insertItemsAtIndexPaths([indexPath])
+                    //退出alertview
+                    self.customAlertView?.removeFromSuperview()
+                }
+                else{
+                    print("创建账本失败")
+                }
+            }
+            UIApplication.sharedApplication().keyWindow?.addSubview(self.customAlertView!)
+        }
+        else{
+            //切换到contentView
+            
+        }
+        
     }
     
     func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
@@ -105,7 +143,6 @@ extension MainViewController:UICollectionViewDataSource{
         let longPress = UILongPressGestureRecognizer(target: self, action: "longPressAction:")
         longPress.cancelsTouchesInView = false
         cell.addGestureRecognizer(longPress)
-        
         cell.accountTitle.text = cellData.btnTitle
         cell.accountCounts.text = cellData.accountCount
         cell.accountBackImage.image = UIImage(named: cellData.backgrountImageName)

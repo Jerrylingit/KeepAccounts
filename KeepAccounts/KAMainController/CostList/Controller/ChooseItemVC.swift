@@ -129,10 +129,10 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
             item.remark = self.chooseItemModel.topBarRemark
             item.photo = self.chooseItemModel.topBarPhotoName
             if self.chooseItemModel.mode == "edit"{
-                AccoutDB.updateData(item)
+                AccoutDB.updateData(accountModelPath, item:item)
             }
             else if self.chooseItemModel.mode == "init" {
-                AccoutDB.insertData(item)
+                AccoutDB.insertData(accountModelPath, item:item)
             }
             
             NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+let accountModelPath = "DatabaseDoc/AccountModel.db"
 protocol SubViewProtocol{
     func clickManageBtn(sender:AnyObject!)
     func clickMidAddBtn(sender:AnyObject!)
@@ -47,7 +47,7 @@ class SingleAccountVC: UIViewController{
     private func initDataSource(){
         var dayCostItem:AccountItem = AccountItem()
         //从数据库中取出所有数据
-        itemAccounts = AccoutDB.selectDataOrderByDate()
+        itemAccounts = AccoutDB.selectDataOrderByDate(accountModelPath)
         //处理符合显示要求的数据
         //1、分开日期； 2、计算日金额
         var tmpItemAccounts:[AccountItem] = []
@@ -93,9 +93,9 @@ class SingleAccountVC: UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
-    }
+//    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+//        return .LightContent
+//    }
     private func compareDate(currentInterval:NSTimeInterval, lastInterval:NSTimeInterval) -> String{
         let currentCom = NSDate.intervalToDateComponent(currentInterval)
         let lastCom = NSDate.intervalToDateComponent(lastInterval)

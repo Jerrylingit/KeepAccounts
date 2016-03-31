@@ -38,20 +38,6 @@ class ComputedBoardLogic:NSObject{
         if let pressOKClosure = pressOKClosure{
             pressOKClosure()
         }
-        
-//        let item = AccountItem()
-//        item.money = money.text ?? ""
-//        item.iconTitle = title.text ?? ""
-//        item.iconName = iconName
-//        item.date = Int(accountTime!)
-//        item.remark = remark ?? ""
-//        item.photo = photoName ?? ""
-//        AccoutDB.insertData(item);
-//        NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
-//        if delegate?.respondsToSelector("onPressBack") != nil{
-//            delegate?.onPressBack()
-//        }
-//        prepareForNextAssign()
     }
     private func pressIncomeAndCost(){
         if let pressIncomeAndCostClosure = pressIncomeAndCostClosure{
