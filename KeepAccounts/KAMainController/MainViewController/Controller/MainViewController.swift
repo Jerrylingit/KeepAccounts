@@ -37,12 +37,60 @@ class MainViewController: UIViewController {
             //最后一个cell是加号，不用做长按处理
             if indexPath.row < cellCount - 1{
                 if sender.state == .Began{
+                    let item = mainVCModel.getItemInfoAtIndex(indexPath.row)
                     cell.highlightedViewAlpha = AccountCellPressState.LongPress.rawValue
                     //弹出修改的按钮
+                    operateAccountBook?.hidden = false
+                    operateAccountBook?.showBtnAnimation()
+                    operateAccountBook?.cancelBlock = {() in
+                        self.operateAccountBook?.hidden = true
+                        self.operateAccountBook?.hideBtnAnimation()
+                        cell.highlightedView.alpha = AccountCellPressState.Normal.rawValue
+                    }
+                    operateAccountBook?.deleteBlock = {() in
+                        let alert = UIAlertController(title: "删除\(item?.btnTitle)", message: "将会删除所有数据，不会恢复", preferredStyle: .Alert)
+                        alert.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
+                        alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: {(action) in
+                            //删除数据源
+                            self.mainVCModel.removeBookItemAtIndex(indexPath.row)
+                            //执行删除操作
+                            self.mainView.accountBookBtnView?.deleteItemsAtIndexPaths([indexPath])
+                            self.operateAccountBook?.hidden = true
+                            self.operateAccountBook?.hideBtnAnimation()
+                            cell.highlightedView.alpha = AccountCellPressState.Normal.rawValue
+                        }))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
+                    operateAccountBook?.editBlock = {() in
+                        self.editAccountBook(item, indexPath:indexPath)
+                        cell.highlightedView.alpha = AccountCellPressState.Normal.rawValue
+                    }
                     
                 }
             }
         }
+    }
+    func editAccountBook(item:AccountBookBtn?, indexPath:NSIndexPath){
+        customAlertView?.title = item?.btnTitle ?? ""
+        customAlertView?.initChooseImage = item?.backgrountImageName ?? "book_cover_0"
+        customAlertView?.cancelBlock = {() in
+            self.customAlertView?.removeFromSuperview()
+        }
+        customAlertView?.sureBlock = {(title, imageName) in
+            //修改账本
+            if let editItem = self.mainVCModel.getItemInfoAtIndex(indexPath.row){
+                editItem.btnTitle = title
+                editItem.backgrountImageName = imageName
+                self.mainVCModel.updateBookItem(editItem, atIndex:indexPath.row)
+                self.mainView.accountBookBtnView?.reloadItemsAtIndexPaths([indexPath])
+                self.operateAccountBook?.hidden = true
+                self.operateAccountBook?.hideBtnAnimation()
+            }
+            //退出alertview
+            self.customAlertView?.removeFromSuperview()
+
+        }
+        UIApplication.sharedApplication().keyWindow?.addSubview(self.customAlertView!)
     }
     
     //MARK: - generate views by coding(private)

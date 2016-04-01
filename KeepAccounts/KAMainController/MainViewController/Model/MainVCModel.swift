@@ -62,6 +62,12 @@ class MainVCModel:NSObject{
             self.accountsBtns.append(AccountBookBtn(title: "", count: "", image: "menu_cell_add", flag: false, dbName: ""))
         }
     }
+    func getItemInfoAtIndex(i:Int)->AccountBookBtn?{
+        if i < accountsBtns.count{
+            return accountsBtns[i]
+        }
+        return nil
+    }
     //更新数组中的flag，互斥
     func showFlagWithIndex(index:Int){
         for i in 0...accountsBtns.count - 1{
