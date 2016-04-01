@@ -18,8 +18,8 @@ protocol SubViewProtocol{
 class SingleAccountVC: UIViewController{
     
     //上一次cell的值，用于和当前值做比较
-    let lastDay = NSDate().timeIntervalSince1970 + 86400
-    var lastCellInterval:NSTimeInterval = NSDate().timeIntervalSince1970 + 86400
+    private let lastDay = NSDate().timeIntervalSince1970 + 86400
+    private var lastCellInterval:NSTimeInterval = NSDate().timeIntervalSince1970 + 86400
     //每日的消费金额
     var dayCost:String = ""
     var dayCostCell:AccountCell?

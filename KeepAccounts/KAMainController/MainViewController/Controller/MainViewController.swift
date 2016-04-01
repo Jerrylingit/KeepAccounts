@@ -38,6 +38,7 @@ class MainViewController: UIViewController {
             if indexPath.row < cellCount - 1{
                 if sender.state == .Began{
                     let item = mainVCModel.getItemInfoAtIndex(indexPath.row)
+                    let title = item?.btnTitle ?? ""
                     cell.highlightedViewAlpha = AccountCellPressState.LongPress.rawValue
                     //弹出修改的按钮
                     operateAccountBook?.hidden = false
@@ -48,7 +49,7 @@ class MainViewController: UIViewController {
                         cell.highlightedView.alpha = AccountCellPressState.Normal.rawValue
                     }
                     operateAccountBook?.deleteBlock = {() in
-                        let alert = UIAlertController(title: "删除\(item?.btnTitle)", message: "将会删除所有数据，不会恢复", preferredStyle: .Alert)
+                        let alert = UIAlertController(title: "删除\(title)", message: "将会删除所有数据，不会恢复", preferredStyle: .Alert)
                         alert.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
                         alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: {(action) in
                             //删除数据源
@@ -65,7 +66,6 @@ class MainViewController: UIViewController {
                         self.editAccountBook(item, indexPath:indexPath)
                         cell.highlightedView.alpha = AccountCellPressState.Normal.rawValue
                     }
-                    
                 }
             }
         }
