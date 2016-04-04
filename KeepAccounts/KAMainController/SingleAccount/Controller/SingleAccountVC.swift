@@ -8,7 +8,8 @@
 
 import UIKit
 
-let accountModelPath = "DatabaseDoc/AccountModel.db"
+public let accountModelPath = "DatabaseDoc/AccountModel.db"
+
 protocol SubViewProtocol{
     func clickManageBtn(sender:AnyObject!)
     func clickMidAddBtn(sender:AnyObject!)
@@ -29,6 +30,19 @@ class SingleAccountVC: UIViewController{
     //总支出和总收入
     var totalIncome:Float = 0
     var totalCost:Float = 0
+    //数据库名和标题
+    var initDBName:String
+    var accountTitle:String
+    
+    init(initDBName:String, accountTitle:String){
+        self.initDBName = initDBName
+        self.accountTitle = accountTitle
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +61,7 @@ class SingleAccountVC: UIViewController{
     private func initDataSource(){
         var dayCostItem:AccountItem = AccountItem()
         //从数据库中取出所有数据
-        itemAccounts = AccoutDB.selectDataOrderByDate(accountModelPath)
+        itemAccounts = AccoutDB.selectDataOrderByDate(initDBName)
         //处理符合显示要求的数据
         //1、分开日期； 2、计算日金额
         var tmpItemAccounts:[AccountItem] = []

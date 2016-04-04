@@ -113,7 +113,7 @@ class AccoutDB: NSObject {
         let rs = db.executeQuery(selectOrderByDateSQL, withArgumentsInArray: nil)
         
         var items:[AccountItem] = []
-        while rs.next(){
+        while rs != nil && rs.next(){
             let item = AccountItem()
             item.ID = Int(rs.intForColumn("ID"))
             item.iconName = rs.stringForColumn("ICONNAME")
@@ -126,6 +126,14 @@ class AccoutDB: NSObject {
         }
         db.close()
         return items
+    }
+    
+    class func itemCount(path:String)->Int{
+        let db = self.getDB(path)
+        db.open()
+        let DBItemCount = db.intForQuery("SELECT COUNT(ID) FROM AccountModel")
+        db.close()
+        return Int(DBItemCount)
     }
     
     

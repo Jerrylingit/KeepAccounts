@@ -58,16 +58,24 @@ class MainVCModel:NSObject{
     private func initWithAccountsBtns(){
         let path = String.createFilePathInDocumentWith(firmAccountPath) ?? ""
         if let accountsBtns = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [AccountBookBtn]{
+            for i in 0...accountsBtns.count - 1{
+                accountsBtns[i].accountCount = String(AccoutDB.itemCount(accountModelPath))+"笔"
+            }
             self.accountsBtns = accountsBtns
             self.accountsBtns.append(AccountBookBtn(title: "", count: "", image: "menu_cell_add", flag: false, dbName: ""))
         }
     }
-    func getItemInfoAtIndex(i:Int)->AccountBookBtn?{
-        if i < accountsBtns.count{
-            return accountsBtns[i]
+    func reloadModelData(){
+        //更新按钮的itemCount
+        let path = String.createFilePathInDocumentWith(firmAccountPath) ?? ""
+        if let accountsBtns = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [AccountBookBtn]{
+            for i in 0...accountsBtns.count - 1{
+                accountsBtns[i].accountCount = String(AccoutDB.itemCount(accountModelPath))+"笔"
+            }
         }
-        return nil
+        //更新金额
     }
+    
     //更新数组中的flag，互斥
     func showFlagWithIndex(index:Int){
         for i in 0...accountsBtns.count - 1{
@@ -79,8 +87,9 @@ class MainVCModel:NSObject{
             }
         }
     }
+    
     //查找
-    func getBookItemAtIndex(i:Int)->AccountBookBtn?{
+    func getItemInfoAtIndex(i:Int)->AccountBookBtn?{
         guard i < accountsBtns.count else{return nil}
         return accountsBtns[i]
     }

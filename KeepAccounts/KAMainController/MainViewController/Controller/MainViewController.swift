@@ -16,12 +16,20 @@ class MainViewController: UIViewController {
     var customAlertView:CustomAlertView?
     var operateAccountBook:OperateAccountBookView?
     
+    //life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         //建立主页面
         setupMainView()
         setupCustomAlertView()
         setupOperateAccountBookView()
+    }
+    override func viewWillAppear(animated: Bool) {
+        //更新数据
+        mainVCModel.reloadModelData()
+        //更新页面
+        mainView.reloadCollectionView()
+        
     }
 
     
@@ -178,7 +186,11 @@ extension MainViewController:UICollectionViewDelegate{
         }
         else{
             //切换到contentView
-            
+            if let item = mainVCModel.getItemInfoAtIndex(indexPath.row){
+                let tmpSingleAccountVC = SingleAccountVC(initDBName: item.dataBaseName, accountTitle: item.btnTitle)
+                self.sideMenuViewController.setContentViewController(tmpSingleAccountVC, animated: true)
+                self.sideMenuViewController.hideMenuViewController()
+            }
         }
         
     }

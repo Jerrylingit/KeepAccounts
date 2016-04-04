@@ -15,16 +15,26 @@ let firmAccountPath = "AccountBooks/firmAccount.archiver"
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var booksArray:[AccountBookBtn] = []
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //在沙盒中创建目录
         initWithCreateDirectory()
         initWithCreateAccountBooks()
 
-        //let chooseItem = MainViewController()
+        //找到正在被使用的账本
+        var item:AccountBookBtn!
+        let path = String.createFilePathInDocumentWith(firmAccountPath) ?? ""
+        if let accountsBtns = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [AccountBookBtn]{
+            for i in 0...accountsBtns.count - 1{
+                if accountsBtns[i].selectedFlag{
+                    item = accountsBtns[i]
+                }
+            }
+        }
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let leftMenuVC = MainViewController()
-        let homeVC = SingleAccountVC()
+        let homeVC = SingleAccountVC(initDBName: item.dataBaseName, accountTitle: item.btnTitle)
         let sideMenu = RESideMenu.init(contentViewController: homeVC, leftMenuViewController: leftMenuVC, rightMenuViewController: nil)
         sideMenu.delegate = self
         sideMenu.contentViewInPortraitOffsetCenterX = 150 * ScreenWithRatio
@@ -45,13 +55,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     private func initWithCreateAccountBooks(){
         let path = String.createFilePathInDocumentWith(firmAccountPath) ?? ""
+        var booksArray:[AccountBookBtn] = []
         if NSFileManager.defaultManager().fileExistsAtPath(path) == false {
             //初始化账本页
-            var booksArray:[AccountBookBtn] = []
             let booksitem = AccountBookBtn(title: "日常账本", count: "0笔", image: "book_cover_0", flag: true, dbName: "DatabaseDoc/AccountModel.db")
             booksArray.append(booksitem)
             NSKeyedArchiver.archiveRootObject(booksArray, toFile: path)
         }
+        self.booksArray = booksArray
     }
 
     func applicationWillResignActive(application: UIApplication) {
