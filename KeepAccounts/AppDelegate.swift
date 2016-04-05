@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sideMenu.delegate = self
         sideMenu.contentViewInPortraitOffsetCenterX = 150 * ScreenWithRatio
         sideMenu.contentViewShadowEnabled = true
-        sideMenu.contentViewShadowOffset = CGSize(width: -3, height: -3)
+        sideMenu.contentViewShadowOffset = CGSize(width: -2, height: -2)
         sideMenu.contentViewShadowColor = UIColor.blackColor()
         sideMenu.scaleContentView = false
         sideMenu.scaleMenuView = false
@@ -60,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //初始化账本页
             let booksitem = AccountBookBtn(title: "日常账本", count: "0笔", image: "book_cover_0", flag: true, dbName: "DatabaseDoc/AccountModel.db")
             booksArray.append(booksitem)
+            booksArray.append(AccountBookBtn(title: "", count: "", image: "menu_cell_add", flag: false, dbName: ""))
             NSKeyedArchiver.archiveRootObject(booksArray, toFile: path)
         }
         self.booksArray = booksArray
@@ -91,11 +92,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate:RESideMenuDelegate{
-    func sideMenu(sideMenu: RESideMenu!, didShowMenuViewController menuViewController: UIViewController!) {
-        sideMenu.panGestureEnabled = false
-    }
-    func sideMenu(sideMenu: RESideMenu!, willHideMenuViewController menuViewController: UIViewController!) {
-        sideMenu.panGestureEnabled = true
-    }
 }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 
+private let customAccountName = "DatabaseDoc/AccountModel"
 
 class MainViewController: UIViewController {
     
@@ -29,7 +30,6 @@ class MainViewController: UIViewController {
         mainVCModel.reloadModelData()
         //更新页面
         mainView.reloadCollectionView()
-        
     }
 
     
@@ -159,40 +159,6 @@ extension MainViewController:UICollectionViewDelegate{
     func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AccountBookCell
         cell.highlightedViewAlpha = AccountCellPressState.Highlighted.rawValue
-        
-        let cellCount = collectionView.numberOfItemsInSection(indexPath.section)
-        if indexPath.row == cellCount - 1{
-            customAlertView?.title = ""
-            customAlertView?.initChooseImage = "book_cover_0"
-            customAlertView?.cancelBlock = {() in
-                self.customAlertView?.removeFromSuperview()
-            }
-            customAlertView?.sureBlock = {(title, imageName) in
-                //建一个数据库
-                let currentTime = Int(NSDate().timeIntervalSince1970)
-                if let dbPath = String.createFilePathInDocumentWith(accountModelPath+"\(currentTime)"){
-                    let item = AccountBookBtn(title: title, count: "0笔", image: imageName, flag: false, dbName: dbPath)
-                    //插入账本
-                    self.mainVCModel.addBookItemByAppend(item)
-                    self.mainView.accountBookBtnView?.insertItemsAtIndexPaths([indexPath])
-                    //退出alertview
-                    self.customAlertView?.removeFromSuperview()
-                }
-                else{
-                    print("创建账本失败")
-                }
-            }
-            UIApplication.sharedApplication().keyWindow?.addSubview(self.customAlertView!)
-        }
-        else{
-            //切换到contentView
-            if let item = mainVCModel.getItemInfoAtIndex(indexPath.row){
-                let tmpSingleAccountVC = SingleAccountVC(initDBName: item.dataBaseName, accountTitle: item.btnTitle)
-                self.sideMenuViewController.setContentViewController(tmpSingleAccountVC, animated: true)
-                self.sideMenuViewController.hideMenuViewController()
-            }
-        }
-        
     }
     
     func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
@@ -200,7 +166,38 @@ extension MainViewController:UICollectionViewDelegate{
         //浮点数没法精确，所以只能用小于
         if cell.highlightedViewAlpha <= AccountCellPressState.Highlighted.rawValue + 0.1{
             cell.highlightedViewAlpha = AccountCellPressState.Normal.rawValue
+            
+            let cellCount = collectionView.numberOfItemsInSection(indexPath.section)
+            if indexPath.row == cellCount - 1{
+                customAlertView?.title = ""
+                customAlertView?.initChooseImage = "book_cover_0"
+                customAlertView?.cancelBlock = {() in
+                    self.customAlertView?.removeFromSuperview()
+                }
+                customAlertView?.sureBlock = {(title, imageName) in
+                    //建一个数据库
+                    let currentTime = Int(NSDate().timeIntervalSince1970)
+                    let dbName = customAccountName + "\(currentTime)" + ".db"
+                    let item = AccountBookBtn(title: title, count: "0笔", image: imageName, flag: false, dbName: dbName)
+                    //插入账本
+                    self.mainVCModel.addBookItemByAppend(item)
+                    self.mainView.accountBookBtnView?.insertItemsAtIndexPaths([indexPath])
+                    //退出alertview
+                    self.customAlertView?.removeFromSuperview()
+                }
+                UIApplication.sharedApplication().keyWindow?.addSubview(self.customAlertView!)
+            }
+            else{
+                //切换到contentView
+                if let item = mainVCModel.getItemInfoAtIndex(indexPath.row){
+                    let tmpSingleAccountVC = SingleAccountVC(initDBName: item.dataBaseName, accountTitle: item.btnTitle)
+                    self.sideMenuViewController.setContentViewController(tmpSingleAccountVC, animated: true)
+                    self.sideMenuViewController.hideMenuViewController()
+                }
+            }
         }
+        
+
     }
 }
 //MARK: - UICollectionViewDataSource

@@ -16,7 +16,7 @@ private let TitleMarginTop:CGFloat = 10
 class ItemBarView: UIView {
     
     var items : [btnModel] = []
-    var delegate:ChooseItemVC?
+    weak var delegate:ChooseItemVC?
     
     //自定义初始化方法
     override init(frame: CGRect) {
@@ -25,6 +25,9 @@ class ItemBarView: UIView {
         getItemsFromDB()
     }
     
+    deinit{
+        print("ItemBarView deinit")
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

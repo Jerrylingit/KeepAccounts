@@ -7,7 +7,7 @@
 //
 
 import UIKit
-typealias presentVCResponder = (UIViewController, Bool, (()->Void)?)->Void
+typealias presentVCResponder = ()->Void
 class AccountCell: UITableViewCell {
 
     @IBOutlet weak var dayCost: UILabel!
@@ -22,10 +22,12 @@ class AccountCell: UITableViewCell {
     @IBOutlet weak var topLine: UIView!
     @IBOutlet weak var deleteBtn: UIButton!
     @IBOutlet weak var editBtn: UIButton!
-    private var isHiddenSubview = false
     
+    private var isHiddenSubview = false
     var cellID:Int?
     var presentVCBlock:presentVCResponder?
+    var deleteCell:presentVCResponder?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -47,33 +49,15 @@ class AccountCell: UITableViewCell {
     }
     
     @IBAction func clickEditBtn(sender: AnyObject) {
-        let model = ChooseItemModel()
-        let item = AccoutDB.selectDataWithID(accountModelPath, id: cellID ?? 0)
-        model.mode = "edit"
-        model.dataBaseId = item.ID
-        model.costBarMoney = item.money
-        model.costBarTitle = item.iconTitle
-        model.costBarIconName = item.iconName
-        model.costBarTime = NSTimeInterval(item.date)
-        model.topBarRemark = item.remark
-        model.topBarPhotoName = item.photo
-        
-        let editChooseItemVC = ChooseItemVC(model: model)
+
         if let block = presentVCBlock{
-            block(editChooseItemVC, true, nil)
+            block()
         }
     }
     @IBAction func clickDeleteBtn(sender: AnyObject) {
-        let alertView = UIAlertController(title: "删除账目", message: "您确定要删除吗？", preferredStyle: .Alert)
-        alertView.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
-        alertView.addAction(UIAlertAction(title: "确定", style: .Default){(action) in
-            if let ID = self.cellID{
-                AccoutDB.deleteDataWith(accountModelPath, ID: ID)
-            }
-            NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
-        })
-        if let block = presentVCBlock{
-            block(alertView, true, nil)
+
+        if let block = deleteCell{
+            block()
         }
     }
     private func showSubView(bool:Bool){

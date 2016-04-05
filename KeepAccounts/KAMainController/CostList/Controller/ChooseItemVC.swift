@@ -34,9 +34,12 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     let ComputeBoardHeight =  UIScreen.mainScreen().bounds.height/2 - 20 + 72
     
     let TopBarHeight: CGFloat = 44.0
-    var computedBar:ComputeBoardView?
-    var topBar:TopBarView?
-    var datePicker:UIView?
+    weak var computedBar:ComputeBoardView?
+    weak var topBar:TopBarView?
+    weak var datePicker:UIView?
+    
+    var dissmissCallback:((AccountItem)->Void)?
+    
     //dataModel
     var chooseItemModel:ChooseItemModel
     
@@ -129,10 +132,14 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
             item.remark = self.chooseItemModel.topBarRemark
             item.photo = self.chooseItemModel.topBarPhotoName
             if self.chooseItemModel.mode == "edit"{
-                AccoutDB.updateData(accountModelPath, item:item)
+                if let dissmissCallback = self.dissmissCallback{
+                    dissmissCallback(item)
+                }
             }
             else if self.chooseItemModel.mode == "init" {
-                AccoutDB.insertData(accountModelPath, item:item)
+                if let dissmissCallback = self.dissmissCallback{
+                    dissmissCallback(item)
+                }
             }
             
             NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
@@ -229,6 +236,7 @@ extension ChooseItemVC: TopBarProtocol{
 extension ChooseItemVC: ComputeBoardProtocol{
     func onPressBack() {
         self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
 }
 

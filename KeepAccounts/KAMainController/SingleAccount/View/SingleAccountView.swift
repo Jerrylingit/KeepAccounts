@@ -28,7 +28,7 @@ class SingleAccountView: UIView {
     
 
     
-    var delegate:SingleAccountVC?
+    weak var delegate:SingleAccountVC?
     var tableView:UITableView?
     var totalIncomeNum:UILabel?
     var totalCostNum:UILabel?

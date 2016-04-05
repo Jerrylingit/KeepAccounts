@@ -140,7 +140,11 @@ extension SingleAccountVC: SubViewProtocol{
         self.presentLeftMenuViewController(sender)
     }
     func clickMidAddBtn(sender:AnyObject!){
-        self.presentViewController(ChooseItemVC(), animated: true, completion: nil)
+        let chooseItemVC = ChooseItemVC()
+        chooseItemVC.dissmissCallback = {(item) in
+            AccoutDB.insertData(self.initDBName, item:item)
+        }
+        self.presentViewController(chooseItemVC, animated: true, completion: nil)
     }
     func presentVC(VC: UIViewController, animated: Bool, completion: (() -> Void)?) {
         self.presentViewController(VC, animated: animated, completion: completion)
@@ -166,14 +170,43 @@ extension SingleAccountVC:UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let rowAmount = tableView.numberOfRowsInSection(indexPath.section)
+        let item = itemFromDataSourceWith(indexPath)
         let identify = "AccountCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(identify, forIndexPath: indexPath) as! AccountCell
         cell.selectionStyle = .None
-        cell.presentVCBlock = {(VC, animated, completion) in self.presentViewController(VC, animated: animated, completion: completion)}
+        cell.presentVCBlock = {() in
+
+            let model = ChooseItemModel()
+            let item = AccoutDB.selectDataWithID(self.initDBName, id: item.ID)
+            model.mode = "edit"
+            model.dataBaseId = item.ID
+            model.costBarMoney = item.money
+            model.costBarTitle = item.iconTitle
+            model.costBarIconName = item.iconName
+            model.costBarTime = NSTimeInterval(item.date)
+            model.topBarRemark = item.remark
+            model.topBarPhotoName = item.photo
+            
+            let editChooseItemVC = ChooseItemVC(model: model)
+            editChooseItemVC.dissmissCallback = {(item) in
+                
+                AccoutDB.updateData(self.initDBName, item:item)
+            }
+            self.presentViewController(editChooseItemVC, animated: true, completion: nil)
+        }
+        cell.deleteCell = {() in
+            let alertView = UIAlertController(title: "删除账目", message: "您确定要删除吗？", preferredStyle: .Alert)
+            alertView.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
+            alertView.addAction(UIAlertAction(title: "确定", style: .Default){(action) in
+                AccoutDB.deleteDataWith(self.initDBName, ID: item.ID)
+                self.reloadDataSource()
+            })
+            self.presentViewController(alertView, animated: true, completion: nil)
+        }
+        
         cell.botmLine.hidden = false
         cell.dayIndicator.hidden = true
         
-        let item = itemFromDataSourceWith(indexPath)
         let imagePath = String.createFilePathInDocumentWith(item.photo) ?? ""
         cell.cellID = item.ID
         cell.iconTitle.text = item.iconTitle

@@ -102,7 +102,7 @@ class ComputeBoardView: UIView {
         }
     }
     
-    var delegate:ChooseItemVC?
+    weak var delegate:ChooseItemVC?
     let computeLogic:ComputedBoardLogic
     
     
@@ -111,6 +111,10 @@ class ComputeBoardView: UIView {
         computeLogic = ComputedBoardLogic()
         super.init(frame: frame)
         setup()
+    }
+    
+    deinit{
+        print("ComputeBoardView deinit")
     }
     
     func setup(){

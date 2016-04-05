@@ -43,13 +43,16 @@ class AccountBookBtn:NSObject, NSCoding{
     }
 }
 
+let UniqAccountPath = String.createFilePathInDocumentWith(firmAccountPath) ?? ""
+
+
 class MainVCModel:NSObject{
     
     var totalAccountsIncome:Float = 0
     var totalAccountsCost:Float = 0
     var totalAccountsRemain:Float = 0
     //给collectionview用
-    var accountsBtns:[AccountBookBtn] = []
+    dynamic var accountsBtns:[AccountBookBtn] = []
     
     override init(){
         super.init()
@@ -58,20 +61,29 @@ class MainVCModel:NSObject{
     private func initWithAccountsBtns(){
         let path = String.createFilePathInDocumentWith(firmAccountPath) ?? ""
         if let accountsBtns = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [AccountBookBtn]{
-            for i in 0...accountsBtns.count - 1{
-                accountsBtns[i].accountCount = String(AccoutDB.itemCount(accountModelPath))+"笔"
+            for i in 0...accountsBtns.count - 2{
+                accountsBtns[i].accountCount = String(AccoutDB.itemCount(accountsBtns[i].dataBaseName))+"笔"
             }
-            self.accountsBtns = accountsBtns
-            self.accountsBtns.append(AccountBookBtn(title: "", count: "", image: "menu_cell_add", flag: false, dbName: ""))
+            self.accountsBtns.removeAll()
+            for element in accountsBtns{
+                self.accountsBtns += [element]
+            }
         }
     }
+    
     func reloadModelData(){
         //更新按钮的itemCount
         let path = String.createFilePathInDocumentWith(firmAccountPath) ?? ""
         if let accountsBtns = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [AccountBookBtn]{
-            for i in 0...accountsBtns.count - 1{
-                accountsBtns[i].accountCount = String(AccoutDB.itemCount(accountModelPath))+"笔"
+            for i in 0...accountsBtns.count - 2{
+                accountsBtns[i].accountCount = String(AccoutDB.itemCount(accountsBtns[i].dataBaseName))+"笔"
             }
+            
+            self.accountsBtns.removeAll()
+            for element in accountsBtns{
+                self.accountsBtns += [element]
+            }
+            
         }
         //更新金额
     }
@@ -81,9 +93,11 @@ class MainVCModel:NSObject{
         for i in 0...accountsBtns.count - 1{
             if i == index{
                 accountsBtns[i].selectedFlag = true
+                NSKeyedArchiver.archiveRootObject(accountsBtns, toFile: UniqAccountPath)
             }
             else{
                 accountsBtns[i].selectedFlag = false
+                NSKeyedArchiver.archiveRootObject(accountsBtns, toFile: UniqAccountPath)
             }
         }
     }
@@ -96,11 +110,13 @@ class MainVCModel:NSObject{
     //增加
     func addBookItemByAppend(item:AccountBookBtn){
         accountsBtns.insert(item, atIndex: accountsBtns.count - 1)
+        NSKeyedArchiver.archiveRootObject(accountsBtns, toFile: UniqAccountPath)
     }
     //删除
     func removeBookItemAtIndex(i:Int){
         if i < accountsBtns.count{
             accountsBtns.removeAtIndex(i)
+            NSKeyedArchiver.archiveRootObject(accountsBtns, toFile: UniqAccountPath)
         }
     }
     //更新
@@ -108,30 +124,9 @@ class MainVCModel:NSObject{
         if index < accountsBtns.count{
             removeBookItemAtIndex(index)
             accountsBtns.insert(item, atIndex: index)
+            NSKeyedArchiver.archiveRootObject(accountsBtns, toFile: UniqAccountPath)
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

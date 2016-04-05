@@ -10,7 +10,7 @@ import UIKit
 
 class TopBarView: UIView {
     
-    var delegate:ChooseItemVC?
+    weak var delegate:ChooseItemVC?
     var topBarChangeTime:UIButton?
     var topBarAddRemark:UIButton?
     var topBarTakePhoto:UIButton?
@@ -31,6 +31,10 @@ class TopBarView: UIView {
         setup()
     }
 
+    deinit{
+        print("TopBarView deinit")
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

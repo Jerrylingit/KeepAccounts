@@ -22,7 +22,7 @@ class MainView: UIView {
     //供修改总收入和总支出的接口, 1: 总收入， 2: 总支出， 3: 总结余
     var incomeAndExpendLabels: NSArray = NSArray()
     var accountBookBtnView:UICollectionView?
-    var delegate:MainViewController?
+    weak var delegate:MainViewController?
     
     convenience init(frame:CGRect, delegate:MainViewController){
         self.init(frame:frame)

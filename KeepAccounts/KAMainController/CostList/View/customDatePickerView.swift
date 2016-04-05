@@ -30,6 +30,9 @@ class CustomDatePicker:UIView {
         self.pickedValue = date
         setupView(frame)
     }
+    deinit{
+        print("TopBarView deinit")
+    }
 
     func setupView(frame:CGRect){
         let bgWidth = frame.width
