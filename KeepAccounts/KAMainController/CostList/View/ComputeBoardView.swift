@@ -113,10 +113,6 @@ class ComputeBoardView: UIView {
         setup()
     }
     
-    deinit{
-        print("ComputeBoardView deinit")
-    }
-    
     func setup(){
         let width = self.frame.width
         let ComputedBoardHeight = self.frame.height - CostBarHeight

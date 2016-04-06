@@ -18,7 +18,7 @@ typealias completeRespond = (String)->()
 
 class LimitInputView: UIView {
     
-    var delegate:LimitInputVC?
+    weak var delegate:LimitInputVC?
     var initViewDate:String?
     var dateLabel:UILabel?
     var characterNum:UILabel?
@@ -42,6 +42,9 @@ class LimitInputView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.dateLabel?.text = initViewDate
+    }
+    deinit{
+        print("LimitInputView deinit")
     }
     private func setupTopBar(frame:CGRect){
         //topbar

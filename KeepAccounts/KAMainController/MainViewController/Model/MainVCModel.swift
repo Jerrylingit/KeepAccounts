@@ -83,7 +83,6 @@ class MainVCModel:NSObject{
             for element in accountsBtns{
                 self.accountsBtns += [element]
             }
-            
         }
         //更新金额
     }

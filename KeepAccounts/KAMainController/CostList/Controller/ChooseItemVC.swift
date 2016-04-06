@@ -31,12 +31,15 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     let ScreenWidth = UIScreen.mainScreen().bounds.width
     let ScreenHeight = UIScreen.mainScreen().bounds.height
     
+    
+    
+    
     let ComputeBoardHeight =  UIScreen.mainScreen().bounds.height/2 - 20 + 72
     
     let TopBarHeight: CGFloat = 44.0
-    weak var computedBar:ComputeBoardView?
-    weak var topBar:TopBarView?
-    weak var datePicker:UIView?
+    var computedBar:ComputeBoardView?
+    var topBar:TopBarView?
+    var datePicker:UIView?
     
     var dissmissCallback:((AccountItem)->Void)?
     
@@ -118,32 +121,37 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
         computeBoard.title = chooseItemModel.costBarTitle
         computeBoard.money = chooseItemModel.costBarMoney
         //修改model中的金额
-        computeBoard.computedResult = {(float) in
-            self.chooseItemModel.setCostBarMoneyWithFloat(float)
+        computeBoard.computedResult = {[weak self](float) in
+            if let strongSelf = self{
+                strongSelf.chooseItemModel.setCostBarMoneyWithFloat(float)
+            }
         }
         //点击OK时要执行一系列操作
-        computeBoard.pressOK = {() in
-            let item = AccountItem()
-            item.ID = self.chooseItemModel.dataBaseId
-            item.money = self.chooseItemModel.costBarMoney
-            item.iconTitle = self.chooseItemModel.costBarTitle
-            item.iconName = self.chooseItemModel.costBarIconName
-            item.date = Int(self.chooseItemModel.costBarTime)
-            item.remark = self.chooseItemModel.topBarRemark
-            item.photo = self.chooseItemModel.topBarPhotoName
-            if self.chooseItemModel.mode == "edit"{
-                if let dissmissCallback = self.dissmissCallback{
-                    dissmissCallback(item)
-                }
-            }
-            else if self.chooseItemModel.mode == "init" {
-                if let dissmissCallback = self.dissmissCallback{
-                    dissmissCallback(item)
-                }
-            }
+        computeBoard.pressOK = {[weak self] in
             
-            NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: self)
-            self.onPressBack()
+            if let strongSelf = self{
+                let item = AccountItem()
+                item.ID = strongSelf.chooseItemModel.dataBaseId
+                item.money = strongSelf.chooseItemModel.costBarMoney
+                item.iconTitle = strongSelf.chooseItemModel.costBarTitle
+                item.iconName = strongSelf.chooseItemModel.costBarIconName
+                item.date = Int(strongSelf.chooseItemModel.costBarTime)
+                item.remark = strongSelf.chooseItemModel.topBarRemark
+                item.photo = strongSelf.chooseItemModel.topBarPhotoName
+                if strongSelf.chooseItemModel.mode == "edit"{
+                    if let dissmissCallback = strongSelf.dissmissCallback{
+                        dissmissCallback(item)
+                    }
+                }
+                else if strongSelf.chooseItemModel.mode == "init" {
+                    if let dissmissCallback = strongSelf.dissmissCallback{
+                        dissmissCallback(item)
+                    }
+                }
+                NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: strongSelf)
+                strongSelf.onPressBack()
+            }
+
         }
         //点击收入或分支选项也要执行切换操作
         computeBoard.pressIncomeAndCost = {() in }
@@ -155,10 +163,17 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     func setupDatePicker(){
         let datePickerView = CustomDatePicker(frame: self.view.frame, date: chooseItemModel.getCostBarTimeInDate(), cancel: nil, sure: nil)
         datePickerView.hidden = true
-        datePickerView.cancelCallback = {()->() in datePickerView.hidden = !datePickerView.hidden}
-        datePickerView.sureCallback = {(date)-> () in
-            //new change
-            self.chooseItemModel.setCostBarTimeWithDate(date)
+        datePickerView.cancelCallback = {[weak datePickerView] in
+            if let strongDatePickerView = datePickerView{
+                strongDatePickerView.hidden = !strongDatePickerView.hidden
+            }
+        }
+        datePickerView.sureCallback = {[weak self](date)-> () in
+            if let strongSelf = self{
+                //new change
+                strongSelf.chooseItemModel.setCostBarTimeWithDate(date)
+            }
+            
         }
         datePicker = datePickerView
         self.view.addSubview(datePickerView)

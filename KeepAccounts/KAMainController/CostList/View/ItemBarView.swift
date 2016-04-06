@@ -25,10 +25,6 @@ class ItemBarView: UIView {
         getItemsFromDB()
     }
     
-    deinit{
-        print("ItemBarView deinit")
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

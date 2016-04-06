@@ -30,10 +30,6 @@ class TopBarView: UIView {
         super.init(frame: frame)
         setup()
     }
-
-    deinit{
-        print("TopBarView deinit")
-    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

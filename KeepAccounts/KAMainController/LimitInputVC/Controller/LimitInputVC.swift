@@ -28,7 +28,7 @@ class LimitInputVC: UIViewController {
         setup()
     }
     deinit{
-        print("TopBarView deinit")
+        print("LimitInputVC deinit")
     }
     
     func keyboardWillShow(notification:NSNotification){

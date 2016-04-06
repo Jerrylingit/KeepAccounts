@@ -51,28 +51,35 @@ class MainViewController: UIViewController {
                     //弹出修改的按钮
                     operateAccountBook?.hidden = false
                     operateAccountBook?.showBtnAnimation()
-                    operateAccountBook?.cancelBlock = {() in
-                        self.operateAccountBook?.hidden = true
-                        self.operateAccountBook?.hideBtnAnimation()
-                        cell.highlightedView.alpha = AccountCellPressState.Normal.rawValue
-                    }
-                    operateAccountBook?.deleteBlock = {() in
-                        let alert = UIAlertController(title: "删除\(title)", message: "将会删除所有数据，不会恢复", preferredStyle: .Alert)
-                        alert.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
-                        alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: {(action) in
-                            //删除数据源
-                            self.mainVCModel.removeBookItemAtIndex(indexPath.row)
-                            //执行删除操作
-                            self.mainView.accountBookBtnView?.deleteItemsAtIndexPaths([indexPath])
-                            self.operateAccountBook?.hidden = true
-                            self.operateAccountBook?.hideBtnAnimation()
+                    operateAccountBook?.cancelBlock = {[weak self] in
+                        if let strongSelf = self{
+                            strongSelf.operateAccountBook?.hidden = true
+                            strongSelf.operateAccountBook?.hideBtnAnimation()
                             cell.highlightedView.alpha = AccountCellPressState.Normal.rawValue
-                        }))
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        }
                     }
-                    operateAccountBook?.editBlock = {() in
-                        self.editAccountBook(item, indexPath:indexPath)
-                        cell.highlightedView.alpha = AccountCellPressState.Normal.rawValue
+                    operateAccountBook?.deleteBlock = {[weak self] in
+                        if let strongSelf = self{
+                            let alert = UIAlertController(title: "删除\(title)", message: "将会删除所有数据，不会恢复", preferredStyle: .Alert)
+                            alert.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
+                            alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: {(action) in
+                                //删除数据源
+                                strongSelf.mainVCModel.removeBookItemAtIndex(indexPath.row)
+                                //执行删除操作
+                                strongSelf.mainView.accountBookBtnView?.deleteItemsAtIndexPaths([indexPath])
+                                strongSelf.operateAccountBook?.hidden = true
+                                strongSelf.operateAccountBook?.hideBtnAnimation()
+                                cell.highlightedView.alpha = AccountCellPressState.Normal.rawValue
+                            }))
+                            strongSelf.presentViewController(alert, animated: true, completion: nil)
+                        }
+                    }
+                    operateAccountBook?.editBlock = {[weak self] in
+                        if let strongSelf = self{
+                            strongSelf.editAccountBook(item, indexPath:indexPath)
+                            cell.highlightedView.alpha = AccountCellPressState.Normal.rawValue
+                        }
+                        
                     }
                 }
             }
@@ -81,22 +88,26 @@ class MainViewController: UIViewController {
     func editAccountBook(item:AccountBookBtn?, indexPath:NSIndexPath){
         customAlertView?.title = item?.btnTitle ?? ""
         customAlertView?.initChooseImage = item?.backgrountImageName ?? "book_cover_0"
-        customAlertView?.cancelBlock = {() in
-            self.customAlertView?.removeFromSuperview()
-        }
-        customAlertView?.sureBlock = {(title, imageName) in
-            //修改账本
-            if let editItem = self.mainVCModel.getItemInfoAtIndex(indexPath.row){
-                editItem.btnTitle = title
-                editItem.backgrountImageName = imageName
-                self.mainVCModel.updateBookItem(editItem, atIndex:indexPath.row)
-                self.mainView.accountBookBtnView?.reloadItemsAtIndexPaths([indexPath])
-                self.operateAccountBook?.hidden = true
-                self.operateAccountBook?.hideBtnAnimation()
+        customAlertView?.cancelBlock = {[weak self] in
+            if let strongSelf = self{
+                strongSelf.customAlertView?.removeFromSuperview()
             }
-            //退出alertview
-            self.customAlertView?.removeFromSuperview()
-
+            
+        }
+        customAlertView?.sureBlock = {[weak self](title, imageName) in
+            if let strongSelf = self{
+                //修改账本
+                if let editItem = strongSelf.mainVCModel.getItemInfoAtIndex(indexPath.row){
+                    editItem.btnTitle = title
+                    editItem.backgrountImageName = imageName
+                    strongSelf.mainVCModel.updateBookItem(editItem, atIndex:indexPath.row)
+                    strongSelf.mainView.accountBookBtnView?.reloadItemsAtIndexPaths([indexPath])
+                    strongSelf.operateAccountBook?.hidden = true
+                    strongSelf.operateAccountBook?.hideBtnAnimation()
+                }
+                //退出alertview
+                strongSelf.customAlertView?.removeFromSuperview()
+            }
         }
         UIApplication.sharedApplication().keyWindow?.addSubview(self.customAlertView!)
     }
@@ -174,16 +185,19 @@ extension MainViewController:UICollectionViewDelegate{
                 customAlertView?.cancelBlock = {() in
                     self.customAlertView?.removeFromSuperview()
                 }
-                customAlertView?.sureBlock = {(title, imageName) in
-                    //建一个数据库
-                    let currentTime = Int(NSDate().timeIntervalSince1970)
-                    let dbName = customAccountName + "\(currentTime)" + ".db"
-                    let item = AccountBookBtn(title: title, count: "0笔", image: imageName, flag: false, dbName: dbName)
-                    //插入账本
-                    self.mainVCModel.addBookItemByAppend(item)
-                    self.mainView.accountBookBtnView?.insertItemsAtIndexPaths([indexPath])
-                    //退出alertview
-                    self.customAlertView?.removeFromSuperview()
+                customAlertView?.sureBlock = {[weak self] (title, imageName) in
+                    if let strongSelf = self{
+                        //建一个数据库
+                        let currentTime = Int(NSDate().timeIntervalSince1970)
+                        let dbName = customAccountName + "\(currentTime)" + ".db"
+                        let item = AccountBookBtn(title: title, count: "0笔", image: imageName, flag: false, dbName: dbName)
+                        //插入账本
+                        strongSelf.mainVCModel.addBookItemByAppend(item)
+                        strongSelf.mainView.accountBookBtnView?.insertItemsAtIndexPaths([indexPath])
+                        //退出alertview
+                        strongSelf.customAlertView?.removeFromSuperview()
+                    }
+                    
                 }
                 UIApplication.sharedApplication().keyWindow?.addSubview(self.customAlertView!)
             }
