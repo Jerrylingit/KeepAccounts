@@ -75,8 +75,6 @@ class SingleAccountView: UIView {
         setupDayAccounts(CGRectMake(0, DayAccountsY, frame.width, frame.height - DayAccountsY))
     }
     
-    
-    
     //头部view
     private func setupHeadBar(frame:CGRect){
         

@@ -94,9 +94,3 @@ class AccountCell: UITableViewCell {
         isHiddenSubview = false
     }
 }
-
-extension AccountCell{
-    func configAccountCell(){
-        
-    }
-}

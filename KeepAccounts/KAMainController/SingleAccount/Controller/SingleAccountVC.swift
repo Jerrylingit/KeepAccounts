@@ -21,18 +21,22 @@ class SingleAccountVC: UIViewController{
     //上一次cell的值，用于和当前值做比较
     private let lastDay = NSDate().timeIntervalSince1970 + 86400
     private var lastCellInterval:NSTimeInterval = NSDate().timeIntervalSince1970 + 86400
-    //每日的消费金额
-    var dayCost:String = ""
-    var dayCostCell:AccountCell?
-    //改时间
-    var mainView:SingleAccountView?
     var itemAccounts:[AccountItem] = []
     //总支出和总收入
     var totalIncome:Float = 0
     var totalCost:Float = 0
+    
+    
+    //每日的消费金额
+    var dayCostCell:AccountCell?
+    //改时间
+    var mainView:SingleAccountView?
     //数据库名和标题
     var initDBName:String
     var accountTitle:String
+    
+    
+    
     
     init(initDBName:String, accountTitle:String){
         self.initDBName = initDBName
