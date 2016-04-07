@@ -43,9 +43,7 @@ class LimitInputView: UIView {
         super.layoutSubviews()
         self.dateLabel?.text = initViewDate
     }
-    deinit{
-        print("LimitInputView deinit")
-    }
+    
     private func setupTopBar(frame:CGRect){
         //topbar
         let topBar = UIView(frame: frame)

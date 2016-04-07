@@ -32,6 +32,7 @@ class OperateAccountBookView: UIView {
         self.backgroundColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 0.0)
         let tap = UITapGestureRecognizer(target: self, action: "tapBgView:")
         self.addGestureRecognizer(tap)
+        self.hidden = true
         setup(frame)
     }
 
@@ -40,6 +41,7 @@ class OperateAccountBookView: UIView {
     }
     
     func showBtnAnimation(){
+        self.hidden = false
         UIView.animateWithDuration(0.2){
             self.cancelBtn.centerY = self.cancelBtn.centerY - BgViewHeight
         }
@@ -52,6 +54,7 @@ class OperateAccountBookView: UIView {
         
     }
     func hideBtnAnimation(){
+        self.hidden = true
         self.cancelBtn.centerY = self.cancelBtn.centerY + BgViewHeight
         self.deleteBtn.centerY = self.deleteBtn.centerY + BgViewHeight
         self.editBtn.centerY = self.editBtn.centerY + BgViewHeight

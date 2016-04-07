@@ -13,17 +13,22 @@ import UIKit
 private let ScreenWidthRatio = UIScreen.mainScreen().bounds.width / 375
 private let ScreenHeightRatio = UIScreen.mainScreen().bounds.height / 667
 
+private let StatusBarHeight:CGFloat = 20
+private let TopBarHeight:CGFloat = 72
+private let IncomeAndExpendBarHeight:CGFloat = 50
+private let BottomBarHeight:CGFloat = 60
+
 class MainView: UIView {
-    let StatusBarHeight:CGFloat = 20
-    let TopBarHeight:CGFloat = 72
-    let IncomeAndExpendBarHeight:CGFloat = 50
-    let BottomBarHeight:CGFloat = 60
+
     
     //供修改总收入和总支出的接口, 1: 总收入， 2: 总支出， 3: 总结余
     var incomeAndExpendLabels: NSArray = NSArray()
-    var accountBookBtnView:UICollectionView?
-    weak var delegate:MainViewController?
+    var accountBookBtnView:UICollectionView!
+    weak var delegate:MainViewController!
     
+    
+    
+    //MARK: - init (internal)
     convenience init(frame:CGRect, delegate:MainViewController){
         self.init(frame:frame)
         let IncomeAndExpendBarY = StatusBarHeight + TopBarHeight
@@ -48,6 +53,15 @@ class MainView: UIView {
         super.init(frame: frame)
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func reloadCollectionView(){
+        self.accountBookBtnView.reloadData()
+    }
+    
+    //MARK: - setup views(private)
     //顶部栏
     private func setupTopBar(frame:CGRect){
         let IconMarginVertical:CGFloat = 15
@@ -151,14 +165,4 @@ class MainView: UIView {
         bottomBar.addSubview(explore)
         self.addSubview(bottomBar)
     }
-    func reloadCollectionView(){
-        self.accountBookBtnView?.reloadData()
-    }
-    
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
 }

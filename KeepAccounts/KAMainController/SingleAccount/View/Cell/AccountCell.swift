@@ -9,7 +9,8 @@
 import UIKit
 typealias presentVCResponder = ()->Void
 class AccountCell: UITableViewCell {
-
+    
+    //MARK: - properties (internal)
     @IBOutlet weak var dayCost: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var photoView: UIImageView!
@@ -23,21 +24,20 @@ class AccountCell: UITableViewCell {
     @IBOutlet weak var deleteBtn: UIButton!
     @IBOutlet weak var editBtn: UIButton!
     
-    private var isHiddenSubview = false
     var cellID:Int?
     var presentVCBlock:presentVCResponder?
     var deleteCell:presentVCResponder?
     
+    //MARK: - private properties
+    private var isHiddenSubview = false
+    
+    //MARK: - init
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
-    
+    //MARK: - click action (internal)
     @IBAction func clickIcon(sender: AnyObject) {
         showSubView(!isHiddenSubview)
         showBtns(isHiddenSubview)
@@ -54,12 +54,38 @@ class AccountCell: UITableViewCell {
             block()
         }
     }
+    
     @IBAction func clickDeleteBtn(sender: AnyObject) {
 
         if let block = deleteCell{
             block()
         }
     }
+    
+    //MARK: - prepare reuse (internal)
+    override func prepareForReuse(){
+        super.prepareForReuse()
+        dayCost.text = ""
+        date.text = ""
+        photoView.image = nil
+        itemCost.text = ""
+        iconTitle.text = ""
+        remark.text = ""
+        botmLine.hidden = false
+        topLine.hidden = false
+        dayIndicator.hidden = true
+        icon.setImage(nil, forState: .Normal)
+        showSubView(true)
+        showBtns(false)
+        isHiddenSubview = false
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
+    }
+    
+    //MARK: - private
     private func showSubView(bool:Bool){
         let alpha:CGFloat = bool ? 1 : 0
         photoView.alpha = alpha
@@ -77,20 +103,5 @@ class AccountCell: UITableViewCell {
         editBtn.center = bool ? CGPointMake(self.frame.width - 60, self.icon.center.y) :self.icon.center
     }
     
-    override func prepareForReuse(){
-        super.prepareForReuse()
-        dayCost.text = ""
-        date.text = ""
-        photoView.image = nil
-        itemCost.text = ""
-        iconTitle.text = ""
-        remark.text = ""
-        botmLine.hidden = false
-        topLine.hidden = false
-        dayIndicator.hidden = true
-        icon.setImage(nil, forState: .Normal)
-        showSubView(true)
-        showBtns(false)
-        isHiddenSubview = false
-    }
+
 }

@@ -26,41 +26,75 @@ private let LabelHeight:CGFloat = 30
 
 class SingleAccountView: UIView {
     
-
+    //MARK: - public properties
+    weak var delegate:SingleAccountVC!
     
-    weak var delegate:SingleAccountVC?
-    var tableView:UITableView?
-    var totalIncomeNum:UILabel?
-    var totalCostNum:UILabel?
     var incomeText:String?{
         get {
-            return totalIncomeNum?.text
+            return totalIncomeNum.text
         }
         set(newValue){
-            totalIncomeNum?.text = newValue
+            totalIncomeNum.text = newValue
         }
     }
+    
     var costText:String?{
         get {
-            return totalCostNum?.text
+            return totalCostNum.text
         }
         set(newValue){
-            totalCostNum?.text = newValue
+            totalCostNum.text = newValue
         }
     }
     
+    var midBtnTitle:String?{
+        get {
+            return midBtn.titleLabel?.text
+        }
+        set(newValue){
+            midBtn.setTitle(newValue, forState: .Normal)
+        }
+    }
+    
+    //MARK: - private properties
+    private var tableView:UITableView!
+    private var totalIncomeNum:UILabel!
+    private var totalCostNum:UILabel!
+    private var midBtn:UIButton!
+    
+    //MARK: - init methods (internal)
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
     }
     
-    convenience init(frame:CGRect, delegate:AnyObject!){
+    convenience init(frame:CGRect, delegate:SingleAccountVC!){
         self.init(frame: frame)
         //tableView的数据源和代理应该在其初始化之前就建立好
-        self.delegate = delegate as? SingleAccountVC
+        self.delegate = delegate
         setup(frame)
     }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
+    //MARK: -  operation (internal)
+    func reloadViews(){
+        tableView?.reloadData()
+    }
+    
+    //MARK: - click action methods (internal)
+    func clickManageBtn(sender:AnyObject!){
+        if delegate.respondsToSelector("clickManageBtn:") != false{
+            delegate.clickManageBtn(sender)
+        }
+    }
+    func clickMidAddBtn(sender:AnyObject!){
+        if delegate.respondsToSelector("clickMidAddBtn:") != false{
+            delegate.clickMidAddBtn(sender)
+        }
+    }
+    
+    //MARK: - setup views methods (private)
     private func setup(frame:CGRect){
         
         
@@ -95,6 +129,7 @@ class SingleAccountView: UIView {
         midBtn.layer.cornerRadius = 10
         midBtn.layer.borderColor = UIColor.whiteColor().CGColor
         midBtn.layer.borderWidth = 1
+        self.midBtn = midBtn
         
         let takePhotoBtn = UIButton(frame: CGRectMake(HeadBarWidth - BtnMargin - BtnWidth, BtnMargin + StatusBarHeight, BtnWidth, BtnWidth))
         takePhotoBtn.setImage(UIImage(named: "btn_camera"), forState: .Normal)
@@ -158,21 +193,5 @@ class SingleAccountView: UIView {
         
         tableView = DayAccountsView
         self.addSubview(DayAccountsView)
-    }
-    
-    func clickManageBtn(sender:AnyObject!){
-        if (delegate?.respondsToSelector("clickManageBtn:") != nil){
-            delegate?.clickManageBtn(sender)
-        }
-        
-    }
-    func clickMidAddBtn(sender:AnyObject!){
-        if (delegate?.respondsToSelector("clickMidAddBtn:") != nil){
-            delegate?.clickMidAddBtn(sender)
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

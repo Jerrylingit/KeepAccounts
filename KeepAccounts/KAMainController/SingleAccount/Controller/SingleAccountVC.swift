@@ -18,29 +18,13 @@ protocol SubViewProtocol{
 
 class SingleAccountVC: UIViewController{
     
-    //上一次cell的值，用于和当前值做比较
-    private let lastDay = NSDate().timeIntervalSince1970 + 86400
-    private var lastCellInterval:NSTimeInterval = NSDate().timeIntervalSince1970 + 86400
-    var itemAccounts:[AccountItem] = []
-    //总支出和总收入
-    var totalIncome:Float = 0
-    var totalCost:Float = 0
+    //MARK: - properties (private)
+    private var singleAccountModel:SingleAccountModel
+    private var mainView:SingleAccountView!
     
-    
-    //每日的消费金额
-    var dayCostCell:AccountCell?
-    //改时间
-    var mainView:SingleAccountView?
-    //数据库名和标题
-    var initDBName:String
-    var accountTitle:String
-    
-    
-    
-    
-    init(initDBName:String, accountTitle:String){
-        self.initDBName = initDBName
-        self.accountTitle = accountTitle
+    //MARK: - init
+    init(model:SingleAccountModel){
+        self.singleAccountModel = model
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -48,97 +32,39 @@ class SingleAccountVC: UIViewController{
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadDataSource", name: "ChangeDataSource", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadDataAndViews", name: "ChangeDataSource", object: nil)
         self.view.backgroundColor = UIColor.whiteColor()
+        //初始化界面
         setupMainView()
-        initDataSource()
-        
     }
-    func reloadDataSource(){
-        initDataSource()
-        mainView?.tableView?.reloadData()
-    }
-    
-    //MARK: - datasource
-    private func initDataSource(){
-        var dayCostItem:AccountItem = AccountItem()
-        //从数据库中取出所有数据
-        itemAccounts = AccoutDB.selectDataOrderByDate(initDBName)
-        //处理符合显示要求的数据
-        //1、分开日期； 2、计算日金额
-        var tmpItemAccounts:[AccountItem] = []
-        for sourceItem in itemAccounts {
-            //1、比较大小
-            let showDate = compareDate(NSTimeInterval(sourceItem.date), lastInterval: lastCellInterval)
-            //2、保存当前的日期值到lastCellInterval
-            lastCellInterval = NSTimeInterval(sourceItem.date)
-            //3、修改原数据
-            sourceItem.dateString = showDate
-            sourceItem.dayCost = sourceItem.money
-            //累加
-            if let money = Float(sourceItem.money){
-                totalCost += money
-            }
-            //4、判断showDate是否为空字符串，为空则加上本次的金额，不为空则替换cell
-            if showDate == "" {
-                let dayCostTmp = Float(dayCostItem.dayCost) ?? 0
-                let moneyTmp = Float(sourceItem.money) ?? 0
-                let curMoney = dayCostTmp + moneyTmp
-                dayCostItem.dayCost = NSString(format: "%.2f", curMoney) as String
-                sourceItem.dayCost = ""
-            }
-            else{
-                dayCostItem = sourceItem
-            }
-            
-            tmpItemAccounts.append(sourceItem)
-        }
-        mainView?.costText = String(format: "%.2f", totalCost)
-        totalCost = 0
-        lastCellInterval = lastDay
-        itemAccounts = tmpItemAccounts
-    }
-    private func setupMainView(){
-        let singleAccountView = SingleAccountView(frame: self.view.frame, delegate:self)
-        mainView = singleAccountView
-        self.view.addSubview(singleAccountView)
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-//    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-//        return .LightContent
-//    }
-    private func compareDate(currentInterval:NSTimeInterval, lastInterval:NSTimeInterval) -> String{
-        let currentCom = NSDate.intervalToDateComponent(currentInterval)
-        let lastCom = NSDate.intervalToDateComponent(lastInterval)
-        let yearEqual = currentCom.year == lastCom.year
-        let monthEqual = currentCom.month == lastCom.month
-        let dayEqual = currentCom.day == lastCom.day
-        if yearEqual == true{
-            if monthEqual == true{
-                if dayEqual == true{
-                    return ""
-                }
-                else{
-                    return "\(currentCom.day)日"
-                }
-            }
-            else{
-                return "\(currentCom.month)月\(currentCom.day)日"
-            }
-        }
-        else{
-            return "\(currentCom.year)年\(currentCom.month)月\(currentCom.day)日"
-        }
+    //MARK: - operation (internal)
+    func reloadDataAndViews(){
+        //更新数据和界面
+        singleAccountModel.setAccountBookDataInModel()
+        mainView.reloadViews()
     }
-}
+    
+    //MARK: - setup views (private)
+    private func setupMainView(){
+        let singleAccountView = SingleAccountView(frame: self.view.frame, delegate:self)
+        mainView = singleAccountView
+        //标题、收入和支出
+        mainView.costText = String(format: "%.2f", singleAccountModel.totalCost)
+        mainView.incomeText = String(format: "%.2f", singleAccountModel.totalIncome)
+        self.view.addSubview(singleAccountView)
+    }
 
+    
+}
+//MARK: - SubViewProtocol
 extension SingleAccountVC: SubViewProtocol{
     func clickManageBtn(sender:AnyObject!){
         self.presentLeftMenuViewController(sender)
@@ -146,7 +72,7 @@ extension SingleAccountVC: SubViewProtocol{
     func clickMidAddBtn(sender:AnyObject!){
         let chooseItemVC = ChooseItemVC()
         chooseItemVC.dissmissCallback = {(item) in
-            AccoutDB.insertData(self.initDBName, item:item)
+            AccoutDB.insertData(self.singleAccountModel.initDBName, item:item)
         }
         self.presentViewController(chooseItemVC, animated: true, completion: nil)
     }
@@ -165,10 +91,18 @@ extension SingleAccountVC:UITableViewDelegate{
 extension SingleAccountVC:UITableViewDataSource{
     
     func itemFromDataSourceWith(indexPath:NSIndexPath) -> AccountItem{
-        if indexPath.row < itemAccounts.count{
-           return itemAccounts[indexPath.row]
+        if indexPath.row < singleAccountModel.itemAccounts.count{
+           return singleAccountModel.itemAccounts[indexPath.row]
         }
         return AccountItem()
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return singleAccountModel.itemAccounts.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -181,7 +115,7 @@ extension SingleAccountVC:UITableViewDataSource{
         cell.presentVCBlock = {[weak self] in
             if let strongSelf = self{
                 let model = ChooseItemModel()
-                let item = AccoutDB.selectDataWithID(strongSelf.initDBName, id: item.ID)
+                let item = AccoutDB.selectDataWithID(strongSelf.singleAccountModel.initDBName, id: item.ID)
                 model.mode = "edit"
                 model.dataBaseId = item.ID
                 model.costBarMoney = item.money
@@ -194,7 +128,7 @@ extension SingleAccountVC:UITableViewDataSource{
                 let editChooseItemVC = ChooseItemVC(model: model)
                 editChooseItemVC.dissmissCallback = {(item) in
                     
-                    AccoutDB.updateData(strongSelf.initDBName, item:item)
+                    AccoutDB.updateData(strongSelf.singleAccountModel.initDBName, item:item)
                 }
                 strongSelf.presentViewController(editChooseItemVC, animated: true, completion: nil)
             }
@@ -205,12 +139,11 @@ extension SingleAccountVC:UITableViewDataSource{
                 let alertView = UIAlertController(title: "删除账目", message: "您确定要删除吗？", preferredStyle: .Alert)
                 alertView.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
                 alertView.addAction(UIAlertAction(title: "确定", style: .Default){(action) in
-                    AccoutDB.deleteDataWith(strongSelf.initDBName, ID: item.ID)
-                    strongSelf.reloadDataSource()
-                    })
+                    AccoutDB.deleteDataWith(strongSelf.singleAccountModel.initDBName, ID: item.ID)
+                    strongSelf.reloadDataAndViews()
+                })
                 strongSelf.presentViewController(alertView, animated: true, completion: nil)
             }
-            
         }
         
         cell.botmLine.hidden = false
@@ -237,16 +170,10 @@ extension SingleAccountVC:UITableViewDataSource{
         //最后一个去掉尾巴
         if indexPath.row == rowAmount - 1{
             cell.botmLine.hidden = true
-            lastCellInterval = lastDay
         }
         
         return cell
     }
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemAccounts.count
-    }
+    
     
 }

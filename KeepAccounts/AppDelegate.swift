@@ -33,8 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let leftMenuVC = MainViewController()
-        let homeVC = SingleAccountVC(initDBName: item.dataBaseName, accountTitle: item.btnTitle)
+        let mainVCModel = MainVCModel()
+        let leftMenuVC = MainViewController(model: mainVCModel)
+        let singleAccountModel = SingleAccountModel(initDBName: item.dataBaseName, accountTitle: item.btnTitle)
+        let homeVC = SingleAccountVC(model: singleAccountModel)
         let sideMenu = RESideMenu.init(contentViewController: homeVC, leftMenuViewController: leftMenuVC, rightMenuViewController: nil)
         sideMenu.delegate = self
         sideMenu.contentViewInPortraitOffsetCenterX = 150 * ScreenWithRatio

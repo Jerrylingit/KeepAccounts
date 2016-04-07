@@ -31,9 +31,6 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
     let ScreenWidth = UIScreen.mainScreen().bounds.width
     let ScreenHeight = UIScreen.mainScreen().bounds.height
     
-    
-    
-    
     let ComputeBoardHeight =  UIScreen.mainScreen().bounds.height/2 - 20 + 72
     
     let TopBarHeight: CGFloat = 44.0

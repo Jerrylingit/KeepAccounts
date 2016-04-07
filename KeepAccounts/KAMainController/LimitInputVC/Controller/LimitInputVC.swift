@@ -27,9 +27,6 @@ class LimitInputVC: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: self.view.window)
         setup()
     }
-    deinit{
-        print("LimitInputVC deinit")
-    }
     
     func keyboardWillShow(notification:NSNotification){
         if keyboardIsShow == true {
