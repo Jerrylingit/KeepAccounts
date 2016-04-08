@@ -24,6 +24,10 @@ class ChooseItemModel:NSObject{
         return String(format: "%.2f", float)
     }
     
+    func getCostBarMoneyInFloat()->Float? {
+        return Float(costBarMoney)
+    }
+    
     func setCostBarMoneyWithFloat(float:Float){
         costBarMoney = floatToStringRemain2Decimal(float)
     }

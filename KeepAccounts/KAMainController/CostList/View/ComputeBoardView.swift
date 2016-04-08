@@ -47,13 +47,13 @@ class ComputeBoardView: UIView {
             costBarTitle?.text = newValue
         }
     }
-    var costBarMoney:UILabel?
+    var costBarMoney:UILabel!
     var money:String{
         get{
-            return costBarMoney?.text ?? ""
+            return costBarMoney.text ?? ""
         }
         set(newValue){
-            costBarMoney?.text = newValue
+            costBarMoney.text = newValue
         }
     }
     var costBarLeftIcon:UIImageView?
@@ -113,6 +113,24 @@ class ComputeBoardView: UIView {
         setup()
     }
     
+    override func layoutSubviews() {
+        
+    }
+    
+    func clickComputedBtn(btn:UIButton){
+        let value = btn.currentTitle ?? ""
+        computeLogic.Compute(value)
+    }
+    
+    func shakeCostBarMoney(){
+        let shakeAnimation = CAKeyframeAnimation(keyPath: "position.x")
+        shakeAnimation.values = [0, 10, -10, 10, 0]
+        shakeAnimation.keyTimes = [0, 1/6.0, 3/6.0, 5/6.0, 1]
+        shakeAnimation.duration = 0.4
+        shakeAnimation.additive = true
+        costBarMoney.layer.addAnimation(shakeAnimation, forKey: "CostBarMoneyShake")
+    }
+    
     func setup(){
         let width = self.frame.width
         let ComputedBoardHeight = self.frame.height - CostBarHeight
@@ -125,10 +143,6 @@ class ComputeBoardView: UIView {
         setUpLastColunmBtn(CGRectMake(0, CostBarHeight, width, ComputedBoardHeight))
         //生成横竖分割线
         setUpSepLine(CGRectMake(0, CostBarHeight, width, ComputedBoardHeight))
-    }
-    
-    override func layoutSubviews() {
-
     }
 
     //分割线时间标签
@@ -255,10 +269,10 @@ class ComputeBoardView: UIView {
         btn.addTarget(self, action: "clickComputedBtn:", forControlEvents: .TouchUpInside)
         return btn
     }
-    func clickComputedBtn(btn:UIButton){
-        let value = btn.currentTitle ?? ""
-        computeLogic.Compute(value)
-    }
+    
+    
+    
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

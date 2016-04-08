@@ -127,26 +127,35 @@ class ChooseItemVC: UIViewController, ChooseItemProtocol {
         computeBoard.pressOK = {[weak self] in
             
             if let strongSelf = self{
-                let item = AccountItem()
-                item.ID = strongSelf.chooseItemModel.dataBaseId
-                item.money = strongSelf.chooseItemModel.costBarMoney
-                item.iconTitle = strongSelf.chooseItemModel.costBarTitle
-                item.iconName = strongSelf.chooseItemModel.costBarIconName
-                item.date = Int(strongSelf.chooseItemModel.costBarTime)
-                item.remark = strongSelf.chooseItemModel.topBarRemark
-                item.photo = strongSelf.chooseItemModel.topBarPhotoName
-                if strongSelf.chooseItemModel.mode == "edit"{
-                    if let dissmissCallback = strongSelf.dissmissCallback{
-                        dissmissCallback(item)
+                if let money = strongSelf.chooseItemModel.getCostBarMoneyInFloat(){
+                    if money < 0.001{
+                        strongSelf.computedBar?.shakeCostBarMoney()
                     }
-                }
-                else if strongSelf.chooseItemModel.mode == "init" {
-                    if let dissmissCallback = strongSelf.dissmissCallback{
-                        dissmissCallback(item)
+                    else{
+                        let item = AccountItem()
+                        item.ID = strongSelf.chooseItemModel.dataBaseId
+                        item.money = strongSelf.chooseItemModel.costBarMoney
+                        item.iconTitle = strongSelf.chooseItemModel.costBarTitle
+                        item.iconName = strongSelf.chooseItemModel.costBarIconName
+                        item.date = Int(strongSelf.chooseItemModel.costBarTime)
+                        item.remark = strongSelf.chooseItemModel.topBarRemark
+                        item.photo = strongSelf.chooseItemModel.topBarPhotoName
+                        if strongSelf.chooseItemModel.mode == "edit"{
+                            if let dissmissCallback = strongSelf.dissmissCallback{
+                                dissmissCallback(item)
+                            }
+                        }
+                        else if strongSelf.chooseItemModel.mode == "init" {
+                            if let dissmissCallback = strongSelf.dissmissCallback{
+                                dissmissCallback(item)
+                            }
+                        }
+                        NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: strongSelf)
+                        strongSelf.onPressBack()
                     }
+                    
                 }
-                NSNotificationCenter.defaultCenter().postNotificationName("ChangeDataSource", object: strongSelf)
-                strongSelf.onPressBack()
+                
             }
 
         }
