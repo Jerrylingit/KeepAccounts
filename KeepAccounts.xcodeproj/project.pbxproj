@@ -311,6 +311,7 @@
 		84E411151C72A47700C4260E /* KeepAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				84EFCC7A1CBE3E5100627311 /* Controls */,
 				C4F8E49E1C8BBFFA003C6A89 /* Utility */,
 				84DC44371C75C2B00054E632 /* Support File */,
 				84DDF9D41C754D83003F077F /* KAMainController */,
@@ -466,6 +467,13 @@
 				84E6ABCE1CA2948000CBA148 /* ComputedBoardLogic.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		84EFCC7A1CBE3E5100627311 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 		84FFE8081C97E61800A0CAAB /* String+Extension */ = {

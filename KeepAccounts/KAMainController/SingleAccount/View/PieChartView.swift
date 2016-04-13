@@ -22,6 +22,8 @@ class PieChartView: UIView {
     var index:Int = 1
     
     //MARK: - properties (private)
+    private var incomeBtn:UIButton!
+    private var costBtn:UIButton!
     private var itemTitleLabel:UILabel!
     private var itemMoneyLabel:UILabel!
     private var itemIconBtn:UIButton!
@@ -75,6 +77,15 @@ class PieChartView: UIView {
         index += 1
     }
     
+    func selectedIncome(sender:UIButton){
+        sender.selected = !sender.selected
+        costBtn.selected = !sender.selected
+    }
+    func selectedCost(sender:UIButton){
+        sender.selected = !sender.selected
+        incomeBtn.selected = !sender.selected
+    }
+    
     //MARK: - setupViews (private)
     private func setupViews(frame:CGRect){
         
@@ -89,6 +100,32 @@ class PieChartView: UIView {
     
     private  func setupIncomeAndCostBtn(frame:CGRect){
         
+        let btnWidth:CGFloat = 75
+        let btnMargin:CGFloat = 15
+        let bgView = UIView(frame: frame)
+        
+        let incomeBtn = createBtn(CGRectMake(btnMargin, btnMargin, btnWidth, btnWidth), title:"总收入\n9384.00", action:"selectedIncome:")
+        self.incomeBtn = incomeBtn
+        let costBtn = createBtn(CGRectMake(frame.width - btnMargin - btnWidth, btnMargin, btnWidth, btnWidth), title:"总支出\n9384.00", action:"selectedCost:")
+        costBtn.titleLabel?.textAlignment = .Right
+        costBtn.selected = true
+        self.costBtn = costBtn
+        let sepline = UIView(frame: CGRectMake(0, btnWidth + btnMargin, frame.width, sepLineHeight))
+        sepline.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
+        
+        bgView.addSubview(sepline)
+        bgView.addSubview(incomeBtn)
+        bgView.addSubview(costBtn)
+        self.addSubview(bgView)
+    }
+    private func createBtn(frame:CGRect, title:String, action:Selector)->UIButton{
+        let btn = UIButton(frame: frame)
+        btn.setTitle(title, forState: .Normal)
+        btn.titleLabel?.numberOfLines = 2
+        btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        btn.setTitleColor(UIColor.orangeColor(), forState: .Selected)
+        btn.addTarget(self, action: action, forControlEvents: .TouchUpInside)
+        return btn
     }
     
     private  func setupScrollMonthView(frame:CGRect){
@@ -112,7 +149,6 @@ class PieChartView: UIView {
         gradientMaskAnimation()
         let initRotateRadian = -CGFloat(M_PI) * dataItem[0] / itemValueAmount
         rotateContainerLayerWithRadian(initRotateRadian)
-        print("container.position = \(containerLayer.position)")
         
         bgView.layer.addSublayer(containerLayer)
         
