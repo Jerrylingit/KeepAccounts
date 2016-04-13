@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		846B31721CB51BF200F30305 /* SingleAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B31711CB51BF200F30305 /* SingleAccountModel.swift */; settings = {ASSET_TAGS = (); }; };
+		846B31721CB51BF200F30305 /* SingleAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B31711CB51BF200F30305 /* SingleAccountModel.swift */; };
 		848187E11CAA193C005B0875 /* MainVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848187E01CAA193C005B0875 /* MainVCModel.swift */; };
-		849905B31CAD238F008A5D73 /* OperateAccountBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849905B21CAD238F008A5D73 /* OperateAccountBookView.swift */; settings = {ASSET_TAGS = (); }; };
+		849905B31CAD238F008A5D73 /* OperateAccountBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849905B21CAD238F008A5D73 /* OperateAccountBookView.swift */; };
 		849EC16C1C9955640046D53F /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EC16B1C9955640046D53F /* UIImage+Extension.swift */; };
 		84B722921C7E94B4009F436B /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228D1C7E94B4009F436B /* RECommonFunctions.m */; };
 		84B722931C7E94B4009F436B /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228F1C7E94B4009F436B /* RESideMenu.m */; };
@@ -45,8 +45,15 @@
 		84E612611C9249A500021495 /* IncomeAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E6125F1C9249A500021495 /* IncomeAccountCell.xib */; };
 		84E6ABCC1CA2376100CBA148 /* ChooseItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6ABCB1CA2376100CBA148 /* ChooseItemModel.swift */; };
 		84E6ABCF1CA2948000CBA148 /* ComputedBoardLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6ABCE1CA2948000CBA148 /* ComputedBoardLogic.swift */; };
-		84E6CFBB1CACAA9C00CA29AF /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6CFBA1CACAA9C00CA29AF /* CustomAlertView.swift */; settings = {ASSET_TAGS = (); }; };
-		84E6CFBD1CACF99700CA29AF /* FlagBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6CFBC1CACF99700CA29AF /* FlagBtn.swift */; settings = {ASSET_TAGS = (); }; };
+		84E6CFBB1CACAA9C00CA29AF /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6CFBA1CACAA9C00CA29AF /* CustomAlertView.swift */; };
+		84E6CFBD1CACF99700CA29AF /* FlagBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6CFBC1CACF99700CA29AF /* FlagBtn.swift */; };
+		84EFCC6B1CBE1D3A00627311 /* BgScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC6A1CBE1D3A00627311 /* BgScrollView.swift */; };
+		84EFCC6F1CBE241100627311 /* PieChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC6E1CBE241100627311 /* PieChartModel.swift */; };
+		84EFCC711CBE242000627311 /* LineChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC701CBE242000627311 /* LineChartModel.swift */; };
+		84EFCC731CBE243000627311 /* BudgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC721CBE243000627311 /* BudgetModel.swift */; };
+		84EFCC751CBE244200627311 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC741CBE244200627311 /* PieChartView.swift */; };
+		84EFCC771CBE244E00627311 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC761CBE244E00627311 /* LineChartView.swift */; };
+		84EFCC791CBE245800627311 /* BudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC781CBE245800627311 /* BudgetView.swift */; };
 		84FFE80A1C97E62C00A0CAAB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFE8091C97E62C00A0CAAB /* String+Extension.swift */; };
 		C417E5831C8B276F007875EF /* ChooseItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E57A1C8B276F007875EF /* ChooseItemVC.swift */; };
 		C417E5841C8B276F007875EF /* ComputeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E57F1C8B276F007875EF /* ComputeBoardView.swift */; };
@@ -130,6 +137,13 @@
 		84E6ABCE1CA2948000CBA148 /* ComputedBoardLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputedBoardLogic.swift; sourceTree = "<group>"; };
 		84E6CFBA1CACAA9C00CA29AF /* CustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		84E6CFBC1CACF99700CA29AF /* FlagBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagBtn.swift; sourceTree = "<group>"; };
+		84EFCC6A1CBE1D3A00627311 /* BgScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BgScrollView.swift; sourceTree = "<group>"; };
+		84EFCC6E1CBE241100627311 /* PieChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartModel.swift; sourceTree = "<group>"; };
+		84EFCC701CBE242000627311 /* LineChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartModel.swift; sourceTree = "<group>"; };
+		84EFCC721CBE243000627311 /* BudgetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetModel.swift; sourceTree = "<group>"; };
+		84EFCC741CBE244200627311 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		84EFCC761CBE244E00627311 /* LineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
+		84EFCC781CBE245800627311 /* BudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetView.swift; sourceTree = "<group>"; };
 		84FFE8091C97E62C00A0CAAB /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		C417E57A1C8B276F007875EF /* ChooseItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseItemVC.swift; sourceTree = "<group>"; };
 		C417E57F1C8B276F007875EF /* ComputeBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeBoardView.swift; sourceTree = "<group>"; };
@@ -391,6 +405,10 @@
 			children = (
 				84E579911C917CAA0007295B /* Cell */,
 				84E5798E1C917BE90007295B /* SingleAccountView.swift */,
+				84EFCC6A1CBE1D3A00627311 /* BgScrollView.swift */,
+				84EFCC741CBE244200627311 /* PieChartView.swift */,
+				84EFCC761CBE244E00627311 /* LineChartView.swift */,
+				84EFCC781CBE245800627311 /* BudgetView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -435,6 +453,9 @@
 			isa = PBXGroup;
 			children = (
 				846B31711CB51BF200F30305 /* SingleAccountModel.swift */,
+				84EFCC6E1CBE241100627311 /* PieChartModel.swift */,
+				84EFCC701CBE242000627311 /* LineChartModel.swift */,
+				84EFCC721CBE243000627311 /* BudgetModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -672,6 +693,7 @@
 				84B722921C7E94B4009F436B /* RECommonFunctions.m in Sources */,
 				C4F8E4B61C8C1345003C6A89 /* AccountDB.swift in Sources */,
 				84E5B1EB1C979CC600BBE173 /* LimitInputView.swift in Sources */,
+				84EFCC791CBE245800627311 /* BudgetView.swift in Sources */,
 				84DDFDAF1C75C039003F077F /* FMDatabase.m in Sources */,
 				84E5798F1C917BE90007295B /* SingleAccountVC.swift in Sources */,
 				84E4B2961CA9283100400F56 /* AccountBookCell.swift in Sources */,
@@ -682,7 +704,10 @@
 				84DDFDB21C75C039003F077F /* FMDatabaseQueue.m in Sources */,
 				C417E5871C8B276F007875EF /* TopBarView.swift in Sources */,
 				84E5B1E91C979BE300BBE173 /* LimitInputVC.swift in Sources */,
+				84EFCC751CBE244200627311 /* PieChartView.swift in Sources */,
 				84E411171C72A47700C4260E /* AppDelegate.swift in Sources */,
+				84EFCC711CBE242000627311 /* LineChartModel.swift in Sources */,
+				84EFCC6F1CBE241100627311 /* PieChartModel.swift in Sources */,
 				846B31721CB51BF200F30305 /* SingleAccountModel.swift in Sources */,
 				84CA4B511C969C7F009766B9 /* customDatePickerView.swift in Sources */,
 				C417E5841C8B276F007875EF /* ComputeBoardView.swift in Sources */,
@@ -690,6 +715,7 @@
 				84E6ABCC1CA2376100CBA148 /* ChooseItemModel.swift in Sources */,
 				849905B31CAD238F008A5D73 /* OperateAccountBookView.swift in Sources */,
 				C417E5831C8B276F007875EF /* ChooseItemVC.swift in Sources */,
+				84EFCC731CBE243000627311 /* BudgetModel.swift in Sources */,
 				84E6CFBD1CACF99700CA29AF /* FlagBtn.swift in Sources */,
 				84DECF001C8EB9E500B80975 /* TypeBtnDB.swift in Sources */,
 				84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */,
@@ -699,8 +725,10 @@
 				84E4B28D1CA91D3D00400F56 /* MainViewController.swift in Sources */,
 				C417E5861C8B276F007875EF /* ItemBarView.swift in Sources */,
 				C4F8E4A11C8BC166003C6A89 /* NSString+Path.swift in Sources */,
+				84EFCC771CBE244E00627311 /* LineChartView.swift in Sources */,
 				84E612601C9249A500021495 /* IncomeAccountCell.swift in Sources */,
 				84E6CFBB1CACAA9C00CA29AF /* CustomAlertView.swift in Sources */,
+				84EFCC6B1CBE1D3A00627311 /* BgScrollView.swift in Sources */,
 				849EC16C1C9955640046D53F /* UIImage+Extension.swift in Sources */,
 				84E579901C917BE90007295B /* SingleAccountView.swift in Sources */,
 				84B722941C7E94B4009F436B /* UIViewController+RESideMenu.m in Sources */,
