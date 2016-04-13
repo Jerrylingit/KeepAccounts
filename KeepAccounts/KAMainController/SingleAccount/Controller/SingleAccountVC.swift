@@ -54,12 +54,15 @@ class SingleAccountVC: UIViewController{
     
     //MARK: - setup views (private)
     private func setupMainView(){
-        let singleAccountView = SingleAccountView(frame: self.view.frame, delegate:self)
+        let bgScrollView = UIScrollView(frame: CGRectMake(0, 0, self.view.bounds.width * 4, self.view.bounds.height))
+        bgScrollView.backgroundColor = UIColor(hue: 0.4, saturation: 0.5, brightness: 0.75, alpha: 1.0)
+        let singleAccountView = SingleAccountView(frame: self.view.bounds, delegate:self)
         mainView = singleAccountView
         //标题、收入和支出
         mainView.costText = String(format: "%.2f", singleAccountModel.totalCost)
         mainView.incomeText = String(format: "%.2f", singleAccountModel.totalIncome)
-        self.view.addSubview(singleAccountView)
+        bgScrollView.addSubview(singleAccountView)
+        self.view.addSubview(bgScrollView)
     }
 
     
