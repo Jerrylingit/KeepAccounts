@@ -64,6 +64,10 @@ class SingleAccountVC: UIViewController{
         //标题、收入和支出
         mainView.costText = String(format: "%.2f", singleAccountModel.totalCost)
         mainView.incomeText = String(format: "%.2f", singleAccountModel.totalIncome)
+        
+        let pieChartView = PieChartView(frame: CGRectMake(self.view.bounds.width, 0, self.view.bounds.width, self.view.bounds.height), dataItem: [10,20,30,40,50,60,70])
+        
+        bgScrollView.addSubview(pieChartView)
         bgScrollView.addSubview(singleAccountView)
         self.view.addSubview(bgScrollView)
     }
