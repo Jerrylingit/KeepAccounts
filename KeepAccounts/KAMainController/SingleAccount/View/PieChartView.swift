@@ -12,6 +12,7 @@ private let sepLineHeight:CGFloat = 0.5
 private let rotateBtnWidth:CGFloat = 60
 private let rotateBtnMarginBottom:CGFloat = 10
 
+
 class PieChartView: UIView {
     
     var rectLayer:CAShapeLayer!
@@ -20,6 +21,8 @@ class PieChartView: UIView {
     //MARK: - properties (public)
     var lineWidth:CGFloat = 15
     var index:Int = 1
+    weak var delegate:AKPickerViewDelegate?
+    weak var dataSource:AKPickerViewDataSource?
     
     //MARK: - properties (private)
     private var incomeBtn:UIButton!
@@ -30,6 +33,7 @@ class PieChartView: UIView {
     private var itemPercentage:UILabel!
     private var itemAccountCount:UILabel!
     private var rotateBtn:UIButton!
+    private var pickerView:AKPickerView!
     
     private var dataItem:Array<CGFloat>
     
@@ -50,7 +54,9 @@ class PieChartView: UIView {
     }
     
     //MARK: - init
-    init(frame:CGRect, dataItem:Array<CGFloat>){
+    init(frame:CGRect, dataItem:Array<CGFloat>, delegate:AKPickerViewDelegate!, dataSource:AKPickerViewDataSource!){
+        self.dataSource = dataSource
+        self.delegate = delegate
         self.dataItem = dataItem
         super.init(frame: frame)
         setupViews(frame)
@@ -129,7 +135,18 @@ class PieChartView: UIView {
     }
     
     private  func setupScrollMonthView(frame:CGRect){
+        let pickerView = AKPickerView(frame: frame)
+        pickerView.delegate = delegate
+        pickerView.dataSource = dataSource
         
+        pickerView.font = UIFont(name: "HelveticaNeue-Light", size: 20)!
+        pickerView.highlightedFont = UIFont(name: "HelveticaNeue", size: 20)!
+        pickerView.pickerViewStyle = .Wheel
+        pickerView.maskDisabled = false
+        pickerView.interitemSpacing = 20
+        pickerView.reloadData()
+        self.pickerView = pickerView
+        self.addSubview(pickerView)
     }
     
     private  func setupRotateLayers(frame:CGRect){

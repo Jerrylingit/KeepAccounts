@@ -65,13 +65,32 @@ class SingleAccountVC: UIViewController{
         mainView.costText = String(format: "%.2f", singleAccountModel.totalCost)
         mainView.incomeText = String(format: "%.2f", singleAccountModel.totalIncome)
         
-        let pieChartView = PieChartView(frame: CGRectMake(self.view.bounds.width, 0, self.view.bounds.width, self.view.bounds.height), dataItem: [10,20,30,40,50,60,70])
+        let pieChartView = PieChartView(frame: CGRectMake(self.view.bounds.width, 0, self.view.bounds.width, self.view.bounds.height), dataItem: [10,20,30,40,50,60,70], delegate:self, dataSource:self)
         
         bgScrollView.addSubview(pieChartView)
         bgScrollView.addSubview(singleAccountView)
         self.view.addSubview(bgScrollView)
     }
 }
+
+extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
+    
+    // MARK: - AKPickerViewDataSource
+    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
+        return 10
+    }
+    
+    func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
+        return "123"
+    }
+    
+    // MARK: - AKPickerViewDelegate
+    
+    func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
+        print("Your favorite city is 123")
+    }
+}
+
 //MARK: - SubViewProtocol
 extension SingleAccountVC: SubViewProtocol{
     func clickManageBtn(sender:AnyObject!){
@@ -88,16 +107,14 @@ extension SingleAccountVC: SubViewProtocol{
         self.presentViewController(VC, animated: animated, completion: completion)
     }
 }
-//MARK: - tableview delegate
-extension SingleAccountVC:UITableViewDelegate{
+
+
+extension SingleAccountVC:UITableViewDataSource, UITableViewDelegate{
+    //MARK: - tableview delegate
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return CGFloat(80)
     }
-}
-
-//MARK: - tableview datasource
-extension SingleAccountVC:UITableViewDataSource{
-    
+    //MARK: - tableview datasource
     func itemFromDataSourceWith(indexPath:NSIndexPath) -> AccountItem{
         if indexPath.row < singleAccountModel.itemAccounts.count{
            return singleAccountModel.itemAccounts[indexPath.row]
