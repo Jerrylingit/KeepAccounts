@@ -11,7 +11,11 @@ import UIKit
 private let sepLineHeight:CGFloat = 0.5
 private let rotateBtnWidth:CGFloat = 60
 private let rotateBtnMarginBottom:CGFloat = 10
-
+private let redIndicatorHeight:CGFloat = 30
+private let midRoundBtnWidth:CGFloat = 40
+private let titleLabelY:CGFloat = 50
+private let titleLabelHeight:CGFloat = 50
+private let moneyLabelHeight:CGFloat = 50
 
 class PieChartView: UIView {
     
@@ -36,6 +40,24 @@ class PieChartView: UIView {
         }
         set(newValue){
             incomeBtn.setTitle("总支出\n\(newValue)", forState: .Normal)
+        }
+    }
+    
+    var pieChartItemTitle:String{
+        get{
+            return itemTitleLabel.text ?? ""
+        }
+        set(newValue){
+            itemTitleLabel.text = newValue
+        }
+    }
+    
+    var pieChartItemMoney:String{
+        get{
+            return itemMoneyLabel.text ?? ""
+        }
+        set(newValue){
+            itemMoneyLabel.text = newValue
         }
     }
     
@@ -109,14 +131,12 @@ class PieChartView: UIView {
     
     //MARK: - setupViews (private)
     private func setupViews(frame:CGRect){
-        
-        let layersHeight = frame.height - 200
-        let incomeAndCostBtnHeight:CGFloat = 100
+        let incomeAndCostBtnHeight:CGFloat = 80
+        let layersHeight = frame.height - 2 * incomeAndCostBtnHeight
         
         setupIncomeAndCostBtn(CGRectMake(0, 0, frame.width, incomeAndCostBtnHeight))
         setupScrollMonthView(CGRectMake(0, incomeAndCostBtnHeight, frame.width, incomeAndCostBtnHeight))
         setupRotateLayers(CGRectMake(0, incomeAndCostBtnHeight * 2, frame.width, layersHeight))
-        
     }
     
     private  func setupIncomeAndCostBtn(frame:CGRect){
@@ -124,6 +144,7 @@ class PieChartView: UIView {
         let btnWidth:CGFloat = 75
         let btnMargin:CGFloat = 15
         let bgView = UIView(frame: frame)
+        bgView.backgroundColor = UIColor(hue: 0.7, saturation: 0.3, brightness: 0.4, alpha: 1.0)
         
         let incomeBtn = createBtn(CGRectMake(btnMargin, btnMargin, btnWidth, btnWidth), title:"总收入\n9384.00", action:"selectedIncome:")
         self.incomeBtn = incomeBtn
@@ -131,7 +152,7 @@ class PieChartView: UIView {
         costBtn.titleLabel?.textAlignment = .Right
         costBtn.selected = true
         self.costBtn = costBtn
-        let sepline = UIView(frame: CGRectMake(0, btnWidth + btnMargin, frame.width, sepLineHeight))
+        let sepline = UIView(frame: CGRectMake(0, frame.height, frame.width, sepLineHeight))
         sepline.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
         
         bgView.addSubview(sepline)
@@ -162,6 +183,7 @@ class PieChartView: UIView {
         pickerView.maskDisabled = false
         pickerView.interitemSpacing = 20
         pickerView.reloadData()
+        pickerView.backgroundColor = UIColor(hue: 0.4, saturation: 0.5, brightness: 0.6, alpha: 1.0)
         self.pickerView = pickerView
         
         let sepline = UIView(frame: CGRectMake(0, frame.height * 2, frame.width, sepLineHeight))
@@ -173,23 +195,55 @@ class PieChartView: UIView {
     
     private  func setupRotateLayers(frame:CGRect){
         
+        
         let bgView = UIView(frame: frame)
 //        bgView.backgroundColor = UIColor(hue: 0.4, saturation: 0.5, brightness: 0.6, alpha: 1.0)
+        
+        let titleLabel = UILabel(frame: CGRectMake(frame.width/2 - titleLabelHeight, titleLabelY, titleLabelHeight * 2, titleLabelHeight))
+        titleLabel.textAlignment = .Center
+        titleLabel.text = "零钱"
+        let moneyLabel = UILabel(frame: CGRectMake(0, 0, moneyLabelHeight * 2, moneyLabelHeight))
+        moneyLabel.text = "890.99"
+        moneyLabel.textAlignment = .Center
+        moneyLabel.center = CGPointMake(frame.width/2, titleLabelHeight + titleLabelY)
+        itemMoneyLabel = moneyLabel
+        itemTitleLabel = titleLabel
+        
+        let redIndicator = UIView(frame: CGRectMake(0, 0, 1, redIndicatorHeight))
+        redIndicator.center = CGPointMake(frame.width/2, frame.height/2 - frame.width/4 - redIndicatorHeight )
+        redIndicator.backgroundColor = UIColor.redColor()
+        
+        
+        let midRoundBtn = UIButton(frame: CGRectMake(0, 0, midRoundBtnWidth, midRoundBtnWidth))
+        midRoundBtn.center = CGPointMake(frame.width/2, frame.height/2 - midRoundBtnWidth/2)
+        midRoundBtn.setImage(UIImage(named: "type_big_1"), forState: .Normal)
+        itemIconBtn = midRoundBtn
+        let midPercentLabel = UILabel(frame: CGRectMake(0, 0, midRoundBtnWidth, midRoundBtnWidth))
+        midPercentLabel.center = CGPointMake(frame.width/2, frame.height/2 + midRoundBtnWidth/2)
+        midPercentLabel.text = "15%"
+        midPercentLabel.textAlignment = .Center
+        itemPercentage = midPercentLabel
+        
         containerLayer = CAShapeLayer()
-        containerLayer.frame = CGRectMake(0, 0, frame.width, frame.width)
+        containerLayer.frame = CGRectMake(0, 0, frame.width, frame.height)
         var percentageStart:CGFloat = 0
         var percentageEnd:CGFloat = 0
         for i in 0...dataItem.count - 1{
             percentageEnd += dataItem[i] / itemValueAmount
-            let pieLayer = generateLayers(percentageStart, percentageEnd: percentageEnd)
+            let pieLayer = generateLayers(frame, percentageStart: percentageStart, percentageEnd: percentageEnd)
             containerLayer.addSublayer(pieLayer)
             percentageStart = percentageEnd
         }
-        gradientMaskAnimation()
+        gradientMaskAnimation(frame)
         let initRotateRadian = -CGFloat(M_PI) * dataItem[0] / itemValueAmount
         rotateContainerLayerWithRadian(initRotateRadian)
         
-        bgView.layer.addSublayer(containerLayer)
+        
+        let countLabel = UILabel(frame: CGRectMake(0, 0, midRoundBtnWidth, midRoundBtnWidth))
+        countLabel.center = CGPointMake(frame.width/2, frame.height/2 + frame.width/4 + 40)
+        countLabel.textAlignment = .Center
+        countLabel.text = "2笔"
+        itemAccountCount = countLabel
         
         let rotateBtnX = (frame.width - rotateBtnWidth) / 2
         let rotateBtnY =  frame.height - rotateBtnMarginBottom - rotateBtnWidth
@@ -197,13 +251,21 @@ class PieChartView: UIView {
         rotateBtn.setImage(UIImage(named: "btn_pieChart_rotation"), forState: .Normal)
         rotateBtn.addTarget(self, action: "rotateAction:", forControlEvents: .TouchUpInside)
         
+        
+        bgView.layer.addSublayer(containerLayer)
+        bgView.addSubview(countLabel)
+        bgView.addSubview(midPercentLabel)
+        bgView.addSubview(midRoundBtn)
+        bgView.addSubview(moneyLabel)
+        bgView.addSubview(titleLabel)
+        bgView.addSubview(redIndicator)
         bgView.addSubview(rotateBtn)
         self.addSubview(bgView)
     }
     
-    private func gradientMaskAnimation(){
+    private func gradientMaskAnimation(frame:CGRect){
         
-        containerLayer.mask = generateLayers(0, percentageEnd: 1)
+        containerLayer.mask = generateLayers(frame, percentageStart: 0, percentageEnd: 1)
         let gradientAnimation = CABasicAnimation(keyPath: "strokeEnd")
         gradientAnimation.fromValue = 0
         gradientAnimation.toValue = 1
@@ -212,13 +274,13 @@ class PieChartView: UIView {
         containerLayer.mask?.addAnimation(gradientAnimation, forKey: "gradientAnimation")
     }
     
-    private func generateLayers(percentageStart:CGFloat, percentageEnd:CGFloat) -> CAShapeLayer{
+    private func generateLayers(frame: CGRect, percentageStart:CGFloat, percentageEnd:CGFloat) -> CAShapeLayer{
         
         let path = UIBezierPath(arcCenter: CGPointMake(radius, radius), radius: radius, startAngle: CGFloat(-M_PI_2), endAngle: CGFloat(3 * M_PI_2) , clockwise: true)
         let pieLayer = CAShapeLayer()
         pieLayer.path = path.CGPath
         pieLayer.frame = CGRectMake(0, 0, layerWidth, layerWidth)
-        pieLayer.position = CGPointMake(self.frame.width / 2, self.frame.width / 2)
+        pieLayer.position = CGPointMake(frame.width / 2, frame.height / 2)
         pieLayer.lineWidth = lineWidth
         pieLayer.strokeColor = UIColor(hue: percentageEnd, saturation: 0.5, brightness: 0.75, alpha: 1.0).CGColor
         pieLayer.fillColor = nil

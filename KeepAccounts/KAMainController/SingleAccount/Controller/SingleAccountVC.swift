@@ -84,7 +84,8 @@ class SingleAccountVC: UIViewController{
     private func setupPickerView(frame:CGRect) -> PieChartView{
         let pieChartModel = PieChartModel(dbName: singleAccountModel.initDBName)
         self.pieChartModel = pieChartModel
-        let pieChartView = PieChartView(frame: frame, dataItem: [10,20,30,40,50,60,70], delegate:self, dataSource:self)
+        
+        let pieChartView = PieChartView(frame: frame, dataItem: pieChartModel.getLayerDataItem(pieChartModel.mergedDBDataDic), delegate:self, dataSource:self)
         pieChartView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
         
         return pieChartView

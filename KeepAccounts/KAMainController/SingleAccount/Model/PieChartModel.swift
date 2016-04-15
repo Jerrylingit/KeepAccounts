@@ -12,18 +12,25 @@ class PieChartModel: NSObject {
     
     //MARK: - properties (public)
     
-    var mergedMonthlyData = [String: [String:[AccountItem]]]() //the final data structure
+    var mergedMonthlyData = [Int: [String:[AccountItem]]]() //the final data structure
     var yearArray = [String]()
+    var mergedDBDataDic = [String:[AccountItem]]() // while the key is iconName and array is items
     var monthArray:[String]{
-        var itemsArray = Array(mergedMonthlyData.keys)
-        itemsArray.insert("全部", atIndex: 0)
-        return itemsArray
+        var items = [String]()
+        let itemsArray = Array(mergedMonthlyData.keys)
+        for i in 0...itemsArray.count - 1{
+            let interval = NSTimeInterval(itemsArray[i])
+            let month = NSDate.intervalToDateComponent(interval).month
+            items.append("\(month)月")
+        }
+        items.insert("全部", atIndex: 0)
+        return items
     }
     
     //MARK: - properties (private)
     private var initDBName:String
-    private var monthDic = [String:[AccountItem]]() //while the key is month and array is items
-    private var mergedDBDataDic = [String:[AccountItem]]() // while the key is iconName and array is items
+    private var monthDic = [Int:[AccountItem]]() //while the key is month and array is items
+    
     private var dbData:[AccountItem]{
         return AccoutDB.selectDataOrderByDate(initDBName)
     }
@@ -36,13 +43,25 @@ class PieChartModel: NSObject {
         groupDateByMonth()
         mergeEachMetaData()
     }
-    
+    //MARK: - operation(internal)
+    func getLayerDataItem(dataItem:[String:[AccountItem]])->[CGFloat] {
+        var layerData = [CGFloat]()
+        for (_, items) in dataItem{
+            var value:Float = 0
+            for item in items{
+                value += Float(item.money) ?? 0
+            }
+            layerData.append(CGFloat(value))
+        }
+        return layerData
+    }
+    //MARK: - methods (private)
     private func groupDateByMonth(){
         if dbData.count > 0 {
             var eachMonthItems = [AccountItem]()
             
             var dateCompRef = NSDate.intervalToDateComponent(NSTimeInterval(dbData[0].date))
-            var monthKey = "\(dateCompRef.month)月"
+            var monthKey = dbData[0].date
             yearArray.append("\(dateCompRef.year)年")
             eachMonthItems.append(dbData[0])
             
@@ -58,7 +77,7 @@ class PieChartModel: NSObject {
                         monthDic[monthKey] = eachMonthItems  //put eachMonthItems into monthDic with monthKey
                         
                         eachMonthItems.removeAll() //remove all items in eachMonthItems
-                        monthKey = "\(dateComp.month)月" //update monthKey
+                        monthKey = dbData[i].date //update monthKey
                         eachMonthItems.append(dbData[i]) //add current dbData[i]
                         
                         dateCompRef = dateComp //change dateCompRef to current dbData[i]
@@ -70,7 +89,7 @@ class PieChartModel: NSObject {
                     monthDic[monthKey] = eachMonthItems
                     
                     eachMonthItems.removeAll() //remove all items in eachMonthItems
-                    monthKey = "\(dateComp.month)月"
+                    monthKey = dbData[i].date
                     eachMonthItems.append(dbData[i]) //add current dbData[i]
                     
                     dateCompRef = dateComp //change dateCompRef to current dbData[i]
@@ -107,30 +126,4 @@ class PieChartModel: NSObject {
         }
         
     }
-    
-    private func compareDate(currentInterval:NSTimeInterval, lastInterval:NSTimeInterval) -> String{
-        let currentCom = NSDate.intervalToDateComponent(currentInterval)
-        let lastCom = NSDate.intervalToDateComponent(lastInterval)
-        let yearEqual = currentCom.year == lastCom.year
-        let monthEqual = currentCom.month == lastCom.month
-        let dayEqual = currentCom.day == lastCom.day
-        if yearEqual == true{
-            if monthEqual == true{
-                if dayEqual == true{
-                    return ""
-                }
-                else{
-                    return "\(currentCom.day)日"
-                }
-            }
-            else{
-                return "\(currentCom.month)月\(currentCom.day)日"
-            }
-        }
-        else{
-            return "\(currentCom.year)年\(currentCom.month)月\(currentCom.day)日"
-        }
-    }
-    
-    
 }
