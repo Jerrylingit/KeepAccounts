@@ -20,6 +20,7 @@ class SingleAccountVC: UIViewController{
     
     //MARK: - properties (private)
     private var singleAccountModel:SingleAccountModel
+    private var pieChartModel:PieChartModel!
     private var mainView:SingleAccountView!
     
     //MARK: - init
@@ -54,22 +55,39 @@ class SingleAccountVC: UIViewController{
     
     //MARK: - setup views (private)
     private func setupMainView(){
-        let bgScrollView = BgScrollView(frame: self.view.bounds)
+        let bgScrollView = setupBgScrollView(self.view.bounds)
+        
+        mainView = setupSingleAccountView(self.view.bounds)
+
+        let pieChartView = setupPickerView(CGRectMake(self.view.bounds.width, 0, self.view.bounds.width, self.view.bounds.height))
+        
+        bgScrollView.addSubview(pieChartView)
+        bgScrollView.addSubview(mainView)
+        self.view.addSubview(bgScrollView)
+    }
+    private func setupBgScrollView(frame:CGRect)->UIScrollView{
+        let bgScrollView = BgScrollView(frame: frame)
         bgScrollView.contentSize = CGSizeMake(self.view.bounds.width * 4, self.view.bounds.height)
         bgScrollView.bounces = false
         bgScrollView.pagingEnabled = true
-        
+        return bgScrollView
+    }
+    private func setupSingleAccountView(frame:CGRect)->SingleAccountView{
         let singleAccountView = SingleAccountView(frame: self.view.bounds, delegate:self)
-        mainView = singleAccountView
         //标题、收入和支出
-        mainView.costText = String(format: "%.2f", singleAccountModel.totalCost)
-        mainView.incomeText = String(format: "%.2f", singleAccountModel.totalIncome)
+        singleAccountView.costText = String(format: "%.2f", singleAccountModel.totalCost)
+        singleAccountView.incomeText = String(format: "%.2f", singleAccountModel.totalIncome)
         
-        let pieChartView = PieChartView(frame: CGRectMake(self.view.bounds.width, 0, self.view.bounds.width, self.view.bounds.height), dataItem: [10,20,30,40,50,60,70], delegate:self, dataSource:self)
+        return singleAccountView
+    }
+    
+    private func setupPickerView(frame:CGRect) -> PieChartView{
+        let pieChartModel = PieChartModel(dbName: singleAccountModel.initDBName)
+        self.pieChartModel = pieChartModel
         
-        bgScrollView.addSubview(pieChartView)
-        bgScrollView.addSubview(singleAccountView)
-        self.view.addSubview(bgScrollView)
+        let pieChartView = PieChartView(frame: frame, dataItem: [10,20,30,40,50,60,70], delegate:self, dataSource:self)
+        
+        return pieChartView
     }
 }
 
