@@ -15,14 +15,29 @@ private let rotateBtnMarginBottom:CGFloat = 10
 
 class PieChartView: UIView {
     
-    var rectLayer:CAShapeLayer!
-    var angle:CGFloat = CGFloat(M_PI_2)
-    
     //MARK: - properties (public)
     var lineWidth:CGFloat = 15
     var index:Int = 1
     weak var delegate:AKPickerViewDelegate?
     weak var dataSource:AKPickerViewDataSource?
+    
+    var pieChartTotalCost:String{
+        get{
+            return costBtn.titleLabel?.text ?? ""
+        }
+        set(newValue){
+            costBtn.setTitle("总收入\n\(newValue)", forState: .Normal)
+        }
+    }
+    
+    var pieChartTotalIncome:String{
+        get{
+            return incomeBtn.titleLabel?.text ?? ""
+        }
+        set(newValue){
+            incomeBtn.setTitle("总支出\n\(newValue)", forState: .Normal)
+        }
+    }
     
     //MARK: - properties (private)
     private var incomeBtn:UIButton!
@@ -135,6 +150,8 @@ class PieChartView: UIView {
     }
     
     private  func setupScrollMonthView(frame:CGRect){
+        
+        
         let pickerView = AKPickerView(frame: frame)
         pickerView.delegate = delegate
         pickerView.dataSource = dataSource
@@ -146,13 +163,18 @@ class PieChartView: UIView {
         pickerView.interitemSpacing = 20
         pickerView.reloadData()
         self.pickerView = pickerView
+        
+        let sepline = UIView(frame: CGRectMake(0, frame.height * 2, frame.width, sepLineHeight))
+        sepline.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
+        
         self.addSubview(pickerView)
+        self.addSubview(sepline)
     }
     
     private  func setupRotateLayers(frame:CGRect){
         
         let bgView = UIView(frame: frame)
-        bgView.backgroundColor = UIColor(hue: 0.4, saturation: 0.5, brightness: 0.6, alpha: 1.0)
+//        bgView.backgroundColor = UIColor(hue: 0.4, saturation: 0.5, brightness: 0.6, alpha: 1.0)
         containerLayer = CAShapeLayer()
         containerLayer.frame = CGRectMake(0, 0, frame.width, frame.width)
         var percentageStart:CGFloat = 0

@@ -84,8 +84,8 @@ class SingleAccountVC: UIViewController{
     private func setupPickerView(frame:CGRect) -> PieChartView{
         let pieChartModel = PieChartModel(dbName: singleAccountModel.initDBName)
         self.pieChartModel = pieChartModel
-        
         let pieChartView = PieChartView(frame: frame, dataItem: [10,20,30,40,50,60,70], delegate:self, dataSource:self)
+        pieChartView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
         
         return pieChartView
     }
@@ -95,17 +95,17 @@ extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
     
     // MARK: - AKPickerViewDataSource
     func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
-        return 10
+        return self.pieChartModel.monthArray.count
     }
     
     func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
-        return "123"
+        return self.pieChartModel.monthArray[item]
     }
     
     // MARK: - AKPickerViewDelegate
     
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
-        print("Your favorite city is 123")
+        print("Your favorite city is \(item)")
     }
 }
 
