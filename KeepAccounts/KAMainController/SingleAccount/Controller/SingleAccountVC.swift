@@ -96,11 +96,11 @@ extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
     
     // MARK: - AKPickerViewDataSource
     func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
-        return self.pieChartModel.monthArray.count
+        return self.pieChartModel.keysOfMergedMonthlyDataAfterDeal.count
     }
     
     func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
-        return self.pieChartModel.monthArray[item]
+        return self.pieChartModel.keysOfMergedMonthlyDataAfterDeal[item]
     }
     
     // MARK: - AKPickerViewDelegate
