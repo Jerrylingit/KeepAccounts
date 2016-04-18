@@ -22,8 +22,11 @@ class PieChartView: UIView {
     //MARK: - properties (public)
     var lineWidth:CGFloat = 15
     var index:Int = 1
+    var layerData:[RotateLayerData]
+    
     weak var delegate:AKPickerViewDelegate?
     weak var dataSource:AKPickerViewDataSource?
+    
     
     var pieChartTotalCost:String{
         get{
@@ -53,10 +56,11 @@ class PieChartView: UIView {
     private var itemPercentage:UILabel!
     private var itemAccountCount:UILabel!
     
+    
 //    private var rotateBtn:UIButton!
     private var pickerView:AKPickerView!
     
-    private var dataItem:Array<CGFloat>
+    private var dataItem:[CGFloat]!
     
     private var itemValueAmount:CGFloat{
         var amount:CGFloat = 0
@@ -75,11 +79,14 @@ class PieChartView: UIView {
     }
     
     //MARK: - init
-    init(frame:CGRect, dataItem:Array<CGFloat>, delegate:AKPickerViewDelegate!, dataSource:AKPickerViewDataSource!){
+    init(frame:CGRect, layerData:[RotateLayerData], delegate:AKPickerViewDelegate!, dataSource:AKPickerViewDataSource!){
         self.dataSource = dataSource
         self.delegate = delegate
-        self.dataItem = dataItem
+        self.layerData = layerData
+        
         super.init(frame: frame)
+        
+        self.setDataItems(layerData)
         setupViews(frame)
     }
     
@@ -99,9 +106,14 @@ class PieChartView: UIView {
         rotateContainerLayerWithRadian(rotateRadian)
     }
     
-    func rotateAction(sender:UIButton){
+    func rotateAction(sender:UIButton?){
         reDraw(index % dataItem.count)
+        reloadDataInPieChartView(layerData[index])
         index += 1
+        if index == dataItem.count{
+            index = 0
+        }
+        
     }
     
     func selectedIncome(sender:UIButton){
@@ -113,6 +125,34 @@ class PieChartView: UIView {
         incomeBtn.selected = !sender.selected
     }
     
+    func setDataItems(layerDatas:[RotateLayerData]){
+        var moneyItems = [CGFloat]()
+        for item in layerDatas{
+            let money = Float(item.money) ?? 0
+            moneyItems.append(CGFloat(money))
+        }
+        self.dataItem = moneyItems
+    }
+    func reloadDataInPieChartView(layerData: RotateLayerData){
+        
+        self.itemTitleLabel.text = layerData.title
+        self.itemMoneyLabel.text = layerData.money
+        self.itemIconBtn.setImage(UIImage(named: layerData.icon), forState: .Normal)
+        self.itemPercentage.text = layerData.percent
+        self.itemAccountCount.text = layerData.count
+        
+    }
+    
+    func updateByLayerData(data:[RotateLayerData]){
+        layerData = data
+        setDataItems(data)
+//        containerLayer.removeFromSuperlayer()
+        setupContainerLayer(CGRectMake(0, 160, frame.width, frame.height - 160))
+        if layerData.count > 0{
+            reloadDataInPieChartView(layerData[0])
+        }
+    }
+    
     //MARK: - setupViews (private)
     private func setupViews(frame:CGRect){
         let incomeAndCostBtnHeight:CGFloat = 80
@@ -121,6 +161,10 @@ class PieChartView: UIView {
         setupIncomeAndCostBtn(CGRectMake(0, 0, frame.width, incomeAndCostBtnHeight))
         setupScrollMonthView(CGRectMake(0, incomeAndCostBtnHeight, frame.width, incomeAndCostBtnHeight))
         setupRotateLayers(CGRectMake(0, incomeAndCostBtnHeight * 2, frame.width, layersHeight))
+        
+        if layerData.count > 0{
+            reloadDataInPieChartView(layerData[0])
+        }
     }
     
     private  func setupIncomeAndCostBtn(frame:CGRect){
@@ -187,11 +231,11 @@ class PieChartView: UIView {
         
         let midPercentLabel = setupPercentageLabel(frame)
         
-        let containerLayer = setupContainerLayer(frame)
-        
         let countLabel = setupCountLabel(frame)
 
         let rotateBtn = setupRotateBtn(frame)
+        
+        let containerLayer = setupContainerLayer(frame)
         
         bgView.layer.addSublayer(containerLayer)
         bgView.addSubview(countLabel)
@@ -209,8 +253,6 @@ class PieChartView: UIView {
         containerLayer.frame = CGRectMake(0, 0, frame.width, frame.height)
         var percentageStart:CGFloat = 0
         var percentageEnd:CGFloat = 0
-//        let defaultLayer = generateLayers(frame, percentageStart: 0, percentageEnd: 1)
-//        containerLayer.addSublayer(defaultLayer)
         
         for (_, value) in dataItem.enumerate(){
             percentageEnd += value / itemValueAmount
@@ -218,8 +260,7 @@ class PieChartView: UIView {
             containerLayer.addSublayer(pieLayer)
             percentageStart = percentageEnd
         }
-        
-        if dataItem.count > 0{
+        if layerData.count > 0{
             let initRotateRadian = -CGFloat(M_PI) * dataItem[0] / itemValueAmount
             rotateContainerLayerWithRadian(initRotateRadian)
         }
@@ -229,13 +270,13 @@ class PieChartView: UIView {
     private func setupTitleLabel(frame:CGRect)->UILabel{
         let titleLabel = UILabel(frame: CGRectMake(frame.width/2 - titleLabelHeight, titleLabelY, titleLabelHeight * 2, titleLabelHeight))
         titleLabel.textAlignment = .Center
-        titleLabel.text = "零钱"
+        titleLabel.text = "一般"
         itemTitleLabel = titleLabel
         return titleLabel
     }
     private func setupMoneyLabel(frame:CGRect)->UILabel{
         let moneyLabel = UILabel(frame: CGRectMake(0, 0, moneyLabelHeight * 2, moneyLabelHeight))
-        moneyLabel.text = "890.99"
+        moneyLabel.text = "0.00"
         moneyLabel.textAlignment = .Center
         moneyLabel.center = CGPointMake(frame.width/2, titleLabelHeight + titleLabelY)
         itemMoneyLabel = moneyLabel
@@ -258,7 +299,7 @@ class PieChartView: UIView {
     private func setupPercentageLabel(frame:CGRect)->UILabel{
         let midPercentLabel = UILabel(frame: CGRectMake(0, 0, midRoundBtnWidth, midRoundBtnWidth))
         midPercentLabel.center = CGPointMake(frame.width/2, frame.height/2 + midRoundBtnWidth/2)
-        midPercentLabel.text = "15%"
+        midPercentLabel.text = "100%"
         midPercentLabel.textAlignment = .Center
         itemPercentage = midPercentLabel
         return midPercentLabel
@@ -270,7 +311,7 @@ class PieChartView: UIView {
         let countLabel = UILabel(frame: CGRectMake(0, 0, midRoundBtnWidth, midRoundBtnWidth))
         countLabel.center = CGPointMake(frame.width/2, frame.height/2 + frame.width/4 + 40)
         countLabel.textAlignment = .Center
-        countLabel.text = "2笔"
+        countLabel.text = "0笔"
         itemAccountCount = countLabel
         return countLabel
     }

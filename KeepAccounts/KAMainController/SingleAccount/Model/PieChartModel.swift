@@ -8,12 +8,21 @@
 
 import UIKit
 //data displayed in piechartview
-struct RotateLayerData {
+class RotateLayerData:NSObject {
     let title:String
     let money:String
     let icon:String
-    let percent:String
+    var percent:String
     let count:String
+    
+    init(title:String, money:String, icon:String, percent:String, count:String){
+        self.title = title
+        self.money = money
+        self.icon = icon
+        self.percent = percent
+        self.count = count
+        super.init()
+    }
 }
 
 class PieChartModel: NSObject {
@@ -21,6 +30,7 @@ class PieChartModel: NSObject {
     
     var mergedMonthlyData = [Int: [String:[AccountItem]]]() //the final data structrue
     var yearArray = [String]()
+    var rotateLayerDataArray = [RotateLayerData]()
     var mergedDBDataDic = [String:[AccountItem]]() // while the key is iconName and array is items
     var keysOfMergedMonthlyDataAfterDeal:[String]{
         var items = [String]()
@@ -53,7 +63,7 @@ class PieChartModel: NSObject {
         mergeEachMetaData()
     }
     //MARK: - operation(internal)
-    func getLayerDataItem(dataItem:[String:[AccountItem]])->[CGFloat] {
+    func getLayerDataItem(dataItem:[String:[AccountItem]])->[RotateLayerData] {
         var amount:Float = 0
         var layerData = [CGFloat]()
         var rotateLayerDataArray = [RotateLayerData]()
@@ -75,10 +85,12 @@ class PieChartModel: NSObject {
         }
         
         for (i,data) in rotateLayerDataArray.enumerate() {
-            let percent = layerData[i] / amount
+            let tmpPercent = Float(layerData[i]) / amount
+            let percentage = "\(Int(tmpPercent * 100))%"
+            data.percent = percentage
         }
-        
-        return layerData
+        self.rotateLayerDataArray = rotateLayerDataArray
+        return rotateLayerDataArray
     }
     
     func getMergedMonthlyDataAtIndex(index:Int) -> [String:[AccountItem]] {
@@ -134,8 +146,8 @@ class PieChartModel: NSObject {
         
         var isChecked = [Bool](count: data.count, repeatedValue: false)
         var dataDic = [String : [AccountItem]]()
-        for (i,value) in isChecked.enumerate(){
-            if value == false {
+        for (var i = 0; i < data.count; i += 1){
+            if isChecked[i] == false {
                 let imageRef = data[i].iconName
                 var tmpData = [AccountItem]()
                 for (j,_) in data.enumerate(){

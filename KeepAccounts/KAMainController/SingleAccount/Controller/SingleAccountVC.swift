@@ -21,6 +21,7 @@ class SingleAccountVC: UIViewController{
     //MARK: - properties (private)
     private var singleAccountModel:SingleAccountModel
     private var pieChartModel:PieChartModel!
+    private var pieChartView:PieChartView!
     private var mainView:SingleAccountView!
     
     //MARK: - init
@@ -85,9 +86,9 @@ class SingleAccountVC: UIViewController{
         let pieChartModel = PieChartModel(dbName: singleAccountModel.initDBName)
         self.pieChartModel = pieChartModel
         
-        let pieChartView = PieChartView(frame: frame, dataItem: pieChartModel.getLayerDataItem(pieChartModel.mergedDBDataDic), delegate:self, dataSource:self)
+        let pieChartView = PieChartView(frame: frame, layerData: pieChartModel.getLayerDataItem(pieChartModel.mergedDBDataDic), delegate:self, dataSource:self)
         pieChartView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
-        
+        self.pieChartView = pieChartView
         return pieChartView
     }
 }
@@ -106,7 +107,8 @@ extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
     // MARK: - AKPickerViewDelegate
     
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
-        print("Your favorite city is \(item)")
+        let layerData = pieChartModel.getLayerDataItem(pieChartModel.getMergedMonthlyDataAtIndex(item))
+        pieChartView.updateByLayerData(layerData)
     }
 }
 
