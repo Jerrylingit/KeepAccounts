@@ -172,7 +172,6 @@ class PieChartView: UIView {
     
     private  func setupScrollMonthView(frame:CGRect){
         
-        
         let pickerView = AKPickerView(frame: frame)
         pickerView.delegate = delegate
         pickerView.dataSource = dataSource
