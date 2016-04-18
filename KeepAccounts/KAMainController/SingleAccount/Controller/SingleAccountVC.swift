@@ -88,6 +88,7 @@ class SingleAccountVC: UIViewController{
         
         let pieChartView = PieChartView(frame: frame, layerData: pieChartModel.getLayerDataItem(pieChartModel.mergedDBDataDic), delegate:self, dataSource:self)
         pieChartView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
+        pieChartView.setYear(pieChartModel.yearArray[0])
         self.pieChartView = pieChartView
         return pieChartView
     }
@@ -109,6 +110,7 @@ extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
         let layerData = pieChartModel.getLayerDataItem(pieChartModel.getMergedMonthlyDataAtIndex(item))
         pieChartView.updateByLayerData(layerData)
+        pieChartView.setYear(pieChartModel.yearArray[item])
     }
 }
 

@@ -12,10 +12,12 @@ private let sepLineHeight:CGFloat = 0.5
 private let rotateBtnWidth:CGFloat = 60
 private let rotateBtnMarginBottom:CGFloat = 10
 private let redIndicatorHeight:CGFloat = 30
-private let midRoundBtnWidth:CGFloat = 40
+private let midRoundBtnWidth:CGFloat = 50
 private let titleLabelY:CGFloat = 50
 private let titleLabelHeight:CGFloat = 50
 private let moneyLabelHeight:CGFloat = 50
+private let yearLabelHeight:CGFloat = 30
+private let yearLabelWidth:CGFloat = 60
 
 class PieChartView: UIView {
     
@@ -55,11 +57,11 @@ class PieChartView: UIView {
     private var itemIconBtn:UIButton!
     private var itemPercentage:UILabel!
     private var itemAccountCount:UILabel!
-    
+    private var yearLabel:UILabel!
     
 //    private var rotateBtn:UIButton!
     private var pickerView:AKPickerView!
-    
+    private var layerBgView:UIView!
     private var dataItem:[CGFloat]!
     
     private var itemValueAmount:CGFloat{
@@ -107,13 +109,14 @@ class PieChartView: UIView {
     }
     
     func rotateAction(sender:UIButton?){
-        reDraw(index % dataItem.count)
-        reloadDataInPieChartView(layerData[index])
-        index += 1
-        if index == dataItem.count{
-            index = 0
+        if dataItem.count > 1{
+            reDraw(index % dataItem.count)
+            reloadDataInPieChartView(layerData[index])
+            index += 1
+            if index >= dataItem.count{
+                index = 0
+            }
         }
-        
     }
     
     func selectedIncome(sender:UIButton){
@@ -140,17 +143,25 @@ class PieChartView: UIView {
         self.itemIconBtn.setImage(UIImage(named: layerData.icon), forState: .Normal)
         self.itemPercentage.text = layerData.percent
         self.itemAccountCount.text = layerData.count
-        
     }
     
     func updateByLayerData(data:[RotateLayerData]){
         layerData = data
         setDataItems(data)
-//        containerLayer.removeFromSuperlayer()
-        setupContainerLayer(CGRectMake(0, 160, frame.width, frame.height - 160))
+        index = 1
+        
+        self.containerLayer.removeFromSuperlayer()
+        self.containerLayer = setupContainerLayer(CGRectMake(0, 160, frame.width, frame.height - 160))
+        self.layerBgView.layer.addSublayer(self.containerLayer)
         if layerData.count > 0{
             reloadDataInPieChartView(layerData[0])
         }
+    }
+    
+    func setYear(year:String){
+        self.yearLabel.text = year
+        self.yearLabel.sizeToFit()
+        self.yearLabel.center = CGPointMake(frame.width / 2, 80)
     }
     
     //MARK: - setupViews (private)
@@ -173,7 +184,7 @@ class PieChartView: UIView {
         let btnMargin:CGFloat = 15
         let bgView = UIView(frame: frame)
         
-        let incomeBtn = createBtn(CGRectMake(btnMargin, btnMargin, btnWidth, btnWidth), title:"总收入\n9384.00", action:"selectedIncome:")
+        let incomeBtn = createBtn(CGRectMake(btnMargin, btnMargin, btnWidth, btnWidth), title:"总收入\n0.00", action:"selectedIncome:")
         self.incomeBtn = incomeBtn
         let costBtn = createBtn(CGRectMake(frame.width - btnMargin - btnWidth, btnMargin, btnWidth, btnWidth), title:"总支出\n9384.00", action:"selectedCost:")
         costBtn.titleLabel?.textAlignment = .Right
@@ -199,27 +210,42 @@ class PieChartView: UIView {
     
     private  func setupScrollMonthView(frame:CGRect){
         
-        let pickerView = AKPickerView(frame: frame)
+        let bgView = UIView(frame: frame)
+        
+        let pickerView = AKPickerView(frame: CGRectMake(0, 0, frame.width, frame.height))
         pickerView.delegate = delegate
         pickerView.dataSource = dataSource
         pickerView.font = UIFont(name: "HelveticaNeue-Light", size: 20)!
         pickerView.highlightedFont = UIFont(name: "HelveticaNeue", size: 20)!
         pickerView.pickerViewStyle = .Wheel
         pickerView.maskDisabled = false
+        pickerView.highlightedTextColor = UIColor.orangeColor()
         pickerView.interitemSpacing = 20
         pickerView.reloadData()
         self.pickerView = pickerView
         
-        let sepline = UIView(frame: CGRectMake(0, frame.height * 2, frame.width, sepLineHeight))
+        let sepline = UIView(frame: CGRectMake(0, frame.height, frame.width, sepLineHeight))
         sepline.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
         
-        self.addSubview(pickerView)
-        self.addSubview(sepline)
+        let yearLabel = UILabel(frame: CGRectMake(0, 0, yearLabelWidth, yearLabelHeight))
+        yearLabel.center = CGPointMake(frame.width / 2, frame.height)
+        yearLabel.backgroundColor = UIColor.whiteColor()
+        yearLabel.textColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0)
+        yearLabel.textAlignment = .Center
+        yearLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14)
+        yearLabel.text = "1900年"
+        self.yearLabel = yearLabel
+        
+        bgView.addSubview(pickerView)
+        bgView.addSubview(sepline)
+        bgView.addSubview(yearLabel)
+        self.addSubview(bgView)
     }
     
     private  func setupRotateLayers(frame:CGRect){
 
         let bgView = UIView(frame: frame)
+        self.layerBgView = bgView
         
         let titleLabel = setupTitleLabel(frame)
         
@@ -248,8 +274,8 @@ class PieChartView: UIView {
         self.addSubview(bgView)
     }
     
-    func setupContainerLayer(frame:CGRect)->CALayer {
-        containerLayer = CAShapeLayer()
+    func setupContainerLayer(frame:CGRect)->CAShapeLayer {
+        let containerLayer = CAShapeLayer()
         containerLayer.frame = CGRectMake(0, 0, frame.width, frame.height)
         var percentageStart:CGFloat = 0
         var percentageEnd:CGFloat = 0
@@ -260,10 +286,13 @@ class PieChartView: UIView {
             containerLayer.addSublayer(pieLayer)
             percentageStart = percentageEnd
         }
+        self.containerLayer = containerLayer
+        
         if layerData.count > 0{
             let initRotateRadian = -CGFloat(M_PI) * dataItem[0] / itemValueAmount
             rotateContainerLayerWithRadian(initRotateRadian)
         }
+        
         return containerLayer
     }
     

@@ -46,6 +46,7 @@ class PieChartModel: NSObject {
         return items
     }
     
+    
     //MARK: - properties (private)
     private var initDBName:String
     private var monthDic = [Int:[AccountItem]]() //while the key is month and array is items
@@ -110,21 +111,22 @@ class PieChartModel: NSObject {
             
             for (_, value) in dbData.enumerate(){
                 let dateComp = NSDate.intervalToDateComponent(NSTimeInterval(value.date))
-                if dateCompRef.year == dateComp.year{
+                if dateCompRef.year == dateComp.year && dateCompRef.month == dateComp.month {
                     //same month, append item to eachMonthItems
-                    if dateCompRef.month == dateComp.month{
+//                    if dateCompRef.month == dateComp.month{
                         eachMonthItems.append(value)
-                    }
-                    //different month, put eachMonthItems into monthDic with monthKey, remove all items in eachMonthItems and add current dbData[i]
-                    else{
-                        monthDic[monthKey] = eachMonthItems  //put eachMonthItems into monthDic with monthKey
-                        
-                        eachMonthItems.removeAll() //remove all items in eachMonthItems
-                        monthKey = value.date //update monthKey
-                        eachMonthItems.append(value) //add current dbData[i]
-                        
-                        dateCompRef = dateComp //change dateCompRef to current dbData[i]
-                    }
+//                    }
+//                    //different month, put eachMonthItems into monthDic with monthKey, remove all items in eachMonthItems and add current dbData[i]
+//                    else{
+//                        yearArray.append("\(dateComp.year)年")
+//                        monthDic[monthKey] = eachMonthItems  //put eachMonthItems into monthDic with monthKey
+//                        
+//                        eachMonthItems.removeAll() //remove all items in eachMonthItems
+//                        monthKey = value.date //update monthKey
+//                        eachMonthItems.append(value) //add current dbData[i]
+//                        
+//                        dateCompRef = dateComp //change dateCompRef to current dbData[i]
+//                    }
                 }
                 else{
                     yearArray.append("\(dateComp.year)年")
@@ -140,6 +142,15 @@ class PieChartModel: NSObject {
             }
             //put the last key-value into monthDic
             monthDic[monthKey] = eachMonthItems
+            if yearArray[yearArray.endIndex - 1] == yearArray[yearArray.startIndex]{
+                let allYear = yearArray[yearArray.startIndex]
+                yearArray.insert(allYear, atIndex: 0)
+            }
+            else{
+                let allYear = yearArray[yearArray.endIndex - 1] + "~" + yearArray[yearArray.startIndex]
+                yearArray.insert(allYear, atIndex: 0)
+            }
+            
         }
     }
     private func mergeSameItem(data:[AccountItem])->[String:[AccountItem]]{
