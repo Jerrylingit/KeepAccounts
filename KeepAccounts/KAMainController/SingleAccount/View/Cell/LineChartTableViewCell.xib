@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="96" id="KGk-i7-Jjw" customClass="LineChartTableViewCell" customModule="KeepAccounts" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="type_big_1" translatesAutoresizingMaskIntoConstraints="NO" id="AX7-lR-mRR">
+                        <rect key="frame" x="15" y="5" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="hMH-QS-LLS"/>
+                            <constraint firstAttribute="width" constant="50" id="vhC-O8-GfY"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="hMH-QS-LLS"/>
+                            </mask>
+                        </variation>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="888.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLB-N7-uve">
+                        <rect key="frame" x="256" y="19" width="56" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Zg-Xu-pD0">
+                        <rect key="frame" x="133" y="25" width="100" height="10"/>
+                        <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一般" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgv-Ps-Ju8">
+                        <rect key="frame" x="73" y="19" width="30" height="21"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="AX7-lR-mRR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="1X8-Tp-GKh"/>
+                    <constraint firstItem="WLB-N7-uve" firstAttribute="leading" secondItem="6Zg-Xu-pD0" secondAttribute="trailing" constant="23" id="1tM-13-mp1"/>
+                    <constraint firstItem="tgv-Ps-Ju8" firstAttribute="leading" secondItem="AX7-lR-mRR" secondAttribute="trailing" constant="8" id="1zA-ir-fhS"/>
+                    <constraint firstItem="6Zg-Xu-pD0" firstAttribute="leading" secondItem="tgv-Ps-Ju8" secondAttribute="trailing" constant="30" id="7Ti-oA-a62"/>
+                    <constraint firstItem="WLB-N7-uve" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="FBf-WR-5De"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="6Zg-Xu-pD0" secondAttribute="bottom" constant="16" id="J3J-hr-Ica"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="WLB-N7-uve" secondAttribute="trailing" id="M8J-H0-Znp"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="AX7-lR-mRR" secondAttribute="bottom" constant="-4" id="avI-uJ-5GQ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="tgv-Ps-Ju8" secondAttribute="bottom" constant="11" id="cfU-ph-yK2"/>
+                    <constraint firstItem="tgv-Ps-Ju8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="d3a-a8-Xph"/>
+                    <constraint firstItem="6Zg-Xu-pD0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="17" id="eUx-ID-igI"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="WLB-N7-uve" secondAttribute="bottom" constant="11" id="tQR-N7-g5A"/>
+                    <constraint firstItem="AX7-lR-mRR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-3" id="vli-S4-Aee"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="627" y="363"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="type_big_1" width="76" height="76"/>
+    </resources>
+</document>

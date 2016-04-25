@@ -23,6 +23,7 @@ class SingleAccountVC: UIViewController{
     private var pieChartModel:PieChartModel!
     private var pieChartView:PieChartView!
     private var mainView:SingleAccountView!
+    private var lineChartView:LineChartView!
     
     //MARK: - init
     init(model:SingleAccountModel){
@@ -62,8 +63,11 @@ class SingleAccountVC: UIViewController{
 
         let pieChartView = setupPickerView(CGRectMake(self.view.bounds.width, 0, self.view.bounds.width, self.view.bounds.height))
         
-        bgScrollView.addSubview(pieChartView)
+        self.lineChartView = setupLineView(CGRectMake(self.view.bounds.width * 2, 0, self.view.bounds.width, self.view.bounds.height))
+        
         bgScrollView.addSubview(mainView)
+        bgScrollView.addSubview(pieChartView)
+        bgScrollView.addSubview(lineChartView)
         self.view.addSubview(bgScrollView)
     }
     private func setupBgScrollView(frame:CGRect)->UIScrollView{
@@ -92,6 +96,12 @@ class SingleAccountVC: UIViewController{
         self.pieChartView = pieChartView
         return pieChartView
     }
+    private func setupLineView(frame:CGRect)->LineChartView{
+        let lineView = LineChartView(frame: frame, delegate: self, dataSource: self)
+        lineView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
+        lineView.setYear(pieChartModel.yearArray[0])
+        return lineView
+    }
 }
 
 extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
@@ -106,11 +116,16 @@ extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
     }
     
     // MARK: - AKPickerViewDelegate
-    
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
-        let layerData = pieChartModel.getLayerDataItem(pieChartModel.getMergedMonthlyDataAtIndex(item))
-        pieChartView.updateByLayerData(layerData)
-        pieChartView.setYear(pieChartModel.yearArray[item])
+        
+        if pickerView.superview?.isKindOfClass(PieChartView) != false{
+            let layerData = pieChartModel.getLayerDataItem(pieChartModel.getMergedMonthlyDataAtIndex(item))
+            pieChartView.updateByLayerData(layerData)
+            pieChartView.setYear(pieChartModel.yearArray[item])
+        }
+        else if pickerView.superview?.isKindOfClass(LineChartView) != false{
+            lineChartView.setYear(pieChartModel.yearArray[item])
+        }
     }
 }
 

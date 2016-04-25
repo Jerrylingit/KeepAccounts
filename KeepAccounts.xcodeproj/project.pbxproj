@@ -12,6 +12,9 @@
 		848187E11CAA193C005B0875 /* MainVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848187E01CAA193C005B0875 /* MainVCModel.swift */; };
 		849905B31CAD238F008A5D73 /* OperateAccountBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849905B21CAD238F008A5D73 /* OperateAccountBookView.swift */; };
 		849EC16C1C9955640046D53F /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EC16B1C9955640046D53F /* UIImage+Extension.swift */; };
+		84ADF78B1CCDC46500220CC3 /* AccountDisplayViewBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ADF78A1CCDC46500220CC3 /* AccountDisplayViewBase.swift */; };
+		84ADF7901CCE25CC00220CC3 /* LineChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ADF78E1CCE25CC00220CC3 /* LineChartTableViewCell.swift */; };
+		84ADF7911CCE25CC00220CC3 /* LineChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84ADF78F1CCE25CC00220CC3 /* LineChartTableViewCell.xib */; };
 		84B722921C7E94B4009F436B /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228D1C7E94B4009F436B /* RECommonFunctions.m */; };
 		84B722931C7E94B4009F436B /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7228F1C7E94B4009F436B /* RESideMenu.m */; };
 		84B722941C7E94B4009F436B /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B722911C7E94B4009F436B /* UIViewController+RESideMenu.m */; };
@@ -87,6 +90,9 @@
 		848187E01CAA193C005B0875 /* MainVCModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVCModel.swift; sourceTree = "<group>"; };
 		849905B21CAD238F008A5D73 /* OperateAccountBookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperateAccountBookView.swift; sourceTree = "<group>"; };
 		849EC16B1C9955640046D53F /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		84ADF78A1CCDC46500220CC3 /* AccountDisplayViewBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDisplayViewBase.swift; sourceTree = "<group>"; };
+		84ADF78E1CCE25CC00220CC3 /* LineChartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartTableViewCell.swift; sourceTree = "<group>"; };
+		84ADF78F1CCE25CC00220CC3 /* LineChartTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineChartTableViewCell.xib; sourceTree = "<group>"; };
 		84B7228C1C7E94B4009F436B /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		84B7228D1C7E94B4009F436B /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		84B7228E1C7E94B4009F436B /* RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenu.h; sourceTree = "<group>"; };
@@ -413,6 +419,7 @@
 				84EFCC761CBE244E00627311 /* LineChartView.swift */,
 				84EFCC781CBE245800627311 /* BudgetView.swift */,
 				847D28A41CC070780076AD3F /* AKPickerView.swift */,
+				84ADF78A1CCDC46500220CC3 /* AccountDisplayViewBase.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -424,6 +431,8 @@
 				84E579931C917D8C0007295B /* AccountCell.xib */,
 				84E6125E1C9249A500021495 /* IncomeAccountCell.swift */,
 				84E6125F1C9249A500021495 /* IncomeAccountCell.xib */,
+				84ADF78E1CCE25CC00220CC3 /* LineChartTableViewCell.swift */,
+				84ADF78F1CCE25CC00220CC3 /* LineChartTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -676,6 +685,7 @@
 				84E4111E1C72A47700C4260E /* Assets.xcassets in Resources */,
 				84E4B2971CA9283100400F56 /* AccountBookCell.xib in Resources */,
 				84DDFDB41C75C039003F077F /* Info.plist in Resources */,
+				84ADF7911CCE25CC00220CC3 /* LineChartTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,8 +727,10 @@
 				84E5B1E91C979BE300BBE173 /* LimitInputVC.swift in Sources */,
 				84EFCC751CBE244200627311 /* PieChartView.swift in Sources */,
 				84E411171C72A47700C4260E /* AppDelegate.swift in Sources */,
+				84ADF78B1CCDC46500220CC3 /* AccountDisplayViewBase.swift in Sources */,
 				84EFCC711CBE242000627311 /* LineChartModel.swift in Sources */,
 				84EFCC6F1CBE241100627311 /* PieChartModel.swift in Sources */,
+				84ADF7901CCE25CC00220CC3 /* LineChartTableViewCell.swift in Sources */,
 				846B31721CB51BF200F30305 /* SingleAccountModel.swift in Sources */,
 				84CA4B511C969C7F009766B9 /* customDatePickerView.swift in Sources */,
 				C417E5841C8B276F007875EF /* ComputeBoardView.swift in Sources */,

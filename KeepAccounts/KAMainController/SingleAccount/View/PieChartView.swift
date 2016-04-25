@@ -19,48 +19,19 @@ private let moneyLabelHeight:CGFloat = 50
 private let yearLabelHeight:CGFloat = 30
 private let yearLabelWidth:CGFloat = 60
 
-class PieChartView: UIView {
+class PieChartView: AccountDisplayViewBase {
     
     //MARK: - properties (public)
-    var lineWidth:CGFloat = 15
-    var index:Int = 1
     var layerData:[RotateLayerData]
     
-    weak var delegate:AKPickerViewDelegate?
-    weak var dataSource:AKPickerViewDataSource?
-    
-    
-    var pieChartTotalCost:String{
-        get{
-            return costBtn.titleLabel?.text ?? ""
-        }
-        set(newValue){
-            costBtn.setTitle("总收入\n\(newValue)", forState: .Normal)
-        }
-    }
-    
-    var pieChartTotalIncome:String{
-        get{
-            return incomeBtn.titleLabel?.text ?? ""
-        }
-        set(newValue){
-            incomeBtn.setTitle("总支出\n\(newValue)", forState: .Normal)
-        }
-    }
-    
     //MARK: - properties (private)
-    private var incomeBtn:UIButton!
-    private var costBtn:UIButton!
-    
     private var itemTitleLabel:UILabel!
     private var itemMoneyLabel:UILabel!
     private var itemIconBtn:UIButton!
     private var itemPercentage:UILabel!
     private var itemAccountCount:UILabel!
-    private var yearLabel:UILabel!
     
 //    private var rotateBtn:UIButton!
-    private var pickerView:AKPickerView!
     private var layerBgView:UIView!
     private var dataItem:[CGFloat]!
     
@@ -82,11 +53,9 @@ class PieChartView: UIView {
     
     //MARK: - init
     init(frame:CGRect, layerData:[RotateLayerData], delegate:AKPickerViewDelegate!, dataSource:AKPickerViewDataSource!){
-        self.dataSource = dataSource
-        self.delegate = delegate
         self.layerData = layerData
         
-        super.init(frame: frame)
+        super.init(frame: frame, delegate: delegate, dataSource: dataSource)
         
         self.setDataItems(layerData)
         setupViews(frame)
@@ -119,15 +88,6 @@ class PieChartView: UIView {
         }
     }
     
-    func selectedIncome(sender:UIButton){
-        sender.selected = !sender.selected
-        costBtn.selected = !sender.selected
-    }
-    func selectedCost(sender:UIButton){
-        sender.selected = !sender.selected
-        incomeBtn.selected = !sender.selected
-    }
-    
     func setDataItems(layerDatas:[RotateLayerData]){
         var moneyItems = [CGFloat]()
         for item in layerDatas{
@@ -158,88 +118,16 @@ class PieChartView: UIView {
         }
     }
     
-    func setYear(year:String){
-        self.yearLabel.text = year
-        self.yearLabel.sizeToFit()
-        self.yearLabel.center = CGPointMake(frame.width / 2, 80)
-    }
-    
     //MARK: - setupViews (private)
     private func setupViews(frame:CGRect){
         let incomeAndCostBtnHeight:CGFloat = 80
         let layersHeight = frame.height - 2 * incomeAndCostBtnHeight
         
-        setupIncomeAndCostBtn(CGRectMake(0, 0, frame.width, incomeAndCostBtnHeight))
-        setupScrollMonthView(CGRectMake(0, incomeAndCostBtnHeight, frame.width, incomeAndCostBtnHeight))
         setupRotateLayers(CGRectMake(0, incomeAndCostBtnHeight * 2, frame.width, layersHeight))
         
         if layerData.count > 0{
             reloadDataInPieChartView(layerData[0])
         }
-    }
-    
-    private  func setupIncomeAndCostBtn(frame:CGRect){
-        
-        let btnWidth:CGFloat = 75
-        let btnMargin:CGFloat = 15
-        let bgView = UIView(frame: frame)
-        
-        let incomeBtn = createBtn(CGRectMake(btnMargin, btnMargin, btnWidth, btnWidth), title:"总收入\n0.00", action:"selectedIncome:")
-        self.incomeBtn = incomeBtn
-        let costBtn = createBtn(CGRectMake(frame.width - btnMargin - btnWidth, btnMargin, btnWidth, btnWidth), title:"总支出\n9384.00", action:"selectedCost:")
-        costBtn.titleLabel?.textAlignment = .Right
-        costBtn.selected = true
-        self.costBtn = costBtn
-        let sepline = UIView(frame: CGRectMake(0, frame.height, frame.width, sepLineHeight))
-        sepline.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
-        
-        bgView.addSubview(sepline)
-        bgView.addSubview(incomeBtn)
-        bgView.addSubview(costBtn)
-        self.addSubview(bgView)
-    }
-    private func createBtn(frame:CGRect, title:String, action:Selector)->UIButton{
-        let btn = UIButton(frame: frame)
-        btn.setTitle(title, forState: .Normal)
-        btn.titleLabel?.numberOfLines = 2
-        btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        btn.setTitleColor(UIColor.orangeColor(), forState: .Selected)
-        btn.addTarget(self, action: action, forControlEvents: .TouchUpInside)
-        return btn
-    }
-    
-    private  func setupScrollMonthView(frame:CGRect){
-        
-        let bgView = UIView(frame: frame)
-        
-        let pickerView = AKPickerView(frame: CGRectMake(0, 0, frame.width, frame.height))
-        pickerView.delegate = delegate
-        pickerView.dataSource = dataSource
-        pickerView.font = UIFont(name: "HelveticaNeue-Light", size: 20)!
-        pickerView.highlightedFont = UIFont(name: "HelveticaNeue", size: 20)!
-        pickerView.pickerViewStyle = .Wheel
-        pickerView.maskDisabled = false
-        pickerView.highlightedTextColor = UIColor.orangeColor()
-        pickerView.interitemSpacing = 20
-        pickerView.reloadData()
-        self.pickerView = pickerView
-        
-        let sepline = UIView(frame: CGRectMake(0, frame.height, frame.width, sepLineHeight))
-        sepline.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
-        
-        let yearLabel = UILabel(frame: CGRectMake(0, 0, yearLabelWidth, yearLabelHeight))
-        yearLabel.center = CGPointMake(frame.width / 2, frame.height)
-        yearLabel.backgroundColor = UIColor.whiteColor()
-        yearLabel.textColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0)
-        yearLabel.textAlignment = .Center
-        yearLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14)
-        yearLabel.text = "1900年"
-        self.yearLabel = yearLabel
-        
-        bgView.addSubview(pickerView)
-        bgView.addSubview(sepline)
-        bgView.addSubview(yearLabel)
-        self.addSubview(bgView)
     }
     
     private  func setupRotateLayers(frame:CGRect){

@@ -90,6 +90,12 @@ class PieChartModel: NSObject {
             let percentage = "\(Int(tmpPercent * 100))%"
             data.percent = percentage
         }
+        
+        rotateLayerDataArray.sortInPlace{(item1, item2)->Bool in
+            let item1MoneyFloat = Float(item1.money)
+            let item2MoneyFloat = Float(item2.money)
+            return item1MoneyFloat > item2MoneyFloat
+        }
         self.rotateLayerDataArray = rotateLayerDataArray
         return rotateLayerDataArray
     }
