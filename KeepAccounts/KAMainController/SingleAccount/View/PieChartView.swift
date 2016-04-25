@@ -258,8 +258,6 @@ class PieChartView: AccountDisplayViewBase {
         let path = UIBezierPath(arcCenter: CGPointMake(frame.width/2, frame.height/2), radius: radius, startAngle: CGFloat(-M_PI_2), endAngle: CGFloat(3 * M_PI_2) , clockwise: true)
         let pieLayer = CAShapeLayer()
         pieLayer.path = path.CGPath
-//        pieLayer.frame = CGRectMake(0, 0, layerWidth, layerWidth)
-//        pieLayer.position = CGPointMake(frame.width / 2, frame.height / 2)
         pieLayer.lineWidth = lineWidth
         pieLayer.strokeColor = UIColor(hue: percentageEnd, saturation: 0.5, brightness: 0.75, alpha: 1.0).CGColor
         pieLayer.fillColor = nil

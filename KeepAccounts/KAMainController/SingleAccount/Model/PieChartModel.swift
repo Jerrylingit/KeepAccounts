@@ -30,6 +30,7 @@ class PieChartModel: NSObject {
     
     var mergedMonthlyData = [Int: [String:[AccountItem]]]() //the final data structrue
     var yearArray = [String]()
+    var lineChartDataArray = [RotateLayerData]()
     var rotateLayerDataArray = [RotateLayerData]()
     var mergedDBDataDic = [String:[AccountItem]]() // while the key is iconName and array is items
     var keysOfMergedMonthlyDataAfterDeal:[String]{

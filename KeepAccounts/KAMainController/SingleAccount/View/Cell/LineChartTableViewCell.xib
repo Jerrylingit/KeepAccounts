@@ -60,6 +60,12 @@
                     <constraint firstItem="AX7-lR-mRR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-3" id="vli-S4-Aee"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="icon" destination="AX7-lR-mRR" id="mY3-0X-P0I"/>
+                <outlet property="money" destination="WLB-N7-uve" id="pIq-zn-NqP"/>
+                <outlet property="percentage" destination="6Zg-Xu-pD0" id="W1O-ER-0JQ"/>
+                <outlet property="title" destination="tgv-Ps-Ju8" id="UVQ-pk-P5F"/>
+            </connections>
             <point key="canvasLocation" x="627" y="363"/>
         </tableViewCell>
     </objects>

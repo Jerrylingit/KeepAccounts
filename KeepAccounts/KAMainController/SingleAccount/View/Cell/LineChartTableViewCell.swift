@@ -10,6 +10,10 @@ import UIKit
 
 class LineChartTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var percentage: UIView!
+    @IBOutlet weak var money: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

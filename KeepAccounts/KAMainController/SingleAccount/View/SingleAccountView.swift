@@ -187,6 +187,7 @@ class SingleAccountView: UIView {
         DayAccountsView.delegate = delegate
         DayAccountsView.rowHeight = UITableViewAutomaticDimension
         DayAccountsView.showsVerticalScrollIndicator = false
+        
         let midColumnLine = UIView(frame: CGRectMake(self.center.x - 2, -300, 1, 300))
         midColumnLine.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
         DayAccountsView.addSubview(midColumnLine)
