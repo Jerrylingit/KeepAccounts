@@ -28,11 +28,21 @@ class RotateLayerData:NSObject {
 class PieChartModel: NSObject {
     //MARK: - properties (public)
     
-    var mergedMonthlyData = [Int: [String:[AccountItem]]]() //the final data structrue
     var yearArray = [String]()
-    var lineChartDataArray = [RotateLayerData]()
+    
+    var mergedMonthlyData = [Int: [String:[AccountItem]]]() //the final data structrue
+    var mergedByDateData = []
+    
+    var lineChartTableViewData = [RotateLayerData]()
     var rotateLayerDataArray = [RotateLayerData]()
+    
     var mergedDBDataDic = [String:[AccountItem]]() // while the key is iconName and array is items
+    
+    var keysOfMergedMonthlyDataLineChart: [String]{
+        var tmp = keysOfMergedMonthlyDataAfterDeal
+        tmp.removeAtIndex(0)
+        return tmp
+    }
     var keysOfMergedMonthlyDataAfterDeal:[String]{
         var items = [String]()
         let itemsArray = Array(mergedMonthlyData.keys)
@@ -101,6 +111,15 @@ class PieChartModel: NSObject {
         return rotateLayerDataArray
     }
     
+    func setRotateLayerDataArrayWithDataItem(dataItem:[String:[AccountItem]]){
+        self.rotateLayerDataArray = getLayerDataItem(dataItem)
+    }
+    
+    func setLineChartTableViewDataWithDataItem(dataItem:[String:[AccountItem]]){
+        let tmp = getLayerDataItem(dataItem)
+        lineChartTableViewData = tmp
+    }
+    
     func getMergedMonthlyDataAtIndex(index:Int) -> [String:[AccountItem]] {
         let itemsArray = Array(mergedMonthlyData.keys)
         let key = itemsArray[index]
@@ -119,21 +138,7 @@ class PieChartModel: NSObject {
             for (_, value) in dbData.enumerate(){
                 let dateComp = NSDate.intervalToDateComponent(NSTimeInterval(value.date))
                 if dateCompRef.year == dateComp.year && dateCompRef.month == dateComp.month {
-                    //same month, append item to eachMonthItems
-//                    if dateCompRef.month == dateComp.month{
-                        eachMonthItems.append(value)
-//                    }
-//                    //different month, put eachMonthItems into monthDic with monthKey, remove all items in eachMonthItems and add current dbData[i]
-//                    else{
-//                        yearArray.append("\(dateComp.year)年")
-//                        monthDic[monthKey] = eachMonthItems  //put eachMonthItems into monthDic with monthKey
-//                        
-//                        eachMonthItems.removeAll() //remove all items in eachMonthItems
-//                        monthKey = value.date //update monthKey
-//                        eachMonthItems.append(value) //add current dbData[i]
-//                        
-//                        dateCompRef = dateComp //change dateCompRef to current dbData[i]
-//                    }
+                    eachMonthItems.append(value)
                 }
                 else{
                     yearArray.append("\(dateComp.year)年")

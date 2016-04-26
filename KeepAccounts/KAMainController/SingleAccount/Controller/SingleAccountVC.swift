@@ -89,9 +89,10 @@ class SingleAccountVC: UIViewController{
     private func setupPickerView(frame:CGRect) -> PieChartView{
         let pieChartModel = PieChartModel(dbName: singleAccountModel.initDBName)
         self.pieChartModel = pieChartModel
-        
-        let pieChartView = PieChartView(frame: frame, layerData: pieChartModel.getLayerDataItem(pieChartModel.mergedDBDataDic), delegate:self, dataSource:self)
+        pieChartModel.setRotateLayerDataArrayWithDataItem(pieChartModel.mergedDBDataDic)
+        let pieChartView = PieChartView(frame: frame, layerData: pieChartModel.rotateLayerDataArray, delegate:self, dataSource:self)
         pieChartView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
+        // maybebug
         pieChartView.setYear(pieChartModel.yearArray[0])
         self.pieChartView = pieChartView
         return pieChartView
@@ -99,6 +100,9 @@ class SingleAccountVC: UIViewController{
     private func setupLineView(frame:CGRect)->LineChartView{
         let lineView = LineChartView(frame: frame, delegate: self, dataSource: self, tableViewDelegate: self)
         lineView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
+        pieChartModel.setLineChartTableViewDataWithDataItem(pieChartModel.getMergedMonthlyDataAtIndex(1))
+        
+        // maybebug
         lineView.setYear(pieChartModel.yearArray[1])
         return lineView
     }
@@ -117,7 +121,6 @@ extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
             count = count >= 0 ? count : 0
         }
         return count
-        
     }
     
     func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
@@ -135,8 +138,8 @@ extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
         
         if pickerView.superview?.isKindOfClass(PieChartView) == true{
-            let layerData = pieChartModel.getLayerDataItem(pieChartModel.getMergedMonthlyDataAtIndex(item))
-            pieChartView.updateByLayerData(layerData)
+            pieChartModel.setRotateLayerDataArrayWithDataItem(pieChartModel.getMergedMonthlyDataAtIndex(item))
+            pieChartView.updateByLayerData(pieChartModel.rotateLayerDataArray)
             pieChartView.setYear(pieChartModel.yearArray[item])
         }
         else if pickerView.superview?.isKindOfClass(LineChartView) == true{
