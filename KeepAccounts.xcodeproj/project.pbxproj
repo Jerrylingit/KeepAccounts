@@ -51,6 +51,7 @@
 		84E6ABCF1CA2948000CBA148 /* ComputedBoardLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6ABCE1CA2948000CBA148 /* ComputedBoardLogic.swift */; };
 		84E6CFBB1CACAA9C00CA29AF /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6CFBA1CACAA9C00CA29AF /* CustomAlertView.swift */; };
 		84E6CFBD1CACF99700CA29AF /* FlagBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6CFBC1CACF99700CA29AF /* FlagBtn.swift */; };
+		84ED56CE1CCF1F030029CD34 /* LineChartViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED56CD1CCF1F030029CD34 /* LineChartViewComponent.swift */; };
 		84EFCC6B1CBE1D3A00627311 /* BgScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC6A1CBE1D3A00627311 /* BgScrollView.swift */; };
 		84EFCC6F1CBE241100627311 /* PieChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC6E1CBE241100627311 /* PieChartModel.swift */; };
 		84EFCC711CBE242000627311 /* LineChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC701CBE242000627311 /* LineChartModel.swift */; };
@@ -145,6 +146,7 @@
 		84E6ABCE1CA2948000CBA148 /* ComputedBoardLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputedBoardLogic.swift; sourceTree = "<group>"; };
 		84E6CFBA1CACAA9C00CA29AF /* CustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		84E6CFBC1CACF99700CA29AF /* FlagBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagBtn.swift; sourceTree = "<group>"; };
+		84ED56CD1CCF1F030029CD34 /* LineChartViewComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartViewComponent.swift; sourceTree = "<group>"; };
 		84EFCC6A1CBE1D3A00627311 /* BgScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BgScrollView.swift; sourceTree = "<group>"; };
 		84EFCC6E1CBE241100627311 /* PieChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartModel.swift; sourceTree = "<group>"; };
 		84EFCC701CBE242000627311 /* LineChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartModel.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				84EFCC781CBE245800627311 /* BudgetView.swift */,
 				847D28A41CC070780076AD3F /* AKPickerView.swift */,
 				84ADF78A1CCDC46500220CC3 /* AccountDisplayViewBase.swift */,
+				84ED56CD1CCF1F030029CD34 /* LineChartViewComponent.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				84E5798F1C917BE90007295B /* SingleAccountVC.swift in Sources */,
 				84E4B2961CA9283100400F56 /* AccountBookCell.swift in Sources */,
 				84DDFDB11C75C039003F077F /* FMDatabasePool.m in Sources */,
+				84ED56CE1CCF1F030029CD34 /* LineChartViewComponent.swift in Sources */,
 				848187E11CAA193C005B0875 /* MainVCModel.swift in Sources */,
 				84E4B28E1CA91D3D00400F56 /* MainView.swift in Sources */,
 				84FFE80A1C97E62C00A0CAAB /* String+Extension.swift in Sources */,

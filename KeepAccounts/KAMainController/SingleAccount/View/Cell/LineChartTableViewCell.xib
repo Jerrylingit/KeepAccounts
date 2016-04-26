@@ -18,7 +18,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="888.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLB-N7-uve">
                         <rect key="frame" x="256" y="19" width="56" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="6Zg-Xu-pD0">
@@ -28,11 +28,11 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一般" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgv-Ps-Ju8">
                         <rect key="frame" x="73" y="19" width="30" height="21"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UiB-l0-nbq">
-                        <rect key="frame" x="0.0" y="59" width="320" height="1"/>
+                        <rect key="frame" x="0.0" y="58" width="320" height="1"/>
                         <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="XPB-bA-sah"/>
@@ -59,7 +59,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="6Zg-Xu-pD0" secondAttribute="bottom" constant="19" id="J3J-hr-Ica"/>
                     <constraint firstAttribute="trailingMargin" secondItem="UiB-l0-nbq" secondAttribute="trailing" constant="-8" id="JEO-Wk-6EQ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="WLB-N7-uve" secondAttribute="trailing" id="M8J-H0-Znp"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="UiB-l0-nbq" secondAttribute="bottom" constant="-9" id="Nqj-2U-DLr"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="UiB-l0-nbq" secondAttribute="bottom" constant="-8" id="Nqj-2U-DLr"/>
                     <constraint firstAttribute="bottomMargin" secondItem="AX7-lR-mRR" secondAttribute="bottom" constant="1" id="avI-uJ-5GQ"/>
                     <constraint firstAttribute="bottomMargin" secondItem="tgv-Ps-Ju8" secondAttribute="bottom" constant="11" id="cfU-ph-yK2"/>
                     <constraint firstItem="tgv-Ps-Ju8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="d3a-a8-Xph"/>

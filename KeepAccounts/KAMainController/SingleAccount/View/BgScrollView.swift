@@ -18,5 +18,4 @@ class BgScrollView: UIScrollView, UIGestureRecognizerDelegate {
             return true
         }
     }
-
 }

@@ -281,10 +281,10 @@ extension SingleAccountVC:UITableViewDataSource, UITableViewDelegate{
             cell.icon.image = UIImage(named: item.icon)
             cell.layoutIfNeeded()
             
-            let widthScale = Float(item.money)! / Float(pieChartModel.lineChartTableViewData[0].money)!
+            var widthScale = Float(item.money)! / Float(pieChartModel.lineChartTableViewData[0].money)!
+            widthScale = widthScale > 0.01 ? widthScale :0.01
             cell.constraintBtwnPercentageAndMoney.constant = cell.percentage.width - cell.percentage.width * CGFloat(widthScale) + CGFloat(23.0)
             cell.percentage.backgroundColor = UIColor(hue: CGFloat(widthScale), saturation: 0.4, brightness: 0.8, alpha: 1.0)
-            print(cell.percentage.width)
             return cell
         }
         return UITableViewCell()

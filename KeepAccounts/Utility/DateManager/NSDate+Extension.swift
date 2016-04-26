@@ -22,5 +22,18 @@ extension NSDate{
         let calCom = cal.components([.Year, .Month, .Day], fromDate: date)
         return calCom
     }
-    
+    class func numberOfDaysInMonthWithDate(date:NSDate)->Int{
+        let comp = NSCalendar.currentCalendar().rangeOfUnit(.Day, inUnit: .Month, forDate: date)
+        return comp.length
+    }
+    class func numberOfDaysInMonthWithInterval(interval:NSTimeInterval)->Int{
+        let date = NSDate(timeIntervalSince1970: interval)
+        return numberOfDaysInMonthWithDate(date)
+    }
+    class func getFirstDayOfMonthWithDate(date:NSDate)->NSDate?{
+        let cal = NSCalendar.currentCalendar()
+        let comp = cal.components([.Year, .Month, .Day], fromDate: date)
+        comp.day = 1
+        return cal.dateFromComponents(comp)
+    }
 }

@@ -25,14 +25,38 @@ class RotateLayerData:NSObject {
     }
 }
 
+
+class LineChartInfoData:NSObject{
+    let money:Float
+    let date:String
+    let week:String
+    init(money:Float, date:String, week:String){
+        self.money = money
+        self.date = date
+        self.week = week
+        super.init()
+    }
+}
+
+private let secondsPerDay:NSTimeInterval = 86400
+private let weekChinese = ["日", "一", "二", "三", "四", "五", "六"]
+
 class PieChartModel: NSObject {
     //MARK: - properties (public)
     
     var yearArray = [String]()
     var monthArray = [Int]()
     
+    var lineChartInfoArray = [LineChartInfoData]()
+    var lineChartMoneyArray:[Float]{
+        var tmp = [Float]()
+        for value in lineChartInfoArray{
+            tmp.append(value.money)
+        }
+        return tmp
+    }
+    
     var mergedMonthlyData = [Int: [String:[AccountItem]]]() //the final data structrue
-    var mergedByDateData = []
     
     var lineChartTableViewData = [RotateLayerData]()
     var rotateLayerDataArray = [RotateLayerData]()
@@ -56,7 +80,6 @@ class PieChartModel: NSObject {
         }
         return items
     }
-    
     
     //MARK: - properties (private)
     private var initDBName:String
@@ -118,12 +141,46 @@ class PieChartModel: NSObject {
         self.lineChartTableViewData = getLayerDataItem(dataItem)
     }
     
+    func setLineChartInfoArrayWithMonthData(item:[AccountItem], interval:NSTimeInterval){
+        
+        let tmpDate =  NSDate(timeIntervalSince1970: interval)
+        let numOfDays = NSDate.numberOfDaysInMonthWithDate(tmpDate)
+        var firstDateOfMonth = NSDate.getFirstDayOfMonthWithDate(tmpDate)!
+        let reverseItem = item.reverse()
+        
+        for _ in 1...numOfDays{
+            
+            let compRef = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday], fromDate: firstDateOfMonth)
+            var money:Float = 0.0
+            let date = "\(compRef.month)月\(compRef.day)日"
+            let week = "星期\(weekChinese[compRef.weekday])"
+            
+            for value in reverseItem{
+                let itemComp = getCompWithDate(value.date)
+                if compRef.day == itemComp.day{
+                    money += Float(value.money) ?? 0
+                }
+            }
+            
+            lineChartInfoArray.append(LineChartInfoData(money: money, date: date, week: week))
+            let nextDateInterval = firstDateOfMonth.timeIntervalSince1970 + secondsPerDay
+            firstDateOfMonth = NSDate(timeIntervalSince1970: nextDateInterval)
+        }
+    }
+    
+    
     func getMergedMonthlyDataAtIndex(index:Int) -> [String:[AccountItem]] {
         let key = monthArray[index]
         return mergedMonthlyData[key]!
     }
     
     //MARK: - methods (private)
+    private func getCompWithDate(date:Int)->NSDateComponents{
+        let itemDate = NSDate(timeIntervalSince1970: NSTimeInterval(date))
+        let itemComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday], fromDate: itemDate)
+        return itemComp
+    }
+    
     private func groupDateByMonth(){
         if dbData.count > 0 {
             var eachMonthItems = [AccountItem]()
