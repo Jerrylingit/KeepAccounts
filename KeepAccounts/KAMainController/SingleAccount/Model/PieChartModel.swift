@@ -29,6 +29,7 @@ class PieChartModel: NSObject {
     //MARK: - properties (public)
     
     var yearArray = [String]()
+    var monthArray = [Int]()
     
     var mergedMonthlyData = [Int: [String:[AccountItem]]]() //the final data structrue
     var mergedByDateData = []
@@ -45,9 +46,8 @@ class PieChartModel: NSObject {
     }
     var keysOfMergedMonthlyDataAfterDeal:[String]{
         var items = [String]()
-        let itemsArray = Array(mergedMonthlyData.keys)
         items.append("全部")
-        for (_, value) in itemsArray.enumerate(){
+        for value in monthArray{
             if value != -1{
                 let interval = NSTimeInterval(value)
                 let month = NSDate.intervalToDateComponent(interval).month
@@ -107,7 +107,6 @@ class PieChartModel: NSObject {
             let item2MoneyFloat = Float(item2.money)
             return item1MoneyFloat > item2MoneyFloat
         }
-        self.rotateLayerDataArray = rotateLayerDataArray
         return rotateLayerDataArray
     }
     
@@ -116,13 +115,11 @@ class PieChartModel: NSObject {
     }
     
     func setLineChartTableViewDataWithDataItem(dataItem:[String:[AccountItem]]){
-        let tmp = getLayerDataItem(dataItem)
-        lineChartTableViewData = tmp
+        self.lineChartTableViewData = getLayerDataItem(dataItem)
     }
     
     func getMergedMonthlyDataAtIndex(index:Int) -> [String:[AccountItem]] {
-        let itemsArray = Array(mergedMonthlyData.keys)
-        let key = itemsArray[index]
+        let key = monthArray[index]
         return mergedMonthlyData[key]!
     }
     
@@ -134,7 +131,6 @@ class PieChartModel: NSObject {
             var dateCompRef = NSDate.intervalToDateComponent(NSTimeInterval(dbData[0].date))
             var monthKey = dbData[0].date
             yearArray.append("\(dateCompRef.year)年")
-            
             for (_, value) in dbData.enumerate(){
                 let dateComp = NSDate.intervalToDateComponent(NSTimeInterval(value.date))
                 if dateCompRef.year == dateComp.year && dateCompRef.month == dateComp.month {
@@ -142,7 +138,7 @@ class PieChartModel: NSObject {
                 }
                 else{
                     yearArray.append("\(dateComp.year)年")
-                    
+                    monthArray.append(monthKey)
                     monthDic[monthKey] = eachMonthItems
                     
                     eachMonthItems.removeAll() //remove all items in eachMonthItems
@@ -153,6 +149,7 @@ class PieChartModel: NSObject {
                 }
             }
             //put the last key-value into monthDic
+            monthArray.append(monthKey)
             monthDic[monthKey] = eachMonthItems
             if yearArray[yearArray.endIndex - 1] == yearArray[yearArray.startIndex]{
                 let allYear = yearArray[yearArray.startIndex]
@@ -189,6 +186,7 @@ class PieChartModel: NSObject {
             //all
             mergedDBDataDic = mergeSameItem(dbData)
             mergedMonthlyData[-1] = mergeSameItem(dbData)
+            monthArray.insert(-1, atIndex: 0)
             //monthly
             for (key, monthDataArray) in monthDic{
                 mergedMonthlyData[key] = mergeSameItem(monthDataArray)

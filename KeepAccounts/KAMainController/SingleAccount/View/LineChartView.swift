@@ -29,6 +29,10 @@ class LineChartView: AccountDisplayViewBase {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func updateViews(){
+        monthDataTableView.reloadData()
+    }
+    
     
     //MARK: - setup views(private)
     private func setupViews(frame:CGRect){
@@ -41,6 +45,7 @@ class LineChartView: AccountDisplayViewBase {
         tableView.registerNib(UINib(nibName: "LineChartTableViewCell", bundle: nil), forCellReuseIdentifier: "LineChartTableViewCell")
         tableView.delegate = tableViewDelegate
         tableView.dataSource = tableViewDelegate
+        tableView.separatorStyle = .None
         monthDataTableView = tableView
         self.addSubview(tableView)
     }

@@ -10,6 +10,7 @@ import UIKit
 
 class LineChartTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var constraintBtwnPercentageAndMoney: NSLayoutConstraint!
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var percentage: UIView!
@@ -17,6 +18,10 @@ class LineChartTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    override func prepareForReuse() {
+        constraintBtwnPercentageAndMoney.constant = 23
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -101,7 +101,6 @@ class SingleAccountVC: UIViewController{
         let lineView = LineChartView(frame: frame, delegate: self, dataSource: self, tableViewDelegate: self)
         lineView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
         pieChartModel.setLineChartTableViewDataWithDataItem(pieChartModel.getMergedMonthlyDataAtIndex(1))
-        
         // maybebug
         lineView.setYear(pieChartModel.yearArray[1])
         return lineView
@@ -143,6 +142,8 @@ extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
             pieChartView.setYear(pieChartModel.yearArray[item])
         }
         else if pickerView.superview?.isKindOfClass(LineChartView) == true{
+            pieChartModel.setLineChartTableViewDataWithDataItem(pieChartModel.getMergedMonthlyDataAtIndex(item + 1))
+            lineChartView.updateViews()
             lineChartView.setYear(pieChartModel.yearArray[item + 1])
         }
     }
@@ -196,7 +197,7 @@ extension SingleAccountVC:UITableViewDataSource, UITableViewDelegate{
             count = singleAccountModel.itemAccounts.count
         }
         else if tableView.superview?.isKindOfClass(LineChartView) == true {
-            count = pieChartModel.rotateLayerDataArray.count
+            count = pieChartModel.lineChartTableViewData.count
         }
         return count
     }
@@ -274,15 +275,16 @@ extension SingleAccountVC:UITableViewDataSource, UITableViewDelegate{
         else if tableView.superview?.isKindOfClass(LineChartView) == true {
             let cell = tableView.dequeueReusableCellWithIdentifier("LineChartTableViewCell", forIndexPath: indexPath) as! LineChartTableViewCell
             
-            let item = pieChartModel.rotateLayerDataArray[indexPath.row + 1]
+            let item = pieChartModel.lineChartTableViewData[indexPath.row]
             cell.money.text = item.money
             cell.title.text = item.title
             cell.icon.image = UIImage(named: item.icon)
+            cell.layoutIfNeeded()
             
-            let widthScale = Float(item.money)! / Float(pieChartModel.rotateLayerDataArray[0].money)!
-            cell.percentage.width = cell.percentage.width * CGFloat(widthScale)
-            cell.percentage.backgroundColor = UIColor(hue: CGFloat(widthScale), saturation: 0.7, brightness: 0.5, alpha: 1.0)
-            
+            let widthScale = Float(item.money)! / Float(pieChartModel.lineChartTableViewData[0].money)!
+            cell.constraintBtwnPercentageAndMoney.constant = cell.percentage.width - cell.percentage.width * CGFloat(widthScale) + CGFloat(23.0)
+            cell.percentage.backgroundColor = UIColor(hue: CGFloat(widthScale), saturation: 0.4, brightness: 0.8, alpha: 1.0)
+            print(cell.percentage.width)
             return cell
         }
         return UITableViewCell()
