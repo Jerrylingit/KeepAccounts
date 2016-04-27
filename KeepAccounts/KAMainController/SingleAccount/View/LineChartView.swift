@@ -17,8 +17,14 @@ class LineChartView: AccountDisplayViewBase {
     private var lineChartHeight:CGFloat{
         return (bounds.height - 160.0) / 2
     }
+    private var lineChart:LineChartViewComponent!
+    private var pointDataItem:[Float]!
+    private var infoDataItem:[LineChartInfoData]!
+    
     //init (internal)
-    init(frame:CGRect, delegate:AKPickerViewDelegate!, dataSource:AKPickerViewDataSource,tableViewDelegate:SingleAccountVC!){
+    init(frame:CGRect, infoDataItem:[LineChartInfoData]!, pointDataItem:[Float]!, delegate:AKPickerViewDelegate!, dataSource:AKPickerViewDataSource,tableViewDelegate:SingleAccountVC!){
+        self.infoDataItem = infoDataItem
+        self.pointDataItem = pointDataItem
         self.tableViewDelegate = tableViewDelegate
         super.init(frame: frame, delegate: delegate, dataSource: dataSource)
         setupViews(frame)
@@ -28,7 +34,10 @@ class LineChartView: AccountDisplayViewBase {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateViews(){
+    func updateViews(infoDataItem:[LineChartInfoData], pointDataItem:[Float]){
+        lineChart.pointDataItem = pointDataItem
+        lineChart.infoDataItem = infoDataItem
+        lineChart.setNeedsDisplay()
         monthDataTableView.reloadData()
     }
     
@@ -39,7 +48,7 @@ class LineChartView: AccountDisplayViewBase {
     }
     
     private func setupLineChartView(frame:CGRect){
-        let lineChart = LineChartViewComponent(frame: frame)
+        lineChart = LineChartViewComponent(frame: frame, pointDataItem: pointDataItem, infoDataItem: infoDataItem)
         
         let sepLine = UIView(frame: CGRect(x: 0, y: frame.height - 1 + frame.origin.y, width: frame.width, height: 0.5))
         sepLine.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)

@@ -56,6 +56,7 @@ class PieChartModel: NSObject {
         return tmp
     }
     
+    var monthDic = [Int:[AccountItem]]() //while the key is month and array is items
     var mergedMonthlyData = [Int: [String:[AccountItem]]]() //the final data structrue
     
     var lineChartTableViewData = [RotateLayerData]()
@@ -83,7 +84,7 @@ class PieChartModel: NSObject {
     
     //MARK: - properties (private)
     private var initDBName:String
-    private var monthDic = [Int:[AccountItem]]() //while the key is month and array is items
+    
     
     private var dbData:[AccountItem]{
         return AccoutDB.selectDataOrderByDate(initDBName)
@@ -147,13 +148,14 @@ class PieChartModel: NSObject {
         let numOfDays = NSDate.numberOfDaysInMonthWithDate(tmpDate)
         var firstDateOfMonth = NSDate.getFirstDayOfMonthWithDate(tmpDate)!
         let reverseItem = item.reverse()
+        lineChartInfoArray.removeAll()
         
         for _ in 1...numOfDays{
             
             let compRef = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday], fromDate: firstDateOfMonth)
             var money:Float = 0.0
             let date = "\(compRef.month)月\(compRef.day)日"
-            let week = "星期\(weekChinese[compRef.weekday])"
+            let week = "星期\(weekChinese[compRef.weekday - 1])"
             
             for value in reverseItem{
                 let itemComp = getCompWithDate(value.date)

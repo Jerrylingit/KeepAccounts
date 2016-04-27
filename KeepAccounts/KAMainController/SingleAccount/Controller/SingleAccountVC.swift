@@ -98,7 +98,10 @@ class SingleAccountVC: UIViewController{
         return pieChartView
     }
     private func setupLineView(frame:CGRect)->LineChartView{
-        let lineView = LineChartView(frame: frame, delegate: self, dataSource: self, tableViewDelegate: self)
+        let key = pieChartModel.monthArray[1]
+        pieChartModel.setLineChartInfoArrayWithMonthData(pieChartModel.monthDic[key]!, interval: NSTimeInterval(key))
+        
+        let lineView = LineChartView(frame: frame, infoDataItem: pieChartModel.lineChartInfoArray, pointDataItem: pieChartModel.lineChartMoneyArray,  delegate: self, dataSource: self, tableViewDelegate: self)
         lineView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
         pieChartModel.setLineChartTableViewDataWithDataItem(pieChartModel.getMergedMonthlyDataAtIndex(1))
         // maybebug
@@ -143,7 +146,9 @@ extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
         }
         else if pickerView.superview?.isKindOfClass(LineChartView) == true{
             pieChartModel.setLineChartTableViewDataWithDataItem(pieChartModel.getMergedMonthlyDataAtIndex(item + 1))
-            lineChartView.updateViews()
+            let key = pieChartModel.monthArray[item + 1]
+            pieChartModel.setLineChartInfoArrayWithMonthData(pieChartModel.monthDic[key]!, interval: NSTimeInterval(key))
+            lineChartView.updateViews(pieChartModel.lineChartInfoArray, pointDataItem: pieChartModel.lineChartMoneyArray)
             lineChartView.setYear(pieChartModel.yearArray[item + 1])
         }
     }
