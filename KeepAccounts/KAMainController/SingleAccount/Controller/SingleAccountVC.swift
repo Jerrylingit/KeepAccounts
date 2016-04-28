@@ -58,6 +58,7 @@ class SingleAccountVC: UIViewController{
     //MARK: - setup views (private)
     private func setupMainView(){
         let bgScrollView = setupBgScrollView(self.view.bounds)
+        bgScrollView.delaysContentTouches = false
         
         mainView = setupSingleAccountView(self.view.bounds)
 

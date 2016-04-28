@@ -23,35 +23,94 @@ class LineChartViewComponent: UIView {
     var pointDataItem:[Float]!
     var infoDataItem:[LineChartInfoData]!
     
+    private var backColumnAverWidth:CGFloat{
+        return bounds.width / CGFloat(backColumnLineCount + 1)
+    }
+    private var backColumnAverHeight:CGFloat{
+        return bounds.height - chartTop - chartBottom
+    }
+    
+    private var weekLabel:UILabel!
+    private var dateLabel:UILabel!
+    private var moneyLabel:UILabel!
+    private var curPosLabel:UILabel!
+    private var infoView:UIView!
+    
+    
     //init
     init(frame:CGRect, pointDataItem:[Float], infoDataItem:[LineChartInfoData]){
         self.pointDataItem = pointDataItem
         self.infoDataItem = infoDataItem
         super.init(frame: frame)
         self.backgroundColor = UIColor.whiteColor()
+        setupInfoView(frame)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("Moved")
-    }
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        print("Cancelled")
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touched = touches.first
+        if let location = touched?.locationInView(self){
+            showInfoView(location)
+        }
+        
+        infoView.hidden = false
+        curPosLabel.hidden = false
     }
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        infoView.hidden = true
+        curPosLabel.hidden = true
         print("Ended")
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("Began")
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touched = touches.first
+        
+        if let location = touched?.locationInView(self){
+            showInfoView(location)
+        }
+        
+    }
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        infoView.hidden = true
+        curPosLabel.hidden = true
+        print("Cancelled")
+    }
+    
+    func showInfoView(point:CGPoint){
+        let backColumnAverWidth = self.backColumnAverWidth
+        
+        var num = round((point.x)/backColumnAverWidth)
+        if num == 0 {
+            num = 1
+        }
+        else if num >= CGFloat(pointDataItem.count){
+            num = CGFloat(pointDataItem.count)
+        }
+        let offsetX = num * backColumnAverWidth
+        if offsetX < infoView.width/2{
+            infoView.centerX = infoView.width/2
+        }
+        else if offsetX > self.width - infoView.width/2{
+            infoView.centerX = self.width - infoView.width/2
+        }
+        else{
+            infoView.centerX = offsetX
+        }
+        curPosLabel.x = offsetX
+        let item = infoDataItem[Int(num - 1)]
+        moneyLabel.text = String(item.money)
+        dateLabel.text = item.date
+        weekLabel.text = item.week
+        
+        print("Moved: \(num)")
     }
     
     override func drawRect(rect: CGRect) {
         //draw back column line
-        let backColumnAverWidth = bounds.width / CGFloat(backColumnLineCount + 1)
-        let backColumnAverHeight = bounds.height - chartTop - chartBottom
+        let backColumnAverWidth = self.backColumnAverWidth
+        let backColumnAverHeight = self.backColumnAverHeight
         let pointCount = pointDataItem.count
         
         let context = UIGraphicsGetCurrentContext()
@@ -134,7 +193,48 @@ class LineChartViewComponent: UIView {
             dotPath.stroke()
             dotPath.fill()
         }
-        
-        
     }
+    func setupInfoView(frame:CGRect){
+        
+        let infoViewWidth:CGFloat = bounds.width/4
+        let infoViewlHeight:CGFloat = 40
+        
+        
+        let infoView = UIView(frame: CGRect(x: 0, y: 0, width: infoViewWidth, height: infoViewlHeight))
+        infoView.backgroundColor = UIColor.orangeColor()
+        infoView.layer.cornerRadius = 5
+        
+        let moneyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: infoViewWidth, height: infoViewlHeight/2))
+        moneyLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 14)
+        moneyLabel.text = "1000000.00"
+        
+        let dateLabel = UILabel(frame: CGRect(x: 0, y: infoViewlHeight/2, width: infoViewWidth/2 , height: infoViewlHeight/2))
+        dateLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 11)
+        dateLabel.textAlignment = .Left
+        dateLabel.text = "04月12日"
+        
+        let weekLabel = UILabel(frame: CGRect(x: infoViewWidth/2, y: infoViewlHeight/2, width: infoViewWidth/2, height: infoViewlHeight/2))
+        weekLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 11)
+        weekLabel.textAlignment = .Right
+        weekLabel.text = "星期六"
+        
+        let curPosLabel = UILabel(frame: CGRect(x: 10, y: infoViewlHeight, width: 0.5, height: self.backColumnAverHeight - infoViewlHeight))
+        curPosLabel.backgroundColor = UIColor.orangeColor()
+        
+        
+        infoView.addSubview(moneyLabel)
+        infoView.addSubview(dateLabel)
+        infoView.addSubview(weekLabel)
+        
+        self.weekLabel = weekLabel
+        self.dateLabel = dateLabel
+        self.moneyLabel = moneyLabel
+        self.curPosLabel = curPosLabel
+        self.infoView = infoView
+        infoView.hidden = true
+        curPosLabel.hidden = true
+        self.addSubview(infoView)
+        self.addSubview(curPosLabel)
+    }
+    
 }

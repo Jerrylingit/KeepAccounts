@@ -18,4 +18,11 @@ class BgScrollView: UIScrollView, UIGestureRecognizerDelegate {
             return true
         }
     }
+    
+    override func touchesShouldCancelInContentView(view: UIView) -> Bool {
+        if view.isKindOfClass(LineChartViewComponent){
+            return false
+        }
+        return true
+    }
 }

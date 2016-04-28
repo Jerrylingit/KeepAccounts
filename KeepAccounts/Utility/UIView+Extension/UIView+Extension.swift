@@ -29,6 +29,26 @@ extension UIView{
             self.frame = frame
         }
     }
+    var x:CGFloat{
+        get{
+            return self.frame.origin.x
+        }
+        set(newValue){
+            var frame = self.frame
+            frame.origin.x = newValue
+            self.frame = frame
+        }
+    }
+    var y:CGFloat{
+        get{
+            return self.frame.origin.y
+        }
+        set(newValue){
+            var frame = self.frame
+            frame.origin.y = newValue
+            self.frame = frame
+        }
+    }
     var centerX:CGFloat{
         get{
             return self.center.x
