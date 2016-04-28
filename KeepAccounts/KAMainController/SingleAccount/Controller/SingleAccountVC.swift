@@ -101,15 +101,17 @@ class SingleAccountVC: UIViewController{
         return pieChartView
     }
     private func setupLineView(frame:CGRect)->LineChartView{
-        let key = pieChartModel.monthArray[1]
-        pieChartModel.setLineChartInfoArrayWithMonthData(pieChartModel.monthDic[key]!, interval: NSTimeInterval(key))
-        
-        let lineView = LineChartView(frame: frame, infoDataItem: pieChartModel.lineChartInfoArray, pointDataItem: pieChartModel.lineChartMoneyArray,  delegate: self, dataSource: self, tableViewDelegate: self)
-        lineView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
-        pieChartModel.setLineChartTableViewDataWithDataItem(pieChartModel.getMergedMonthlyDataAtIndex(1))
-        // maybebug
-        lineView.setYear(pieChartModel.yearArray[1])
-        return lineView
+        if pieChartModel.monthArray.count > 0{
+            let key = pieChartModel.monthArray[1]
+            pieChartModel.setLineChartInfoArrayWithMonthData(pieChartModel.monthDic[key]!, interval: NSTimeInterval(key))
+            let lineView = LineChartView(frame: frame, infoDataItem: pieChartModel.lineChartInfoArray, pointDataItem: pieChartModel.lineChartMoneyArray,  delegate: self, dataSource: self, tableViewDelegate: self)
+            lineView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
+            pieChartModel.setLineChartTableViewDataWithDataItem(pieChartModel.getMergedMonthlyDataAtIndex(1))
+            // maybebug
+            lineView.setYear(pieChartModel.yearArray[1])
+            return lineView
+        }
+        return LineChartView(frame: frame, infoDataItem: nil, pointDataItem: nil,  delegate: self, dataSource: self, tableViewDelegate: self)
     }
 }
 
