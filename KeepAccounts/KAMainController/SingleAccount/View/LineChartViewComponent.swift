@@ -29,11 +29,23 @@ class LineChartViewComponent: UIView {
         self.infoDataItem = infoDataItem
         super.init(frame: frame)
         self.backgroundColor = UIColor.whiteColor()
-        
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("Moved")
+    }
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        print("Cancelled")
+    }
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("Ended")
+    }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("Began")
     }
     
     override func drawRect(rect: CGRect) {
@@ -69,7 +81,7 @@ class LineChartViewComponent: UIView {
         }
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .Center
-        let attrs = [NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 16)!,
+        let attrs = [NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 16)!,
             NSParagraphStyleAttributeName: paragraphStyle,
             NSForegroundColorAttributeName: UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)]
         for i in 0..<pointCount{

@@ -93,7 +93,9 @@ class SingleAccountVC: UIViewController{
         let pieChartView = PieChartView(frame: frame, layerData: pieChartModel.rotateLayerDataArray, delegate:self, dataSource:self)
         pieChartView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
         // maybebug
-        pieChartView.setYear(pieChartModel.yearArray[0])
+        if pieChartModel.yearArray.count > 0{
+            pieChartView.setYear(pieChartModel.yearArray[0])
+        }
         self.pieChartView = pieChartView
         return pieChartView
     }
