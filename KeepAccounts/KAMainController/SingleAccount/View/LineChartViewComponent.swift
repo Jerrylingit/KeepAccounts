@@ -10,14 +10,14 @@ import UIKit
 
 private let chartTop:CGFloat = 20
 private let chartBottom:CGFloat = 25
-private let backColumnLineWidth:CGFloat = 0.5
+private let backColumnLineWidth:CGFloat = 1
 private let dotWidth:CGFloat = 6
 private let labelWidth:CGFloat = 20
 private let labelHeight:CGFloat = 20
 
 private let backColumnLineCount = 31
 
-class LineChartViewComponent: UIView {
+class LineChartViewComponent: UIView, UIGestureRecognizerDelegate {
     
     //properties (private)
     var pointDataItem:[Float]!
@@ -62,7 +62,6 @@ class LineChartViewComponent: UIView {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         infoView.hidden = true
         curPosLabel.hidden = true
-        print("Ended")
     }
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touched = touches.first
@@ -75,7 +74,6 @@ class LineChartViewComponent: UIView {
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         infoView.hidden = true
         curPosLabel.hidden = true
-        print("Cancelled")
     }
     
     func showInfoView(point:CGPoint){
@@ -103,8 +101,6 @@ class LineChartViewComponent: UIView {
         moneyLabel.text = String(item.money)
         dateLabel.text = item.date
         weekLabel.text = item.week
-        
-        print("Moved: \(num)")
     }
     
     override func drawRect(rect: CGRect) {
@@ -189,7 +185,7 @@ class LineChartViewComponent: UIView {
             else{
                 UIColor.whiteColor().setFill()
             }
-            dotPath.lineWidth = 0.5
+            dotPath.lineWidth = 1
             dotPath.stroke()
             dotPath.fill()
         }
@@ -218,7 +214,7 @@ class LineChartViewComponent: UIView {
         weekLabel.textAlignment = .Right
         weekLabel.text = "星期六"
         
-        let curPosLabel = UILabel(frame: CGRect(x: 10, y: infoViewlHeight, width: 0.5, height: self.backColumnAverHeight - infoViewlHeight))
+        let curPosLabel = UILabel(frame: CGRect(x: 10, y: infoViewlHeight, width: 1, height: self.backColumnAverHeight - infoViewlHeight))
         curPosLabel.backgroundColor = UIColor.orangeColor()
         
         
@@ -236,5 +232,4 @@ class LineChartViewComponent: UIView {
         self.addSubview(infoView)
         self.addSubview(curPosLabel)
     }
-    
 }

@@ -187,6 +187,9 @@ extension SingleAccountVC:UITableViewDataSource, UITableViewDelegate{
         }
         return height
     }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
     //MARK: - tableview datasource
     func itemFromDataSourceWith(indexPath:NSIndexPath) -> AccountItem{
         if indexPath.row < singleAccountModel.itemAccounts.count{
