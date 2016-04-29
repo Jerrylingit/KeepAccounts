@@ -31,7 +31,7 @@ class PieChartView: AccountDisplayViewBase {
     private var itemPercentage:UILabel!
     private var itemAccountCount:UILabel!
     
-//    private var rotateBtn:UIButton!
+    
     private var layerBgView:UIView!
     private var dataItem:[CGFloat]!
     
@@ -54,9 +54,7 @@ class PieChartView: AccountDisplayViewBase {
     //MARK: - init
     init(frame:CGRect, layerData:[RotateLayerData], delegate:AKPickerViewDelegate!, dataSource:AKPickerViewDataSource!){
         self.layerData = layerData
-        
         super.init(frame: frame, delegate: delegate, dataSource: dataSource)
-        
         self.setDataItems(layerData)
         setupViews(frame)
     }

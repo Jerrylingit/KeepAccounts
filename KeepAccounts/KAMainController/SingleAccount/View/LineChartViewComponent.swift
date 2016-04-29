@@ -195,7 +195,6 @@ class LineChartViewComponent: UIView, UIGestureRecognizerDelegate {
         let infoViewWidth:CGFloat = bounds.width/4
         let infoViewlHeight:CGFloat = 40
         
-        
         let infoView = UIView(frame: CGRect(x: 0, y: 0, width: infoViewWidth, height: infoViewlHeight))
         infoView.backgroundColor = UIColor.orangeColor()
         infoView.layer.cornerRadius = 5
@@ -214,7 +213,7 @@ class LineChartViewComponent: UIView, UIGestureRecognizerDelegate {
         weekLabel.textAlignment = .Right
         weekLabel.text = "星期六"
         
-        let curPosLabel = UILabel(frame: CGRect(x: 10, y: infoViewlHeight, width: 1, height: self.backColumnAverHeight - infoViewlHeight))
+        let curPosLabel = UILabel(frame: CGRect(x: 10, y: infoViewlHeight, width: 2, height: self.backColumnAverHeight - infoViewlHeight))
         curPosLabel.backgroundColor = UIColor.orangeColor()
         
         

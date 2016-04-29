@@ -40,14 +40,21 @@ class LineChartInfoData:NSObject{
 
 private let secondsPerDay:NSTimeInterval = 86400
 private let weekChinese = ["日", "一", "二", "三", "四", "五", "六"]
+private let allDataKey:Int = -1
 
 class PieChartModel: NSObject {
-    //MARK: - properties (public)
     
+    //MARK: - properties (public)
     var yearArray = [String]()
     var monthArray = [Int]()
     
+    var lineChartTableViewData = [RotateLayerData]()
     var lineChartInfoArray = [LineChartInfoData]()
+    var rotateLayerDataArray:[RotateLayerData]
+    
+    var monthDic = [Int:[AccountItem]]()                    //while the key is month and array is items
+    var mergedMonthlyData = [Int: [String:[AccountItem]]]() //the final data structrue
+    
     var lineChartMoneyArray:[Float]{
         var tmp = [Float]()
         for value in lineChartInfoArray{
@@ -55,25 +62,22 @@ class PieChartModel: NSObject {
         }
         return tmp
     }
-    
-    var monthDic = [Int:[AccountItem]]() //while the key is month and array is items
-    var mergedMonthlyData = [Int: [String:[AccountItem]]]() //the final data structrue
-    
-    var lineChartTableViewData = [RotateLayerData]()
-    var rotateLayerDataArray = [RotateLayerData]()
-    
-    var mergedDBDataDic = [String:[AccountItem]]() // while the key is iconName and array is items
-    
-    var keysOfMergedMonthlyDataLineChart: [String]{
-        var tmp = keysOfMergedMonthlyDataAfterDeal
-        tmp.removeAtIndex(0)
-        return tmp
-    }
-    var keysOfMergedMonthlyDataAfterDeal:[String]{
+    var pieChartPickerData:[String]{
         var items = [String]()
         items.append("全部")
         for value in monthArray{
-            if value != -1{
+            if value != allDataKey{
+                let interval = NSTimeInterval(value)
+                let month = NSDate.intervalToDateComponent(interval).month
+                items.append("\(month)月")
+            }
+        }
+        return items
+    }
+    var lineChartPickerData:[String]{
+        var items = [String]()
+        for value in monthArray{
+            if value != allDataKey{
                 let interval = NSTimeInterval(value)
                 let month = NSDate.intervalToDateComponent(interval).month
                 items.append("\(month)月")
@@ -84,8 +88,6 @@ class PieChartModel: NSObject {
     
     //MARK: - properties (private)
     private var initDBName:String
-    
-    
     private var dbData:[AccountItem]{
         return AccoutDB.selectDataOrderByDate(initDBName)
     }
@@ -93,16 +95,30 @@ class PieChartModel: NSObject {
     //MARK: - init
     init(dbName:String){
         initDBName = dbName
+        let rotateItem = RotateLayerData(title: "一般", money: "0.00", icon: "type_big_1", percent: "100%", count: "0笔")
+        rotateLayerDataArray = [rotateItem]
+        let comp = NSDate.dateToDateComponent(NSDate())
+        yearArray = ["\(comp.year)年", "\(comp.year)年"]
+        monthArray = [allDataKey, Int(NSDate().timeIntervalSince1970)]
         super.init()
         //deal with raw data
         groupDateByMonth()
         mergeEachMetaData()
+        setRotateLayerDataArrayAtIndex(0)
+        setLineChartTableViewDataAtIndex(0)
+        setLineChartInfoArrayAtIndex(0)
     }
     //MARK: - operation(internal)
+    func setRotateLayerDataArrayAtIndex(i:Int){
+        if let dataItem = getMergedMonthlyDataAtIndex(i){
+            self.rotateLayerDataArray = getLayerDataItem(dataItem)
+        }
+    }
+    
     func getLayerDataItem(dataItem:[String:[AccountItem]])->[RotateLayerData] {
         var amount:Float = 0
         var layerData = [CGFloat]()
-        var rotateLayerDataArray = [RotateLayerData]()
+        var array = [RotateLayerData]()
         for (_, items) in dataItem{
             var value:Float = 0
             var title = ""
@@ -117,63 +133,70 @@ class PieChartModel: NSObject {
             money = String(format: "%.2f", value)
             amount += value
             layerData.append(CGFloat(value))
-            rotateLayerDataArray.append(RotateLayerData(title: title, money: money, icon: icon, percent: "", count: count))
+            array.append(RotateLayerData(title: title, money: money, icon: icon, percent: "", count: count))
         }
         
-        for (i,data) in rotateLayerDataArray.enumerate() {
+        for (i,data) in array.enumerate() {
             let tmpPercent = Float(layerData[i]) / amount
             let percentage = "\(Int(tmpPercent * 100))%"
             data.percent = percentage
         }
         
-        rotateLayerDataArray.sortInPlace{(item1, item2)->Bool in
+        array.sortInPlace{(item1, item2)->Bool in
             let item1MoneyFloat = Float(item1.money)
             let item2MoneyFloat = Float(item2.money)
             return item1MoneyFloat > item2MoneyFloat
         }
-        return rotateLayerDataArray
+        return array
+    }
+    func setLineChartTableViewDataAtIndex(i:Int){
+        if let dataItem = getMergedMonthlyDataAtIndex(i + 1){
+            self.lineChartTableViewData = getLayerDataItem(dataItem)
+        }
     }
     
-    func setRotateLayerDataArrayWithDataItem(dataItem:[String:[AccountItem]]){
-        self.rotateLayerDataArray = getLayerDataItem(dataItem)
-    }
-    
-    func setLineChartTableViewDataWithDataItem(dataItem:[String:[AccountItem]]){
-        self.lineChartTableViewData = getLayerDataItem(dataItem)
-    }
-    
-    func setLineChartInfoArrayWithMonthData(item:[AccountItem], interval:NSTimeInterval){
+    func setLineChartInfoArrayAtIndex(i:Int){
         
-        let tmpDate =  NSDate(timeIntervalSince1970: interval)
-        let numOfDays = NSDate.numberOfDaysInMonthWithDate(tmpDate)
-        var firstDateOfMonth = NSDate.getFirstDayOfMonthWithDate(tmpDate)!
-        let reverseItem = item.reverse()
-        lineChartInfoArray.removeAll()
-        
-        for _ in 1...numOfDays{
+        if i + 1 < monthArray.count{
+            let month = monthArray[i + 1]
+            let tmpDate =  NSDate(timeIntervalSince1970: NSTimeInterval(month))
+            let numOfDays = NSDate.numberOfDaysInMonthWithDate(tmpDate)
+            var firstDateOfMonth = NSDate.getFirstDayOfMonthWithDate(tmpDate)!
+            var tmpLineChartInfoArray = [LineChartInfoData]()
             
-            let compRef = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday], fromDate: firstDateOfMonth)
-            var money:Float = 0.0
-            let date = "\(compRef.month)月\(compRef.day)日"
-            let week = "星期\(weekChinese[compRef.weekday - 1])"
-            
-            for value in reverseItem{
-                let itemComp = getCompWithDate(value.date)
-                if compRef.day == itemComp.day{
-                    money += Float(value.money) ?? 0
+            for _ in 1...numOfDays{
+                
+                let compRef = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday], fromDate: firstDateOfMonth)
+                var money:Float = 0.0
+                let date = "\(compRef.month)月\(compRef.day)日"
+                let week = "星期\(weekChinese[compRef.weekday - 1])"
+                
+                if let item = monthDic[month]{
+                    let reverseItem = item.reverse()
+                    for value in reverseItem{
+                        let itemComp = getCompWithDate(value.date)
+                        if compRef.day == itemComp.day{
+                            money += Float(value.money) ?? 0
+                        }
+                    }
                 }
+                
+                tmpLineChartInfoArray.append(LineChartInfoData(money: money, date: date, week: week))
+                let nextDateInterval = firstDateOfMonth.timeIntervalSince1970 + secondsPerDay
+                firstDateOfMonth = NSDate(timeIntervalSince1970: nextDateInterval)
             }
-            
-            lineChartInfoArray.append(LineChartInfoData(money: money, date: date, week: week))
-            let nextDateInterval = firstDateOfMonth.timeIntervalSince1970 + secondsPerDay
-            firstDateOfMonth = NSDate(timeIntervalSince1970: nextDateInterval)
+            lineChartInfoArray = tmpLineChartInfoArray
         }
     }
     
     
-    func getMergedMonthlyDataAtIndex(index:Int) -> [String:[AccountItem]] {
+    
+    func getMergedMonthlyDataAtIndex(index:Int) -> [String:[AccountItem]]? {
+        guard index < monthArray.count else{
+            return nil
+        }
         let key = monthArray[index]
-        return mergedMonthlyData[key]!
+        return mergedMonthlyData[key]
     }
     
     //MARK: - methods (private)
@@ -184,41 +207,42 @@ class PieChartModel: NSObject {
     }
     
     private func groupDateByMonth(){
+        
+        
+        //if there is any data in database
         if dbData.count > 0 {
+            var tmpYearArray = [String]()
+            var tmpMonthArray = [Int]()
+            var tmpMonthDic = [Int:[AccountItem]]()
             var eachMonthItems = [AccountItem]()
             
             var dateCompRef = NSDate.intervalToDateComponent(NSTimeInterval(dbData[0].date))
             var monthKey = dbData[0].date
-            yearArray.append("\(dateCompRef.year)年")
+            tmpYearArray.append("\(dateCompRef.year)年")
             for (_, value) in dbData.enumerate(){
                 let dateComp = NSDate.intervalToDateComponent(NSTimeInterval(value.date))
                 if dateCompRef.year == dateComp.year && dateCompRef.month == dateComp.month {
                     eachMonthItems.append(value)
                 }
                 else{
-                    yearArray.append("\(dateComp.year)年")
-                    monthArray.append(monthKey)
-                    monthDic[monthKey] = eachMonthItems
+                    tmpYearArray.append("\(dateComp.year)年")
+                    tmpMonthArray.append(monthKey)
+                    tmpMonthDic[monthKey] = eachMonthItems
                     
-                    eachMonthItems.removeAll() //remove all items in eachMonthItems
+                    eachMonthItems.removeAll()          //remove all items in eachMonthItems
                     monthKey = value.date
-                    eachMonthItems.append(value) //add current dbData[i]
+                    eachMonthItems.append(value)        //add current dbData[i]
                     
-                    dateCompRef = dateComp //change dateCompRef to current dbData[i]
+                    dateCompRef = dateComp              //change dateCompRef to current dbData[i]
                 }
             }
             //put the last key-value into monthDic
-            monthArray.append(monthKey)
-            monthDic[monthKey] = eachMonthItems
-            if yearArray[yearArray.endIndex - 1] == yearArray[yearArray.startIndex]{
-                let allYear = yearArray[yearArray.startIndex]
-                yearArray.insert(allYear, atIndex: 0)
-            }
-            else{
-                let allYear = yearArray[yearArray.endIndex - 1] + "~" + yearArray[yearArray.startIndex]
-                yearArray.insert(allYear, atIndex: 0)
-            }
+            tmpMonthArray.append(monthKey)
+            tmpMonthDic[monthKey] = eachMonthItems
             
+            yearArray = tmpYearArray
+            monthArray = tmpMonthArray
+            monthDic = tmpMonthDic
         }
     }
     private func mergeSameItem(data:[AccountItem])->[String:[AccountItem]]{
@@ -241,11 +265,18 @@ class PieChartModel: NSObject {
         return dataDic
     }
     private func mergeEachMetaData(){
-        if dbData.count > 0  {
+        if dbData.count > 0 {
             //all
-            mergedDBDataDic = mergeSameItem(dbData)
-            mergedMonthlyData[-1] = mergeSameItem(dbData)
-            monthArray.insert(-1, atIndex: 0)
+            if yearArray[yearArray.endIndex - 1] == yearArray[yearArray.startIndex]{
+                let allYear = yearArray[yearArray.startIndex]
+                yearArray.insert(allYear, atIndex: 0)
+            }
+            else{
+                let allYear = yearArray[yearArray.endIndex - 1] + "~" + yearArray[yearArray.startIndex]
+                yearArray.insert(allYear, atIndex: 0)
+            }
+            mergedMonthlyData[allDataKey] = mergeSameItem(dbData)
+            monthArray.insert(allDataKey, atIndex: 0)
             //monthly
             for (key, monthDataArray) in monthDic{
                 mergedMonthlyData[key] = mergeSameItem(monthDataArray)

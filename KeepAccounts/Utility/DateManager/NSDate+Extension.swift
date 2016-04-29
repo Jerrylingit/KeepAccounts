@@ -18,10 +18,14 @@ extension NSDate{
     }
     class func intervalToDateComponent(interval:NSTimeInterval) -> NSDateComponents{
         let date = NSDate(timeIntervalSince1970: interval)
+        return dateToDateComponent(date)
+    }
+    class func dateToDateComponent(date:NSDate) -> NSDateComponents{
         let cal = NSCalendar.currentCalendar()
         let calCom = cal.components([.Year, .Month, .Day], fromDate: date)
         return calCom
     }
+    
     class func numberOfDaysInMonthWithDate(date:NSDate)->Int{
         let comp = NSCalendar.currentCalendar().rangeOfUnit(.Day, inUnit: .Month, forDate: date)
         return comp.length
