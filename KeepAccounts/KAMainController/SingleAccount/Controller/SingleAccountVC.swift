@@ -80,6 +80,7 @@ class SingleAccountVC: UIViewController{
         bgScrollView.contentSize = CGSizeMake(self.view.bounds.width * 4, self.view.bounds.height)
         bgScrollView.bounces = false
         bgScrollView.pagingEnabled = true
+        bgScrollView.showsHorizontalScrollIndicator = false
         return bgScrollView
     }
     private func setupSingleAccountView(frame:CGRect)->SingleAccountView{
@@ -200,10 +201,13 @@ extension SingleAccountVC:UITableViewDataSource, UITableViewDelegate{
         var count = 0
         if tableView.superview?.isKindOfClass(SingleAccountView) == true {
             count = singleAccountModel.itemAccounts.count
+            tableView.tableViewDisplayWithMsg("新账本", ifNecessaryForRowCount: count)
         }
         else if tableView.superview?.isKindOfClass(LineChartView) == true {
             count = pieChartModel.lineChartTableViewData.count
+            tableView.tableViewDisplayWithMsg("您本月没有记录", ifNecessaryForRowCount: count)
         }
+        
         return count
     }
     

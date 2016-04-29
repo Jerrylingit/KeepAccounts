@@ -40,6 +40,9 @@ class PieChartView: AccountDisplayViewBase {
         for value in dataItem{
             amount += value
         }
+        if amount == 0 {
+            amount = 1
+        }
         return amount
     }
     private var containerLayer:CAShapeLayer!
@@ -134,19 +137,12 @@ class PieChartView: AccountDisplayViewBase {
         self.layerBgView = bgView
         
         let titleLabel = setupTitleLabel(frame)
-        
         let moneyLabel = setupMoneyLabel(frame)
-        
         let redIndicator = setupIndicator(frame)
-        
         let midRoundBtn = setupIconBtn(frame)
-        
         let midPercentLabel = setupPercentageLabel(frame)
-        
         let countLabel = setupCountLabel(frame)
-
         let rotateBtn = setupRotateBtn(frame)
-        
         let containerLayer = setupContainerLayer(frame)
         
         bgView.layer.addSublayer(containerLayer)
@@ -163,12 +159,13 @@ class PieChartView: AccountDisplayViewBase {
     func setupContainerLayer(frame:CGRect)->CAShapeLayer {
         let containerLayer = CAShapeLayer()
         containerLayer.frame = CGRectMake(0, 0, frame.width, frame.height)
+        containerLayer.addSublayer(generateLayers(frame, color: UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.8), percentageStart: 0, percentageEnd: 1))
         var percentageStart:CGFloat = 0
         var percentageEnd:CGFloat = 0
         
         for (_, value) in dataItem.enumerate(){
             percentageEnd += value / itemValueAmount
-            let pieLayer = generateLayers(frame, percentageStart: percentageStart, percentageEnd: percentageEnd)
+            let pieLayer = generateLayers(frame, color: nil, percentageStart: percentageStart, percentageEnd: percentageEnd)
             containerLayer.addSublayer(pieLayer)
             percentageStart = percentageEnd
         }
@@ -185,13 +182,11 @@ class PieChartView: AccountDisplayViewBase {
     private func setupTitleLabel(frame:CGRect)->UILabel{
         let titleLabel = UILabel(frame: CGRectMake(frame.width/2 - titleLabelHeight, titleLabelY, titleLabelHeight * 2, titleLabelHeight))
         titleLabel.textAlignment = .Center
-        titleLabel.text = "一般"
         itemTitleLabel = titleLabel
         return titleLabel
     }
     private func setupMoneyLabel(frame:CGRect)->UILabel{
         let moneyLabel = UILabel(frame: CGRectMake(0, 0, moneyLabelHeight * 2, moneyLabelHeight))
-        moneyLabel.text = "0.00"
         moneyLabel.textAlignment = .Center
         moneyLabel.center = CGPointMake(frame.width/2, titleLabelHeight + titleLabelY)
         itemMoneyLabel = moneyLabel
@@ -207,14 +202,12 @@ class PieChartView: AccountDisplayViewBase {
     private func setupIconBtn(frame:CGRect)->UIButton{
         let midRoundBtn = UIButton(frame: CGRectMake(0, 0, midRoundBtnWidth, midRoundBtnWidth))
         midRoundBtn.center = CGPointMake(frame.width/2, frame.height/2 - midRoundBtnWidth/2)
-        midRoundBtn.setImage(UIImage(named: "type_big_1"), forState: .Normal)
         itemIconBtn = midRoundBtn
         return midRoundBtn
     }
     private func setupPercentageLabel(frame:CGRect)->UILabel{
         let midPercentLabel = UILabel(frame: CGRectMake(0, 0, midRoundBtnWidth, midRoundBtnWidth))
         midPercentLabel.center = CGPointMake(frame.width/2, frame.height/2 + midRoundBtnWidth/2)
-        midPercentLabel.text = "100%"
         midPercentLabel.textAlignment = .Center
         itemPercentage = midPercentLabel
         return midPercentLabel
@@ -226,7 +219,6 @@ class PieChartView: AccountDisplayViewBase {
         let countLabel = UILabel(frame: CGRectMake(0, 0, midRoundBtnWidth, midRoundBtnWidth))
         countLabel.center = CGPointMake(frame.width/2, frame.height/2 + frame.width/4 + 40)
         countLabel.textAlignment = .Center
-        countLabel.text = "0笔"
         itemAccountCount = countLabel
         return countLabel
     }
@@ -242,7 +234,7 @@ class PieChartView: AccountDisplayViewBase {
     
     private func gradientMaskAnimation(frame:CGRect){
         
-        containerLayer.mask = generateLayers(frame, percentageStart: 0, percentageEnd: 1)
+        containerLayer.mask = generateLayers(frame, color: nil, percentageStart: 0, percentageEnd: 1)
         let gradientAnimation = CABasicAnimation(keyPath: "strokeEnd")
         gradientAnimation.fromValue = 0
         gradientAnimation.toValue = 1
@@ -251,13 +243,19 @@ class PieChartView: AccountDisplayViewBase {
         containerLayer.mask?.addAnimation(gradientAnimation, forKey: "gradientAnimation")
     }
     
-    private func generateLayers(frame: CGRect, percentageStart:CGFloat, percentageEnd:CGFloat) -> CAShapeLayer{
+    private func generateLayers(frame: CGRect, color:UIColor?, percentageStart:CGFloat, percentageEnd:CGFloat) -> CAShapeLayer{
         
         let path = UIBezierPath(arcCenter: CGPointMake(frame.width/2, frame.height/2), radius: radius, startAngle: CGFloat(-M_PI_2), endAngle: CGFloat(3 * M_PI_2) , clockwise: true)
         let pieLayer = CAShapeLayer()
         pieLayer.path = path.CGPath
         pieLayer.lineWidth = lineWidth
-        pieLayer.strokeColor = UIColor(hue: percentageEnd, saturation: 0.5, brightness: 0.75, alpha: 1.0).CGColor
+        if let col = color?.CGColor{
+            pieLayer.strokeColor = col
+        }
+        else{
+            pieLayer.strokeColor = UIColor(hue: percentageEnd, saturation: 0.5, brightness: 0.75, alpha: 1.0).CGColor
+        }
+        
         pieLayer.fillColor = nil
         pieLayer.strokeStart = percentageStart
         pieLayer.strokeEnd = percentageEnd

@@ -149,6 +149,7 @@ class AccountDisplayViewBase: UIView {
         pickerView.highlightedTextColor = UIColor.orangeColor()
         pickerView.interitemSpacing = 20
         pickerView.reloadData()
+        pickerView.selectItem(0)
         self.pickerView = pickerView
         
         let sepline = UIView(frame: CGRectMake(0, frame.height, frame.width, sepLineHeight))

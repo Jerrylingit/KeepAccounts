@@ -128,7 +128,10 @@ class LineChartViewComponent: UIView, UIGestureRecognizerDelegate {
         let columnXPoint = {(i:Int)-> CGFloat in
             return  backColumnAverWidth * CGFloat(i + 1)
         }
-        let maxElement = pointDataItem.maxElement() ?? 0
+        var maxElement = pointDataItem.maxElement() ?? 0
+        if maxElement == 0{
+            maxElement = 1
+        }
         let columnYPoint = {(i:Int)-> CGFloat in
             var y = CGFloat(self.pointDataItem[i]) / CGFloat(maxElement) * (backColumnAverHeight - 5)
             y = backColumnAverHeight - y
