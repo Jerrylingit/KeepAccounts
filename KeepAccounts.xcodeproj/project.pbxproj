@@ -66,6 +66,7 @@
 		C417E5841C8B276F007875EF /* ComputeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E57F1C8B276F007875EF /* ComputeBoardView.swift */; };
 		C417E5861C8B276F007875EF /* ItemBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E5811C8B276F007875EF /* ItemBarView.swift */; };
 		C417E5871C8B276F007875EF /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417E5821C8B276F007875EF /* TopBarView.swift */; };
+		C4B3BC971CD4CCF9007A58C9 /* KACommonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B3BC961CD4CCF9007A58C9 /* KACommonLabel.swift */; };
 		C4F8E4A11C8BC166003C6A89 /* NSString+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F8E4A01C8BC166003C6A89 /* NSString+Path.swift */; };
 		C4F8E4B61C8C1345003C6A89 /* AccountDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F8E4B51C8C1345003C6A89 /* AccountDB.swift */; };
 /* End PBXBuildFile section */
@@ -164,6 +165,7 @@
 		C417E57F1C8B276F007875EF /* ComputeBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeBoardView.swift; sourceTree = "<group>"; };
 		C417E5811C8B276F007875EF /* ItemBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemBarView.swift; sourceTree = "<group>"; };
 		C417E5821C8B276F007875EF /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
+		C4B3BC961CD4CCF9007A58C9 /* KACommonLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KACommonLabel.swift; sourceTree = "<group>"; };
 		C4F8E4A01C8BC166003C6A89 /* NSString+Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Path.swift"; sourceTree = "<group>"; };
 		C4F8E4B51C8C1345003C6A89 /* AccountDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDB.swift; sourceTree = "<group>"; };
 		E58D19CDA7A3B178E200EF63 /* Pods-KeepAccounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeepAccounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-KeepAccounts/Pods-KeepAccounts.release.xcconfig"; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 		84EFCC7A1CBE3E5100627311 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				C4B3BC961CD4CCF9007A58C9 /* KACommonLabel.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -825,6 +828,7 @@
 				84CA4B511C969C7F009766B9 /* customDatePickerView.swift in Sources */,
 				C417E5841C8B276F007875EF /* ComputeBoardView.swift in Sources */,
 				84DC5B0E1C96554F00D80529 /* NSDate+Extension.swift in Sources */,
+				C4B3BC971CD4CCF9007A58C9 /* KACommonLabel.swift in Sources */,
 				84E6ABCC1CA2376100CBA148 /* ChooseItemModel.swift in Sources */,
 				849905B31CAD238F008A5D73 /* OperateAccountBookView.swift in Sources */,
 				C417E5831C8B276F007875EF /* ChooseItemVC.swift in Sources */,

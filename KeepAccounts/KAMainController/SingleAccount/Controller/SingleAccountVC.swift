@@ -24,6 +24,7 @@ class SingleAccountVC: UIViewController{
     private var pieChartView:PieChartView!
     private var mainView:SingleAccountView!
     private var lineChartView:LineChartView!
+    private var budgetView:BudgetView!
     
     //MARK: - init
     init(model:SingleAccountModel){
@@ -64,15 +65,15 @@ class SingleAccountVC: UIViewController{
         let bgScrollView = setupBgScrollView(self.view.bounds)
         bgScrollView.delaysContentTouches = false
         
-        mainView = setupSingleAccountView(self.view.bounds)
-
-        let pieChartView = setupPieChartView(CGRectMake(self.view.bounds.width, 0, self.view.bounds.width, self.view.bounds.height))
-        
-        self.lineChartView = setupLineView(CGRectMake(self.view.bounds.width * 2, 0, self.view.bounds.width, self.view.bounds.height))
+        mainView = setupSingleAccountView(CGRectMake(self.view.bounds.width * 3, 0, self.view.bounds.width, self.view.bounds.height))
+        pieChartView = setupPieChartView(CGRectMake(self.view.bounds.width, 0, self.view.bounds.width, self.view.bounds.height))
+        lineChartView = setupLineView(CGRectMake(self.view.bounds.width * 2, 0, self.view.bounds.width, self.view.bounds.height))
+        budgetView = setupBudgetView(self.view.bounds)
         
         bgScrollView.addSubview(mainView)
         bgScrollView.addSubview(pieChartView)
         bgScrollView.addSubview(lineChartView)
+        bgScrollView.addSubview(budgetView)
         self.view.addSubview(bgScrollView)
     }
     private func setupBgScrollView(frame:CGRect)->UIScrollView{
@@ -84,7 +85,7 @@ class SingleAccountVC: UIViewController{
         return bgScrollView
     }
     private func setupSingleAccountView(frame:CGRect)->SingleAccountView{
-        let singleAccountView = SingleAccountView(frame: self.view.bounds, delegate:self)
+        let singleAccountView = SingleAccountView(frame: frame, delegate:self)
         //标题、收入和支出
         singleAccountView.costText = String(format: "%.2f", singleAccountModel.totalCost)
         singleAccountView.incomeText = String(format: "%.2f", singleAccountModel.totalIncome)
@@ -106,6 +107,11 @@ class SingleAccountVC: UIViewController{
         lineView.setYear(pieChartModel.yearArray[1])
         return lineView
         
+    }
+    private func setupBudgetView(frame:CGRect)->BudgetView{
+        let tmpBudgetView = BudgetView(frame: frame)
+        tmpBudgetView.delegate = self
+        return tmpBudgetView
     }
 }
 
@@ -169,6 +175,11 @@ extension SingleAccountVC: SubViewProtocol{
     }
 }
 
+extension SingleAccountVC:BudgetViewDelegate{
+    func pressSettingBtnWithBudgetView(budgetView: BudgetView) {
+        
+    }
+}
 
 extension SingleAccountVC:UITableViewDataSource, UITableViewDelegate{
     //MARK: - tableview delegate
