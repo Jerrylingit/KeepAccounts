@@ -67,6 +67,19 @@ class PieChartView: AccountDisplayViewBase {
     }
     
     //MARK: - operations (internal)
+    func reloadPieChartViewData(data:[RotateLayerData]?, year:String, cost:String?, income:String?){
+        self.setYear(year)
+        if let data = data{
+            self.updateByLayerData(data)
+        }
+        if let cost = cost{
+            self.pieChartTotalCost = cost
+        }
+        if let income = income {
+            self.pieChartTotalIncome = income
+        }
+    }
+    
     func reDraw(index:Int){
         var curIndex = index - 1
         if index == 0{

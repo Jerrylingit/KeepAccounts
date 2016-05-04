@@ -38,6 +38,35 @@ class LineChartInfoData:NSObject{
     }
 }
 
+class BudgetData:NSObject{
+    let budgetNum:String!
+    let costNum:String!
+    let settleDay:String!
+    
+    var surpluNum:String{
+        let budget = Float(budgetNum) ?? 0
+        let cost = Float(costNum) ?? 0
+        let tmp = budget - cost
+        return String(format: "%.2f", tmp)
+    }
+    var percentNum:String{
+        let surplus = Int(surpluNum) ?? 0
+        let budget = Int(budgetNum) ?? 0
+        if surplus < 0 || budget == 0 {
+            return "0%"
+        }
+        let tmp = surplus * 100 / budget
+        return "\(tmp)%"
+    }
+    
+    init(budget:String, cost:String, day:String){
+        budgetNum = budget
+        costNum = cost
+        settleDay = day
+        super.init()
+    }
+}
+
 private let secondsPerDay:NSTimeInterval = 86400
 private let weekChinese = ["日", "一", "二", "三", "四", "五", "六"]
 private let allDataKey:Int = -1
@@ -46,7 +75,12 @@ class PieChartModel: NSObject {
     
     //MARK: - properties (public)
     var yearArray = [String]()
-    var monthArray = [Int]()
+    var monthArray:[Int]
+    var monthTotalMoney:[String]
+    
+    var budgetModelData:BudgetData!
+    var budget:CGFloat = 0
+    var settleDay:Int = 1
     
     var lineChartTableViewData = [RotateLayerData]()
     var lineChartInfoArray = [LineChartInfoData]()
@@ -100,6 +134,7 @@ class PieChartModel: NSObject {
         let comp = NSDate.dateToDateComponent(NSDate())
         yearArray = ["\(comp.year)年", "\(comp.year)年"]
         monthArray = [allDataKey, Int(NSDate().timeIntervalSince1970)]
+        monthTotalMoney = ["总支出\n0.00", "月支出\n0.00"]
         super.init()
         //deal with raw data
         groupDateByMonth()
@@ -107,12 +142,19 @@ class PieChartModel: NSObject {
         setRotateLayerDataArrayAtIndex(0)
         setLineChartTableViewDataAtIndex(0)
         setLineChartInfoArrayAtIndex(0)
+        setBudgetDataforUse()
     }
     //MARK: - operation(internal)
     func setRotateLayerDataArrayAtIndex(i:Int){
         if let dataItem = getMergedMonthlyDataAtIndex(i){
             self.rotateLayerDataArray = getLayerDataItem(dataItem)
         }
+    }
+    func setBudgetDataforUse(){
+        let tmpBudget = String(format: "%.2f", budget)
+        let tmpSettleDay = NSDate.numberOfDaysInMonthWithDate(NSDate()) - settleDay
+        let tmpCost = monthTotalMoney[1].substringFromIndex(monthTotalMoney[1].startIndex.advancedBy(4))
+        budgetModelData = BudgetData(budget: tmpBudget, cost: "\(tmpCost)", day: "\(tmpSettleDay)")
     }
     
     func getLayerDataItem(dataItem:[String:[AccountItem]])->[RotateLayerData] {
@@ -214,20 +256,28 @@ class PieChartModel: NSObject {
             var tmpYearArray = [String]()
             var tmpMonthArray = [Int]()
             var tmpMonthDic = [Int:[AccountItem]]()
+            var tmpMonthTotalMoney = [String]()
             var eachMonthItems = [AccountItem]()
+            var monthMoney:Float = 0
+            var totalMoney:Float = 0
             
             var dateCompRef = NSDate.intervalToDateComponent(NSTimeInterval(dbData[0].date))
             var monthKey = dbData[0].date
             tmpYearArray.append("\(dateCompRef.year)年")
             for (_, value) in dbData.enumerate(){
                 let dateComp = NSDate.intervalToDateComponent(NSTimeInterval(value.date))
+                totalMoney += Float(value.money) ?? 0
+                
                 if dateCompRef.year == dateComp.year && dateCompRef.month == dateComp.month {
                     eachMonthItems.append(value)
+                    monthMoney += Float(value.money) ?? 0
                 }
                 else{
                     tmpYearArray.append("\(dateComp.year)年")
                     tmpMonthArray.append(monthKey)
                     tmpMonthDic[monthKey] = eachMonthItems
+                    tmpMonthTotalMoney.append(String(format: "月支出\n%.2f", monthMoney))
+                    monthMoney = Float(value.money) ?? 0
                     
                     eachMonthItems.removeAll()          //remove all items in eachMonthItems
                     monthKey = value.date
@@ -238,9 +288,14 @@ class PieChartModel: NSObject {
             }
             //put the last key-value into monthDic
             tmpMonthArray.append(monthKey)
+            tmpMonthTotalMoney.append(String(format: "月支出\n%.2f", monthMoney))
             tmpMonthDic[monthKey] = eachMonthItems
             
+            tmpMonthTotalMoney.insert(String(format: "总支出\n%.2f", totalMoney), atIndex: 0)
+            
+            
             yearArray = tmpYearArray
+            monthTotalMoney = tmpMonthTotalMoney
             monthArray = tmpMonthArray
             monthDic = tmpMonthDic
         }

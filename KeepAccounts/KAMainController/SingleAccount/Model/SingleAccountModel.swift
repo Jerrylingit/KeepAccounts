@@ -8,12 +8,18 @@
 
 import UIKit
 
+
+
 class SingleAccountModel: NSObject {
     
     //MARK: - properties (public)
     var itemAccounts:[AccountItem] = []
     var totalIncome:Float = 0
     var totalCost:Float = 0
+    
+    
+    
+    
     
     //数据库名和标题
     var initDBName:String
@@ -30,6 +36,7 @@ class SingleAccountModel: NSObject {
         setAccountBookDataInModel()
     }
     //MARK: - operation (internal)
+    
     func setAccountBookDataInModel(){
         //总支出和总收入
         let totalIncome:Float = 0

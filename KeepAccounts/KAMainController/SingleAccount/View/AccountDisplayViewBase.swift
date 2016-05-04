@@ -37,7 +37,7 @@ class AccountDisplayViewBase: UIView {
             return costBtn.titleLabel?.text ?? ""
         }
         set(newValue){
-            costBtn.setTitle("总收入\n\(newValue)", forState: .Normal)
+            costBtn.setTitle("\(newValue)", forState: .Normal)
         }
     }
     
@@ -46,14 +46,13 @@ class AccountDisplayViewBase: UIView {
             return incomeBtn.titleLabel?.text ?? ""
         }
         set(newValue){
-            incomeBtn.setTitle("总支出\n\(newValue)", forState: .Normal)
+            incomeBtn.setTitle("\(newValue)", forState: .Normal)
         }
     }
     
     //MARK: - properties (private)
     private var incomeBtn:UIButton!
     private var costBtn:UIButton!
-    
     private var yearLabel:UILabel!
     
     //    private var rotateBtn:UIButton!

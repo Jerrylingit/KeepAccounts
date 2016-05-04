@@ -43,8 +43,7 @@ class SingleAccountVC: UIViewController{
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadDataAndViews", name: "ChangeDataSource", object: nil)
         self.view.backgroundColor = UIColor.whiteColor()
-        
-        
+
         //初始化界面
         setupMainView()
     }
@@ -96,20 +95,18 @@ class SingleAccountVC: UIViewController{
     private func setupPieChartView(frame:CGRect) -> PieChartView{
         
         let pieChartView = PieChartView(frame: frame, layerData: pieChartModel.rotateLayerDataArray, delegate:self, dataSource:self)
-        pieChartView.pieChartTotalCost =  String(format: "%.2f", singleAccountModel.totalCost)
-        pieChartView.setYear(pieChartModel.yearArray[0])
+        pieChartView.reloadPieChartViewData(nil, year: pieChartModel.yearArray[0], cost: pieChartModel.monthTotalMoney[0], income: nil)
         self.pieChartView = pieChartView
         return pieChartView
     }
     private func setupLineView(frame:CGRect)->LineChartView{
         let lineView = LineChartView(frame: frame, infoDataItem: pieChartModel.lineChartInfoArray, pointDataItem: pieChartModel.lineChartMoneyArray,  delegate: self, dataSource: self, tableViewDelegate: self)
-        lineView.pieChartTotalCost = String(format: "%.2f", singleAccountModel.totalCost)
-        lineView.setYear(pieChartModel.yearArray[1])
+        lineView.reloadLineChartViewData(nil, pointDataItem: nil, year:pieChartModel.yearArray[1], cost: pieChartModel.monthTotalMoney[1], income: nil)
         return lineView
         
     }
     private func setupBudgetView(frame:CGRect)->BudgetView{
-        let tmpBudgetView = BudgetView(frame: frame)
+        let tmpBudgetView = BudgetView(frame: frame, data: pieChartModel.budgetModelData)
         tmpBudgetView.delegate = self
         return tmpBudgetView
     }
@@ -145,15 +142,14 @@ extension SingleAccountVC: AKPickerViewDataSource, AKPickerViewDelegate{
         
         if pickerView.superview?.isKindOfClass(PieChartView) == true{
             pieChartModel.setRotateLayerDataArrayAtIndex(item)
-            pieChartView.updateByLayerData(pieChartModel.rotateLayerDataArray)
-            pieChartView.setYear(pieChartModel.yearArray[item])
+            pieChartView.reloadPieChartViewData(pieChartModel.rotateLayerDataArray, year: pieChartModel.yearArray[item], cost: pieChartModel.monthTotalMoney[item], income: nil)
         }
         else if pickerView.superview?.isKindOfClass(LineChartView) == true{
             pieChartModel.setLineChartTableViewDataAtIndex(item)
-            
             pieChartModel.setLineChartInfoArrayAtIndex(item)
-            lineChartView.updateViews(pieChartModel.lineChartInfoArray, pointDataItem: pieChartModel.lineChartMoneyArray)
-            lineChartView.setYear(pieChartModel.yearArray[item + 1])
+            
+            lineChartView.reloadLineChartViewData(pieChartModel.lineChartInfoArray, pointDataItem: pieChartModel.lineChartMoneyArray, year:pieChartModel.yearArray[item + 1], cost: pieChartModel.monthTotalMoney[item + 1], income: nil)
+            
         }
     }
 }

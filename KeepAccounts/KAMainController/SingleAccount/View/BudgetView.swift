@@ -14,13 +14,8 @@ protocol BudgetViewDelegate {
 }
 
 class BudgetView: UIView {
-
-    var budgetNum:String!
-    var costNum:String!
-    var surpluNum:String!
-    var settleDay:String!
-    var percentNum:String!
     
+    var budgetViewData:BudgetData!
     var delegate:BudgetViewDelegate?
     
     private var budgetLabel:KACommonLabel!
@@ -29,7 +24,8 @@ class BudgetView: UIView {
     private var bottleBg:UIView!
     private var waterView:UIImageView!
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, data:BudgetData) {
+        budgetViewData = data
         super.init(frame: frame)
         self.backgroundColor = UIColor.whiteColor()
         setupViews(frame)
@@ -55,7 +51,7 @@ class BudgetView: UIView {
         
         let mbLabel = KACommonLabel()
         mbLabel.setUpLabel("月预算")
-        mbLabel.setDownLabel("0.00")
+        mbLabel.setDownLabel(budgetViewData.budgetNum)
         budgetLabel = mbLabel
         self.addSubview(mbLabel)
         mbLabel.snp_makeConstraints {[weak self] (make) in
@@ -68,7 +64,7 @@ class BudgetView: UIView {
         
         let costLabel = KACommonLabel()
         costLabel.setUpLabel("支出")
-        costLabel.setDownLabel("0.00")
+        costLabel.setDownLabel(budgetViewData.costNum)
         self.costLabel = costLabel
         self.addSubview(costLabel)
         costLabel.snp_makeConstraints {[weak self](make) in
@@ -81,7 +77,7 @@ class BudgetView: UIView {
         
         let dayLabel = KACommonLabel()
         dayLabel.setUpLabel("距结算日")
-        dayLabel.setDownLabel("1")
+        dayLabel.setDownLabel(budgetViewData.settleDay)
         self.dayLabel = dayLabel
         self.addSubview(dayLabel)
         dayLabel.snp_makeConstraints {[weak self](make) in
@@ -138,7 +134,7 @@ class BudgetView: UIView {
         
         let bottleLabel = KACommonLabel()
         bottleLabel.setUpLabel("结余")
-        bottleLabel.setDownLabel("50000.00")
+        bottleLabel.setDownLabel(budgetViewData.surpluNum)
         bottleBg.addSubview(bottleLabel)
         bottleLabel.snp_makeConstraints { (make) -> Void in
             make.width.height.equalTo(40)
@@ -146,7 +142,7 @@ class BudgetView: UIView {
         }
         
         let indicatorView = KAHorizIndicatorView()
-        indicatorView.setPercentWithText("100%")
+        indicatorView.setPercentWithText(budgetViewData.percentNum)
         self.addSubview(indicatorView)
         indicatorView.snp_makeConstraints {(make) -> Void in
             make.width.height.equalTo(40)

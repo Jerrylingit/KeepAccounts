@@ -34,9 +34,21 @@ class LineChartView: AccountDisplayViewBase {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateViews(infoDataItem:[LineChartInfoData], pointDataItem:[Float]){
-        lineChart.pointDataItem = pointDataItem
-        lineChart.infoDataItem = infoDataItem
+    func reloadLineChartViewData(infoDataItem:[LineChartInfoData]?, pointDataItem:[Float]?, year:String, cost:String?, income:String?){
+        
+        if let infoDataItem = infoDataItem{
+            lineChart.infoDataItem = infoDataItem
+        }
+        if let pointDataItem = pointDataItem{
+            lineChart.pointDataItem = pointDataItem
+        }
+        self.setYear(year)
+        if let cost = cost{
+            self.pieChartTotalCost = cost
+        }
+        if let income = income{
+            self.pieChartTotalIncome = income
+        }
         lineChart.setNeedsDisplay()
         monthDataTableView.reloadData()
     }
