@@ -56,8 +56,6 @@
 		84ED56CE1CCF1F030029CD34 /* LineChartViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED56CD1CCF1F030029CD34 /* LineChartViewComponent.swift */; };
 		84EFCC6B1CBE1D3A00627311 /* BgScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC6A1CBE1D3A00627311 /* BgScrollView.swift */; };
 		84EFCC6F1CBE241100627311 /* PieChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC6E1CBE241100627311 /* PieChartModel.swift */; };
-		84EFCC711CBE242000627311 /* LineChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC701CBE242000627311 /* LineChartModel.swift */; };
-		84EFCC731CBE243000627311 /* BudgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC721CBE243000627311 /* BudgetModel.swift */; };
 		84EFCC751CBE244200627311 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC741CBE244200627311 /* PieChartView.swift */; };
 		84EFCC771CBE244E00627311 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC761CBE244E00627311 /* LineChartView.swift */; };
 		84EFCC791CBE245800627311 /* BudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EFCC781CBE245800627311 /* BudgetView.swift */; };
@@ -156,8 +154,6 @@
 		84ED56CD1CCF1F030029CD34 /* LineChartViewComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartViewComponent.swift; sourceTree = "<group>"; };
 		84EFCC6A1CBE1D3A00627311 /* BgScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BgScrollView.swift; sourceTree = "<group>"; };
 		84EFCC6E1CBE241100627311 /* PieChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartModel.swift; sourceTree = "<group>"; };
-		84EFCC701CBE242000627311 /* LineChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartModel.swift; sourceTree = "<group>"; };
-		84EFCC721CBE243000627311 /* BudgetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetModel.swift; sourceTree = "<group>"; };
 		84EFCC741CBE244200627311 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		84EFCC761CBE244E00627311 /* LineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		84EFCC781CBE245800627311 /* BudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetView.swift; sourceTree = "<group>"; };
@@ -483,8 +479,6 @@
 			children = (
 				846B31711CB51BF200F30305 /* SingleAccountModel.swift */,
 				84EFCC6E1CBE241100627311 /* PieChartModel.swift */,
-				84EFCC701CBE242000627311 /* LineChartModel.swift */,
-				84EFCC721CBE243000627311 /* BudgetModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -825,7 +819,6 @@
 				84DFCB1A1CD9A5FE00113CCE /* KAHorizIndicatorView.swift in Sources */,
 				84E411171C72A47700C4260E /* AppDelegate.swift in Sources */,
 				84ADF78B1CCDC46500220CC3 /* AccountDisplayViewBase.swift in Sources */,
-				84EFCC711CBE242000627311 /* LineChartModel.swift in Sources */,
 				84EFCC6F1CBE241100627311 /* PieChartModel.swift in Sources */,
 				84ADF7901CCE25CC00220CC3 /* LineChartTableViewCell.swift in Sources */,
 				846B31721CB51BF200F30305 /* SingleAccountModel.swift in Sources */,
@@ -836,7 +829,6 @@
 				84E6ABCC1CA2376100CBA148 /* ChooseItemModel.swift in Sources */,
 				849905B31CAD238F008A5D73 /* OperateAccountBookView.swift in Sources */,
 				C417E5831C8B276F007875EF /* ChooseItemVC.swift in Sources */,
-				84EFCC731CBE243000627311 /* BudgetModel.swift in Sources */,
 				84E6CFBD1CACF99700CA29AF /* FlagBtn.swift in Sources */,
 				84DECF001C8EB9E500B80975 /* TypeBtnDB.swift in Sources */,
 				84DD0AED1C770C1800661F52 /* FMDatabaseAdditionsVariadic.swift in Sources */,
