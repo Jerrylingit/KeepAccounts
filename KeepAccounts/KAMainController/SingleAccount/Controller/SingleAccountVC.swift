@@ -31,7 +31,6 @@ class SingleAccountVC: UIViewController{
         self.singleAccountModel = model
         super.init(nibName: nil, bundle: nil)
         self.pieChartModel = PieChartModel(dbName: singleAccountModel.initDBName)
-        
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -64,10 +63,10 @@ class SingleAccountVC: UIViewController{
         let bgScrollView = setupBgScrollView(self.view.bounds)
         bgScrollView.delaysContentTouches = false
         
-        mainView = setupSingleAccountView(CGRectMake(self.view.bounds.width * 3, 0, self.view.bounds.width, self.view.bounds.height))
+        mainView = setupSingleAccountView(self.view.bounds)
         pieChartView = setupPieChartView(CGRectMake(self.view.bounds.width, 0, self.view.bounds.width, self.view.bounds.height))
         lineChartView = setupLineView(CGRectMake(self.view.bounds.width * 2, 0, self.view.bounds.width, self.view.bounds.height))
-        budgetView = setupBudgetView(self.view.bounds)
+        budgetView = setupBudgetView(CGRectMake(self.view.bounds.width * 3, 0, self.view.bounds.width, self.view.bounds.height))
         
         bgScrollView.addSubview(mainView)
         bgScrollView.addSubview(pieChartView)
@@ -103,7 +102,6 @@ class SingleAccountVC: UIViewController{
         let lineView = LineChartView(frame: frame, infoDataItem: pieChartModel.lineChartInfoArray, pointDataItem: pieChartModel.lineChartMoneyArray,  delegate: self, dataSource: self, tableViewDelegate: self)
         lineView.reloadLineChartViewData(nil, pointDataItem: nil, year:pieChartModel.yearArray[1], cost: pieChartModel.monthTotalMoney[1], income: nil)
         return lineView
-        
     }
     private func setupBudgetView(frame:CGRect)->BudgetView{
         let tmpBudgetView = BudgetView(frame: frame, data: pieChartModel.budgetModelData)
